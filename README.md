@@ -4,17 +4,18 @@ Teamleden: Reuben Reuben auf dem Brinke, Jaydey Faasen, Berend Jansen, Pien van 
 ## Brainstorming concepten
 
 #### Verschillende concepten / ondewerpen voor onze matching website 
-1. Sport event matching website
-2. Voetbal wedstrijd matching website
-3. Tourist matching website
-4. Vis matching website
-5. vakanties matching website
-6. concert matching website
-7. eet matching website
-8. feit matching website
-9. formule 1 matching website
-10. work out en fitness maching website
-11. Live update sport event matching website
+1. Matching website sport-evenementen
+2. Matching website voetbal-wedstrijden
+3. Matching website touristen (samen reizen?)
+4. Matching website locatie vissen
+5. Matching website vakantiebestemmingen
+6. Matching website concerten
+7. Matching website eten
+8. Matching website random feitjes (op basis van account?)
+9. Matching website Formule 1 quiz vs vrienden
+10. Matching website fitness (workouts/vooruitgang?)
+11. Matching website live sport updates
+12. Matching website Pokemon persoonlijkheids test
 
 #### Wat is de doelgroep?
 Gebruikers die fan zijn van formule 1  
