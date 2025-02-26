@@ -102,6 +102,17 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 
 13. Wanneer ik wil weten welke coureur het populairst is onder fans, wil ik een ranglijst van favoriete coureurs kunnen zien, zodat ik kan vergelijken hoe mijn voorkeuren zich verhouden tot die van anderen.
 
+14. Wanneer ik snel wat leuke feitjes op wil zoeken over Formule 1, bijvoorbeeld een lijst van kampioenen per jaar, wil ik dit op verschillende manieren kunnen sorteren zodat ik makkelijk het feitje waar ik naar op zoek was kan achterhalen.
+
+15. Wanneer ik actief een raceweekend aan het volgen ben, wil ik een overzicht van de kwalificatieresultaten, strategieën en voorspellingen kunnen zien, zodat ik goed voorbereid ben op de race.
+
+16. Wanneer ik in discussie ben over een race, wil ik polls kunnen maken en stemmen op meningen van anderen, zodat ik kan zien hoe de community over een bepaalde kwestie denkt.
+
+17. Wanneer ik benieuwd ben hoe teams relatief aan elkaar presteren, wil ik duidelijke grafieken waarin de prestaties van deze teams met elkaar vergeleken worden, zodat ik niet de hele tijd tussen paginas hoef te wisselen.
+
+18. Wanneer ik wil achterhalen welke bandenstrategie het effectiefst tijdens een bepaald raceweekend, wil ik per race kunnen zien welke coureur/team welke strategie heeft toegepast en waar zij geeindigt zijn.
+    
+
 #### Welke job story component ga jij bouwen?
 
 #### lofi-wireflows
