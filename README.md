@@ -70,7 +70,7 @@ De look en feel van de website moet snel, energiek, en professioneel aanvoelen, 
 *Design:* Strakke, moderne lay-out met veel visuele elementen zoals beelden van coureurs, auto’s, en racecircuits.
 *Kleurenschema:* Gebruik van een dynamisch kleurenpalet, geïnspireerd door F1 (bijv. zwart, wit, rood, en metallic tinten).
 
-#### ons gekozen concept
+#### Ons gekozen concept
 De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergelijken, hun voorkeuren aan te geven, en ze te matchen met andere fans die vergelijkbare interesses delen. Gebruikers kunnen bijvoorbeeld een specifieke coureur selecteren en zien wie hun favoriete coureur is, maar ook andere fans vinden die dezelfde coureur als favoriet hebben. Bovendien kunnen ze hun meningen delen en discussiepunten op basis van prestaties, historische gegevens en voorspellingen van toekomstige races.
 
 #### Job Stories
@@ -113,11 +113,12 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 18. Wanneer ik wil achterhalen welke bandenstrategie het effectiefst tijdens een bepaald raceweekend, wil ik per race kunnen zien welke coureur/team welke strategie heeft toegepast en waar zij geeindigt zijn.
     
 
-#### Welke job story component ga jij bouwen?
+#### Requirements list (a.d.h.v. Job stories)
 
-#### lofi-wireflows
+#### Componenten matching website
 
-wawdsa
+#### Verdeling componenten per teamlid
+
 
 
 
