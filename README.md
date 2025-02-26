@@ -116,6 +116,11 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 #### Requirements list (a.d.h.v. Job stories)
 
 #### Componenten matching website
+- Account aanmaken -> voorkeuren instellen
+- Inloggen
+- Vrienden toevoegen
+- Data sorteren -> statistieken / tabellen
+- Quiz (op basis van voorkeuren / level ?)
 
 #### Verdeling componenten per teamlid
 
