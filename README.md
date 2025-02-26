@@ -3,7 +3,7 @@ Teamleden: Reuben Reuben auf dem Brinke, Jaydey Faasen, Berend Jansen, Pien van 
 klas: Tech 1 
 
 
-## De opdracht
+### De opdracht
 - Je ontwerpt en ontwikkelt in een team van 4 een matching website waar bezoekers een account kunnen aanmaken en content kunnen selecteren / filteren / sorteren om tot een match te komen.
 - Ieder teamlid is verantwoordelijk voor een component van de website.
 - Samen ben je verantwoordelijk voor het geheel.
@@ -13,7 +13,22 @@ klas: Tech 1
 ## Fase 1: Orienteren
 
 
-### Brainstorm verschillende concepten / ondewerpen voor onze matching website 
+#### Gebruikersbelangen:
+
+- Gebruikers moeten content kunnen selecteren / filteren / sorteren
+- Gebruikers moeten aan elkaar gekoppeld kunnen worden
+- Gebruikers moeten content te zien krijgen op basis van hun voorkeuren
+
+#### Technische eisen:
+- Frontend: HTML, CSS, JavaScript
+- Backend: API (MongoDB database), NodeJS, Express, EJS
+
+
+
+## Fase 2: Conceptualiseren
+
+
+#### Brainstorm verschillende concepten / ondewerpen voor onze matching website 
 1. Matching website sport-evenementen
 2. Matching website voetbal-wedstrijden
 3. Matching website touristen (samen reizen?)
@@ -29,7 +44,7 @@ klas: Tech 1
 
 Wij hebben gestemd op onze favorieten en zijn uitgekomen op de Matching website voor Formule 1 fans
 
-### Wat is de doelgroep?
+#### Wat is de doelgroep?
 16-45 jaar, aangezien deze groep doorgaans actief is op sociale media en geïnteresseerd is in digitale platforms.
 
 ### Intresse(s)
@@ -55,15 +70,10 @@ De look en feel van de website moet snel, energiek, en professioneel aanvoelen, 
 *Design:* Strakke, moderne lay-out met veel visuele elementen zoals beelden van coureurs, auto’s, en racecircuits.
 *Kleurenschema:* Gebruik van een dynamisch kleurenpalet, geïnspireerd door F1 (bijv. zwart, wit, rood, en metallic tinten).
 
-
-
-## Fase 2: Conceptualiseren
-
-
-### ons gekozen concept
+#### Ons gekozen concept
 De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergelijken, hun voorkeuren aan te geven, en ze te matchen met andere fans die vergelijkbare interesses delen. Gebruikers kunnen bijvoorbeeld een specifieke coureur selecteren en zien wie hun favoriete coureur is, maar ook andere fans vinden die dezelfde coureur als favoriet hebben. Bovendien kunnen ze hun meningen delen en discussiepunten op basis van prestaties, historische gegevens en voorspellingen van toekomstige races.
 
-### Job Stories
+#### Job Stories
 *vb wanneer (situatie) ik wil (motivatie) zodat ik kan (verwachte uitkomst)*
 
 1. Wanneer ik Formule 1-fan ben, wil ik mijn favoriete coureur vergelijken met anderen, zodat ik kan zien hoe goed mijn keuze is in vergelijking met andere fans.
@@ -82,10 +92,37 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 
 8. Wanneer ik met andere fans wil praten, wil ik direct berichten kunnen sturen en discussiëren, zodat ik mijn mening kan delen over races, strategieën of toekomstige voorspellingen.
 
-### Welke job story component ga jij bouwen?
+9. Wanneer ik nieuw ben in de Formule 1-wereld, wil ik aanbevelingen krijgen over coureurs en teams, zodat ik een beter begrip krijg van wie ik misschien wil volgen.
 
-### lofi-wireflows
+10. Wanneer ik een race wil terugkijken, wil ik hoogtepunten en analyse van de prestaties van mijn favoriete coureur kunnen vinden, zodat ik geen belangrijke momenten mis.
 
+11. Wanneer ik een discussie wil starten over een controversiële racebeslissing, wil ik een forum of commentsectie hebben, zodat ik meningen van andere fans kan verzamelen en bespreken.
+
+12. Wanneer ik een favoriet team heb, wil ik updates krijgen over hun coureurs en prestaties, zodat ik altijd op de hoogte blijf van de laatste ontwikkelingen.
+
+13. Wanneer ik wil weten welke coureur het populairst is onder fans, wil ik een ranglijst van favoriete coureurs kunnen zien, zodat ik kan vergelijken hoe mijn voorkeuren zich verhouden tot die van anderen.
+
+14. Wanneer ik snel wat leuke feitjes op wil zoeken over Formule 1, bijvoorbeeld een lijst van kampioenen per jaar, wil ik dit op verschillende manieren kunnen sorteren zodat ik makkelijk het feitje waar ik naar op zoek was kan achterhalen.
+
+15. Wanneer ik actief een raceweekend aan het volgen ben, wil ik een overzicht van de kwalificatieresultaten, strategieën en voorspellingen kunnen zien, zodat ik goed voorbereid ben op de race.
+
+16. Wanneer ik in discussie ben over een race, wil ik polls kunnen maken en stemmen op meningen van anderen, zodat ik kan zien hoe de community over een bepaalde kwestie denkt.
+
+17. Wanneer ik benieuwd ben hoe teams relatief aan elkaar presteren, wil ik duidelijke grafieken waarin de prestaties van deze teams met elkaar vergeleken worden, zodat ik niet de hele tijd tussen paginas hoef te wisselen.
+
+18. Wanneer ik wil achterhalen welke bandenstrategie het effectiefst tijdens een bepaald raceweekend, wil ik per race kunnen zien welke coureur/team welke strategie heeft toegepast en waar zij geeindigt zijn.
+    
+
+#### Requirements list (a.d.h.v. Job stories)
+
+#### Componenten matching website
+- Account aanmaken -> voorkeuren instellen
+- Inloggen
+- Vrienden toevoegen
+- Data sorteren -> statistieken / tabellen
+- Quiz (op basis van voorkeuren / level ?)
+
+#### Verdeling componenten per teamlid
 
 
 
