@@ -16,17 +16,17 @@ app
 
 
 //Use MongoDB
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
+// const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
+// const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
 
-const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-})
+// const client = new MongoClient(uri, {
+//     serverApi: {
+//       version: ServerApiVersion.v1,
+//       strict: true,
+//       deprecationErrors: true,
+//     }
+// })
 
 // Try to open a database connection
 client.connect()
