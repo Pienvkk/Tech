@@ -13,6 +13,11 @@ klas: Tech 1
 ## Fase 1: Orienteren
 
 
+
+
+## Fase 2: Conceptualiseren
+
+
 ### Brainstorm verschillende concepten / ondewerpen voor onze matching website 
 1. Matching website sport-evenementen
 2. Matching website voetbal-wedstrijden
@@ -54,11 +59,6 @@ De look en feel van de website moet snel, energiek, en professioneel aanvoelen, 
 
 *Design:* Strakke, moderne lay-out met veel visuele elementen zoals beelden van coureurs, auto’s, en racecircuits.
 *Kleurenschema:* Gebruik van een dynamisch kleurenpalet, geïnspireerd door F1 (bijv. zwart, wit, rood, en metallic tinten).
-
-
-
-## Fase 2: Conceptualiseren
-
 
 ### ons gekozen concept
 De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergelijken, hun voorkeuren aan te geven, en ze te matchen met andere fans die vergelijkbare interesses delen. Gebruikers kunnen bijvoorbeeld een specifieke coureur selecteren en zien wie hun favoriete coureur is, maar ook andere fans vinden die dezelfde coureur als favoriet hebben. Bovendien kunnen ze hun meningen delen en discussiepunten op basis van prestaties, historische gegevens en voorspellingen van toekomstige races.
