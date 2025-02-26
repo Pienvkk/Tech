@@ -2,9 +2,18 @@
 Teamleden: Reuben Reuben auf dem Brinke, Jaydey Faasen, Berend Jansen, Pien van kalkeren
 klas: Tech 1 
 
-## opdracht 1 Brainstorming concepten
 
-#### Verschillende concepten / ondewerpen voor onze matching website 
+## De opdracht
+- Je ontwerpt en ontwikkelt in een team van 4 een matching website waar bezoekers een account kunnen aanmaken en content kunnen selecteren / filteren / sorteren om tot een match te komen.
+- Ieder teamlid is verantwoordelijk voor een component van de website.
+- Samen ben je verantwoordelijk voor het geheel.
+
+
+
+## Fase 1: Orienteren
+
+
+### Brainstorm verschillende concepten / ondewerpen voor onze matching website 
 1. Matching website sport-evenementen
 2. Matching website voetbal-wedstrijden
 3. Matching website touristen (samen reizen?)
@@ -18,11 +27,18 @@ klas: Tech 1
 11. Matching website live sport updates
 12. Matching website Pokemon persoonlijkheids test
 
-#### Wat is de doelgroep?
+Wij hebben gestemd op onze favorieten en zijn uitgekomen op de Matching website voor Formule 1 fans
+
+### Wat is de doelgroep?
 16-45 jaar, aangezien deze groep doorgaans actief is op sociale media en geïnteresseerd is in digitale platforms.
 
 ### Intresse(s)
-Formule 1, motorsport in het algemeen, coureurs, teams, en racestatistieken.
+- Formule 1
+- Motorsport
+- Coureurs
+- Racing teams
+- Circuits
+- Race-statistieken
 
 #### Interacties
 1. *registratie/Account aanmaken:* Gebruikers moeten een profiel aanmaken waarin ze hun voorkeuren kunnen aangeven (favoriete coureurs, teams, races).
@@ -39,13 +55,15 @@ De look en feel van de website moet snel, energiek, en professioneel aanvoelen, 
 *Design:* Strakke, moderne lay-out met veel visuele elementen zoals beelden van coureurs, auto’s, en racecircuits.
 *Kleurenschema:* Gebruik van een dynamisch kleurenpalet, geïnspireerd door F1 (bijv. zwart, wit, rood, en metallic tinten).
 
-## Opdracht 2: uitwerken concept
 
-#### ons gekozen concept
+
+## Fase 2: Conceptualiseren
+
+
+### ons gekozen concept
 De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergelijken, hun voorkeuren aan te geven, en ze te matchen met andere fans die vergelijkbare interesses delen. Gebruikers kunnen bijvoorbeeld een specifieke coureur selecteren en zien wie hun favoriete coureur is, maar ook andere fans vinden die dezelfde coureur als favoriet hebben. Bovendien kunnen ze hun meningen delen en discussiepunten op basis van prestaties, historische gegevens en voorspellingen van toekomstige races.
 
-
-#### Job Stories
+### Job Stories
 *vb wanneer (situatie) ik wil (motivatie) zodat ik kan (verwachte uitkomst)*
 
 1. Wanneer ik Formule 1-fan ben, wil ik mijn favoriete coureur vergelijken met anderen, zodat ik kan zien hoe goed mijn keuze is in vergelijking met andere fans.
@@ -64,9 +82,9 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 
 8. Wanneer ik met andere fans wil praten, wil ik direct berichten kunnen sturen en discussiëren, zodat ik mijn mening kan delen over races, strategieën of toekomstige voorspellingen.
 
+### Welke job story component ga jij bouwen?
 
-#### Welke job story component ga jij bouwen?
-#### lofi-wireflows
+### lofi-wireflows
 
 
 
