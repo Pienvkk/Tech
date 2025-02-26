@@ -1,3 +1,18 @@
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header img {
+    margin-left: 3rem;
+}
+
+header ul {
+    margin-right: 3rem;
+}
+
 h1 {
     display: flex;
     justify-content: center;
