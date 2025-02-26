@@ -82,6 +82,16 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 
 8. Wanneer ik met andere fans wil praten, wil ik direct berichten kunnen sturen en discussiëren, zodat ik mijn mening kan delen over races, strategieën of toekomstige voorspellingen.
 
+9. Wanneer ik nieuw ben in de Formule 1-wereld, wil ik aanbevelingen krijgen over coureurs en teams, zodat ik een beter begrip krijg van wie ik misschien wil volgen.
+
+10. Wanneer ik een race wil terugkijken, wil ik hoogtepunten en analyse van de prestaties van mijn favoriete coureur kunnen vinden, zodat ik geen belangrijke momenten mis.
+
+11. Wanneer ik een discussie wil starten over een controversiële racebeslissing, wil ik een forum of commentsectie hebben, zodat ik meningen van andere fans kan verzamelen en bespreken.
+
+12. Wanneer ik een favoriet team heb, wil ik updates krijgen over hun coureurs en prestaties, zodat ik altijd op de hoogte blijf van de laatste ontwikkelingen.
+
+13. Wanneer ik wil weten welke coureur het populairst is onder fans, wil ik een ranglijst van favoriete coureurs kunnen zien, zodat ik kan vergelijken hoe mijn voorkeuren zich verhouden tot die van anderen.
+
 ### Welke job story component ga jij bouwen?
 
 ### lofi-wireflows
