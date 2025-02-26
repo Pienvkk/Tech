@@ -29,14 +29,14 @@ app
 // })
 
 // Try to open a database connection
-client.connect()
-  .then(() => {
-    console.log('Database connection established')
-})
-  .catch((err) => {
-    console.log(`Database connection error - ${err}`)
-    console.log(`For uri - ${uri}`)
-})
+// client.connect()
+//   .then(() => {
+//     console.log('Database connection established')
+// })
+//   .catch((err) => {
+//     console.log(`Database connection error - ${err}`)
+//     console.log(`For uri - ${uri}`)
+// })
 
 // A sample route, replace this with your own routes
 app.get('/', (req, res) => {
