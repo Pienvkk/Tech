@@ -13,6 +13,16 @@ klas: Tech 1
 ## Fase 1: Orienteren
 
 
+### Gebruikersbelangen:
+
+- Gebruikers moeten content kunnen selecteren / filteren / sorteren
+- Gebruikers moeten aan elkaar gekoppeld kunnen worden
+- Gebruikers moeten content te zien krijgen op basis van hun voorkeuren
+
+### Technische eisen:
+- Frontend: HTML, CSS, JavaScript
+- Backend: API (MongoDB database), NodeJS, Express, EJS
+
 
 
 ## Fase 2: Conceptualiseren
