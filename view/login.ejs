@@ -10,8 +10,19 @@
 <body>
     <%- include('../view/header'); %>
 
-    <main>
+    <main class="mainLogin">
         <h1>LOGIN</h1>
+
+        <form action="/login" method="POST">
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="pass">Password:</label>
+            <input type="text" name="pass" id="pass" required>
+
+            <input type="submit" value="login">
+        </form>
     </main>
 
     <%- include('../view/footer'); %>

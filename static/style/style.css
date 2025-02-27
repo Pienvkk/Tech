@@ -1,3 +1,14 @@
+/* GLOBALE CSS */
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+}
+
+/* HEADER */
+
 header {
     display: flex;
     flex-direction: row;
@@ -20,10 +31,23 @@ header ul li {
     margin: 0 1rem;
 }
 
-h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: red;
+/* MAIN INDEX */
+
+.mainIndex {
+
 }
 
+/* MAIN LOGIN */
+
+.mainLogin form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* MAIN CREATE ACCOUNT */
+
+.mainCreateAccount {
+
+}
