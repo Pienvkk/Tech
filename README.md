@@ -119,10 +119,10 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
     
 #### Schetsen
 Pien lo-fi schermen 
-<img src="./static/style/images/schetsen/Profiel.png" alt="">
-<img src="./static/style/images/schetsen/Game.png" alt="">
-<img src="./static/style/images/schetsen/Landingpage.png" alt="">
-<img src="./static/style/images/schetsen/Communityplatform.png" alt="">
+<img src="./static/style/images/schetsen/Profiel.png" alt="lofi scherm profiel">
+<img src="./static/style/images/schetsen/Game.png" alt="lofi scherm game">
+<img src="./static/style/images/schetsen/Landingpage.png" alt="lofi scherm landpage">
+<img src="./static/style/images/schetsen/Communityplatform.png" alt="lofi scherm community platform">
 
 #### Requirements list (a.d.h.v. Job stories)
 
