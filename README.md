@@ -8,6 +8,11 @@ klas: Tech 1
 - Ieder teamlid is verantwoordelijk voor een component van de website.
 - Samen ben je verantwoordelijk voor het geheel.
 
+### regels voor de site
+1. Engelse namen + hoofdletters toevoegen voor duidelijkheid.
+2. Alles geordend houden en duidelijke benaming geven aan mapjes.
+3. Duidelijke omschrijven bij je push als je iets veranderd heb aan de server.
+4. Laat weten of als je iets gaat veranderden
 
 
 ## Fase 1: Orienteren
@@ -112,6 +117,8 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 
 18. Wanneer ik wil achterhalen welke bandenstrategie het effectiefst tijdens een bepaald raceweekend, wil ik per race kunnen zien welke coureur/team welke strategie heeft toegepast en waar zij geeindigt zijn.
     
+#### Schetsen
+
 
 #### Requirements list (a.d.h.v. Job stories)
 
