@@ -28,8 +28,14 @@ const client = new MongoClient(uri, {
 })
 
 client.connect()
-  .then(() => {
+  .then(async() => {
     console.log('Database connection established')
+
+    const db = client.db(process.env.DB_NAME)
+    const Circuits = db.collection('Circuits')
+
+    const sampleCircuit = await Circuits.findOne({})
+    console.log('Circuit:', sampleCircuit)
 })
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
