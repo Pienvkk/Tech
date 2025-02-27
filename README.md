@@ -118,7 +118,11 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 18. Wanneer ik wil achterhalen welke bandenstrategie het effectiefst tijdens een bepaald raceweekend, wil ik per race kunnen zien welke coureur/team welke strategie heeft toegepast en waar zij geeindigt zijn.
     
 #### Schetsen
-
+Pien lo-fi schermen 
+<img src="./static/style/images/schetsen/Profiel.png" alt="">
+<img src="./static/style/images/schetsen/Game.png" alt="">
+<img src="./static/style/images/schetsen/Landingpage.png" alt="">
+<img src="./static/style/images/schetsen/Communityplatform.png" alt="">
 
 #### Requirements list (a.d.h.v. Job stories)
 
