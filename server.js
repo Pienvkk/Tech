@@ -34,10 +34,10 @@ client.connect()
     console.log('Database connection established')
 
     const db = client.db(process.env.DB_NAME)
-    const Circuits = db.collection('Circuits')
+    const users = db.collection('0Users')
 
-    const sampleCircuit = await Circuits.findOne({})
-    console.log('Circuit:', sampleCircuit)
+    const sampleUsers = await users.findOne({})
+    console.log('users:', sampleUsers)
 })
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
@@ -72,7 +72,6 @@ app.use((err, req, res) => {
 app.listen(process.env.PORT, () => {
     console.log(`I did not change this message and now my webserver is listening at port ${process.env.PORT}`)
 })
-
 
 
 function home(req, res) {
