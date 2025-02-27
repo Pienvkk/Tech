@@ -39,12 +39,15 @@ header ul li {
 
 /* MAIN LOGIN */
 
-.mainLogin {
-
+.mainLogin form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* MAIN CREATE ACCOUNT */
 
 .mainCreateAccount {
-    
+
 }
