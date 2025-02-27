@@ -8,6 +8,11 @@ klas: Tech 1
 - Ieder teamlid is verantwoordelijk voor een component van de website.
 - Samen ben je verantwoordelijk voor het geheel.
 
+### regels voor de site
+1. Engelse namen + hoofdletters toevoegen voor duidelijkheid.
+2. Alles geordend houden en duidelijke benaming geven aan mapjes.
+3. Duidelijke omschrijven bij je push als je iets veranderd heb aan de server.
+4. Laat weten of als je iets gaat veranderden
 
 
 ## Fase 1: Orienteren
@@ -119,6 +124,12 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 21. Wanneer ik de statistieken van een recente Formule 1 wedstrijd wil bekijken wil ik dit overzichtelijk kunnen doen.
 
 22. Wanneer ik wil discussiëren met anderen over recente Formule 1 gebeurtenissen wil ik dit kunnen doen met mensen die op het zelfde kennis niveau zitten als ik.
+#### Schetsen
+Pien lo-fi schermen 
+<img src="./static/style/images/schetsen/Profiel.png" alt="lofi scherm profiel">
+<img src="./static/style/images/schetsen/Game.png" alt="lofi scherm game">
+<img src="./static/style/images/schetsen/Landingpage.png" alt="lofi scherm landpage">
+<img src="./static/style/images/schetsen/Communityplatform.png" alt="lofi scherm community platform">
 
 #### Requirements list (a.d.h.v. Job stories)
 
