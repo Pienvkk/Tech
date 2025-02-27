@@ -11,6 +11,8 @@ app
     .set ('views', 'view')
 
     .get ('/', home)
+    .get ('/login', login)
+    .get ('/createAccount', createAccount)
 
     .listen(2828)
 
@@ -37,9 +39,12 @@ client.connect()
 })
 
 
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
+
 
 // Middleware to handle not found errors - error 404
 app.use((req, res) => {
@@ -66,4 +71,12 @@ app.listen(process.env.PORT, () => {
 
 function home(req, res) {
     res.render('index.ejs')
+}
+
+function login(req, res) {
+    res.render('login.ejs')
+}
+
+function createAccount (req, res) {
+    res.render('createAccount.ejs')
 }
