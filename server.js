@@ -45,6 +45,7 @@ client.connect()
 })
 
 
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
@@ -74,12 +75,28 @@ app.listen(process.env.PORT, () => {
 
 
 
-    try {
-        const
-    }
-}
-)
+app.post('/login', async (req, res) => {
+    const { username, pass } = req.body
 
+    try {
+        const db = client.db(process.env.DB_NAME)
+        const users = db.collection('0Users')
+
+        // Zoek de gebruiker in de database
+        const user = await users.findOne({ username: username, password: pass })
+
+        if (!user) {
+            return res.status(400).send('Ongeldige gebruikersnaam of wachtwoord')
+        }
+
+        // Login is succesvol
+        res.send('Succesvol ingelogd!')
+
+    } catch (error) {
+        console.error('Login fout:', error)
+        res.status(500).send('Er is iets misgegaan op de server')
+    }
+})
 
 
 function home(req, res) {
