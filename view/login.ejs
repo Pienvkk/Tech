@@ -13,15 +13,15 @@
     <main class="mainLogin">
         <h1>LOGIN</h1>
 
-        <form action="login">
+        <form action="/login" method="POST">
 
-            <label for="username"></label>
-            <input type="text" name="username" id="username">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
 
-            <label for="pass"></label>
-            <input type="text" name="pass" id="pass">
+            <label for="pass">Password:</label>
+            <input type="text" name="pass" id="pass" required>
 
-            <input type="submit" value="submit">
+            <input type="submit" value="login">
         </form>
     </main>
 
