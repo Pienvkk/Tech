@@ -112,6 +112,13 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 
 18. Wanneer ik wil achterhalen welke bandenstrategie het effectiefst tijdens een bepaald raceweekend, wil ik per race kunnen zien welke coureur/team welke strategie heeft toegepast en waar zij geeindigt zijn.
     
+19. Wanneer ik fans met dezelfde interesses als ik wil vinden wil ik deze kunnen filteren op basis van formule 1 interesses en toevoegen.
+
+20. Wanneer ik mijn kennis van Forumle 1 wil testen wil ik tegen andere fans kunnen strijden en concurreren in de vorm van een wedstrijd.
+
+21. Wanneer ik de statistieken van een recente Formule 1 wedstrijd wil bekijken wil ik dit overzichtelijk kunnen doen.
+
+22. Wanneer ik wil discussiëren met anderen over recente Formule 1 gebeurtenissen wil ik dit kunnen doen met mensen die op het zelfde kennis niveau zitten als ik.
 
 #### Requirements list (a.d.h.v. Job stories)
 
