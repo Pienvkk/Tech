@@ -13,6 +13,44 @@ good luck coding! (^-^)*/
     font-style: normal;
 }
 
+
+
+/* GLOBALE CSS */
+
+body {
+    color:white;
+    background-color: rgb(20, 20, 20);
+}
+
+h1 {
+    font-family: 'formule1mainfont', sans-serif;
+    color: white;
+    font-size:2cm;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form label {
+    margin: 1rem 0;
+}
+
+form input {
+    margin: 1rem 0;
+}
+
+
+
+/* HEADER */
+
 header {
     display: flex;
     flex-direction: row;
@@ -30,15 +68,37 @@ header ul {
     flex-direction: row;
     list-style: none;
     margin-right: 3rem;
+
+    list-style-type: none;
 }
 
 header ul li {
     margin: 0 1rem;
+    padding: 0.8rem 1rem;
 }
 
 header a {
+    padding: 0.8rem 1rem;
+
+    background-color: #ff0000;
+    color: #FFFFFF;
     text-decoration: none;
-    color: #28282A;
+}
+
+header a:link {
+    color: #FFFFFF;
+}
+
+header a:visited {
+    color: #FFFFFF;
+}
+
+header a:hover {
+    color: #FFFFFF;
+}
+
+header a:active {
+    color: #FFFFFF;
 }
 
 /* header a:nth-of-type(7){
@@ -50,21 +110,3 @@ header a {
     background-color: #EE0000;
     border-radius: 0.5em;
 } */
-
-h1 {
-    font-family: 'formule1mainfont', sans-serif;
-    color: white;
-    font-size:2cm;
-
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
-
-body {
-    color:white;
-    background-color: rgb(20, 20, 20);
-}
-
-
-
