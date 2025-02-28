@@ -19,7 +19,6 @@ header {
     align-items: center;
     justify-content: space-between;
     background-color: #FFFFFF;
-    color: #28282A;
 }
 
 header img {
@@ -39,6 +38,17 @@ header ul li {
 
 header a {
     text-decoration: none;
+    color: #28282A;
+}
+
+header a:nth-of-type(7){
+    background-color: #F3F3F3;
+    border-radius: 0.5em;
+}
+
+header a:nth-of-type(7){
+    background-color: #EE0000;
+    border-radius: 0.5em;
 }
 
 h1 {
