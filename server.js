@@ -3,6 +3,22 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 
+const session = require('express-session')
+
+app.use(session({
+    secret: 'your-secret-key', // Verander dit naar een veilige string!
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Zet op 'true' als je HTTPS gebruikt
+}));
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+});
+
+
+
 
 
 app
@@ -20,24 +36,6 @@ app
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
 })
-
-
-
-
-
-const session = require('express-session')
-
-app.use(session({
-    secret: 'your-secret-key', // Verander dit naar een veilige string!
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Zet op 'true' als je HTTPS gebruikt
-}));
-
-app.use((req, res, next) => {
-    res.locals.user = req.session.user || null;
-    next();
-});
 
 
 
