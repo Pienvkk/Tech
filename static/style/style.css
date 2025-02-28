@@ -47,12 +47,28 @@ header ul {
 header ul li {
     margin: 0 1rem;
     padding: 0.8rem 1rem;
-    border-radius: 1px;
-
-    background-color: #ff0000;
-    color: #FFFFFF;
 }
 
 header ul li a {
+    padding: 0.8rem 1rem;
+
+    background-color: #ff0000;
+    color: #FFFFFF;
     text-decoration: none;
+}
+
+header ul li a:link {
+    color: #FFFFFF;
+}
+
+header ul li a:visited {
+    color: #FFFFFF;
+}
+
+header ul li a:hover {
+    color: #FFFFFF;
+}
+
+header ul li a:active {
+    color: #FFFFFF;
 }
