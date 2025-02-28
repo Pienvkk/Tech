@@ -154,26 +154,7 @@ app.get('/logout', (req, res) => {
 
 
 
-// Middleware to handle not found errors - error 404
-app.use((req, res) => {
-    // log error to console
-    console.error('404 error at URL: ' + req.url)
-    // send back a HTTP response with status code 404
-    res.status(404).send('404 error at URL: ' + req.url)
-})
-
-// Middleware to handle server errors - error 500
-app.use((err, req, res) => {
-    // log error to console
-    console.error(err.stack)
-    // send back a HTTP response with status code 500
-    res.status(500).send('500: server error')
-})
-
-
-
-
-
+// Functies
 function home(req, res) {
     if (req.session.user) {
         res.render('index.ejs', { user: req.session.user });
@@ -189,3 +170,23 @@ function login(req, res) {
 function createAccount (req, res) {
     res.render('createAccount.ejs')
 }
+
+
+
+
+
+// Middleware to handle not found errors - error 404
+app.use((req, res) => {
+    // log error to console
+    console.error('404 error at URL: ' + req.url)
+    // send back a HTTP response with status code 404
+    res.status(404).send('404 error at URL: ' + req.url)
+})
+
+// Middleware to handle server errors - error 500
+app.use((err, req, res) => {
+    // log error to console
+    console.error(err.stack)
+    // send back a HTTP response with status code 500
+    res.status(500).send('500: server error')
+})
