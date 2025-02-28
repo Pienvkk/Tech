@@ -21,6 +21,7 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    background-color: #FFFFFF;
 }
 
 header img {
@@ -38,6 +39,11 @@ header ul li {
     margin: 0 1rem;
 }
 
+header a {
+    text-decoration: none;
+    color: #28282A;
+}
+
 h1 {
     font-family: 'formule1mainfont', sans-serif;
     color: white;
@@ -47,4 +53,6 @@ h1 {
     justify-content: left;
     align-items: center;
 }
+
+
 
