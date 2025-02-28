@@ -149,3 +149,7 @@ header ul li:nth-of-type(8) a:hover {
 header ul li:nth-of-type(8) a:active {
     color: #FFFFFF;
 }
+
+header ul li p {
+    color: #202020;
+}

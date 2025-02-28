@@ -10,7 +10,7 @@
         <li><a href="#">speel</a></li>
 
         <% if (user) { %>
-            <li>Welkom, <%= user.username %>!</li>
+            <li><p>Welkom, <%= user.username %>!</p></li>
             <li><a href="/logout">Uitloggen</a></li>
         <% } else { %>
             <li><a href="/login">Log in</a></li>
