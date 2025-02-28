@@ -3,6 +3,8 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 
+
+
 app
     .use(express.json())
     .use (express.urlencoded({extended: true}))
@@ -17,7 +19,23 @@ app
 
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
-    })
+})
+
+
+
+
+
+const session = require('express-session')
+
+app.use(session({
+    secret: 'your-secret-key', // Verander dit naar een veilige string!
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Zet op 'true' als je HTTPS gebruikt
+}));
+
+
+
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
@@ -31,6 +49,8 @@ const client = new MongoClient(uri, {
       deprecationErrors: true,
     }
 })
+
+
 
 
 // Connect met database voor users
@@ -104,6 +124,12 @@ app.post('/login', async (req, res) => {
             return res.status(400).send('Ongeldige gebruikersnaam of wachtwoord')
         }
 
+        // Login is succesvol - Sla de gebruiker op in de sessie
+        req.session.user = { username: user.username };
+
+        // Redirect naar homepagina
+        res.redirect('/');
+
         // Login is succesvol
         res.send('Succesvol ingelogd!')
 
@@ -112,6 +138,17 @@ app.post('/login', async (req, res) => {
         res.status(500).send('Er is iets misgegaan op de server')
     }
 })
+
+
+
+
+
+// Uitloggen
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
+});
 
 
 
@@ -138,7 +175,11 @@ app.use((err, req, res) => {
 
 
 function home(req, res) {
-    res.render('index.ejs')
+    if (req.session.user) {
+        res.render('index.ejs', { user: req.session.user });
+    } else {
+        res.render('index.ejs', { user: null });
+    }
 }
 
 function login(req, res) {
