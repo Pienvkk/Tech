@@ -17,6 +17,10 @@ good luck coding! (^-^)*/
 
 /* GLOBALE CSS */
 
+* {
+    margin: 0;
+}
+
 body {
     color:white;
     background-color: rgb(20, 20, 20);
@@ -56,6 +60,7 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
     background-color: #FFFFFF;
 }
 
@@ -74,14 +79,10 @@ header ul {
 
 header ul li {
     margin: 0 1rem;
-    padding: 0.8rem 1rem;
 }
 
 header a {
-    padding: 0.8rem 1rem;
-
-    background-color: #ff0000;
-    color: #FFFFFF;
+    color: #28282A;
     text-decoration: none;
 }
 
@@ -101,12 +102,18 @@ header a:active {
     color: #FFFFFF;
 }
 
-/* header a:nth-of-type(7){
-    background-color: #F3F3F3;
-    border-radius: 0.5em;
-} */
+header a:nth-of-type(7){
+    padding: 0.8rem 1rem;
 
-/* header a:nth-of-type(8){
-    background-color: #EE0000;
-    border-radius: 0.5em;
-} */
+    background-color: #ff0000;
+    color: #FFFFFF;
+    text-decoration: none;
+} 
+
+header a:nth-of-type(8){
+    padding: 0.8rem 1rem;
+
+    background-color: #ff0000;
+    color: #FFFFFF;
+    text-decoration: none;
+} 
