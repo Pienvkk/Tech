@@ -103,7 +103,7 @@ header ul li a:active {
 }
 
 header ul li:nth-of-type(7) a {
-    padding: 0.8rem 1rem;
+    padding: 0.8rem 2rem;
 
     background-color: #ff0000;
     color: #FFFFFF;
@@ -126,7 +126,7 @@ header ul li:nth-of-type(7) a:active {
     color: #FFFFFF;
 }
 
-header ul li a:nth-of-type(8){
+header ul li:nth-of-type(8) a {
     padding: 0.8rem 1rem;
 
     background-color: #ff0000;
