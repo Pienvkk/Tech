@@ -1,3 +1,9 @@
+/* Important to do's in de css
+1. Per aanroepen indelen op (opmaak, posisitie enz) voor netheid
+2. Kopjes geven aan bepaalde stukken waar het voor is op welke pagina of plek om makkelijk terug te vinden
+
+good luck coding! (^-^)*/
+
 *{
     color:white;
     background-color: rgb(20, 20, 20);
@@ -34,9 +40,10 @@ header ul li {
 
 h1 {
     font-family: 'formule1mainfont', sans-serif;
+    color: white;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
 }
 
