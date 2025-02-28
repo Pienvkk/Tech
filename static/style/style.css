@@ -17,10 +17,6 @@ good luck coding! (^-^)*/
 
 /* GLOBALE CSS */
 
-* {
-    margin: 0;
-}
-
 body {
     color:white;
     background-color: rgb(20, 20, 20);
@@ -61,6 +57,9 @@ header {
     align-items: center;
     justify-content: space-between;
 
+    width: 100vw;
+    height: 8vh;
+
     background-color: #FFFFFF;
 }
 
@@ -81,34 +80,50 @@ header ul li {
     margin: 0 1rem;
 }
 
-header a {
-    color: #28282A;
+header ul li a {
+    color: #202020;
     text-decoration: none;
 }
 
-header a:link {
-    color: #FFFFFF;
+header ul li a:link {
+    color: #202020;
 }
 
-header a:visited {
-    color: #FFFFFF;
+header ul li a:visited {
+    color: #202020;
 }
 
-header a:hover {
-    color: #FFFFFF;
+header ul li a:hover {
+    color: #202020;
 }
 
-header a:active {
-    color: #FFFFFF;
+header ul li a:active {
+    color: #202020;
 }
 
-header a:nth-of-type(7){
+header ul li:nth-of-type(7) a {
     padding: 0.8rem 1rem;
 
     background-color: #ff0000;
     color: #FFFFFF;
     text-decoration: none;
 } 
+
+header ul li:nth-of-type(7) a:link {
+    color: #FFFFFF;
+}
+
+header ul li:nth-of-type(7) a:visited {
+    color: #FFFFFF;
+}
+
+header ul li:nth-of-type(7) a:hover {
+    color: #FFFFFF;
+}
+
+header ul li:nth-of-type(7) a:active {
+    color: #FFFFFF;
+}
 
 header a:nth-of-type(8){
     padding: 0.8rem 1rem;
@@ -117,3 +132,19 @@ header a:nth-of-type(8){
     color: #FFFFFF;
     text-decoration: none;
 } 
+
+header ul li:nth-of-type(8) a:link {
+    color: #FFFFFF;
+}
+
+header ul li:nth-of-type(8) a:visited {
+    color: #FFFFFF;
+}
+
+header ul li:nth-of-type(8) a:hover {
+    color: #FFFFFF;
+}
+
+header ul li:nth-of-type(8) a:active {
+    color: #FFFFFF;
+}
