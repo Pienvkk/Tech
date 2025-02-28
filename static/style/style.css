@@ -4,10 +4,7 @@
 
 good luck coding! (^-^)*/
 
-*{
-    color:white;
-    background-color: rgb(20, 20, 20);
-}
+
 
 @font-face {
     font-family:'formule1mainfont';
@@ -52,6 +49,11 @@ h1 {
     display: flex;
     justify-content: left;
     align-items: center;
+}
+
+body {
+    color:white;
+    background-color: rgb(20, 20, 20);
 }
 
 
