@@ -41,9 +41,10 @@ header ul li {
 h1 {
     font-family: 'formule1mainfont', sans-serif;
     color: white;
+    font-size:2cm;
 
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 }
 
