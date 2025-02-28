@@ -7,6 +7,21 @@ h1 {
     color: red;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form label {
+    margin: 1rem 0;
+}
+
+form input {
+    margin: 1rem 0;
+}
+
 /* HEADER */
 
 header {
@@ -29,25 +44,4 @@ header ul {
 
 header ul li {
     margin: 0 1rem;
-}
-
-/* MAIN INDEX */
-
-.mainIndex {
-
-}
-
-/* MAIN LOGIN */
-
-.mainLogin form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* MAIN CREATE ACCOUNT */
-
-.mainCreateAccount {
-
 }

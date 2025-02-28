@@ -52,7 +52,7 @@ client.connect()
 
 
 
-// Check of login request binnenkomt
+// Check of account creatie request binnenkomt
 app.post('/createAccount', async (req, res) => {
     console.log('Received account creation request:', req.body); 
     res.send('Received request'); 
