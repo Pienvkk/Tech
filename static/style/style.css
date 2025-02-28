@@ -34,6 +34,7 @@ h1 {
     display: flex;
     justify-content: left;
     align-items: center;
+    margin: 1cm 0.5cm;
 }
 
 form {
@@ -111,12 +112,14 @@ header ul li a:active {
     color: #202020;
 }
 
-header ul li:nth-of-type(7) a {
+header ul li:nth-of-type(7) a {  /*  is dit niet bijna dubbel met de 8ste :)?*/
     padding: 0.8rem 2rem;
 
     background-color: #ff0000;
     color: #FFFFFF;
     text-decoration: none;
+
+    border-radius: 1mm;
 } 
 
 header ul li:nth-of-type(7) a:link {
@@ -141,6 +144,8 @@ header ul li:nth-of-type(8) a {
     background-color: #ff0000;
     color: #FFFFFF;
     text-decoration: none;
+
+    border-radius: 1mm;
 } 
 
 header ul li:nth-of-type(8) a:link {
