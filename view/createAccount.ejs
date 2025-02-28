@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Matching - create account</title>
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
+</head>
+
+<body>
+    <%- include('../view/header'); %>
+
+    <main class="createAccount">
+
+        <h1>CREATE ACCOUNT</h1>
+
+        <form action="/createAccount" method="POST">
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="pass">Password:</label>
+            <input type="text" name="pass" id="pass" required>
+
+            <input type="submit" value="createAccount">
+        </form>
+        
+    </main>
+
+    <%- include('../view/footer'); %>
+</body>
+</html>

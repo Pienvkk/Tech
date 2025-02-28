@@ -1,3 +1,29 @@
+/* GLOBALE CSS */
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form label {
+    margin: 1rem 0;
+}
+
+form input {
+    margin: 1rem 0;
+}
+
+/* HEADER */
+
 header {
     display: flex;
     flex-direction: row;
@@ -14,16 +40,35 @@ header ul {
     flex-direction: row;
 
     margin-right: 3rem;
+
+    list-style-type: none;
 }
 
 header ul li {
     margin: 0 1rem;
+    padding: 0.8rem 1rem;
 }
 
-h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: red;
+header ul li a {
+    padding: 0.8rem 1rem;
+
+    background-color: #ff0000;
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
+header ul li a:link {
+    color: #FFFFFF;
+}
+
+header ul li a:visited {
+    color: #FFFFFF;
+}
+
+header ul li a:hover {
+    color: #FFFFFF;
+}
+
+header ul li a:active {
+    color: #FFFFFF;
+}

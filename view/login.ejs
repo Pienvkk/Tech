@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Matching - login</title>
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
+</head>
+
+<body>
+    <%- include('../view/header'); %>
+
+    <main class="mainLogin">
+        <h1>LOG IN</h1>
+
+        <form action="/login" method="POST">
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="pass">Password:</label>
+            <input type="text" name="pass" id="pass" required>
+
+            <input type="submit" value="login">
+        </form>
+    </main>
+
+    <%- include('../view/footer'); %>
+</body>
+</html>

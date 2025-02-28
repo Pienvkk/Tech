@@ -4,20 +4,25 @@ const express = require('express')
 const app = express()
 
 app
-    .use ('/', express.static('static'))
+    .use(express.json())
     .use (express.urlencoded({extended: true}))
+    .use ('/', express.static('static'))
 
     .set ('view engine', 'ejs')
     .set ('views', 'view')
 
     .get ('/', home)
+    .get ('/login', login)
+    .get ('/createAccount', createAccount)
 
-    .listen(2828)
+    .listen(process.env.PORT, () => {
+        console.log(`Webserver is listening at port ${process.env.PORT}`)
+    })
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Formule1`
 
 const client = new MongoClient(uri, {
     serverApi: {
@@ -27,9 +32,17 @@ const client = new MongoClient(uri, {
     }
 })
 
+
+// Connect met database voor users
 client.connect()
-  .then(() => {
+  .then(async() => {
     console.log('Database connection established')
+
+    const db = client.db(process.env.DB_NAME)
+    const users = db.collection('0Users')
+
+    const sampleUsers = await users.findOne({})
+    console.log('users:', sampleUsers)
 })
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
@@ -37,9 +50,76 @@ client.connect()
 })
 
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+
+
+// Check of account creatie request binnenkomt
+app.post('/createAccount', async (req, res) => {
+    console.log('Received account creation request:', req.body); 
+    res.send('Received request'); 
+});
+
+// Account aanmaken
+app.post('/createAccount', async (req, res) => {
+    const { username, pass } = req.body;
+
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const users = db.collection('0Users');
+
+        // Kijkt of username al bestaat
+        const existingUser = await users.findOne({ username: username });
+        if (existingUser) {
+            return res.status(400).send('Username taken');
+        }
+
+        // Stopt nieuwe user in database
+        await users.insertOne({ username: username, password: pass });
+
+        res.send('Account successfully created!');
+
+    } catch (error) {
+        console.error('Account creation error:', error);
+        res.status(500).send('Server error');
+    }
+});
+
+
+
+
+
+// Check of login request binnenkomt
+app.post('/login', async (req, res) => {
+    console.log('Received login request:', req.body); 
+    res.send('Received request'); 
+});
+
+// Inloggen
+app.post('/login', async (req, res) => {
+    const { username, pass } = req.body
+
+    try {
+        const db = client.db(process.env.DB_NAME)
+        const users = db.collection('0Users')
+
+        // Zoek de gebruiker in de database
+        const user = await users.findOne({ username: username, password: pass })
+
+        if (!user) {
+            return res.status(400).send('Ongeldige gebruikersnaam of wachtwoord')
+        }
+
+        // Login is succesvol
+        res.send('Succesvol ingelogd!')
+
+    } catch (error) {
+        console.error('Login fout:', error)
+        res.status(500).send('Er is iets misgegaan op de server')
+    }
 })
+
+
+
+
 
 // Middleware to handle not found errors - error 404
 app.use((req, res) => {
@@ -57,13 +137,18 @@ app.use((err, req, res) => {
     res.status(500).send('500: server error')
 })
 
-// Start the webserver and listen for HTTP requests at specified port
-app.listen(process.env.PORT, () => {
-    console.log(`I did not change this message and now my webserver is listening at port ${process.env.PORT}`)
-})
+
 
 
 
 function home(req, res) {
     res.render('index.ejs')
+}
+
+function login(req, res) {
+    res.render('login.ejs')
+}
+
+function createAccount (req, res) {
+    res.render('createAccount.ejs')
 }
