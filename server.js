@@ -183,7 +183,7 @@ function createAccount (req, res) {
 
 
 
-// Middleware to handle not found errors - error 404
+// Middleware voor not found errors - error 404
 app.use((req, res) => {
     // log error to console
     console.error('404 error at URL: ' + req.url)
@@ -191,7 +191,7 @@ app.use((req, res) => {
     res.status(404).send('404 error at URL: ' + req.url)
 })
 
-// Middleware to handle server errors - error 500
+// Middleware voor server errors - error 500
 app.use((err, req, res) => {
     // log error to console
     console.error(err.stack)
