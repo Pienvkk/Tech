@@ -176,3 +176,7 @@ main div{
     justify-content: space-evenly;
     margin-top: 6cm;
 }
+
+main section{
+    margin-top: 11cm; /* weet nog niet zo goed hoe ik dit anders moet oplossen*/
+}
