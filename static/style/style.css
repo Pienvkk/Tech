@@ -62,10 +62,15 @@ header {
     height: 8vh;
 
     background-color: #FFFFFF;
+    font-family: "alfabet", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 4mm;
 }
 
 header img {
-    margin-left: 3rem;
+    width: 3cm;
+    margin-left: 5mm;
 }
 
 header ul {
