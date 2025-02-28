@@ -4,9 +4,9 @@ const express = require('express')
 const app = express()
 
 app
-    .use ('/', express.static('static'))
-    .use (express.urlencoded({extended: true}))
     .use(express.json())
+    .use (express.urlencoded({extended: true}))
+    .use ('/', express.static('static'))
 
     .set ('view engine', 'ejs')
     .set ('views', 'view')
@@ -71,14 +71,16 @@ app.use((err, req, res) => {
     res.status(500).send('500: server error')
 })
 
-// Start the webserver and listen for HTTP requests at specified port
 
 
-
-
+// Check of login request binnenkomt
 app.post('/login', async (req, res) => {
-    console.log('Received login request:', req.body); // Debugging
+    console.log('Received login request:', req.body); 
+    res.send('Received request'); 
+});
 
+// Inloggen
+app.post('/login', async (req, res) => {
     const { username, pass } = req.body
 
     try {
