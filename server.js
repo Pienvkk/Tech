@@ -56,7 +56,6 @@ client.connect()
 app.post('/createAccount', async (req, res) => {
     // Check of account creatie request binnenkomt
     console.log('Received account creation request:', req.body); 
-    res.send('Received request'); 
 
     // Account aanmaken
     const { username, pass } = req.body;
@@ -90,7 +89,6 @@ app.post('/createAccount', async (req, res) => {
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
     console.log('Received login request:', req.body); 
-    res.send('Received request'); 
 
     // Inloggen
     const { username, pass } = req.body
