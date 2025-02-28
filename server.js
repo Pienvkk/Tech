@@ -166,11 +166,19 @@ function home(req, res) {
 }
 
 function login(req, res) {
-    res.render('login.ejs')
+    if (req.session.user) {
+        res.render('login.ejs', { user: req.session.user });
+    } else {
+        res.render('login.ejs', { user: null });
+    }
 }
 
 function createAccount (req, res) {
-    res.render('createAccount.ejs')
+    if (req.session.user) {
+        res.render('createAccount.ejs', { user: req.session.user });
+    } else {
+        res.render('createAccount.ejs', { user: null });    
+    }
 }
 
 
