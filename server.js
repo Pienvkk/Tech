@@ -32,6 +32,8 @@ const client = new MongoClient(uri, {
     }
 })
 
+
+// Connect met database voor login
 client.connect()
   .then(async() => {
     console.log('Database connection established')
@@ -51,24 +53,6 @@ client.connect()
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
-})
-
-
-
-// Middleware to handle not found errors - error 404
-app.use((req, res) => {
-    // log error to console
-    console.error('404 error at URL: ' + req.url)
-    // send back a HTTP response with status code 404
-    res.status(404).send('404 error at URL: ' + req.url)
-})
-
-// Middleware to handle server errors - error 500
-app.use((err, req, res) => {
-    // log error to console
-    console.error(err.stack)
-    // send back a HTTP response with status code 500
-    res.status(500).send('500: server error')
 })
 
 
@@ -102,6 +86,25 @@ app.post('/login', async (req, res) => {
         res.status(500).send('Er is iets misgegaan op de server')
     }
 })
+
+
+
+// Middleware to handle not found errors - error 404
+app.use((req, res) => {
+    // log error to console
+    console.error('404 error at URL: ' + req.url)
+    // send back a HTTP response with status code 404
+    res.status(404).send('404 error at URL: ' + req.url)
+})
+
+// Middleware to handle server errors - error 500
+app.use((err, req, res) => {
+    // log error to console
+    console.error(err.stack)
+    // send back a HTTP response with status code 500
+    res.status(500).send('500: server error')
+})
+
 
 
 function home(req, res) {
