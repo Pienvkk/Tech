@@ -5,6 +5,10 @@
 good luck coding! (^-^)*/
 
 
+*{
+    margin: 0;
+}
+
 
 @font-face {
     font-family:'formule1mainfont';
