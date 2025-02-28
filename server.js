@@ -6,6 +6,7 @@ const app = express()
 app
     .use ('/', express.static('static'))
     .use (express.urlencoded({extended: true}))
+    .use(express.json())
 
     .set ('view engine', 'ejs')
     .set ('views', 'view')
