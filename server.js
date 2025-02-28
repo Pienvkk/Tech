@@ -52,14 +52,13 @@ client.connect()
 
 
 
-// Check of account creatie request binnenkomt
+
 app.post('/createAccount', async (req, res) => {
+    // Check of account creatie request binnenkomt
     console.log('Received account creation request:', req.body); 
     res.send('Received request'); 
-});
 
-// Account aanmaken
-app.post('/createAccount', async (req, res) => {
+    // Account aanmaken
     const { username, pass } = req.body;
 
     try {
@@ -87,14 +86,13 @@ app.post('/createAccount', async (req, res) => {
 
 
 
-// Check of login request binnenkomt
+
 app.post('/login', async (req, res) => {
+    // Check of login request binnenkomt
     console.log('Received login request:', req.body); 
     res.send('Received request'); 
-});
 
-// Inloggen
-app.post('/login', async (req, res) => {
+    // Inloggen
     const { username, pass } = req.body
 
     try {
