@@ -3,6 +3,13 @@
     background-color: rgb(20, 20, 20);
 }
 
+@font-face {
+    font-family:'formule1mainfont';
+    src: url('../fonts/OzdaSuperItalic-yYLXZ.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 header {
     display: flex;
     flex-direction: row;
@@ -26,9 +33,10 @@ header ul li {
 }
 
 h1 {
+    font-family: 'formule1mainfont', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: red;
+    color: white;
 }
 
