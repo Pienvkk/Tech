@@ -14,7 +14,9 @@ app
     .get ('/login', login)
     .get ('/createAccount', createAccount)
 
-    .listen(2828)
+    .listen(process.env.PORT, () => {
+        console.log(`Webserver is listening at port ${process.env.PORT}`)
+    })
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
@@ -69,13 +71,13 @@ app.use((err, req, res) => {
 })
 
 // Start the webserver and listen for HTTP requests at specified port
-app.listen(process.env.PORT, () => {
-    console.log(`Webserver is listening at port ${process.env.PORT}`)
-})
+
 
 
 
 app.post('/login', async (req, res) => {
+    console.log('Received login request:', req.body); // Debugging
+
     const { username, pass } = req.body
 
     try {
