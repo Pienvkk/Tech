@@ -57,6 +57,7 @@ header {
     align-items: center;
     justify-content: space-between;
 
+    margin: 0;
     width: 100vw;
     height: 8vh;
 
@@ -125,7 +126,7 @@ header ul li:nth-of-type(7) a:active {
     color: #FFFFFF;
 }
 
-header a:nth-of-type(8){
+header ul li a:nth-of-type(8){
     padding: 0.8rem 1rem;
 
     background-color: #ff0000;
