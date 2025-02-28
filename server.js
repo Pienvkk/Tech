@@ -33,7 +33,7 @@ const client = new MongoClient(uri, {
 })
 
 
-// Connect met database voor login
+// Connect met database voor users
 client.connect()
   .then(async() => {
     console.log('Database connection established')
@@ -51,9 +51,39 @@ client.connect()
 
 
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+
+// Check of login request binnenkomt
+app.post('/createAccount', async (req, res) => {
+    console.log('Received account creation request:', req.body); 
+    res.send('Received request'); 
+});
+
+// Account aanmaken
+app.post('/createAccount', async (req, res) => {
+    const { username, pass } = req.body;
+
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const users = db.collection('0Users');
+
+        // Kijkt of username al bestaat
+        const existingUser = await users.findOne({ username: username });
+        if (existingUser) {
+            return res.status(400).send('Username taken');
+        }
+
+        // Stopt nieuwe user in database
+        await users.insertOne({ username: username, password: pass });
+
+        res.send('Account successfully created!');
+
+    } catch (error) {
+        console.error('Account creation error:', error);
+        res.status(500).send('Server error');
+    }
+});
+
+
 
 
 
@@ -89,6 +119,8 @@ app.post('/login', async (req, res) => {
 
 
 
+
+
 // Middleware to handle not found errors - error 404
 app.use((req, res) => {
     // log error to console
@@ -104,6 +136,8 @@ app.use((err, req, res) => {
     // send back a HTTP response with status code 500
     res.status(500).send('500: server error')
 })
+
+
 
 
 
