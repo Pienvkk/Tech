@@ -40,12 +40,19 @@ header ul {
     flex-direction: row;
 
     margin-right: 3rem;
+
+    list-style-type: none;
 }
 
 header ul li {
     margin: 0 1rem;
     padding: 0.8rem 1rem;
-    border-radius: 15px;
+    border-radius: 1px;
 
-    background-color: #202020;
+    background-color: #ff0000;
+    color: #FFFFFF;
+}
+
+header ul li a {
+    text-decoration: none;
 }
