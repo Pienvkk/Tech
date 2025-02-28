@@ -41,15 +41,15 @@ header a {
     color: #28282A;
 }
 
-header a:nth-of-type(7){
+/* header a:nth-of-type(7){
     background-color: #F3F3F3;
     border-radius: 0.5em;
-}
+} */
 
-header a:nth-of-type(8){
+/* header a:nth-of-type(8){
     background-color: #EE0000;
     border-radius: 0.5em;
-}
+} */
 
 h1 {
     font-family: 'formule1mainfont', sans-serif;
