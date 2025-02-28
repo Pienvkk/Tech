@@ -8,12 +8,6 @@ klas: Tech 1
 - Ieder teamlid is verantwoordelijk voor een component van de website.
 - Samen ben je verantwoordelijk voor het geheel.
 
-### regels voor de site
-1. Engelse namen + hoofdletters toevoegen voor duidelijkheid.
-2. Alles geordend houden en duidelijke benaming geven aan mapjes.
-3. Duidelijke omschrijven bij je push als je iets veranderd heb aan de server.
-4. Laat weten of als je iets gaat veranderden
-
 
 ## Fase 1: Orienteren
 
