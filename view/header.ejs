@@ -8,8 +8,13 @@
         <li><a href="#">Team up</a></li>
         <li><a href="#">feed</a></li>
         <li><a href="#">speel</a></li>
-        <li><a href="/login">log in</a></li>
-        <li><a href="/createAccount">Create account</a></li>
+
+        <% if (user) { %>
+            <li>Welkom, <%= user.username %>!</li>
+            <li><a href="/logout">Uitloggen</a></li>
+        <% } else { %>
+            <li><a href="/login">Log in</a></li>
+            <li><a href="/createAccount">Create account</a></li>
+        <% } %>
     </ul>
 </header>
-

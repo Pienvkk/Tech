@@ -34,6 +34,11 @@ app.use(session({
     cookie: { secure: false } // Zet op 'true' als je HTTPS gebruikt
 }));
 
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+});
+
 
 
 
@@ -127,11 +132,8 @@ app.post('/login', async (req, res) => {
         // Login is succesvol - Sla de gebruiker op in de sessie
         req.session.user = { username: user.username };
 
-        // Redirect naar homepagina
+        // Login is succesvol - Redirect naar homepagina
         res.redirect('/');
-
-        // Login is succesvol
-        res.send('Succesvol ingelogd!')
 
     } catch (error) {
         console.error('Login fout:', error)
