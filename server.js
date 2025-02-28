@@ -19,7 +19,7 @@ app
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Formule1`
 
 const client = new MongoClient(uri, {
     serverApi: {
@@ -70,7 +70,7 @@ app.use((err, req, res) => {
 
 // Start the webserver and listen for HTTP requests at specified port
 app.listen(process.env.PORT, () => {
-    console.log(`I did not change this message and now my webserver is listening at port ${process.env.PORT}`)
+    console.log(`Webserver is listening at port ${process.env.PORT}`)
 })
 
 
