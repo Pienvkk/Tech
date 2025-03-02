@@ -33,13 +33,12 @@ body {
 
 h1, h2 {
     font-family: 'formule1mainfont', sans-serif;
+    font-size: 3rem;
     color: white;
-    font-size:2cm;
 
     display: flex;
     justify-content: left;
     align-items: center;
-    margin: 1cm 0.5cm;
 }
 
 form {
@@ -74,13 +73,11 @@ header {
     background-color: #FFFFFF;
     font-family: "alfabet", sans-serif;
     font-weight: 200;
-    font-style: normal;
-    font-size: 4mm;
 }
 
 header img {
-    width: 3cm;
-    margin-left: 5mm;
+    width: 10rem;
+    margin-left: 3rem;
 }
 
 header ul {
@@ -123,7 +120,7 @@ header ul li:nth-of-type(7) a {  /*  is dit niet bijna dubbel met de 8ste :)?*/
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
     text-decoration: none;
 
-    border-radius: 1mm;
+    border-radius: 5px;
     font-weight: 800;
 } 
 
@@ -150,7 +147,7 @@ header ul li:nth-of-type(8) a {
     color: #FFFFFF;
     text-decoration: none;
 
-    border-radius: 1mm;
+    border-radius: 5px;
     font-weight: 800;
 } 
 
@@ -178,11 +175,14 @@ main div{
     display: flex;
     justify-content: center;
     justify-content: space-evenly;
-    margin-top: 6cm;
+    margin-top: 3rem;
 }
+
 
 main section:nth-of-type(2){ 
     background-color: #240907;
+main section{
+    margin-top: 5rem;
 }
 
 header ul li p {
