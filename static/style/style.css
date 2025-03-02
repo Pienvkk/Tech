@@ -165,7 +165,6 @@ header ul li:nth-of-type(8) a:active {
     color: #FFFFFF;
 }
 
-
 main div img{
     flex-direction:row;
 }
@@ -180,3 +179,8 @@ main div{
 main section{
     margin-top: 11cm; /* weet nog niet zo goed hoe ik dit anders moet oplossen*/
 }
+
+header ul li p {
+    color: #202020;
+}
+

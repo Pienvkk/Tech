@@ -3,6 +3,24 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 
+const session = require('express-session')
+
+app.use(session({
+    secret: 'your-secret-key', // Verander dit naar een veilige string!
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Zet op 'true' als je HTTPS gebruikt
+}));
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+});
+
+
+
+
+
 app
     .use(express.json())
     .use (express.urlencoded({extended: true}))
@@ -17,7 +35,10 @@ app
 
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
-    })
+})
+
+
+
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
@@ -31,6 +52,8 @@ const client = new MongoClient(uri, {
       deprecationErrors: true,
     }
 })
+
+
 
 
 // Connect met database voor users
@@ -104,8 +127,11 @@ app.post('/login', async (req, res) => {
             return res.status(400).send('Ongeldige gebruikersnaam of wachtwoord')
         }
 
-        // Login is succesvol
-        res.send('Succesvol ingelogd!')
+        // Login is succesvol - Sla de gebruiker op in de sessie
+        req.session.user = { username: user.username };
+
+        // Login is succesvol - Redirect naar homepagina
+        res.redirect('/');
 
     } catch (error) {
         console.error('Login fout:', error)
@@ -117,7 +143,47 @@ app.post('/login', async (req, res) => {
 
 
 
-// Middleware to handle not found errors - error 404
+// Uitloggen
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
+});
+
+
+
+
+
+// Functies
+function home(req, res) {
+    if (req.session.user) {
+        res.render('index.ejs', { user: req.session.user });
+    } else {
+        res.render('index.ejs', { user: null });
+    }
+}
+
+function login(req, res) {
+    if (req.session.user) {
+        res.render('login.ejs', { user: req.session.user });
+    } else {
+        res.render('login.ejs', { user: null });
+    }
+}
+
+function createAccount (req, res) {
+    if (req.session.user) {
+        res.render('createAccount.ejs', { user: req.session.user });
+    } else {
+        res.render('createAccount.ejs', { user: null });    
+    }
+}
+
+
+
+
+
+// Middleware voor not found errors - error 404
 app.use((req, res) => {
     // log error to console
     console.error('404 error at URL: ' + req.url)
@@ -125,26 +191,10 @@ app.use((req, res) => {
     res.status(404).send('404 error at URL: ' + req.url)
 })
 
-// Middleware to handle server errors - error 500
+// Middleware voor server errors - error 500
 app.use((err, req, res) => {
     // log error to console
     console.error(err.stack)
     // send back a HTTP response with status code 500
     res.status(500).send('500: server error')
 })
-
-
-
-
-
-function home(req, res) {
-    res.render('index.ejs')
-}
-
-function login(req, res) {
-    res.render('login.ejs')
-}
-
-function createAccount (req, res) {
-    res.render('createAccount.ejs')
-}
