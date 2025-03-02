@@ -28,6 +28,7 @@ body {
 
 h1 {
     font-family: 'formule1mainfont', sans-serif;
+    font-size: 3rem;
     color: white;
 
     display: flex;
@@ -70,7 +71,7 @@ header {
 }
 
 header img {
-    width: 5rem;
+    width: 10rem;
     margin-left: 3rem;
 }
 
