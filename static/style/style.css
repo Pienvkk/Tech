@@ -7,6 +7,11 @@ good luck coding! (^-^)*/
 
 *{
     margin: 0;
+
+    font-family: sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 4mm;
 }
 
 
@@ -23,10 +28,10 @@ good luck coding! (^-^)*/
 
 body {
     color:white;
-    background-color: rgb(20, 20, 20);
+    background-color: #121212;
 }
 
-h1 {
+h1, h2 {
     font-family: 'formule1mainfont', sans-serif;
     color: white;
     font-size:2cm;
@@ -165,7 +170,7 @@ header ul li:nth-of-type(8) a:active {
     color: #FFFFFF;
 }
 
-main div img{
+main section:first-of-type img{
     flex-direction:row;
 }
 
@@ -176,11 +181,25 @@ main div{
     margin-top: 6cm;
 }
 
-main section{
-    margin-top: 11cm; /* weet nog niet zo goed hoe ik dit anders moet oplossen*/
+main section:nth-of-type(2){ 
+    background-color: #240907;
 }
 
 header ul li p {
     color: #202020;
 }
 
+main {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-evenly; 
+    align-items: center; 
+    min-height: 100vh; 
+}
+
+section {
+    flex: 1; 
+    width: 100%; 
+    padding-left: 1cm;
+    min-height: 100vh;
+}
