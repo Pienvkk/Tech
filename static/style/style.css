@@ -78,7 +78,7 @@ header img {
     margin-left: 3rem;
 }
 
-header ul {
+header nav ul {
     display: flex;
     flex-direction: row;
     list-style: none;
@@ -87,32 +87,32 @@ header ul {
     list-style-type: none;
 }
 
-header ul li {
+header nav ul li {
     margin: 0 1rem;
 }
 
-header ul li a {
+header nav ul li a {
     color: #202020;
     text-decoration: none;
 }
 
-header ul li a:link {
+header nav ul li a:link {
     color: #202020;
 }
 
-header ul li a:visited {
+header nav ul li a:visited {
     color: #202020;
 }
 
-header ul li a:hover {
+header nav ul li a:hover {
     color: #202020;
 }
 
-header ul li a:active {
+header nav ul li a:active {
     color: #202020;
 }
 
-header ul li:nth-of-type(5) a { 
+header nav  ul li:nth-of-type(5) a { 
     padding: 0.8rem 2rem;
 
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
@@ -122,23 +122,23 @@ header ul li:nth-of-type(5) a {
     font-weight: 800;
 } 
 
-header ul li:nth-of-type(5) a:link {
+header nav ul li:nth-of-type(5) a:link {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(5) a:visited {
+header nav ul li:nth-of-type(5) a:visited {
     color: #231919;
 }
 
-header ul li:nth-of-type(5) a:hover {
+header nav ul li:nth-of-type(5) a:hover {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(5) a:active {
+header nav ul li:nth-of-type(5) a:active {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(6) a {
+header nav ul li:nth-of-type(6) a {
     padding: 0.8rem 1rem;
 
     background-color: #ff0000;
@@ -149,23 +149,23 @@ header ul li:nth-of-type(6) a {
     font-weight: 800;
 } 
 
-header ul li:nth-of-type(6) a:link {
+header nav ul li:nth-of-type(6) a:link {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(6) a:visited {
+header nav ul li:nth-of-type(6) a:visited {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(6) a:hover {
+header nav ul li:nth-of-type(6) a:hover {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(6) a:active {
+header nav ul li:nth-of-type(6) a:active {
     color: #FFFFFF;
 }
 
-header ul li p {
+header nav ul li p {
     color: #202020;
 }
 
@@ -218,24 +218,24 @@ main section:nth-of-type(2) {
 
 /* QUIZ MAIN */
 
-.main section {
+.mainQuiz section {
     flex: 1; 
     width: 100%; 
     padding-left: 3rem;
     min-height: 100vh;
 }
 
-.quiz h2 {
+.mainQuiz h2 {
     font-family: sans-serif;
     font-weight: 800;
 }
 
-.quiz li label {
+.mainQuiz li label {
     font-size:large;
     margin-left: 1rem;
 }
 
-.quiz li {
+.mainQuiz li {
     margin-top: 3rem;
     list-style-type: none;
 }

@@ -6,62 +6,65 @@
     <title>Quiz</title>
     <link rel="stylesheet" href="/style/style.css" type="text/css">
 </head>
-<body class="quiz">
+<body>
     <%- include('../view/header'); %>
 
-    <h1>Quiz formule 1 circuits</h1>
+    <main class="mainQuiz">
 
-    <section>
+        <h1>Quiz formule 1 circuits</h1>
 
-        <h2>Welk circuit staat bekend als "het juweel in de kroon van de formule 1"</h2>
-        <ul>
-            <li><input type="radio" id="silverstone" name="vraag1" value="Silverstone" checked /><label for="Silverstone">silverstone</label></li>
-            <li><input type="radio" id="Monza" name="vraag1" value="Monza" checked /><label for="Monza">Monza</label></li>
-            <li><input type="radio" id="Monaco" name="vraag1" value="Monaco" checked /><label for="Monaco">Monaco</label></li>
-            <li><input type="radio" id="Suzuka" name="vraag1" value="Suzuka" checked /><label for="Suzuka">Suzuka</label></li>
-        </ul>
-    </section>
+        <section>
+    
+            <h2>Welk circuit staat bekend als "het juweel in de kroon van de formule 1"</h2>
+            <ul>
+                <li><input type="radio" id="silverstone" name="vraag1" value="Silverstone" checked /><label for="Silverstone">silverstone</label></li>
+                <li><input type="radio" id="Monza" name="vraag1" value="Monza" checked /><label for="Monza">Monza</label></li>
+                <li><input type="radio" id="Monaco" name="vraag1" value="Monaco" checked /><label for="Monaco">Monaco</label></li>
+                <li><input type="radio" id="Suzuka" name="vraag1" value="Suzuka" checked /><label for="Suzuka">Suzuka</label></li>
+            </ul>
+        </section>
+    
+        <section>
+            <h2>Wat is het langste circuit op de F1-kalender (2024)?</h2>
+            <ul>
+                <li><input type="radio" id="circuitoftheAmericas" name="vraag2" value="Circuit of the Americas" checked /><label for="circuitoftheAmericas">Circuit of the Americas</label></li>
+                <li><input type="radio" id="spaFrancorchamps" name="vraag2" value="spa-Francorchamps" checked /><label for="spa-Francorchamps">spa-Francorchamps</label></li>
+                <li><input type="radio" id="Jeddah" name="vraag2" value="Jeddah" checked /><label for="Jeddah">Jeddah Corniche Circuit</label></li>
+                <li><input type="radio" id="singapore" name="vraag2" value="singapore" checked /><label for="singapore">Singapore Street Circuit</label></li>
+            </ul>
+        </section>
+       
+        <section>
+            <h2>Welk circuit heeft de bijnaam "de tempel van de snelheid"?</h2>
+            <ul>
+                <li><input type="radio" id="silverstone2" name="vraag3" value="Silverstone" checked /><label for="Silverstone">silverstone</label></li>
+                <li><input type="radio" id="Monza2" name="vraag3" value="Monza" checked /><label for="Monza">Monza</label></li>
+                <li><input type="radio" id="Redbull" name="vraag3" value="Redbull" checked /><label for="redbull">Red Bull Ring</label></li>
+                <li><input type="radio" id="interlagos" name="vraag3" value="interlagos" checked /><label for="interlagos">interlagos</label></li>
+            </ul>
+        </section>
+    
+        <section>
+            <h2>In welk land ligt het circuit waar de eerste officiële Formule 1 Grand Prix werd gehouden in 1950?</h2>
+            <ul>
+                <li><input type="radio" id="italië" name="vraag4" value="italië" checked /><label for="italië">Italië</label></li>
+                <li><input type="radio" id="frankrijk" name="vraag4" value="frankrijk" checked /><label for="frankrijk">Frankrijk</label></li>
+                <li><input type="radio" id="grootbrittannië" name="vraag4" value="grootbrittannië" checked /><label for="grootbrittannië">Groot-Brittannië</label></li>
+                <li><input type="radio" id="duitsland" name="vraag4" value="duitsland" checked /><label for="duitsland">Duitsland</label></li>
+            </ul>
+        </section>
+    
+        <section>
+            <h2>Welke van deze circuits heeft een beroemde bocht genaamd "Eau Rouge"?</h2>
+            <ul>
+                <li><input type="radio" id="suzuka2" name="vraag5" value="Suzuka2" checked /><label for="Suzuka2">Suzuka</label></li>
+                <li><input type="radio" id="spaFrancorchamps2" name="vraag5" value="spa-Francorchamps2" checked /><label for="spa-Francorchamps2">spa-Francorchamps</label></li>
+                <li><input type="radio" id="Circuitgillesvilleneuve" name="vraag4" value="circuitgillesvilleneuve" checked /><label for="Circuitgillesvilleneuve">Circuit Gilles Villeneuve</label></li>
+                <li><input type="radio" id="Bakucitycircuit" name="vraag4" value="Bakucitycircuit" checked /><label for="Bakucitycircuit">Baku City Circuit</label></li>
+            </ul>
+        </section>
+    </main>
 
-    <section>
-        <h2>Wat is het langste circuit op de F1-kalender (2024)?</h2>
-        <ul>
-            <li><input type="radio" id="circuitoftheAmericas" name="vraag2" value="Circuit of the Americas" checked /><label for="circuitoftheAmericas">Circuit of the Americas</label></li>
-            <li><input type="radio" id="spaFrancorchamps" name="vraag2" value="spa-Francorchamps" checked /><label for="spa-Francorchamps">spa-Francorchamps</label></li>
-            <li><input type="radio" id="Jeddah" name="vraag2" value="Jeddah" checked /><label for="Jeddah">Jeddah Corniche Circuit</label></li>
-            <li><input type="radio" id="singapore" name="vraag2" value="singapore" checked /><label for="singapore">Singapore Street Circuit</label></li>
-        </ul>
-    </section>
-   
-    <section>
-        <h2>Welk circuit heeft de bijnaam "de tempel van de snelheid"?</h2>
-        <ul>
-            <li><input type="radio" id="silverstone2" name="vraag3" value="Silverstone" checked /><label for="Silverstone">silverstone</label></li>
-            <li><input type="radio" id="Monza2" name="vraag3" value="Monza" checked /><label for="Monza">Monza</label></li>
-            <li><input type="radio" id="Redbull" name="vraag3" value="Redbull" checked /><label for="redbull">Red Bull Ring</label></li>
-            <li><input type="radio" id="interlagos" name="vraag3" value="interlagos" checked /><label for="interlagos">interlagos</label></li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>In welk land ligt het circuit waar de eerste officiële Formule 1 Grand Prix werd gehouden in 1950?</h2>
-        <ul>
-            <li><input type="radio" id="italië" name="vraag4" value="italië" checked /><label for="italië">Italië</label></li>
-            <li><input type="radio" id="frankrijk" name="vraag4" value="frankrijk" checked /><label for="frankrijk">Frankrijk</label></li>
-            <li><input type="radio" id="grootbrittannië" name="vraag4" value="grootbrittannië" checked /><label for="grootbrittannië">Groot-Brittannië</label></li>
-            <li><input type="radio" id="duitsland" name="vraag4" value="duitsland" checked /><label for="duitsland">Duitsland</label></li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>Welke van deze circuits heeft een beroemde bocht genaamd "Eau Rouge"?</h2>
-        <ul>
-            <li><input type="radio" id="suzuka2" name="vraag5" value="Suzuka2" checked /><label for="Suzuka2">Suzuka</label></li>
-            <li><input type="radio" id="spaFrancorchamps2" name="vraag5" value="spa-Francorchamps2" checked /><label for="spa-Francorchamps2">spa-Francorchamps</label></li>
-            <li><input type="radio" id="Circuitgillesvilleneuve" name="vraag4" value="circuitgillesvilleneuve" checked /><label for="Circuitgillesvilleneuve">Circuit Gilles Villeneuve</label></li>
-            <li><input type="radio" id="Bakucitycircuit" name="vraag4" value="Bakucitycircuit" checked /><label for="Bakucitycircuit">Baku City Circuit</label></li>
-        </ul>
-    </section>
-   
     <%- include('../view/footer'); %>
 </body>
 </html>
