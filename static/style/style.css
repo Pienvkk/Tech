@@ -228,6 +228,7 @@ main section:nth-of-type(2) {
 .quiz h2 {
     font-family: sans-serif;
     font-weight: 800;
+    font-size: 2rem;
 }
 
 .quiz li label {
