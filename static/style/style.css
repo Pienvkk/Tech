@@ -205,4 +205,6 @@ section {
     min-height: 100vh;
 }
 
-.quiz h2{}
+.quiz h2{
+    color: #ff0000;
+}
