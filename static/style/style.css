@@ -221,7 +221,7 @@ section {
 .mainArchive {
     display: grid;
     grid-template-columns: auto 35vw auto 35vw auto;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto 30vh 30vh;
     gap: 2rem;
 }
 
@@ -229,6 +229,8 @@ section {
     grid-column-start: 1;
     grid-column-end: 6;
     grid-row: 1;
+
+    margin: 0 auto;
 }
 
 .mainArchive section:nth-of-type(1) {
