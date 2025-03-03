@@ -32,6 +32,7 @@ app
     .get ('/', home)
     .get ('/login', login)
     .get ('/createAccount', createAccount)
+    .get ('/quiz', quiz)
 
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
@@ -176,6 +177,14 @@ function createAccount (req, res) {
         res.render('createAccount.ejs', { user: req.session.user });
     } else {
         res.render('createAccount.ejs', { user: null });    
+    }
+}
+
+function quiz (req, res) {
+    if (req.session.user) {
+        res.render('quiz.ejs', { user: req.session.user });
+    } else {
+        res.render('quiz.ejs', { user: null });    
     }
 }
 
