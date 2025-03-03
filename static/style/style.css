@@ -112,7 +112,7 @@ header ul li a:active {
     color: #202020;
 }
 
-header ul li:nth-of-type(7) a { 
+header ul li:nth-of-type(5) a { 
     padding: 0.8rem 2rem;
 
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
@@ -122,23 +122,23 @@ header ul li:nth-of-type(7) a {
     font-weight: 800;
 } 
 
-header ul li:nth-of-type(7) a:link {
+header ul li:nth-of-type(5) a:link {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(7) a:visited {
+header ul li:nth-of-type(5) a:visited {
     color: #231919;
 }
 
-header ul li:nth-of-type(7) a:hover {
+header ul li:nth-of-type(5) a:hover {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(7) a:active {
+header ul li:nth-of-type(5) a:active {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(8) a {
+header ul li:nth-of-type(6) a {
     padding: 0.8rem 1rem;
 
     background-color: #ff0000;
@@ -149,19 +149,19 @@ header ul li:nth-of-type(8) a {
     font-weight: 800;
 } 
 
-header ul li:nth-of-type(8) a:link {
+header ul li:nth-of-type(6) a:link {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(8) a:visited {
+header ul li:nth-of-type(6) a:visited {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(8) a:hover {
+header ul li:nth-of-type(6) a:hover {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(8) a:active {
+header ul li:nth-of-type(6) a:active {
     color: #FFFFFF;
 }
 
