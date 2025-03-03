@@ -17,10 +17,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
-
-
 app
     .use(express.json())
     .use (express.urlencoded({extended: true}))
@@ -32,6 +28,7 @@ app
     .get ('/', home)
     .get ('/login', login)
     .get ('/createAccount', createAccount)
+    .get ('/accountPreferences', accountPreferences)
 
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
@@ -73,7 +70,27 @@ client.connect()
 })
 
 
+app.post('/accountPreferences', async (req, res) => {
+    const {season, team, driver} = req.body;
 
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const users = db.collection('0Users');
+
+        // Update user om zijn preferences toe te voegen
+        await users.updateOne(
+            { username: req.session.username},
+            { $set: { firstSeason: season, team: team, driver: driver }}
+          );
+        console.log(season)
+        console.log("Username to update:", req.session.username);
+        res.send('Preferences succesfully added!');
+
+    } catch (error) {
+        console.error('Preferences adding error:', error);
+        res.status(500).send('Server error');
+    }
+});
 
 
 app.post('/createAccount', async (req, res) => {
@@ -81,7 +98,8 @@ app.post('/createAccount', async (req, res) => {
     console.log('Received account creation request:', req.body); 
 
     // Account aanmaken
-    const { username, pass } = req.body;
+    const { username, pass, email, date} = req.body;
+    const formattedDate = date ? new Date(date) : null;
 
     try {
         const db = client.db(process.env.DB_NAME);
@@ -92,15 +110,25 @@ app.post('/createAccount', async (req, res) => {
         if (existingUser) {
             return res.status(400).send('Username taken');
         }
+        const existingEmail = await users.findOne({ email:email });
+        if (existingEmail) {
+            return res.status(400).send('Email taken');
+        }
 
         // Stopt nieuwe user in database
-        await users.insertOne({ username: username, password: pass });
+        await users.insertOne({ username: username, password: pass, email: email, date: formattedDate});
+        
+        const user = await users.findOne({ username: username, password: pass })
+        req.session.username = {username}; 
+        res.redirect('/accountPreferences');
 
-        res.send('Account successfully created!');
+        
 
     } catch (error) {
         console.error('Account creation error:', error);
         res.status(500).send('Server error');
+
+
     }
 });
 
@@ -179,6 +207,13 @@ function createAccount (req, res) {
     }
 }
 
+function accountPreferences (req, res) {
+    if (req.session.user) {
+        res.render('accountPreferences.ejs', { user: req.session.user });
+    } else {
+        res.render('accountPreferences.ejs', { user: null });    
+    }
+}
 
 
 
