@@ -193,7 +193,7 @@ header ul li p {
 
 /* HOME MAIN */
 
-main {
+.mainIndex {
     display: flex;
     flex-direction: column; 
     justify-content: space-evenly; 
@@ -201,7 +201,7 @@ main {
     min-height: 100vh; 
 }
 
-section {
+.mainIndex section {
     flex: 1; 
     width: 100%; 
     padding-left: 3rem;
