@@ -32,8 +32,9 @@ app
     .get ('/', home)
     .get ('/login', login)
     .get ('/createAccount', createAccount)
+    .get ('/quiz', quiz)
     .get ('/archive', archive)
-
+    
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
 })
@@ -172,6 +173,14 @@ function login(req, res) {
     }
 }
 
+function quiz (req, res) {
+    if (req.session.user) {
+        res.render('quiz.ejs', { user: req.session.user });
+    } else {
+        res.render('quiz.ejs', { user: null });    
+    }
+}
+
 function createAccount (req, res) {
     if (req.session.user) {
         res.render('createAccount.ejs', { user: req.session.user });
@@ -184,10 +193,9 @@ function archive (req, res) {
     if (req.session.user) {
         res.render('archive.ejs', { user: req.session.user });
     } else {
-        res.render('archive.ejs', { user: null });    
+        res.render('archive.ejs', { user: null });  
     }
 }
-
 
 
 
