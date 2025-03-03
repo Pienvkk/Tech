@@ -209,3 +209,13 @@ section {
     font-family: sans-serif;
     font-weight: 800;
 }
+
+.quiz li label{
+    font-size:large;
+    margin-left: 1rem;
+}
+
+.quiz li{
+    margin-top: 3rem;
+    list-style-type: none;
+}
