@@ -229,7 +229,7 @@ main section:nth-of-type(2) {
 
 .mainArchive h1 {
     grid-column-start: 1;
-    grid-column-end: 6;
+    grid-column-end: 5;
     grid-row: 1;
 
     margin: 0 auto;
