@@ -14,25 +14,31 @@
     <main class="mainArchive">
         <h1>archives</h1>
 
-        <section>
-            <img src="" alt="">
-            <h2>Drivers</h2>
-        </section>
-        
-        <section>
-            <img src="" alt="">
-            <h2>Constructors</h2>
-        </section>
+        <aside>
+            <div>
+                <input type="radio" id="drivers" name="categorie" value="drivers" checked />
+                <label for="drivers">Drivers</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="constructors" name="categorie" value="constructors" checked />
+                <label for="constructors">Constructors</label>
+            </div>
 
-        <section>
-            <img src="" alt="">
-            <h2>Championships</h2>
-        </section>
- 
-        <section>
-            <img src="" alt="">
-            <h2>Circuits</h2>
-        </section>
+            <div>
+                <input type="radio" id="championships" name="categorie" value="championships" checked />
+                <label for="championships">Championships</label>
+            </div>
+
+            <div>
+                <input type="radio" id="circuits" name="categorie" value="circuits" checked />
+                <label for="circuits">Circuits</label>
+            </div>
+        </aside>
+        
+        <ul class="archiveDrivers">
+
+        </ul>
     </main>
 
     <%- include('../view/footer'); %>
