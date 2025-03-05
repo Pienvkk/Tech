@@ -34,6 +34,8 @@ body {
 h1, h2 {
     font-family: 'formule1mainfont', sans-serif;
     font-size: 3rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
     color: white;
 
     display: flex;
@@ -221,8 +223,11 @@ main section:nth-of-type(2) {
 .mainQuiz section {
     flex: 1; 
     width: 100%; 
-    padding-left: 3rem;
     min-height: 100vh;
+}
+
+.mainQuiz h1{
+    margin-bottom: 5rem;
 }
 
 .mainQuiz h2 {
@@ -238,8 +243,17 @@ main section:nth-of-type(2) {
 
 .mainQuiz li {
     margin-top: 3rem;
+}
+
+.mainQuiz ul {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+
     list-style-type: none;
 }
+
+
 
 
 
