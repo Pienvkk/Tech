@@ -221,19 +221,30 @@ main section:nth-of-type(2) {
 /* QUIZ MAIN */
 
 .mainQuiz section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
     flex: 1; 
-    width: 100%; 
-    min-height: 100vh;
+    margin: 0 2rem 2rem 2rem;
+    padding-top: 2rem;
+    background-color: #222222;
+    border-radius: 5px;
+}
+
+.mainQuiz section:nth-of-type(2){
+    background-color: #222222;
 }
 
 .mainQuiz h1{
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
 }
 
 .mainQuiz h2 {
     font-family: sans-serif;
     font-weight: 800;
     font-size: 2rem;
+    justify-content: center;
 }
 
 .mainQuiz li label {
@@ -251,10 +262,15 @@ main section:nth-of-type(2) {
     grid-template-rows: auto auto;
 
     list-style-type: none;
+    margin-bottom: 2rem;
 }
 
 
-
+.mainQuiz img{
+    width: 45%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
 
 
 /* ARCHIEF MAIN */
