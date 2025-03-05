@@ -41,6 +41,16 @@ h1, h2 {
     align-items: center;
 }
 
+h1 {
+    margin: 2rem 0 2rem 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+
+    margin: 0 0 0 1rem;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -246,52 +256,50 @@ main section:nth-of-type(2) {
 
 .mainArchive {
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto 30vh 30vh;
-    gap: 2rem;
+    grid-template-columns: 10vw auto 10vw;
+    grid-template-rows: auto auto auto;
+    gap: 2vw;
 }
 
 .mainArchive h1 {
-    grid-column-start: 1;
-    grid-column-end: 5;
     grid-row: 1;
-
-    margin: 0 auto;
 }
 
 
-.mainArchive section:nth-of-type(1) {
+.mainArchive aside {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
 
-    background-color: blue;
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
 }
 
-.mainArchive section:nth-of-type(2) {
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3;
+.mainArchive aside div {
+    display: flex;
+    flex-direction: row;
 
-    background-color: blue;
+    width: 18vw;
+    height: 8vh;
+
+    background-color: red;
+    border-radius: 5px;
 }
 
-.mainArchive section:nth-of-type(3) {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 4;
-
-    background-color: blue;
+.mainArchive aside div input {
+    margin-left: 1rem;
 }
 
-.mainArchive section:nth-of-type(4) {
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 3;
-    grid-row-end: 4;
+.mainArchive aside div label {
+    justify-content: center;
+    align-self: center;
 
-    background-color: blue;
+    margin-left: 1rem;
+
+    font-family: 'formule1mainfont', sans-serif;
+    font-size: 1.8rem;
 }
+
