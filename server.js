@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const app = express()
+const multer = require('multer')
 
 const session = require('express-session')
 
@@ -17,10 +18,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
-
-
 app
     .use(express.json())
     .use (express.urlencoded({extended: true}))
@@ -32,12 +29,15 @@ app
     .get ('/', home)
     .get ('/login', login)
     .get ('/createAccount', createAccount)
+    .get ('/accountPreferences', accountPreferences)
     .get ('/quiz', quiz)
     .get ('/teamUp', teamUp)
     .get ('/community', community)
+    .get ('/createPost', createPost)
     .get ('/archive', archive)
     .get ('/helpSupport', helpSupport)
     
+
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
 })
@@ -70,7 +70,6 @@ client.connect()
     const users = db.collection('0Users')
 
     const sampleUsers = await users.findOne({})
-    console.log('users:', sampleUsers)
 })
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
@@ -78,7 +77,27 @@ client.connect()
 })
 
 
+app.post('/accountPreferences', async (req, res) => {
+    const {season, team, driver} = req.body;
 
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const users = db.collection('0Users');
+
+        // Update user om zijn preferences toe te voegen
+        await users.updateOne(
+            { username: req.session.user.username },
+            { $set: { firstSeason: season, team: team, driver: driver }}
+          );
+        console.log(season)
+        console.log("Username to update:", req.session.username);
+        res.redirect('/')
+
+    } catch (error) {
+        console.error('Preferences adding error:', error);
+        res.status(500).send('Server error');
+    }
+});
 
 
 app.post('/createAccount', async (req, res) => {
@@ -86,7 +105,8 @@ app.post('/createAccount', async (req, res) => {
     console.log('Received account creation request:', req.body); 
 
     // Account aanmaken
-    const { username, pass } = req.body;
+    const { username, pass, email, date} = req.body;
+    const formattedDate = date ? new Date(date) : null;
 
     try {
         const db = client.db(process.env.DB_NAME);
@@ -97,20 +117,27 @@ app.post('/createAccount', async (req, res) => {
         if (existingUser) {
             return res.status(400).send('Username taken');
         }
+        const existingEmail = await users.findOne({ email:email });
+        if (existingEmail) {
+            return res.status(400).send('Email taken');
+        }
 
         // Stopt nieuwe user in database
-        await users.insertOne({ username: username, password: pass });
+        await users.insertOne({ username: username, password: pass, email: email, date: formattedDate});
+        
+        const user = await users.findOne({ username: username, password: pass })
+        req.session.user = { username }; 
+        res.redirect('/accountPreferences');
 
-        res.send('Account successfully created!');
+        
 
     } catch (error) {
         console.error('Account creation error:', error);
         res.status(500).send('Server error');
+
+
     }
 });
-
-
-
 
 
 
@@ -142,9 +169,7 @@ app.post('/login', async (req, res) => {
         console.error('Login fout:', error)
         res.status(500).send('Er is iets misgegaan op de server')
     }
-})
-
-
+});
 
 
 
@@ -155,6 +180,32 @@ app.get('/logout', (req, res) => {
     });
 });
 
+app.post('/createPost', async (req, res) => {
+    console.log('Received post creation request:', req.body); 
+
+    const { title, content, file } = req.body;
+
+    if (!req.session.user) {
+        return res.status(401).send('You must be logged in to create a post.');
+    }
+
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const posts = db.collection('0Posts');
+
+        const username = req.session.user.username; // Retrieve the username
+
+        console.log('Username:', username);
+
+        await posts.insertOne({ user: username, title: title, content: content, file: file });
+
+        res.redirect('/community'); // Redirect to community page after posting
+
+    } catch (error) {
+        console.error('Post creation error:', error);
+        res.status(500).send('Server error');
+    }
+});
 
 
 
@@ -184,6 +235,14 @@ function createAccount (req, res) {
     }
 }
 
+
+function accountPreferences (req, res) {
+    if (req.session.user) {
+        res.render('accountPreferences.ejs', { user: req.session.user });
+    } else {
+        res.render('accountPreferences.ejs', { user: null });    
+    }}
+
 function quiz (req, res) {
     if (req.session.user) {
         res.render('quiz.ejs', { user: req.session.user });
@@ -208,6 +267,15 @@ function community (req, res) {
     }
 }
 
+function createPost (req, res) {
+    if (req.session.user) {
+        res.render('createPost.ejs', { user: req.session.user });
+    } else {
+        res.render('createPost.ejs', { user: null });    
+    }
+}
+
+
 function archive (req, res) {
     if (req.session.user) {
         res.render('archive.ejs', { user: req.session.user });
@@ -221,6 +289,7 @@ function helpSupport (req, res) {
         res.render('helpSupport.ejs', { user: req.session.user });
     } else {
         res.render('helpSupport.ejs', { user: null });  
+
     }
 }
 

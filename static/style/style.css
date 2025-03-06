@@ -226,6 +226,27 @@ main section:nth-of-type(2) {
 
 /* VOORKEUREN INSTELLEN MAIN */
 
+/* POST AANMAKEN */
+
+.mainCommunity{
+    display: flex;
+}
+
+.mainCommunity h1{
+    width: 80%;
+}
+
+.mainCommunity a {
+    margin-top: 30px;
+    padding: 0.8rem 1rem;
+    background-color: #ff0000;
+    color: #FFFFFF;
+    text-decoration: none;
+    height: 20px;
+    width: 90px;
+    border-radius: 5px;
+    font-weight: 800;
+} 
 
 
 /* QUIZ MAIN */
