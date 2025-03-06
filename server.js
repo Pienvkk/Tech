@@ -29,6 +29,12 @@ app
     .get ('/login', login)
     .get ('/createAccount', createAccount)
     .get ('/accountPreferences', accountPreferences)
+    .get ('/quiz', quiz)
+    .get ('/teamUp', teamUp)
+    .get ('/community', community)
+    .get ('/archive', archive)
+    .get ('/helpSupport', helpSupport)
+    
 
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
@@ -206,11 +212,51 @@ function createAccount (req, res) {
     }
 }
 
+
 function accountPreferences (req, res) {
     if (req.session.user) {
         res.render('accountPreferences.ejs', { user: req.session.user });
     } else {
         res.render('accountPreferences.ejs', { user: null });    
+
+function quiz (req, res) {
+    if (req.session.user) {
+        res.render('quiz.ejs', { user: req.session.user });
+    } else {
+        res.render('quiz.ejs', { user: null });    
+    }
+}
+
+function teamUp (req, res) {
+    if (req.session.user) {
+        res.render('teamUp.ejs', { user: req.session.user });
+    } else {
+        res.render('teamUp.ejs', { user: null });  
+    }
+}
+
+function community (req, res) {
+    if (req.session.user) {
+        res.render('community.ejs', { user: req.session.user });
+    } else {
+        res.render('community.ejs', { user: null });  
+    }
+}
+
+function archive (req, res) {
+    if (req.session.user) {
+        res.render('archive.ejs', { user: req.session.user });
+    } else {
+        res.render('archive.ejs', { user: null });  
+    }
+}
+
+function helpSupport (req, res) {
+    if (req.session.user) {
+        res.render('helpSupport.ejs', { user: req.session.user });
+    } else {
+        res.render('helpSupport.ejs', { user: null });  
+
     }
 }
 

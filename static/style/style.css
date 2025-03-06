@@ -34,11 +34,23 @@ body {
 h1, h2 {
     font-family: 'formule1mainfont', sans-serif;
     font-size: 3rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
     color: white;
 
     display: flex;
     justify-content: left;
     align-items: center;
+}
+
+h1 {
+    margin: 2rem 0 2rem 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+
+    margin: 0 0 0 1rem;
 }
 
 form {
@@ -55,8 +67,6 @@ form label {
 form input {
     margin: 1rem 0;
 }
-
-
 
 /* HEADER */
 
@@ -80,7 +90,7 @@ header img {
     margin-left: 3rem;
 }
 
-header ul {
+header nav ul {
     display: flex;
     flex-direction: row;
     list-style: none;
@@ -89,32 +99,32 @@ header ul {
     list-style-type: none;
 }
 
-header ul li {
+header nav ul li {
     margin: 0 1rem;
 }
 
-header ul li a {
+header nav ul li a {
     color: #202020;
     text-decoration: none;
 }
 
-header ul li a:link {
+header nav ul li a:link {
     color: #202020;
 }
 
-header ul li a:visited {
+header nav ul li a:visited {
     color: #202020;
 }
 
-header ul li a:hover {
+header nav ul li a:hover {
     color: #202020;
 }
 
-header ul li a:active {
+header nav ul li a:active {
     color: #202020;
 }
 
-header ul li:nth-of-type(7) a {  /*  is dit niet bijna dubbel met de 8ste :)?*/
+header nav  ul li:nth-of-type(6) a { 
     padding: 0.8rem 2rem;
 
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
@@ -124,23 +134,23 @@ header ul li:nth-of-type(7) a {  /*  is dit niet bijna dubbel met de 8ste :)?*/
     font-weight: 800;
 } 
 
-header ul li:nth-of-type(7) a:link {
+header nav ul li:nth-of-type(6) a:link {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(7) a:visited {
+header nav ul li:nth-of-type(6) a:visited {
     color: #231919;
 }
 
-header ul li:nth-of-type(7) a:hover {
+header nav ul li:nth-of-type(6) a:hover {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(7) a:active {
+header nav ul li:nth-of-type(6) a:active {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(8) a {
+header nav ul li:nth-of-type(7) a {
     padding: 0.8rem 1rem;
 
     background-color: #ff0000;
@@ -151,45 +161,29 @@ header ul li:nth-of-type(8) a {
     font-weight: 800;
 } 
 
-header ul li:nth-of-type(8) a:link {
+header nav ul li:nth-of-type(7) a:link {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(8) a:visited {
+header nav ul li:nth-of-type(7) a:visited {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(8) a:hover {
+header nav ul li:nth-of-type(7) a:hover {
     color: #FFFFFF;
 }
 
-header ul li:nth-of-type(8) a:active {
+header nav ul li:nth-of-type(7) a:active {
     color: #FFFFFF;
 }
 
-main section:first-of-type img{
-    flex-direction:row;
-}
-
-main div{
-    display: flex;
-    justify-content: center;
-    justify-content: space-evenly;
-    margin-top: 3rem;
-}
-
-
-main section:nth-of-type(2){ 
-    background-color: #240907;
-main section{
-    margin-top: 5rem;
-}
-
-header ul li p {
+header nav ul li p {
     color: #202020;
 }
 
-main {
+/* HOME MAIN */
+
+.mainIndex {
     display: flex;
     flex-direction: column; 
     justify-content: space-evenly; 
@@ -197,9 +191,152 @@ main {
     min-height: 100vh; 
 }
 
-section {
+.mainIndex div {
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+    margin-top: 3rem;
+}
+
+
+.mainIndex section {
     flex: 1; 
     width: 100%; 
-    padding-left: 1cm;
+    padding-left: 3rem;
     min-height: 100vh;
+    margin-top: 5rem;
 }
+
+main section:first-of-type img{
+    flex-direction:row;
+}
+
+main section:nth-of-type(2) { 
+    background-color: #240907;
+}
+
+
+/* INLOGGEN MAIN */
+
+
+
+/* ACCOUNT AANMAAK MAIN */
+
+
+
+/* VOORKEUREN INSTELLEN MAIN */
+
+
+
+/* QUIZ MAIN */
+
+.mainQuiz section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    flex: 1; 
+    margin: 0 2rem 2rem 2rem;
+    padding-top: 2rem;
+    background-color: #222222;
+    border-radius: 5px;
+}
+
+.mainQuiz section:nth-of-type(2){
+    background-color: #222222;
+}
+
+.mainQuiz h1{
+    margin-bottom: 2rem;
+}
+
+.mainQuiz h2 {
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    justify-content: center;
+}
+
+.mainQuiz img{
+    width: 45%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    border-radius: 5px ;
+}
+
+.mainQuiz ul {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+
+    list-style-type: none;
+    margin-bottom: 2rem;
+}
+
+.mainQuiz ul li {
+    margin-top: 3rem;
+}
+
+mainQuiz ul li label {
+    font-size:large;
+    margin-left: 1rem;
+}
+
+/* TEAM UP MAIN */
+
+
+/* COMMUNITY MAIN */
+
+
+/* ARCHIEF MAIN */
+
+.mainArchive {
+    display: grid;
+    grid-template-columns: 10vw auto 10vw;
+    grid-template-rows: auto auto auto;
+    gap: 2vw;
+}
+
+.mainArchive h1 {
+    grid-row: 1;
+}
+
+
+.mainArchive aside {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainArchive aside div {
+    display: flex;
+    flex-direction: row;
+
+    width: 18vw;
+    height: 8vh;
+
+    background-color: red;
+    border-radius: 5px;
+}
+
+.mainArchive aside div input {
+    margin-left: 1rem;
+}
+
+.mainArchive aside div label {
+    justify-content: center;
+    align-self: center;
+
+    margin-left: 1rem;
+
+    font-family: 'formule1mainfont', sans-serif;
+    font-size: 1.8rem;
+}
+
+/* HELP & SUPPORT */

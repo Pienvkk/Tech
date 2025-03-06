@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Matching</title>
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
+    <link rel="stylesheet" href="https://use.typekit.net/jva5hqf.css">
+</head>
+
+<body>
+    <%- include('../view/header'); %>
+
+    <main class="mainArchive">
+        <h1>archives</h1>
+
+        <aside>
+            <div>
+                <input type="radio" id="drivers" name="categorie" value="drivers" checked />
+                <label for="drivers">Drivers</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="constructors" name="categorie" value="constructors" checked />
+                <label for="constructors">Constructors</label>
+            </div>
+
+            <div>
+                <input type="radio" id="championships" name="categorie" value="championships" checked />
+                <label for="championships">Championships</label>
+            </div>
+
+            <div>
+                <input type="radio" id="circuits" name="categorie" value="circuits" checked />
+                <label for="circuits">Circuits</label>
+            </div>
+        </aside>
+        
+        <ul class="archiveDrivers">
+
+        </ul>
+    </main>
+
+    <%- include('../view/footer'); %>
+
+</body>
+</html>
