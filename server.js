@@ -83,7 +83,7 @@ app.post('/accountPreferences', async (req, res) => {
           );
         console.log(season)
         console.log("Username to update:", req.session.username);
-        res.send('Preferences succesfully added!');
+        res.redirect('/')
 
     } catch (error) {
         console.error('Preferences adding error:', error);
