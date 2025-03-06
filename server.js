@@ -62,7 +62,6 @@ client.connect()
     const users = db.collection('0Users')
 
     const sampleUsers = await users.findOne({})
-    console.log('users:', sampleUsers)
 })
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
@@ -79,7 +78,7 @@ app.post('/accountPreferences', async (req, res) => {
 
         // Update user om zijn preferences toe te voegen
         await users.updateOne(
-            { username: req.session.username},
+            { username: req.session.user.username },
             { $set: { firstSeason: season, team: team, driver: driver }}
           );
         console.log(season)
@@ -119,7 +118,7 @@ app.post('/createAccount', async (req, res) => {
         await users.insertOne({ username: username, password: pass, email: email, date: formattedDate});
         
         const user = await users.findOne({ username: username, password: pass })
-        req.session.username = {username}; 
+        req.session.user = { username }; 
         res.redirect('/accountPreferences');
 
         
