@@ -34,7 +34,7 @@ app
     .get ('/createAccount', createAccount)
     .get ('/quiz', quiz)
     .get ('/teamUp', teamUp)
-    .get ('/communtiy', community)
+    .get ('/community', community)
     .get ('/archive', archive)
     .get ('/helpSupport', helpSupport)
     
@@ -153,6 +153,38 @@ app.get('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/');
     });
+});
+
+
+
+
+
+// Data uit MongoDB voor archief pagina
+app.get('/api/data/:category', async (req, res) => {
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const category = req.params.category; // Haal de categorie uit de URL
+
+        let data = [];
+
+        if (category === "drivers") {
+            data = await db.collection("Drivers").find({}).toArray();
+        } else if (category === "constructors") {
+            data = await db.collection("Constructors").find({}).toArray();
+        } else if (category === "championships") {
+            data = await db.collection("Championships").find({}).toArray();
+        } else if (category === "circuits") {
+            data = await db.collection("Circuits").find({}).toArray();
+        } else {
+            return res.status(400).json({ error: "Ongeldige categorie" });
+        }
+
+        res.json(data);
+
+    } catch (error) {
+        console.error("Fout bij ophalen van data:", error);
+        res.status(500).json({ error: "Server error" });
+    }
 });
 
 
