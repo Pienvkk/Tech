@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const app = express()
+const multer = require('multer')
 
 const session = require('express-session')
 
@@ -32,6 +33,7 @@ app
     .get ('/quiz', quiz)
     .get ('/teamUp', teamUp)
     .get ('/community', community)
+    .get ('/createPost', createPost)
     .get ('/archive', archive)
     .get ('/helpSupport', helpSupport)
     
@@ -139,9 +141,6 @@ app.post('/createAccount', async (req, res) => {
 
 
 
-
-
-
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
     console.log('Received login request:', req.body); 
@@ -170,9 +169,7 @@ app.post('/login', async (req, res) => {
         console.error('Login fout:', error)
         res.status(500).send('Er is iets misgegaan op de server')
     }
-})
-
-
+});
 
 
 
@@ -183,6 +180,32 @@ app.get('/logout', (req, res) => {
     });
 });
 
+app.post('/createPost', async (req, res) => {
+    console.log('Received post creation request:', req.body); 
+
+    const { title, content, file } = req.body;
+
+    if (!req.session.user) {
+        return res.status(401).send('You must be logged in to create a post.');
+    }
+
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const posts = db.collection('0Posts');
+
+        const username = req.session.user.username; // Retrieve the username
+
+        console.log('Username:', username);
+
+        await posts.insertOne({ user: username, title: title, content: content, file: file });
+
+        res.redirect('/community'); // Redirect to community page after posting
+
+    } catch (error) {
+        console.error('Post creation error:', error);
+        res.status(500).send('Server error');
+    }
+});
 
 
 
@@ -218,6 +241,7 @@ function accountPreferences (req, res) {
         res.render('accountPreferences.ejs', { user: req.session.user });
     } else {
         res.render('accountPreferences.ejs', { user: null });    
+    }}
 
 function quiz (req, res) {
     if (req.session.user) {
@@ -242,6 +266,15 @@ function community (req, res) {
         res.render('community.ejs', { user: null });  
     }
 }
+
+function createPost (req, res) {
+    if (req.session.user) {
+        res.render('createPost.ejs', { user: req.session.user });
+    } else {
+        res.render('createPost.ejs', { user: null });    
+    }
+}
+
 
 function archive (req, res) {
     if (req.session.user) {
