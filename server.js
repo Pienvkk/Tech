@@ -244,17 +244,3 @@ app.use((err, req, res) => {
 })
 
 // Quiz vragen functie
-async function run() {
-    try {
-      const database = client.db('Formule1');
-      const movies = database.collection('0Questions');
-
-      const query = { question: 'Back to the Future' };
-      const movie = await question.findOne(query);
-      console.log(question);
-    } finally {
-
-      await client.close();
-    }
-  }
-  run().catch(console.dir);
