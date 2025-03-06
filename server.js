@@ -245,8 +245,9 @@ app.use((err, req, res) => {
 
 // Quiz vragen functie
 
-    const db = client.db(process.env.DB_NAME)
-    const Quizbattle = db.collection('0Questions')
-
-    const Vragenantwoord = await Quizbattle.findOne({})
-    console.log('Question:', Vragenantwoord)
+async function listDatabases(client){
+    databasesList = await client.db().admin().listDatabases();
+ 
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
