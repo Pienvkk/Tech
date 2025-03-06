@@ -244,3 +244,9 @@ app.use((err, req, res) => {
 })
 
 // Quiz vragen functie
+
+    const db = client.db(process.env.DB_NAME)
+    const Quizbattle = db.collection('0Questions')
+
+    const Vragenantwoord = await Quizbattle.findOne({})
+    console.log('Question:', Vragenantwoord)
