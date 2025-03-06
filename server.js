@@ -244,3 +244,25 @@ app.use((err, req, res) => {
 })
 
 // Quiz vragen functie
+
+async function connectDB() {
+    try {
+        await client.connect();
+        console.log(" Verbonden met MongoDB!");
+    } catch (error) {
+        console.error(" Fout bij verbinden:", error);
+    }
+}
+
+// 🔹 API Route om vragen op te halen uit '0Questions'
+app.get("/questions", async (req, res) => {
+    try {
+        const database = client.db("Formule1");
+        const questionsCollection = database.collection("0Questions");
+
+        const questions = await questionsCollection.find().toArray();
+        res.json(questions);
+    } catch (error) {
+        res.status(500).json({ error: "Fout bij ophalen van vragen" });
+    }
+});
