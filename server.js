@@ -245,3 +245,19 @@ app.use((err, req, res) => {
 
 // Quiz vragen functie
 
+
+async function run() {
+  try {
+    await client.connect();
+    // database and collection code goes here
+    const db = client.db("`Formule1");
+    const coll = db.collection("0Questions");
+    // find code goes here
+    const cursor = coll.find();
+    // iterate code goes here
+    await cursor.forEach(console.log);
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+}}
+
