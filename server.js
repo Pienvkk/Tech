@@ -34,7 +34,7 @@ app
     .get ('/createAccount', createAccount)
     .get ('/quiz', quiz)
     .get ('/teamUp', teamUp)
-    .get ('/communtiy', community)
+    .get ('/community', community)
     .get ('/archive', archive)
     .get ('/helpSupport', helpSupport)
     
