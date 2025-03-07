@@ -360,4 +360,27 @@ main section:nth-of-type(2) {
     font-size: 1.8rem;
 }
 
+.archiveList {
+    max-height: 55vh;
+    margin-top: 3rem;
+    padding: 1rem 2rem;
+    
+    overflow-y: auto; 
+    list-style: none;
+    border: 1px solid #FFFFFF; 
+
+    grid-row: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.archiveList li {
+    padding: 1rem;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.archiveList li:last-child {
+    border-bottom: none;
+}
+
 /* HELP & SUPPORT */
