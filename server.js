@@ -207,7 +207,52 @@ app.post('/createPost', async (req, res) => {
     }
 });
 
+// Quiz
 
+app.get('/quiz', async (req, res) => {
+
+    console.log('Vraag vraag:', req.body); 
+
+    try {
+
+        const db = client.db(process.env.DB_NAME)
+        const questions= db.collection('0Questions')
+
+          // Haal alle vragen op en zet ze in een array
+          const allQuestions = await questions.find().toArray();
+
+          // Stuur de vragen als JSON-response
+          res.json(allQuestions);
+
+          console.log('questions', allQuestions)
+
+    }
+
+    catch (error) {
+        console.error('quiz vragen ophalen ging fout:', error)
+        res.status(500).send('Er is iets misgegaan op de server')
+    }
+});
+
+
+
+
+/*
+async function run() {
+    try {
+      await client.connect();
+      // database and collection code goes here
+      const db = client.db("`Formule1");
+      const coll = db.collection("0Questions");
+      // find code goes here
+      const cursor = coll.find();
+      // iterate code goes here
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+  }}
+
+*/
 
 
 // Functies
@@ -311,3 +356,6 @@ app.use((err, req, res) => {
     // send back a HTTP response with status code 500
     res.status(500).send('500: server error')
 })
+
+
+
