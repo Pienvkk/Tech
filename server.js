@@ -157,6 +157,36 @@ app.get('/logout', (req, res) => {
 
 
 // Quiz
+
+app.get('/quiz', async (req, res) => {
+
+    console.log('Vraag vraag:', req.body); 
+
+    try {
+
+        const db = client.db(process.env.DB_NAME)
+        const questions= db.collection('0Questions')
+
+          // Haal alle vragen op en zet ze in een array
+          const allQuestions = await questions.find().toArray();
+
+          // Stuur de vragen als JSON-response
+          res.json(allQuestions);
+
+          console.log('questions', allQuestions)
+
+    }
+
+    catch (error) {
+        console.error('quiz vragen ophalen ging fout:', error)
+        res.status(500).send('Er is iets misgegaan op de server')
+    }
+});
+
+
+
+
+/*
 async function run() {
     try {
       await client.connect();
@@ -171,7 +201,7 @@ async function run() {
       await client.close();
   }}
 
-
+*/
 
 
 // Functies
@@ -258,6 +288,5 @@ app.use((err, req, res) => {
     res.status(500).send('500: server error')
 })
 
-// Quiz vragen functie
 
 
