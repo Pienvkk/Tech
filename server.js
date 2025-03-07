@@ -32,7 +32,7 @@ app
     .get ('/', home)
     .get ('/login', login)
     .get ('/createAccount', createAccount)
-    .get ('/quiz', quiz)
+    // .get ('/quiz', quiz)
     .get ('/teamUp', teamUp)
     .get ('/community', community)
     .get ('/archive', archive)
@@ -155,33 +155,33 @@ app.get('/logout', (req, res) => {
     });
 });
 
-
-// Quiz
+// Quiz 
 
 app.get('/quiz', async (req, res) => {
-
-    console.log('Vraag vraag:', req.body); 
+    console.log('Quizpagina bezocht');
 
     try {
+        const db = client.db(process.env.DB_NAME);
+        const questions = db.collection('0Questions');
 
-        const db = client.db(process.env.DB_NAME)
-        const questions= db.collection('0Questions')
+        // Haal alle vragen op en zet ze in een array
+        const allQuestions = await questions.find().toArray();
 
-          // Haal alle vragen op en zet ze in een array
-          const allQuestions = await questions.find().toArray();
+        // Log vragen in de terminal
+        console.log('Questions:', allQuestions);
 
-          // Stuur de vragen als JSON-response
-          res.json(allQuestions);
+        // Render de quizpagina en stuur vragen + gebruiker mee
+        res.render('quiz.ejs', { 
+            user: req.session.user || null, 
+            questions: allQuestions 
+        });
 
-          console.log('questions', allQuestions)
-
-    }
-
-    catch (error) {
-        console.error('quiz vragen ophalen ging fout:', error)
-        res.status(500).send('Er is iets misgegaan op de server')
+    } catch (error) {
+        console.error('Quiz vragen ophalen ging fout:', error);
+        res.status(500).send('Er is iets misgegaan op de server');
     }
 });
+
 
 
 
@@ -229,13 +229,13 @@ function createAccount (req, res) {
     }
 }
 
-function quiz (req, res) {
-    if (req.session.user) {
-        res.render('quiz.ejs', { user: req.session.user });
-    } else {
-        res.render('quiz.ejs', { user: null });    
-    }
-}
+// function quiz (req, res) {
+//     if (req.session.user) {
+//         res.render('quiz.ejs', { user: req.session.user });
+//     } else {
+//         res.render('quiz.ejs', { user: null });    
+//     }
+// }
 
 function teamUp (req, res) {
     if (req.session.user) {
