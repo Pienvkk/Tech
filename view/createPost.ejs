@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Matching</title>
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
+    <link rel="stylesheet" href="https://use.typekit.net/jva5hqf.css">
+</head>
+
+<body>
+    <%- include('../view/header'); %>
+
+    <main class="mainPost">
+        <h1>Create a Post</h1>
+        <div>
+            <form action="/createPost" method="POST" enctype="multipart/form-data">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title">
+                <label for="content">Content</label>
+                <input type="text" name="content" id="content">
+                <label for="file">Add File</label>
+                <input type="file" name="file">
+                <input type="submit" value="Create Post">
+            </form>
+        </div>
+    </main>
+
+    <%- include('../view/footer'); %>
+
+</body>
+</html>

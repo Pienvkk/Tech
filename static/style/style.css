@@ -279,6 +279,27 @@ header nav ul li p {
 
 /* VOORKEUREN INSTELLEN MAIN */
 
+/* POST AANMAKEN */
+
+.mainCommunity{
+    display: flex;
+}
+
+.mainCommunity h1{
+    width: 80%;
+}
+
+.mainCommunity a {
+    margin-top: 30px;
+    padding: 0.8rem 1rem;
+    background-color: #ff0000;
+    color: #FFFFFF;
+    text-decoration: none;
+    height: 20px;
+    width: 90px;
+    border-radius: 5px;
+    font-weight: 800;
+} 
 
 
 /* QUIZ MAIN */
@@ -390,6 +411,29 @@ header nav ul li p {
 
     font-family: 'formule1mainfont', sans-serif;
     font-size: 1.8rem;
+}
+
+.archiveList {
+    max-height: 55vh;
+    margin-top: 3rem;
+    padding: 1rem 2rem;
+    
+    overflow-y: auto; 
+    list-style: none;
+    border: 1px solid #FFFFFF; 
+
+    grid-row: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.archiveList li {
+    padding: 1rem;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.archiveList li:last-child {
+    border-bottom: none;
 }
 
 /* HELP & SUPPORT */
