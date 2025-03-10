@@ -18,6 +18,10 @@ app.use((req, res, next) => {
     next();
 });
 
+
+
+
+
 app
     .use(express.json())
     .use (express.urlencoded({extended: true}))
@@ -37,7 +41,7 @@ app
     .get ('/archive', archive)
     .get ('/helpSupport', helpSupport)
     
-
+    
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
 })
@@ -70,6 +74,7 @@ client.connect()
     const users = db.collection('0Users')
 
     const sampleUsers = await users.findOne({})
+    console.log('users:', sampleUsers)
 })
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
@@ -77,6 +82,8 @@ client.connect()
 })
 
 
+
+// Voorkeuren instellen
 app.post('/accountPreferences', async (req, res) => {
     const {season, team, driver} = req.body;
 
@@ -100,6 +107,8 @@ app.post('/accountPreferences', async (req, res) => {
 });
 
 
+
+// Account aanmaken
 app.post('/createAccount', async (req, res) => {
     // Check of account creatie request binnenkomt
     console.log('Received account creation request:', req.body); 
@@ -124,7 +133,7 @@ app.post('/createAccount', async (req, res) => {
 
         // Stopt nieuwe user in database
         await users.insertOne({ username: username, password: pass, email: email, date: formattedDate});
-        
+
         const user = await users.findOne({ username: username, password: pass })
         req.session.user = { username }; 
         res.redirect('/accountPreferences');
@@ -141,6 +150,9 @@ app.post('/createAccount', async (req, res) => {
 
 
 
+
+
+// Inloggen
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
     console.log('Received login request:', req.body); 
@@ -180,6 +192,9 @@ app.get('/logout', (req, res) => {
     });
 });
 
+
+
+// Post maken
 app.post('/createPost', async (req, res) => {
     console.log('Received post creation request:', req.body); 
 
@@ -207,8 +222,9 @@ app.post('/createPost', async (req, res) => {
     }
 });
 
-// Quiz
 
+
+// Quiz pagina
 app.get('/quiz', async (req, res) => {
 
     console.log('Vraag vraag:', req.body); 
@@ -234,25 +250,10 @@ app.get('/quiz', async (req, res) => {
     }
 });
 
-/*
-async function run() {
-    try {
-      await client.connect();
-      // database and collection code goes here
-      const db = client.db("`Formule1");
-      const coll = db.collection("0Questions");
-      // find code goes here
-      const cursor = coll.find();
-      // iterate code goes here
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
-  }}
-
-*/
 
 
-// Data uit MongoDB voor archief pagina
+
+// Archief pagina
 app.get('/api/data/:category', async (req, res) => {
     try {
         const db = client.db(process.env.DB_NAME);
@@ -385,6 +386,3 @@ app.use((err, req, res) => {
     // send back a HTTP response with status code 500
     res.status(500).send('500: server error')
 })
-
-
-
