@@ -296,6 +296,7 @@ app.get('/api/data/:category', async (req, res) => {
     }
 });
 
+app.get('/community', community);
 
 
 
@@ -349,11 +350,16 @@ function teamUp (req, res) {
     }
 }
 
-function community (req, res) {
-    if (req.session.user) {
-        res.render('community.ejs', { user: req.session.user });
-    } else {
-        res.render('community.ejs', { user: null });  
+async function community(req, res) {
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const posts = await db.collection('0Posts').find().toArray();
+        console.log("Fetched posts:", posts); // Debugging
+
+        res.render('community.ejs', { user: req.session.user || null, posts });
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+        res.status(500).send('Error fetching posts');
     }
 }
 
