@@ -90,7 +90,7 @@ app.post('/accountPreferences', async (req, res) => {
             { $set: { firstSeason: season, team: team, driver: driver }}
           );
         console.log(season)
-        console.log("Username to update:", req.session.username);
+        console.log("Username to update:", req.session.user.usernamee);
         res.redirect('/')
 
     } catch (error) {
