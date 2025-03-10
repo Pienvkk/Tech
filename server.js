@@ -206,6 +206,7 @@ app.get('/logout', (req, res) => {
 });
 
 
+
 app.post('/createPost', upload.single('file'), async (req, res) => {
     console.log('Received post creation request:', req.body); 
 
@@ -234,36 +235,41 @@ app.post('/createPost', upload.single('file'), async (req, res) => {
     }
 });
 
+
+// Post uploaden
 app.get('/uploads/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/uploads', req.params.filename);
     res.sendFile(filePath);
 });
 
+
+
 // Quiz pagina
 app.get('/quiz', async (req, res) => {
-
-    console.log('Vraag vraag:', req.body); 
+    console.log('Quizpagina bezocht');
 
     try {
+        const db = client.db(process.env.DB_NAME);
+        const questions = db.collection('0Questions');
 
-        const db = client.db(process.env.DB_NAME)
-        const questions= db.collection('0Questions')
+        // Haal alle vragen op en zet ze in een array
+        const allQuestions = await questions.find().toArray();
 
-          // Haal alle vragen op en zet ze in een array
-          const allQuestions = await questions.find().toArray();
+        // Log vragen in de terminal
+        console.log('Questions:', allQuestions);
 
-          // Stuur de vragen als JSON-response
-          res.json(allQuestions);
+        // Render de quizpagina en stuur vragen + gebruiker mee
+        res.render('quiz.ejs', { 
+            user: req.session.user || null, 
+            questions: allQuestions 
+        });
 
-          console.log('questions', allQuestions)
-
-    }
-
-    catch (error) {
-        console.error('quiz vragen ophalen ging fout:', error)
-        res.status(500).send('Er is iets misgegaan op de server')
+    } catch (error) {
+        console.error('Quiz vragen ophalen ging fout:', error);
+        res.status(500).send('Er is iets misgegaan op de server');
     }
 });
+
 
 
 
@@ -296,10 +302,6 @@ app.get('/api/data/:category', async (req, res) => {
     }
 });
 
-app.get('/community', community);
-
-
-
 
 // Functies
 function home(req, res) {
@@ -325,7 +327,6 @@ function createAccount (req, res) {
         res.render('createAccount.ejs', { user: null });    
     }
 }
-
 
 function accountPreferences (req, res) {
     if (req.session.user) {
