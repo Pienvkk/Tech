@@ -120,10 +120,11 @@ De website stelt gebruikers in staat om Formule 1-coureurs met elkaar te vergeli
 22. Wanneer ik wil discussiëren met anderen over recente Formule 1 gebeurtenissen wil ik dit kunnen doen met mensen die op het zelfde kennis niveau zitten als ik.
 #### Schetsen
 Pien lo-fi schermen 
-<img src="./static/style/images/schetsen/Profiel.png" alt="lofi scherm profiel">
-<img src="./static/style/images/schetsen/Game.png" alt="lofi scherm game">
-<img src="./static/style/images/schetsen/Landingpage.png" alt="lofi scherm landpage">
-<img src="./static/style/images/schetsen/Communityplatform.png" alt="lofi scherm community platform">
+<img src="./static/style/images/schetsen/Profiel.png" alt="lofi scherm profiel" width="200">
+<img src="./static/style/images/schetsen/Game.png" alt="lofi scherm game" width="200">
+<img src="./static/style/images/schetsen/Landingpage.png" alt="lofi scherm landpage" width="200">
+<img src="./static/style/images/schetsen/Communityplatform.png" alt="lofi scherm community platform" width="200">
+
 
 #### Requirements list (a.d.h.v. Job stories)
 

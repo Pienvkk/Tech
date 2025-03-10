@@ -2,6 +2,9 @@ require('dotenv').config()
 
 const express = require('express')
 const app = express()
+const multer = require('multer')
+const path = require('path')
+const { v4: uuidv4 } = require('uuid')
 
 const session = require('express-session')
 
@@ -32,11 +35,14 @@ app
     .get ('/', home)
     .get ('/login', login)
     .get ('/createAccount', createAccount)
-    // .get ('/quiz', quiz)
+    .get ('/accountPreferences', accountPreferences)
+    .get ('/quiz', quiz)
     .get ('/teamUp', teamUp)
     .get ('/community', community)
+    .get ('/createPost', createPost)
     .get ('/archive', archive)
     .get ('/helpSupport', helpSupport)
+    
     
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
@@ -77,16 +83,52 @@ client.connect()
     console.log(`For uri - ${uri}`)
 })
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'static/uploads');
+    },
+    filename: function (req, file, cb) {
+        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+        cb(null, uniqueName);
+    }
+});
+
+const upload = multer({ storage });
+
+
+// Voorkeuren instellen
+app.post('/accountPreferences', async (req, res) => {
+    const {season, team, driver} = req.body;
+
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const users = db.collection('0Users');
+
+        // Update user om zijn preferences toe te voegen
+        await users.updateOne(
+            { username: req.session.user.username },
+            { $set: { firstSeason: season, team: team, driver: driver }}
+          );
+        console.log(season)
+        console.log("Username to update:", req.session.user.usernamee);
+        res.redirect('/')
+
+    } catch (error) {
+        console.error('Preferences adding error:', error);
+        res.status(500).send('Server error');
+    }
+});
 
 
 
-
+// Account aanmaken
 app.post('/createAccount', async (req, res) => {
     // Check of account creatie request binnenkomt
     console.log('Received account creation request:', req.body); 
 
     // Account aanmaken
-    const { username, pass } = req.body;
+    const { username, pass, email, date} = req.body;
+    const formattedDate = date ? new Date(date) : null;
 
     try {
         const db = client.db(process.env.DB_NAME);
@@ -97,15 +139,25 @@ app.post('/createAccount', async (req, res) => {
         if (existingUser) {
             return res.status(400).send('Username taken');
         }
+        const existingEmail = await users.findOne({ email:email });
+        if (existingEmail) {
+            return res.status(400).send('Email taken');
+        }
 
         // Stopt nieuwe user in database
-        await users.insertOne({ username: username, password: pass });
+        await users.insertOne({ username: username, password: pass, email: email, date: formattedDate});
 
-        res.send('Account successfully created!');
+        const user = await users.findOne({ username: username, password: pass })
+        req.session.user = { username }; 
+        res.redirect('/accountPreferences');
+
+        
 
     } catch (error) {
         console.error('Account creation error:', error);
         res.status(500).send('Server error');
+
+
     }
 });
 
@@ -113,7 +165,7 @@ app.post('/createAccount', async (req, res) => {
 
 
 
-
+// Inloggen
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
     console.log('Received login request:', req.body); 
@@ -142,9 +194,7 @@ app.post('/login', async (req, res) => {
         console.error('Login fout:', error)
         res.status(500).send('Er is iets misgegaan op de server')
     }
-})
-
-
+});
 
 
 
@@ -155,8 +205,46 @@ app.get('/logout', (req, res) => {
     });
 });
 
-// Quiz 
 
+
+app.post('/createPost', upload.single('file'), async (req, res) => {
+    console.log('Received post creation request:', req.body); 
+
+    const { title, content, file } = req.body;
+
+    if (!req.session.user) {
+        return res.status(401).send('You must be logged in to create a post.');
+    }
+
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const posts = db.collection('0Posts');
+
+        const username = req.session.user.username; // Retrieve the username
+        const filename = req.file ? req.file.filename : null
+
+        console.log('Username:', username);
+
+        await posts.insertOne({ user: username, title: title, content: content, file: filename });
+
+        res.redirect('/community'); // Redirect to community page after posting
+
+    } catch (error) {
+        console.error('Post creation error:', error);
+        res.status(500).send('Server error');
+    }
+});
+
+
+// Post uploaden
+app.get('/uploads/:filename', (req, res) => {
+    const filePath = path.join(__dirname, 'static/uploads', req.params.filename);
+    res.sendFile(filePath);
+});
+
+
+
+// Quiz pagina
 app.get('/quiz', async (req, res) => {
     console.log('Quizpagina bezocht');
 
@@ -186,22 +274,33 @@ app.get('/quiz', async (req, res) => {
 
 
 
-/*
-async function run() {
+// Archief pagina
+app.get('/api/data/:category', async (req, res) => {
     try {
-      await client.connect();
-      // database and collection code goes here
-      const db = client.db("`Formule1");
-      const coll = db.collection("0Questions");
-      // find code goes here
-      const cursor = coll.find();
-      // iterate code goes here
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
-  }}
+        const db = client.db(process.env.DB_NAME);
+        const category = req.params.category; // Haal de categorie uit de URL
 
-*/
+        let data = [];
+
+        if (category === "drivers") {
+            data = await db.collection("Drivers").find({}).toArray();
+        } else if (category === "constructors") {
+            data = await db.collection("Constructors").find({}).toArray();
+        } else if (category === "championships") {
+            data = await db.collection("Championships").find({}).toArray();
+        } else if (category === "circuits") {
+            data = await db.collection("Circuits").find({}).toArray();
+        } else {
+            return res.status(400).json({ error: "Ongeldige categorie" });
+        }
+
+        res.json(data);
+
+    } catch (error) {
+        console.error("Fout bij ophalen van data:", error);
+        res.status(500).json({ error: "Server error" });
+    }
+});
 
 
 // Functies
@@ -229,13 +328,20 @@ function createAccount (req, res) {
     }
 }
 
-// function quiz (req, res) {
-//     if (req.session.user) {
-//         res.render('quiz.ejs', { user: req.session.user });
-//     } else {
-//         res.render('quiz.ejs', { user: null });    
-//     }
-// }
+function accountPreferences (req, res) {
+    if (req.session.user) {
+        res.render('accountPreferences.ejs', { user: req.session.user });
+    } else {
+        res.render('accountPreferences.ejs', { user: null });    
+    }}
+
+function quiz (req, res) {
+    if (req.session.user) {
+        res.render('quiz.ejs', { user: req.session.user });
+    } else {
+        res.render('quiz.ejs', { user: null });    
+    }
+}
 
 function teamUp (req, res) {
     if (req.session.user) {
@@ -245,13 +351,27 @@ function teamUp (req, res) {
     }
 }
 
-function community (req, res) {
-    if (req.session.user) {
-        res.render('community.ejs', { user: req.session.user });
-    } else {
-        res.render('community.ejs', { user: null });  
+async function community(req, res) {
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const posts = await db.collection('0Posts').find().toArray();
+        console.log("Fetched posts:", posts); // Debugging
+
+        res.render('community.ejs', { user: req.session.user || null, posts });
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+        res.status(500).send('Error fetching posts');
     }
 }
+
+function createPost (req, res) {
+    if (req.session.user) {
+        res.render('createPost.ejs', { user: req.session.user });
+    } else {
+        res.render('createPost.ejs', { user: null });    
+    }
+}
+
 
 function archive (req, res) {
     if (req.session.user) {
@@ -266,6 +386,7 @@ function helpSupport (req, res) {
         res.render('helpSupport.ejs', { user: req.session.user });
     } else {
         res.render('helpSupport.ejs', { user: null });  
+
     }
 }
 
@@ -287,6 +408,3 @@ app.use((err, req, res) => {
     // send back a HTTP response with status code 500
     res.status(500).send('500: server error')
 })
-
-
-
