@@ -226,6 +226,8 @@ main section:nth-of-type(2) {
 
 /* VOORKEUREN INSTELLEN MAIN */
 
+
+
 /* POST AANMAKEN */
 
 .mainCommunity{
@@ -247,6 +249,11 @@ main section:nth-of-type(2) {
     border-radius: 5px;
     font-weight: 800;
 } 
+
+
+
+/* ACCOUNT MAIN */
+
 
 
 /* QUIZ MAIN */
