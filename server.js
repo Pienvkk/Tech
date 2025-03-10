@@ -20,6 +20,10 @@ app.use((req, res, next) => {
     next();
 });
 
+
+
+
+
 app
     .use(express.json())
     .use (express.urlencoded({extended: true}))
@@ -39,7 +43,7 @@ app
     .get ('/archive', archive)
     .get ('/helpSupport', helpSupport)
     
-
+    
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
 })
@@ -72,6 +76,7 @@ client.connect()
     const users = db.collection('0Users')
 
     const sampleUsers = await users.findOne({})
+    console.log('users:', sampleUsers)
 })
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
@@ -90,6 +95,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+
+// Voorkeuren instellen
 app.post('/accountPreferences', async (req, res) => {
     const {season, team, driver} = req.body;
 
@@ -113,6 +120,8 @@ app.post('/accountPreferences', async (req, res) => {
 });
 
 
+
+// Account aanmaken
 app.post('/createAccount', async (req, res) => {
     // Check of account creatie request binnenkomt
     console.log('Received account creation request:', req.body); 
@@ -137,7 +146,7 @@ app.post('/createAccount', async (req, res) => {
 
         // Stopt nieuwe user in database
         await users.insertOne({ username: username, password: pass, email: email, date: formattedDate});
-        
+
         const user = await users.findOne({ username: username, password: pass })
         req.session.user = { username }; 
         res.redirect('/accountPreferences');
@@ -154,6 +163,9 @@ app.post('/createAccount', async (req, res) => {
 
 
 
+
+
+// Inloggen
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
     console.log('Received login request:', req.body); 
@@ -193,6 +205,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
+
 app.post('/createPost', upload.single('file'), async (req, res) => {
     console.log('Received post creation request:', req.body); 
 
@@ -225,6 +238,66 @@ app.get('/uploads/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/uploads', req.params.filename);
     res.sendFile(filePath);
 });
+
+// Quiz pagina
+app.get('/quiz', async (req, res) => {
+
+    console.log('Vraag vraag:', req.body); 
+
+    try {
+
+        const db = client.db(process.env.DB_NAME)
+        const questions= db.collection('0Questions')
+
+          // Haal alle vragen op en zet ze in een array
+          const allQuestions = await questions.find().toArray();
+
+          // Stuur de vragen als JSON-response
+          res.json(allQuestions);
+
+          console.log('questions', allQuestions)
+
+    }
+
+    catch (error) {
+        console.error('quiz vragen ophalen ging fout:', error)
+        res.status(500).send('Er is iets misgegaan op de server')
+    }
+});
+
+
+
+
+// Archief pagina
+app.get('/api/data/:category', async (req, res) => {
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const category = req.params.category; // Haal de categorie uit de URL
+
+        let data = [];
+
+        if (category === "drivers") {
+            data = await db.collection("Drivers").find({}).toArray();
+        } else if (category === "constructors") {
+            data = await db.collection("Constructors").find({}).toArray();
+        } else if (category === "championships") {
+            data = await db.collection("Championships").find({}).toArray();
+        } else if (category === "circuits") {
+            data = await db.collection("Circuits").find({}).toArray();
+        } else {
+            return res.status(400).json({ error: "Ongeldige categorie" });
+        }
+
+        res.json(data);
+
+    } catch (error) {
+        console.error("Fout bij ophalen van data:", error);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+
+
 
 
 // Functies
