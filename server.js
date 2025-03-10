@@ -34,7 +34,7 @@ app
     .get ('/login', login)
     .get ('/createAccount', createAccount)
     .get ('/accountPreferences', accountPreferences)
-    .get ('/account', account)
+    .get ('/profile', profile)
     .get ('/quiz', quiz)
     .get ('/teamUp', teamUp)
     .get ('/community', community)
@@ -320,11 +320,11 @@ function accountPreferences (req, res) {
     }
 }
 
-function account (req, res) {
+function profile (req, res) {
     if (req.session.user) {
-        res.render('accountPreferences.ejs', { user: req.session.user });
+        res.render('profile.ejs', { user: req.session.user });
     } else {
-        res.render('account.ejs', { user: null });    
+        res.render('profile.ejs', { user: null });    
     }
 }
 
