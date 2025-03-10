@@ -383,4 +383,34 @@ main section:nth-of-type(2) {
     border-bottom: none;
 }
 
+details {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1.1em;
+}
+
+details[open] {
+    background: #202020;
+}
+
+details div {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+details div p {
+    margin: 0.8rem 0;
+}
+
 /* HELP & SUPPORT */
