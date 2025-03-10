@@ -205,7 +205,9 @@ header nav ul li p {
     margin-top: 5rem;
 }
 
-
+.mainIndex section:first-of-type img{
+    height: 25em;
+}
 
 .mainIndex section:nth-of-type(2) { 
     background-color: #240907;
