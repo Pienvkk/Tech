@@ -48,7 +48,9 @@ h1 {
 }
 
 h2 {
-    margin: 0 0 0 1rem;
+    margin: 0 5 0 1rem;
+    display: flex;
+    text-align: center;
 }
 
 form {
@@ -270,7 +272,30 @@ header nav ul li p {
    margin-right: 1em;
   }
 
+  .mainIndex section:last-of-type{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+  }
 
+  .mainIndex section:last-of-type div:nth-of-type(1){
+    margin-top: 10em;
+  }
+
+  .mainIndex section:last-of-type div:nth-of-type(2){
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20em;
+  }t
+
+  .mainIndex section:last-of-type div:nth-of-type(1) ul{
+    list-style-type: none;
+  }
+
+  .mainIndex section:last-of-type div:nth-of-type(2) ul:first-of-type li{
+    font-family:'formule1mainfont';
+
+  }
 /* INLOGGEN MAIN */
 
 
