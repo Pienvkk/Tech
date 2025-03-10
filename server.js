@@ -3,6 +3,8 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const multer = require('multer')
+const path = require('path')
+const { v4: uuidv4 } = require('uuid')
 
 const session = require('express-session')
 
@@ -81,6 +83,17 @@ client.connect()
     console.log(`For uri - ${uri}`)
 })
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'static/uploads');
+    },
+    filename: function (req, file, cb) {
+        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+        cb(null, uniqueName);
+    }
+});
+
+const upload = multer({ storage });
 
 
 // Voorkeuren instellen
@@ -97,7 +110,7 @@ app.post('/accountPreferences', async (req, res) => {
             { $set: { firstSeason: season, team: team, driver: driver }}
           );
         console.log(season)
-        console.log("Username to update:", req.session.username);
+        console.log("Username to update:", req.session.user.usernamee);
         res.redirect('/')
 
     } catch (error) {
@@ -193,9 +206,7 @@ app.get('/logout', (req, res) => {
 });
 
 
-
-// Post maken
-app.post('/createPost', async (req, res) => {
+app.post('/createPost', upload.single('file'), async (req, res) => {
     console.log('Received post creation request:', req.body); 
 
     const { title, content, file } = req.body;
@@ -209,10 +220,11 @@ app.post('/createPost', async (req, res) => {
         const posts = db.collection('0Posts');
 
         const username = req.session.user.username; // Retrieve the username
+        const filename = req.file ? req.file.filename : null
 
         console.log('Username:', username);
 
-        await posts.insertOne({ user: username, title: title, content: content, file: file });
+        await posts.insertOne({ user: username, title: title, content: content, file: filename });
 
         res.redirect('/community'); // Redirect to community page after posting
 
@@ -222,7 +234,10 @@ app.post('/createPost', async (req, res) => {
     }
 });
 
-
+app.get('/uploads/:filename', (req, res) => {
+    const filePath = path.join(__dirname, 'static/uploads', req.params.filename);
+    res.sendFile(filePath);
+});
 
 // Quiz pagina
 app.get('/quiz', async (req, res) => {
