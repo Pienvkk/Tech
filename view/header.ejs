@@ -9,7 +9,7 @@
             <li><a href="/archive">Archive</a></li>
             <li><a href="/helpSupport">Help & Support</a></li>
             <% if (user) { %>
-                <li><a href="/account"><p><%= user.username %></p></a></li>
+                <li class="profielKnop"><a href="/profile"><img src="#" alt="Your profile picture"><p><%= user.username %></p></a></li>
                 <li><a href="/logout">Uitloggen</a></li>
             <% } else { %>
                 <li><a href="/login">Log in</a></li>

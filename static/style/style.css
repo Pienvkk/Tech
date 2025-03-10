@@ -93,6 +93,7 @@ header img {
 header nav ul {
     display: flex;
     flex-direction: row;
+    align-items: center;
     list-style: none;
     margin-right: 3rem;
 
@@ -181,6 +182,28 @@ header nav ul li p {
     color: #202020;
 }
 
+.profielKnop a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profielKnop a img {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 100%;
+    margin: 0 auto;
+
+    background-color: gray;
+}
+
+.profielKnop a p {
+    font-size: 3,5mm;
+    margin-top: 0.3rem;
+}
+
+
 /* HOME MAIN */
 
 .mainIndex {
@@ -253,6 +276,25 @@ main section:nth-of-type(2) {
 
 
 /* PROFILE MAIN */
+
+.mainProfile section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainProfile section h2 {
+    margin: 0 0 2rem 0;
+}
+
+.mainProfile section img {
+    height: 14vw;
+    width: 14vw;
+    border-radius: 100%;
+    background-color: gray;
+
+}
 
 
 
