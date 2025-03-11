@@ -284,19 +284,29 @@ header nav ul li p {
 
   .mainIndex section:last-of-type div:nth-of-type(2){
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 20em;
-  }t
-
-  .mainIndex section:last-of-type div:nth-of-type(2) ul{
-    list-style-type: none;
+    
     background-color: #FFFFFF;
+    color: #121212;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px; /* kan dit met px?*/
   }
 
   .mainIndex section:last-of-type div:nth-of-type(2) ul:first-of-type li{
     font-family:'formule1mainfont';
-
   }
+
+  .mainIndex section:last-of-type div:nth-of-type(2) ul{
+    margin-right: 5em;
+    margin-left: 6em;
+  }
+  .mainIndex section:last-of-type div:nth-of-type(2) ul li{
+    list-style-type: none;
+    margin-top: 1em;
+  }
+
 /* INLOGGEN MAIN */
 
 
