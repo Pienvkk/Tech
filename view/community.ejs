@@ -13,15 +13,21 @@
 
     <main class="mainCommunity">
         <h1>Community</h1>
-        <div>
+        
+        <% if (posts && posts.length > 0) { %>
             <% posts.forEach(post => { %>
                 <article>
                     <h2><%= post.title %></h2>
                     <p><%= post.content %></p>
-                    <img src="" alt="">
+                    <% if (post.file) { %>
+                        <img src="/uploads/<%= post.file %>" alt="Post image">
+                    <% } %>
                 </article>
             <% }) %>
-        </div>
+        <% } else { %>
+            <p>Er zijn nog geen posts.</p>
+        <% } %>
+
         <a href="/createPost">Create Post</a>
     </main>
 
