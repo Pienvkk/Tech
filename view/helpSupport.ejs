@@ -12,7 +12,50 @@
     <%- include('../view/header'); %>
 
     <main class="mainHelpSupport">
+        <section>
         <h1>Help & Support</h1>
+        <p>Wij zijn hier om je te helpen! Als je problemen hebt of vragen hebt over onze Formule 1-diensten, vind je hier antwoorden op veelgestelde vragen en kun je contact met ons opnemen voor verdere ondersteuning.</p>
+    </section>
+    <section>
+        <h2>Veelgestelde Vragen</h2>
+        <ul>
+            <li>
+                <h3>Hoe kan ik een spel starten of meedoen aan een quiz?</h3>
+                <p>Om een quiz te starten, ga naar de "Quiz" sectie en klik op de knop "Start Quiz". Om je aan te melden voor een spel met vrienden, ga naar de "Vrienden Strijd" sectie en nodig je vrienden uit om mee te doen!</p>
+            <li>
+                <h3>Hoe kan ik strijden tegen mijn vrienden?</h3>
+                <p>Ga naar de "Vrienden Strijd" sectie in het menu, kies een game of quiz, en nodig je vrienden uit via een unieke code of link. Je kunt de scores live volgen en zien wie de meeste punten verzamelt!</p>
+            </li>
+            <li>
+                <h3>Waarom werkt de game niet goed?</h3>
+                    <p>Controleer eerst of je internetverbinding stabiel is. Als het probleem aanhoudt, probeer de pagina te vernieuwen of contacteer onze klantenservice voor technische ondersteuning.</p>
+            </li>
+            <li>
+                <h3>Hoe kan ik mijn profiel aanpassen?</h3>
+                <p>Ga naar je profielpagina door op je naam in de rechterbovenhoek te klikken. Hier kun je je avatar, naam, en instellingen aanpassen.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Neem Contact op</h2>
+        <p>Heb je een probleem dat niet in de veelgestelde vragen staat? Vul het onderstaande formulier in, en ons supportteam neemt zo snel mogelijk contact met je op.</p>
+    </section>
+    <section>
+        <h3>Contactformulier</h3>
+        <form class="contact-form" action="/verzend_bericht" method="POST">
+            <label for="name">Naam:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Bericht:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Verstuur Bericht</button>
+        </form>
+    </section>
     </main>
 
     <%- include('../view/footer'); %>
