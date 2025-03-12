@@ -3,6 +3,8 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const multer = require('multer')
+const path = require('path')
+const { v4: uuidv4 } = require('uuid')
 
 const session = require('express-session')
 
@@ -82,6 +84,17 @@ client.connect()
     console.log(`For uri - ${uri}`)
 })
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'static/uploads');
+    },
+    filename: function (req, file, cb) {
+        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+        cb(null, uniqueName);
+    }
+});
+
+const upload = multer({ storage });
 
 
 // Voorkeuren instellen
@@ -98,7 +111,7 @@ app.post('/accountPreferences', async (req, res) => {
             { $set: { firstSeason: season, team: team, driver: driver }}
           );
         console.log(season)
-        console.log("Username to update:", req.session.username);
+        console.log("Username to update:", req.session.user.usernamee);
         res.redirect('/')
 
     } catch (error) {
@@ -195,8 +208,7 @@ app.get('/logout', (req, res) => {
 
 
 
-// Post maken
-app.post('/createPost', async (req, res) => {
+app.post('/createPost', upload.single('file'), async (req, res) => {
     console.log('Received post creation request:', req.body); 
 
     const { title, content, file } = req.body;
@@ -210,10 +222,11 @@ app.post('/createPost', async (req, res) => {
         const posts = db.collection('0Posts');
 
         const username = req.session.user.username; // Retrieve the username
+        const filename = req.file ? req.file.filename : null
 
         console.log('Username:', username);
 
-        await posts.insertOne({ user: username, title: title, content: content, file: file });
+        await posts.insertOne({ user: username, title: title, content: content, file: filename });
 
         res.redirect('/community'); // Redirect to community page after posting
 
@@ -224,32 +237,40 @@ app.post('/createPost', async (req, res) => {
 });
 
 
+// Post uploaden
+app.get('/uploads/:filename', (req, res) => {
+    const filePath = path.join(__dirname, 'static/uploads', req.params.filename);
+    res.sendFile(filePath);
+});
+
+
 
 // Quiz pagina
 app.get('/quiz', async (req, res) => {
-
-    console.log('Vraag vraag:', req.body); 
+    console.log('Quizpagina bezocht');
 
     try {
+        const db = client.db(process.env.DB_NAME);
+        const questions = db.collection('0Questions');
 
-        const db = client.db(process.env.DB_NAME)
-        const questions= db.collection('0Questions')
+        // Haal alle vragen op en zet ze in een array
+        const allQuestions = await questions.find().toArray();
 
-          // Haal alle vragen op en zet ze in een array
-          const allQuestions = await questions.find().toArray();
+        // Log vragen in de terminal
+        console.log('Questions:', allQuestions);
 
-          // Stuur de vragen als JSON-response
-          res.json(allQuestions);
+        // Render de quizpagina en stuur vragen + gebruiker mee
+        res.render('quiz.ejs', { 
+            user: req.session.user || null, 
+            questions: allQuestions 
+        });
 
-          console.log('questions', allQuestions)
-
-    }
-
-    catch (error) {
-        console.error('quiz vragen ophalen ging fout:', error)
-        res.status(500).send('Er is iets misgegaan op de server')
+    } catch (error) {
+        console.error('Quiz vragen ophalen ging fout:', error);
+        res.status(500).send('Er is iets misgegaan op de server');
     }
 });
+
 
 
 
@@ -283,9 +304,6 @@ app.get('/api/data/:category', async (req, res) => {
 });
 
 
-
-
-
 // Functies
 function home(req, res) {
     if (req.session.user) {
@@ -310,7 +328,6 @@ function createAccount (req, res) {
         res.render('createAccount.ejs', { user: null });    
     }
 }
-
 
 function accountPreferences (req, res) {
     if (req.session.user) {
@@ -344,11 +361,16 @@ function teamUp (req, res) {
     }
 }
 
-function community (req, res) {
-    if (req.session.user) {
-        res.render('community.ejs', { user: req.session.user });
-    } else {
-        res.render('community.ejs', { user: null });  
+async function community(req, res) {
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const posts = await db.collection('0Posts').find().toArray();
+        console.log("Fetched posts:", posts); // Debugging
+
+        res.render('community.ejs', { user: req.session.user || null, posts });
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+        res.status(500).send('Error fetching posts');
     }
 }
 
