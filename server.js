@@ -161,10 +161,6 @@ app.post('/createAccount', async (req, res) => {
     }
 });
 
-
-
-
-
 // Inloggen
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
