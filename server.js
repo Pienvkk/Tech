@@ -46,7 +46,7 @@ app
     .get('/profile', renderPage('profile'))
     .get('/quiz', renderPage('quiz'))
     .get('/teamUp', renderPage('teamUp'))
-    .get('/community', renderPage('community'))
+    .get('/community', community)
     .get('/createPost', renderPage('createPost'))
     .get('/archive', renderPage('archive'))
     .get('/helpSupport', renderPage('helpSupport'))
@@ -228,6 +228,21 @@ app.get('/quiz', async (req, res) => {
         res.status(500).send('Er is iets misgegaan op de server')
     }
 })
+
+
+
+// Community pagina
+async function community(req, res) {
+    try {
+        const posts = await db.collection('0Posts').find().toArray();
+        console.log("Fetched posts:", posts); // Debugging
+
+        res.render('community.ejs', { user: req.session.user || null, posts });
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+        res.status(500).send('Error fetching posts');
+    }
+}
 
 
 
