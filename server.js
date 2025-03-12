@@ -234,13 +234,13 @@ app.get('/quiz', async (req, res) => {
 // Community pagina
 async function community(req, res) {
     try {
-        const posts = await db.collection('0Posts').find().toArray();
+        const posts = await db.collection('0Posts').find().toArray()
         console.log("Fetched posts:", posts); // Debugging
 
-        res.render('community.ejs', { user: req.session.user || null, posts });
+        res.render('community.ejs', { user: req.session.user || null, posts })
     } catch (err) {
         console.error("Error fetching posts:", err);
-        res.status(500).send('Error fetching posts');
+        res.status(500).send('Error fetching posts')
     }
 }
 
