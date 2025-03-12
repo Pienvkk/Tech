@@ -307,6 +307,31 @@ header nav ul li p {
     margin-top: 1em;
   }
 
+/* testje voor carousel */
+
+/* .mainIndex section:first-of-type div{
+    display:grid;
+    grid-template-rows:min-content 1fr;
+    justify-content:center;
+}
+
+.mainIndex section:first-of-type img {
+    display:flex !important; 
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  border:none;
+  background:none;
+} */
+
+
+
+
+
 /* INLOGGEN MAIN */
 
 
