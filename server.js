@@ -213,7 +213,7 @@ app.post('/accountPreferences', async (req, res) => {
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
     console.log('Received login request:', req.body); 
-=======
+})
 
 
 // Afbeeldingen opslaan
@@ -226,6 +226,7 @@ const storage = multer.diskStorage({
         cb(null, uniqueName);
     }
 });
+
 
 
 const upload = multer({ storage })
@@ -375,5 +376,4 @@ app.use((err, req, res) => {
     console.error(err.stack)
     // send back a HTTP response with status code 500
     res.status(500).send('500: server error')
-})
-    })
+})});
