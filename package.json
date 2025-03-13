@@ -1,4 +1,27 @@
 {
+  "name": "formula1_quiz_battle",
+  "version": "1.0.0",
+  "description": "Formula 1 social quiz and informative website for F1 fans",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pienvkk/Tech.git"
+  },
+  "keywords": [
+    "Formula 1",
+    "Quiz",
+    "Battle"
+  ],
+  "author": "Berend Janssen, Jaydey Faasen, Pien van Kalkeren, Reuben auf dem Brinke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pienvkk/Tech/issues"
+  },
+  "homepage": "https://github.com/Pienvkk/Tech",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",

@@ -84,8 +84,9 @@ client.connect()
     })
     .catch((err) => {
         console.error(`Database connection error - ${err}`)
+    })
 
-  .then(async() => {
+    .then(async() => {
     console.log('Database connection established')
 
     const db = client.db(process.env.DB_NAME)
@@ -213,7 +214,7 @@ app.post('/accountPreferences', async (req, res) => {
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
     console.log('Received login request:', req.body); 
-=======
+})
 
 
 // Afbeeldingen opslaan
