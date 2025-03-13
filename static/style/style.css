@@ -231,7 +231,7 @@ header nav ul li p {
 }
 
 .mainIndex section:first-of-type img{
-    height: 25em;
+    height: 30em;
 }
 
 .mainIndex section:nth-of-type(2) { 
@@ -330,6 +330,7 @@ header nav ul li p {
     margin-top: 1em;
   }
 
+  
 /* carousel */
 
 .mainIndex section:first-of-type {
@@ -350,27 +351,30 @@ header nav ul li p {
     order: -1;
 }
 
+
 .swiper-button-prev,
 .swiper-button-next {
-    border: 2px solid #fff;  /* Maak de knoppen zichtbaar */
-    background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparante achtergrond */
+    border: none;
+    background-color: #ff0000;
 }
 
-.swiper-button-prev:focus,
-.swiper-button-next:focus {
-    outline: none; /* Verwijder focus-ring voor een schoner uiterlijk */
-}
 
 .swiper {
-    width: 100%; /* Zorg ervoor dat de breedte goed is */
-    height: 300px; /* Stel een hoogte in voor je carousel */
+    width: 100%;
+    height: 5em;
 }
 
-.swiper-wrapper {
-    display: flex; /* Zorg ervoor dat de slides horizontaal worden uitgelijnd */
-}
+/* .swiper-pagination-bullet {
+    background-color: #ffffff; 
+    width: 12px; 
+    height: 12px;
+    margin: 0 5px; 
+    opacity: 1; 
+  }
 
-
+  .swiper-pagination-bullet-active {
+    background-color: #ff0000; 
+  } */
 
 
 /* INLOGGEN MAIN */

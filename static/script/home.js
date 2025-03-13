@@ -1,22 +1,21 @@
+
 // carousel
 var options = {
     direction: 'horizontal',
-    loop: true,  // Booleaanse waarde in plaats van een string
-    speed: 300, 
+    loop: true,
+    speed: 300,
+    slidesPerView: 3, 
 
-  
-    // pagination
     pagination: {
-      el: '.swiper-pagination', 
-      type: 'fraction' 
+        el: ".swiper-pagination",
+        clickable: true,
+        type: 'bullets',
     },
   
-    // navigation arrows
     navigation: {
       nextEl: '.swiper-button-next', 
       prevEl: '.swiper-button-prev' 
     }
 };
 
-// Initialiseren van de Swiper
 const swiper = new Swiper('.swiper', options);
