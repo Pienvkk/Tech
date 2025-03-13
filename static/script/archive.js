@@ -26,9 +26,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 } else if (category === "championships") {
                     data.forEach(championship => {
-                        const li = document.createElement("li");
-                        li.textContent = `${championship.season} - Winner: ${championship.winner}`;
-                        dataList.appendChild(li);
+                        // Maak een <details> element
+                        const details = document.createElement("details");
+                        details.setAttribute("name", "championships"); // Alle details hebben dezelfde naam
+
+                        // Maak een <summary> met het seizoen en de winnaar
+                        const summary = document.createElement("summary");
+                        summary.textContent = `${championship.season} - Winner: ${championship.winner}`;
+
+                        // Maak een <div> met extra informatie
+                        const info = document.createElement("div");
+                        info.innerHTML = `
+                            <p><strong>Runner-up:</strong> ${championship.runnerUp}</p>
+                            <p><strong>Winning Team:</strong> ${championship.team}</p>
+                            <p><strong>Wins:</strong> ${championship.wins}</p>
+                            <p><strong>Podiums:</strong> ${championship.podiums}</p>
+                            <p><strong>Total Points:</strong> ${championship.points}</p>
+                        `;
+
+                        // Voeg alles toe aan het <details> element
+                        details.appendChild(summary);
+                        details.appendChild(info);
+
+                        // Voeg het toe aan de lijst
+                        dataList.appendChild(details);
                     });
 
                 } else if (category === "circuits") {
