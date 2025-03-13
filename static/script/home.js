@@ -3,7 +3,7 @@ var options = {
     direction: 'horizontal',
     loop: true,  // Booleaanse waarde in plaats van een string
     speed: 300, 
-    cssMode: true, 
+
   
     // pagination
     pagination: {

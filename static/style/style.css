@@ -352,15 +352,25 @@ header nav ul li p {
 
 .swiper-button-prev,
 .swiper-button-next {
-    border: 2px solid #fff;
-    background-color: rgba(0, 0, 0, 0.5); 
+    border: 2px solid #fff;  /* Maak de knoppen zichtbaar */
+    background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparante achtergrond */
 }
 
 .swiper-button-prev:focus,
 .swiper-button-next:focus {
-    outline: none; 
+    outline: none; /* Verwijder focus-ring voor een schoner uiterlijk */
 }
-/* einde carousel code */
+
+.swiper {
+    width: 100%; /* Zorg ervoor dat de breedte goed is */
+    height: 300px; /* Stel een hoogte in voor je carousel */
+}
+
+.swiper-wrapper {
+    display: flex; /* Zorg ervoor dat de slides horizontaal worden uitgelijnd */
+}
+
+
 
 
 /* INLOGGEN MAIN */
