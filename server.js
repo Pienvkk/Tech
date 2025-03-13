@@ -238,31 +238,6 @@ app.get('/uploads/:filename', (req, res) => {
     res.sendFile(filePath);
 });
 
-// Homepagina
-// var options = {
-//     direction: 'horizontal', 
-//     loop: 'true', 
-//     speed: 300, 
-//     cssMode: true, 
-  
-//     // pagination
-//     pagination: {
-//       el: '.swiper-pagination', 
-//       type: 'fraction' 
-//     },
-  
-//     // navigation arrows
-//     navigation: {
-//       nextEl: '.swiper-button-next', 
-//       prevEl: '.swiper-button-prev' 
-//     }
-//   };
-  
-//   /* het daadwerkelijk initialiseren van de carousel */
-//   const swiper = new Swiper('.swiper', options);
-
-
-
 
 // Quiz pagina
 app.get('/quiz', async (req, res) => {
