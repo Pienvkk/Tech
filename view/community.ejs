@@ -21,17 +21,20 @@
         <a href="/createPost">Create Post</a>
         </div>
         <div>
+            <% posts.forEach(post => { %> <!--hoe maak ik deze posts <-< -->
 
             <% posts.forEach(post => { %>
                 <article>
                     <div>
                     <h2><%= post.title %></h2>
                     <p><%= post.content %></p>
+                    <img src="" alt="hier zou een foto komen">
 
                     <% if (post.file) { %>
                         <img src="/uploads/<%= post.file %>" alt="Post image">
                     <% } %>
                 </article>
+                
             <% }) %>
         <% } else { %>
             <p>Er zijn nog geen posts.</p>
@@ -49,6 +52,7 @@
     </main>
 
     <%- include('../view/footer'); %>
+    <script src="/script.js"> </script>
 
 </body>
 </html>
