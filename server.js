@@ -77,12 +77,25 @@ const client = new MongoClient(uri, {
 let db;
 
 client.connect()
+
     .then(() => {
         console.log('Database connection established')
         db = client.db(process.env.DB_NAME);
     })
     .catch((err) => {
         console.error(`Database connection error - ${err}`)
+
+  .then(async() => {
+    console.log('Database connection established')
+
+    const db = client.db(process.env.DB_NAME)
+    const users = db.collection('0Users')
+
+})
+  .catch((err) => {
+    console.log(`Database connection error - ${err}`)
+    console.log(`For uri - ${uri}`)
+
 })
 
 
@@ -98,6 +111,7 @@ app.post('/login', async (req, res) => {
     try {
         const users = db.collection('0Users')
 
+
         // Zoek de gebruiker in de database
         const user = await users.findOne({ username: username, password: pass })
 
@@ -110,6 +124,14 @@ app.post('/login', async (req, res) => {
 
         // Login is succesvol - Redirect naar homepagina
         res.redirect('/');
+
+        // Update user om zijn preferences toe te voegen
+        await users.updateOne(
+            { username: req.session.user.username },
+            { $set: { firstSeason: season, team: team, driver: driver }}
+          );
+        res.redirect('/')
+
 
     } catch (error) {
         console.error('Login fout:', error)
@@ -307,6 +329,7 @@ app.get('/api/data/:category', async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 });
+
 
 
 
