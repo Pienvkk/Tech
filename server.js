@@ -238,7 +238,6 @@ app.get('/uploads/:filename', (req, res) => {
     res.sendFile(filePath);
 });
 
-
 // Homepagina
 // var options = {
 //     direction: 'horizontal', 
