@@ -22,8 +22,6 @@ good luck coding! (^-^)*/
     font-style: normal;
 }
 
-
-
 /* GLOBALE CSS */
 
 body {
@@ -42,6 +40,7 @@ h1, h2 {
     justify-content: left;
     align-items: center;
 }
+
 
 h1 {
     margin: 2rem 0 2rem 3rem;
@@ -423,7 +422,13 @@ header nav ul li p {
 
 
 /* COMMUNITY MAIN */
-
+.mainCommunity{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;      
+    margin: 1rem 1rem;
+}
 
 /* ARCHIEF MAIN */
 
@@ -501,44 +506,77 @@ header nav ul li p {
 
 /* HELP & SUPPORT */
 
-.mainHelpSupport h1{
-    text-align: center;
+.mainHelpSupport h1, h2{
     margin-bottom: 20px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
 
-.mainHelpSupport{
+.mainHelpSupport{  /* zelfde als support pagina samen stoppen?*/
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: center;  
+    align-items: center;      
+    margin: 1rem 1rem;
 }
 
 .mainHelpSupport section{
-    margin-bottom: 5rem;
+    margin-bottom: 10rem;
 }
-
-.mainHelpSupport section:first-of-type{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
 
 .mainHelpSupport ul {
-    margin: 5rem 1rem;
+    margin: 3rem 1rem;
     list-style-type: none;
     padding-left: 0;
 }
 
 .mainHelpSupport li {
-    background-color:#222222;
+    background-color: #222222;
     padding: 1rem;
+    padding-left: 1rem;
     margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.mainHelpSupport li  details p{
+    padding-top: 0.5rem;
+    transition: max-height 0.3s ease-in-out;
 }
 
-.mainHelpSupport li h3 {
+.mainHelpSupport li details summary {
     margin-bottom: 1rem;
     font-weight: bold;
+    cursor: pointer;
+}
+ /*  FORM */
+
+form {
+    background-color: #222222;
+    padding: 2rem 20rem;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+
+form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+form input, form textarea {
+    padding: 0.75rem 5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+}
+
+
+form button:hover {
+    background-color: #555;
 }

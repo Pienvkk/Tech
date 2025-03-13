@@ -14,18 +14,20 @@
     <main class="mainCommunity">
         <h1>Community</h1>
         <div>
-            <% posts.forEach(post => { %>
+            <% posts.forEach(post => { %> <!--hoe maak ik deze posts <-< -->
                 <article>
                     <h2><%= post.title %></h2>
                     <p><%= post.content %></p>
-                    <img src="" alt="">
+                    <img src="" alt="hier zou een foto komen">
                 </article>
+                
             <% }) %>
         </div>
         <a href="/createPost">Create Post</a>
     </main>
 
     <%- include('../view/footer'); %>
+    <script src="/script.js"> </script>
 
 </body>
 </html>
