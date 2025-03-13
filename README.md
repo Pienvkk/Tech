@@ -4,8 +4,9 @@ Created by: Berend Janssen
             Pien van Kalkeren
             Reuben auf dem Brinken
 
-## About
+## About:
+A website for F1 fans. 
 
-## Information
+## How to adopt:
 
-## Feedback
+## Suggestions / collaboration:
