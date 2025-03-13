@@ -84,8 +84,9 @@ client.connect()
     })
     .catch((err) => {
         console.error(`Database connection error - ${err}`)
+    })
 
-  .then(async() => {
+    .then(async() => {
     console.log('Database connection established')
 
     const db = client.db(process.env.DB_NAME)
