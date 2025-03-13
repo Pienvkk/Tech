@@ -27,6 +27,7 @@ good luck coding! (^-^)*/
 body {
     color:white;
     background-color: #121212;
+    --swiper-theme-color:#e7e1e1;
 }
 
 h1, h2 {
@@ -329,6 +330,37 @@ header nav ul li p {
     margin-top: 1em;
   }
 
+/* carousel */
+
+.mainIndex section:first-of-type {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainIndex section:first-of-type li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainIndex section:first-of-type li img {
+    order: -1;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    border: 2px solid #fff;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.swiper-button-prev:focus,
+.swiper-button-next:focus {
+    outline: none; 
+}
+/* einde carousel code */
 
 
 /* INLOGGEN MAIN */
