@@ -249,12 +249,46 @@ main section:nth-of-type(2) {
 } 
 
 
+.mainCommunity{
+    display: flex;
+    flex-direction: column;
+}
+
+.mainCommunity div:first-of-type{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.mainCommunity div:nth-of-type(2){
+    margin: auto;
+    width: 85%;
+}
+
+.mainCommunity div:nth-of-type(2) article{
+    border: 2px solid #FFFFFF;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+}
+
+.mainCommunity div:nth-of-type(2) article div{
+    flex-direction: column;
+}
+
+.mainCommunity div article img{ 
+    width: 8vw;
+    margin-left: auto;
+}
+
 /* QUIZ MAIN */
 
 .mainQuiz section {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    text-align: center; 
 
     flex: 1; 
     margin: 0 2rem 2rem 2rem;

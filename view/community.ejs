@@ -12,17 +12,22 @@
     <%- include('../view/header'); %>
 
     <main class="mainCommunity">
+        <div>
         <h1>Community</h1>
+        <a href="/createPost">Create Post</a>
+        </div>
         <div>
             <% posts.forEach(post => { %>
                 <article>
+                    <div>
                     <h2><%= post.title %></h2>
                     <p><%= post.content %></p>
-                    <img src="" alt="">
+                    <p>User: <%= post.user %></p>
+                    </div>
+                    <img src="/uploads/<%= post.file %>" alt="file">
                 </article>
             <% }) %>
         </div>
-        <a href="/createPost">Create Post</a>
     </main>
 
     <%- include('../view/footer'); %>

@@ -75,8 +75,6 @@ client.connect()
     const db = client.db(process.env.DB_NAME)
     const users = db.collection('0Users')
 
-    const sampleUsers = await users.findOne({})
-    console.log('users:', sampleUsers)
 })
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
@@ -109,8 +107,6 @@ app.post('/accountPreferences', async (req, res) => {
             { username: req.session.user.username },
             { $set: { firstSeason: season, team: team, driver: driver }}
           );
-        console.log(season)
-        console.log("Username to update:", req.session.user.usernamee);
         res.redirect('/')
 
     } catch (error) {
@@ -302,7 +298,7 @@ app.get('/community', community);
 
 
 // Functies
-function home(req, res) {
+function home (req, res) {
     if (req.session.user) {
         res.render('index.ejs', { user: req.session.user });
     } else {
@@ -310,7 +306,7 @@ function home(req, res) {
     }
 }
 
-function login(req, res) {
+function login (req, res) {
     if (req.session.user) {
         res.render('login.ejs', { user: req.session.user });
     } else {
@@ -350,7 +346,7 @@ function teamUp (req, res) {
     }
 }
 
-async function community(req, res) {
+async function community (req, res) {
     try {
         const db = client.db(process.env.DB_NAME);
         const posts = await db.collection('0Posts').find().toArray();
