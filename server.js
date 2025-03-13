@@ -213,7 +213,7 @@ app.post('/accountPreferences', async (req, res) => {
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
     console.log('Received login request:', req.body); 
-=======
+}
 
 
 // Afbeeldingen opslaan
