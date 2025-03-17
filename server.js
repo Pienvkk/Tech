@@ -237,10 +237,11 @@ const upload = multer({ storage })
 
 async function quizbattlefunctie (req, res) {
     try {
+        const questions = db.collection('0Questions')
         const quizquestions = await db.collection('0Questions').find().toArray()
         console.log("Fetched Questions:", quizquestions); // Debugging
 
-        res.render('quiz.ejs', { user: req.session.user || null, quizquestions })
+        res.render('quiz.ejs', { user: req.session.user || null, questions })
     } catch (err) {
         console.error("Error fetching quizquestions:", err);
         res.status(500).send('Error fetching quizquestions')

@@ -14,6 +14,21 @@ good luck coding! (^-^)*/
     font-size: 4mm;
 }
 
+:root{
+    margin: 2rem;
+
+    --font-family-primary:'formule1mainfont';
+    --font-family-secondary: 'sans-serif';
+    --color-background: #121212;
+
+
+    --font-size-small: 0.8em;
+    --font-size-medium: 1em;
+    --font-size-large: 1.4em;
+    --font-size-xlarge: 1.5em;
+
+}
+
 
 @font-face {
     font-family:'formule1mainfont';
@@ -26,14 +41,12 @@ good luck coding! (^-^)*/
 
 body {
     color:white;
-    background-color: #121212;
-    --swiper-theme-color:#e7e1e1;
+    background-color: var(--color-background);
 }
 
 h1, h2 {
-    font-family: 'formule1mainfont', sans-serif;
+    font-family: var(--font-family-primary);
     font-size: 3rem;
-    margin-left: 2rem;
     margin-top: 1rem;
     color: white;
 
@@ -44,6 +57,7 @@ h1, h2 {
 
 
 h1 {
+    font-size: 4rem;
     margin: 2rem 0 2rem 3rem;
 }
 
@@ -254,12 +268,11 @@ header nav ul li p {
     list-style-type: none;
  }
 
- .mainIndex section:nth-of-type(2) div ul li {
-    margin-bottom: 1em;
- }
 
  .mainIndex section:nth-of-type(2) div ul li p{
-    font-size: 2em;
+    font-size: 3vh;
+    font-family: var(--font-family-primary);
+
  }
 
 .mainIndex section:nth-of-type(2) div{
@@ -311,14 +324,14 @@ header nav ul li p {
     margin-top: 20em;
     
     background-color: #FFFFFF;
-    color: #121212;
+    --color-background: #121212;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px; /* kan dit met px?*/
   }
 
   .mainIndex section:last-of-type div:nth-of-type(2) ul:first-of-type li{
-    font-family:'formule1mainfont';
+    font-family: var(--font-family-primary);
   }
 
   .mainIndex section:last-of-type div:nth-of-type(2) ul{
@@ -641,7 +654,7 @@ header nav ul li p {
 
     margin-left: 1rem;
 
-    font-family: 'formule1mainfont', sans-serif;
+    font-family: var(--font-family-primary);
     font-size: 1.8rem;
 }
 

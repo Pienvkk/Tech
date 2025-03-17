@@ -7,45 +7,14 @@
     <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
-    <header>
-        <%- include('../view/header'); %>
-    </header>
-
+    <%- include('../view/header'); %>
+    
     <main>
-        <h1>Formule 1 Circuits Quiz</h1>
-
-        <% if (typeof questions !== "undefined" && questions.length > 0) { %>
-            <form method="POST" action="/submit-quiz">
-                <% questions.forEach((question, index) => { %>
-                    <fieldset>
-                        <legend><%= question.question %></legend>
-                        <ul>
-                            <% question.answers.forEach((answer, i) => { %>
-                                <li>
-                                    <input 
-                                        type="radio" 
-                                        id="vraag<%= index %>_<%= i %>" 
-                                        name="vraag<%= index %>" 
-                                        value="<%= answer %>"
-                                        required>
-                                    <label for="vraag<%= index %>_<%= i %>"><%= answer %></label>
-                                </li>
-                            <% }); %>
-                        </ul>
-                    </fieldset>
-                <% }); %>
-
-                <button type="submit">next</button>
-                <button type="submit">previous</button>
-
-            </form>
-        <% } else { %>
-            <p>Er zijn momenteel geen quizvragen beschikbaar.</p>
-        <% } %>
+      <h1>Welcome, <%= questions.quizquestions %>!</h1>
     </main>
 
-    <footer>
-        <%- include('../view/footer'); %>
-    </footer>
+    <%- include('../view/footer'); %>
+
+    <script src="/script/server.js"></script>
 </body>
 </html>
