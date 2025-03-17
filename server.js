@@ -44,7 +44,7 @@ app
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
     .get('/profile', renderPage('profile'))
-    .get('/quiz', quizbattlefunctie)
+    .get('/quiz', quiz)
     .get('/teamUp', renderPage('teamUp'))
     .get('/community', community)
     .get('/createPost', renderPage('createPost'))
@@ -82,21 +82,10 @@ client.connect()
         console.log('Database connection established')
         db = client.db(process.env.DB_NAME);
     })
-    .catch((err) => {
-        console.error(`Database connection error - ${err}`)
-    })
 
-    .then(async() => {
-    console.log('Database connection established')
-
-    const db = client.db(process.env.DB_NAME)
-    const users = db.collection('0Users')
-
-})
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
     console.log(`For uri - ${uri}`)
-
 })
 
 
@@ -107,7 +96,7 @@ app.post('/login', async (req, res) => {
     console.log('Received login request:', req.body)
 
     // Inloggen
-    const { username, pass } = req.body
+    const { username, pass, season, team, driver } = req.body
 
     try {
         const users = db.collection('0Users')
@@ -210,11 +199,6 @@ app.post('/accountPreferences', async (req, res) => {
     }
 });
 
-// Inloggen
-app.post('/login', async (req, res) => {
-    // Check of login request binnenkomt
-    console.log('Received login request:', req.body); 
-})
 
 
 // Afbeeldingen opslaan
@@ -228,97 +212,22 @@ const storage = multer.diskStorage({
     }
 });
 
-
-
 const upload = multer({ storage })
 
 
-// Quiz pagina
 
-async function quizbattlefunctie (req, res) {
+// Quiz pagina
+async function quiz(req, res) {
     try {
-        const questions = db.collection('0Questions')
-        const quizquestions = await db.collection('0Questions').find().toArray()
-        console.log("Fetched Questions:", quizquestions); // Debugging
+        const questions = await db.collection('0Questions').find().toArray()
+        console.log("Fetched questions:", questions); // Debugging
 
         res.render('quiz.ejs', { user: req.session.user || null, questions })
     } catch (err) {
-        console.error("Error fetching quizquestions:", err);
-        res.status(500).send('Error fetching quizquestions')
+        console.error("Error fetching questions:", err);
+        res.status(500).send('Error fetching questions')
     }
 }
-/*
-// 1 haalt vragen op 
-app.get('/quiz', async (req, res) => {
-    console.log('Quizpagina bezocht');
-
-    try {
-        const questions = db.collection('0Questions');
-
-    
-        const allQuestions = await questions.find().toArray();
-
-        console.log('Questions:', allQuestions);
-    
-        res.render('quiz.ejs', { 
-            user: req.session.user || null, 
-            questions: allQuestions 
-        });
-
-    } catch (error) {
-        console.error('Quiz vragen ophalen ging fout:', error);
-        res.status(500).send('Er is iets misgegaan op de server');
-    }
-});
-
-*/
-
-//2 berekent score 
-
-app.post('/submit-quiz', async (req, res) => {
-    try {
-        const userAnswers = req.body;
-
-        let score = 0;
-        for (let userAnswer of userAnswers) {
-            const question = await questionsCollection.findOne({ question: userAnswer.question });
-            if (question && userAnswer.answer === question.correct_answer) {
-                score++;
-            }
-        }
-
-        res.json({ success: true, message: "Quiz verwerkt", score: score });
-    } catch (error) {
-        console.error('Fout bij verwerken van quiz:', error);
-        res.status(500).json({ success: false, message: "Serverfout" });
-    }
-});
-
-/*app.get('/quiz', async (req, res) => {
-    console.log('Quizpagina bezocht');
-
-    try {
-        const db = client.db(process.env.DB_NAME);
-        const questions = db.collection('0Questions');
-
-        // Haal alle vragen op en zet ze in een array
-        const allQuestions = await questions.find().toArray();
-
-        // Log vragen in de terminal
-        console.log('Questions:', allQuestions);
-    
-        // Render de quizpagina en stuur vragen + gebruiker mee
-        res.render('quiz.ejs', { 
-            user: req.session.user || null, 
-            questions: allQuestions 
-        });
-
-    } catch (error) {
-        console.error('Quiz vragen ophalen ging fout:', error);
-        res.status(500).send('Er is iets misgegaan op de server');
-    }
-});
-*/
 
 // Community pagina
 async function community(req, res) {
