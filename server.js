@@ -44,7 +44,7 @@ app
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
     .get('/profile', renderPage('profile'))
-    .get('/quiz', renderPage('quiz'))
+    .get('/quiz', quizbattlefunctie)
     .get('/teamUp', renderPage('teamUp'))
     .get('/community', community)
     .get('/createPost', renderPage('createPost'))
@@ -234,18 +234,78 @@ const upload = multer({ storage })
 
 
 // Quiz pagina
+
+async function quizbattlefunctie (req, res) {
+    try {
+        const quizquestions = await db.collection('0Questions').find().toArray()
+        console.log("Fetched Questions:", quizquestions); // Debugging
+
+        res.render('quiz.ejs', { user: req.session.user || null, quizquestions })
+    } catch (err) {
+        console.error("Error fetching quizquestions:", err);
+        res.status(500).send('Error fetching quizquestions')
+    }
+}
+/*
+// 1 haalt vragen op 
 app.get('/quiz', async (req, res) => {
-    console.log('Quizpagina bezocht')
+    console.log('Quizpagina bezocht');
 
     try {
-        const questions = db.collection('0Questions')
+        const questions = db.collection('0Questions');
+
+    
+        const allQuestions = await questions.find().toArray();
+
+        console.log('Questions:', allQuestions);
+    
+        res.render('quiz.ejs', { 
+            user: req.session.user || null, 
+            questions: allQuestions 
+        });
+
+    } catch (error) {
+        console.error('Quiz vragen ophalen ging fout:', error);
+        res.status(500).send('Er is iets misgegaan op de server');
+    }
+});
+
+*/
+
+//2 berekent score 
+
+app.post('/submit-quiz', async (req, res) => {
+    try {
+        const userAnswers = req.body;
+
+        let score = 0;
+        for (let userAnswer of userAnswers) {
+            const question = await questionsCollection.findOne({ question: userAnswer.question });
+            if (question && userAnswer.answer === question.correct_answer) {
+                score++;
+            }
+        }
+
+        res.json({ success: true, message: "Quiz verwerkt", score: score });
+    } catch (error) {
+        console.error('Fout bij verwerken van quiz:', error);
+        res.status(500).json({ success: false, message: "Serverfout" });
+    }
+});
+
+/*app.get('/quiz', async (req, res) => {
+    console.log('Quizpagina bezocht');
+
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const questions = db.collection('0Questions');
 
         // Haal alle vragen op en zet ze in een array
-        const allQuestions = await questions.find().toArray()
+        const allQuestions = await questions.find().toArray();
 
         // Log vragen in de terminal
-        console.log('Questions:', allQuestions)
-
+        console.log('Questions:', allQuestions);
+    
         // Render de quizpagina en stuur vragen + gebruiker mee
         res.render('quiz.ejs', { 
             user: req.session.user || null, 
@@ -253,12 +313,11 @@ app.get('/quiz', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Quiz vragen ophalen ging fout:', error)
-        res.status(500).send('Er is iets misgegaan op de server')
+        console.error('Quiz vragen ophalen ging fout:', error);
+        res.status(500).send('Er is iets misgegaan op de server');
     }
-})
-
-
+});
+*/
 
 // Community pagina
 async function community(req, res) {
@@ -308,32 +367,6 @@ app.get('/uploads/:filename', (req, res) => {
     res.sendFile(filePath);
 });
 
-
-// Quiz pagina
-app.get('/quiz', async (req, res) => {
-    console.log('Quizpagina bezocht');
-
-    try {
-        const db = client.db(process.env.DB_NAME);
-        const questions = db.collection('0Questions');
-
-        // Haal alle vragen op en zet ze in een array
-        const allQuestions = await questions.find().toArray();
-
-        // Log vragen in de terminal
-        console.log('Questions:', allQuestions);
-
-        // Render de quizpagina en stuur vragen + gebruiker mee
-        res.render('quiz.ejs', { 
-            user: req.session.user || null, 
-            questions: allQuestions 
-        });
-
-    } catch (error) {
-        console.error('Quiz vragen ophalen ging fout:', error);
-        res.status(500).send('Er is iets misgegaan op de server');
-    }
-});
 
 // Archief pagina
 app.get('/api/data/:category', async (req, res) => {

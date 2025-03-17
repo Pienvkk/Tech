@@ -472,7 +472,7 @@ header nav ul li p {
 
 /* QUIZ MAIN */
 
-.mainQuiz section {
+/* .mainQuiz section {
     display: flex;
     flex-direction: column;
     text-align: center; 
@@ -482,10 +482,29 @@ header nav ul li p {
     padding-top: 2rem;
     background-color: #222222;
     border-radius: 5px;
+} */
+
+.mainQuiz button{
+    margin: auto auto;
+    background-color:hsl(0, 1%, 65%);
+    padding: 1vh 2vh;
+    border-radius: 3px;
+
+    font-weight: bold;
 }
 
-.mainQuiz section:nth-of-type(2){
+.mainQuiz section {
+    display: grid;
+    grid-template-columns: auto 50vw auto;
+    grid-template-rows: auto auto auto;
+    gap: 3rem;
+    
+}
+
+.mainQuiz section:nth-of-type(1){
     background-color: #222222;
+    margin: 2rem 3rem;
+    border-radius: 10px;
 }
 
 .mainQuiz h1{
@@ -496,17 +515,46 @@ header nav ul li p {
     font-family: sans-serif;
     font-weight: 800;
     font-size: 2rem;
-    justify-content: center;
+    /* justify-content: center; */
+
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
 
 .mainQuiz img{
-    width: 45%;
-    margin: 0 auto;
+    width: auto;
     margin-bottom: 1rem;
     border-radius: 5px ;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 
-.mainQuiz ul {
+.mainQuiz button:nth-of-type(1) {
+    background-color:hsl(0, 1%, 47%);
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+.mainQuiz button:nth-of-type(2) {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+.mainQuiz section ul {
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 4;
+
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
@@ -523,6 +571,16 @@ header nav ul li p {
     font-size:large;
     margin-left: 1rem;
 }
+
+/* PROBEERSEL */
+.quiz-question {
+    display: none;
+}
+
+.quiz-question.is-active {
+    display: block;
+}
+
 
 /* TEAM UP MAIN */
 

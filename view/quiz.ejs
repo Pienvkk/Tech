@@ -1,71 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
-    <link rel="stylesheet" href="/style/style.css" type="text/css">
+    <title>Formule 1 Quiz</title>
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
-    <%- include('../view/header'); %>
+    <header>
+        <%- include('../view/header'); %>
+    </header>
 
-    <main class="mainQuiz">
+    <main>
+        <h1>Formule 1 Circuits Quiz</h1>
 
-        <h1>Quiz formule 1 circuits</h1>
-
-        <section>
-                <img src="/style/images/quiz/vraag1.png" alt="Vraag 1 circuit monaco">
-                    <h2>Welk circuit staat bekend als "het juweel in de kroon van de formule 1"</h2>
+        <% if (typeof questions !== "undefined" && questions.length > 0) { %>
+            <form method="POST" action="/submit-quiz">
+                <% questions.forEach((question, index) => { %>
+                    <fieldset>
+                        <legend><%= question.question %></legend>
                         <ul>
-                            <li><input type="radio" id="silverstone" name="vraag1" value="Silverstone"/><label for="Silverstone">silverstone</label></li>
-                            <li><input type="radio" id="Monza" name="vraag1" value="Monza"/><label for="Monza">Monza</label></li>
-                            <li><input type="radio" id="Monaco" name="vraag1" value="Monaco"/><label for="Monaco">Monaco</label></li>
-                            <li><input type="radio" id="Suzuka" name="vraag1" value="Suzuka"/><label for="Suzuka">Suzuka</label></li>
+                            <% question.answers.forEach((answer, i) => { %>
+                                <li>
+                                    <input 
+                                        type="radio" 
+                                        id="vraag<%= index %>_<%= i %>" 
+                                        name="vraag<%= index %>" 
+                                        value="<%= answer %>"
+                                        required>
+                                    <label for="vraag<%= index %>_<%= i %>"><%= answer %></label>
+                                </li>
+                            <% }); %>
                         </ul>
-        </section>
-    
-        <section>
-            <h2>Wat is het langste circuit op de F1-kalender (2024)?</h2>
-                <ul>
-                    <li><input type="radio" id="circuitoftheAmericas" name="vraag2" value="Circuit of the Americas"/><label for="circuitoftheAmericas">Circuit of the Americas</label></li>
-                    <li><input type="radio" id="spaFrancorchamps" name="vraag2" value="spa-Francorchamps"/><label for="spa-Francorchamps">spa-Francorchamps</label></li>
-                    <li><input type="radio" id="Jeddah" name="vraag2" value="Jeddah"/><label for="Jeddah">Jeddah Corniche Circuit</label></li>
-                    <li><input type="radio" id="singapore" name="vraag2" value="singapore"/><label for="singapore">Singapore Street Circuit</label></li>
-                </ul>
-        </section>
-       
-        <section>
-            <h2>Welk circuit heeft de bijnaam "de tempel van de snelheid"?</h2>
-                <ul>
-                    <li><input type="radio" id="silverstone2" name="vraag3" value="Silverstone"/><label for="Silverstone">silverstone</label></li>
-                    <li><input type="radio" id="Monza2" name="vraag3" value="Monza"/><label for="Monza">Monza</label></li>
-                    <li><input type="radio" id="Redbull" name="vraag3" value="Redbull"/><label for="redbull">Red Bull Ring</label></li>
-                    <li><input type="radio" id="interlagos" name="vraag3" value="interlagos"/><label for="interlagos">interlagos</label></li>
-                </ul>
-        </section>
-    
-        <section>
-            <h2>In welk land ligt het circuit waar de eerste officiële Formule 1 Grand Prix werd gehouden in 1950?</h2>
-                <ul>
-                    <li><input type="radio" id="italië" name="vraag4" value="italië"/><label for="italië">Italië</label></li>
-                    <li><input type="radio" id="frankrijk" name="vraag4" value="frankrijk"/><label for="frankrijk">Frankrijk</label></li>
-                    <li><input type="radio" id="grootbrittannië" name="vraag4" value="grootbrittannië"/><label for="grootbrittannië">Groot-Brittannië</label></li>
-                    <li><input type="radio" id="duitsland" name="vraag4" value="duitsland"/><label for="duitsland">Duitsland</label></li>
-                </ul>
-        </section>
-    
-        <section>
-            <h2>Welke van deze circuits heeft een beroemde bocht genaamd "Eau Rouge"?</h2>
-                <ul>
-                    <li><input type="radio" id="suzuka2" name="vraag5" value="Suzuka2"/><label for="Suzuka2">Suzuka</label></li>
-                    <li><input type="radio" id="spaFrancorchamps2" name="vraag5" value="spa-Francorchamps2"/><label for="spa-Francorchamps2">spa-Francorchamps</label></li>
-                    <li><input type="radio" id="Circuitgillesvilleneuve" name="vraag4" value="circuitgillesvilleneuve"/><label for="Circuitgillesvilleneuve">Circuit Gilles Villeneuve</label></li>
-                    <li><input type="radio" id="Bakucitycircuit" name="vraag4" value="Bakucitycircuit"/><label for="Bakucitycircuit">Baku City Circuit</label></li>
-                </ul>
-        </section>
+                    </fieldset>
+                <% }); %>
+
+                <button type="submit">next</button>
+                <button type="submit">previous</button>
+
+            </form>
+        <% } else { %>
+            <p>Er zijn momenteel geen quizvragen beschikbaar.</p>
+        <% } %>
     </main>
 
-    <%- include('../view/footer'); %>
-    <script src="/script/quizbattle.js"> </script>
+    <footer>
+        <%- include('../view/footer'); %>
+    </footer>
 </body>
 </html>
