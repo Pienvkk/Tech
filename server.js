@@ -83,9 +83,9 @@ client.connect()
         db = client.db(process.env.DB_NAME);
     })
 
-  .catch((err) => {
-    console.log(`Database connection error - ${err}`)
-    console.log(`For uri - ${uri}`)
+    .catch((err) => {
+        console.log(`Database connection error - ${err}`)
+        console.log(`For uri - ${uri}`)
 })
 
 
@@ -100,7 +100,7 @@ app.post('/login', async (req, res) => {
 
     try {
         const users = db.collection('0Users')
-
+        const {season, team, driver} = req.body;
 
         // Zoek de gebruiker in de database
         const user = await users.findOne({ username: username, password: pass })
@@ -111,9 +111,6 @@ app.post('/login', async (req, res) => {
 
         // Login is succesvol - Sla de gebruiker op in de sessie
         req.session.user = { username: user.username }
-
-        // Login is succesvol - Redirect naar homepagina
-        res.redirect('/');
 
         // Update user om zijn preferences toe te voegen
         await users.updateOne(
