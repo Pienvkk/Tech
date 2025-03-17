@@ -14,6 +14,19 @@ good luck coding! (^-^)*/
     font-size: 4mm;
 }
 
+:root{
+    --font-family-primary:'formule1mainfont';
+    --font-family-secondary: 'sans-serif';
+    --color-background: #121212;
+
+
+    --font-size-small: 0.8em;
+    --font-size-medium: 1em;
+    --font-size-large: 1.4em;
+    --font-size-xlarge: 1.5em;
+
+}
+
 
 @font-face {
     font-family:'formule1mainfont';
@@ -26,13 +39,12 @@ good luck coding! (^-^)*/
 
 body {
     color:white;
-    background-color: #28282A;
+    background-color: var(--color-background);
 }
 
 h1, h2 {
-    font-family: 'formule1mainfont', sans-serif;
+    font-family: var(--font-family-primary);
     font-size: 3rem;
-    margin-left: 2rem;
     margin-top: 1rem;
     color: white;
 
@@ -43,6 +55,7 @@ h1, h2 {
 
 
 h1 {
+    font-size: 4rem;
     margin: 2rem 0 2rem 3rem;
 }
 
@@ -238,7 +251,7 @@ header nav ul li p {
 }
 
 .mainIndex section:first-of-type img{
-    height: 25em;
+    height: 30em;
 }
 
 .mainIndex section:nth-of-type(2) { 
@@ -261,12 +274,11 @@ header nav ul li p {
     list-style-type: none;
  }
 
- .mainIndex section:nth-of-type(2) div ul li {
-    margin-bottom: 1em;
- }
 
  .mainIndex section:nth-of-type(2) div ul li p{
-    font-size: 2em;
+    font-size: 3vh;
+    font-family: var(--font-family-primary);
+
  }
 
 .mainIndex section:nth-of-type(2) div{
@@ -318,14 +330,14 @@ header nav ul li p {
     margin-top: 20em;
     
     background-color: #FFFFFF;
-    color: #121212;
+    --color-background: #121212;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px; /* kan dit met px?*/
   }
 
   .mainIndex section:last-of-type div:nth-of-type(2) ul:first-of-type li{
-    font-family:'formule1mainfont';
+    font-family: var(--font-family-primary);
   }
 
   .mainIndex section:last-of-type div:nth-of-type(2) ul{
@@ -337,29 +349,51 @@ header nav ul li p {
     margin-top: 1em;
   }
 
-/* testje voor carousel */
+  
+/* carousel */
 
-/* .mainIndex section:first-of-type div{
-    display:grid;
-    grid-template-rows:min-content 1fr;
-    justify-content:center;
+.mainIndex section:first-of-type {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.mainIndex section:first-of-type img {
-    display:flex !important; 
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+.mainIndex section:first-of-type li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.mainIndex section:first-of-type li img {
+    order: -1;
+}
+
 
 .swiper-button-prev,
 .swiper-button-next {
-  border:none;
-  background:none;
-} */
+    border: none;
+    background-color: #ff0000;
+}
 
 
+.swiper {
+    width: 100%;
+    height: 5em;
+}
 
+/* .swiper-pagination-bullet {
+    background-color: #ffffff; 
+    width: 12px; 
+    height: 12px;
+    margin: 0 5px; 
+    opacity: 1; 
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #ff0000; 
+  } */
 
 
 /* INLOGGEN MAIN */
@@ -588,7 +622,7 @@ input[type="submit"]:hover {
 
 /* QUIZ MAIN */
 
-.mainQuiz section {
+/* .mainQuiz section {
     display: flex;
     flex-direction: column;
     text-align: center; 
@@ -598,10 +632,29 @@ input[type="submit"]:hover {
     padding-top: 2rem;
     background-color: #222222;
     border-radius: 5px;
+} */
+
+.mainQuiz button{
+    margin: auto auto;
+    background-color:hsl(0, 1%, 65%);
+    padding: 1vh 2vh;
+    border-radius: 3px;
+
+    font-weight: bold;
 }
 
-.mainQuiz section:nth-of-type(2){
+.mainQuiz section {
+    display: grid;
+    grid-template-columns: auto 50vw auto;
+    grid-template-rows: auto auto auto;
+    gap: 3rem;
+    
+}
+
+.mainQuiz section:nth-of-type(1){
     background-color: #222222;
+    margin: 2rem 3rem;
+    border-radius: 10px;
 }
 
 .mainQuiz h1{
@@ -612,17 +665,46 @@ input[type="submit"]:hover {
     font-family: sans-serif;
     font-weight: 800;
     font-size: 2rem;
-    justify-content: center;
+    /* justify-content: center; */
+
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
 
 .mainQuiz img{
-    width: 45%;
-    margin: 0 auto;
+    width: auto;
     margin-bottom: 1rem;
     border-radius: 5px ;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 
-.mainQuiz ul {
+.mainQuiz button:nth-of-type(1) {
+    background-color:hsl(0, 1%, 47%);
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+.mainQuiz button:nth-of-type(2) {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+.mainQuiz section ul {
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 4;
+
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
@@ -639,6 +721,16 @@ input[type="submit"]:hover {
     font-size:large;
     margin-left: 1rem;
 }
+
+/* PROBEERSEL */
+.quiz-question {
+    display: none;
+}
+
+.quiz-question.is-active {
+    display: block;
+}
+
 
 /* TEAM UP MAIN */
 
@@ -699,7 +791,7 @@ input[type="submit"]:hover {
 
     margin-left: 1rem;
 
-    font-family: 'formule1mainfont', sans-serif;
+    font-family: var(--font-family-primary);
     font-size: 1.8rem;
 }
 
