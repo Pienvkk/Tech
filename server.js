@@ -82,17 +82,7 @@ client.connect()
         console.log('Database connection established')
         db = client.db(process.env.DB_NAME);
     })
-    .catch((err) => {
-        console.error(`Database connection error - ${err}`)
-    })
 
-    .then(async() => {
-    console.log('Database connection established')
-
-    const db = client.db(process.env.DB_NAME)
-    const users = db.collection('0Users')
-
-})
   .catch((err) => {
     console.log(`Database connection error - ${err}`)
     console.log(`For uri - ${uri}`)
