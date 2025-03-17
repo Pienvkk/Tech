@@ -28,16 +28,13 @@
                     <p><%= post.content %></p>
                     <p>User: <%= post.user %></p>
                     </div>
-                </article>
-            <% }) %>
-        </div>
         <% } else { %>
             <p>Er zijn nog geen posts.</p>
         <% } %>
-
     </main>
 
     <%- include('../view/footer'); %>
+    <script src="/script.js"> </script>
 
 </body>
 </html>

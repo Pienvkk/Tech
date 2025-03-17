@@ -82,21 +82,11 @@ client.connect()
         console.log('Database connection established')
         db = client.db(process.env.DB_NAME);
     })
+
+
     .catch((err) => {
-        console.error(`Database connection error - ${err}`)
-    })
-
-  .then(async() => {
-    console.log('Database connection established')
-
-    const db = client.db(process.env.DB_NAME)
-    const users = db.collection('0Users')
-
-})
-  .catch((err) => {
-    console.log(`Database connection error - ${err}`)
-    console.log(`For uri - ${uri}`)
-
+        console.log(`Database connection error - ${err}`)
+        console.log(`For uri - ${uri}`)
 })
 
 
@@ -111,7 +101,7 @@ app.post('/login', async (req, res) => {
 
     try {
         const users = db.collection('0Users')
-
+        const {season, team, driver} = req.body;
 
         // Zoek de gebruiker in de database
         const user = await users.findOne({ username: username, password: pass })
@@ -207,6 +197,11 @@ app.post('/accountPreferences', async (req, res) => {
     }
 });
 
+// Inloggen
+app.post('/login', async (req, res) => {
+    // Check of login request binnenkomt
+    console.log('Received login request:', req.body); 
+})
 
 
 // Afbeeldingen opslaan
@@ -221,7 +216,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage })
-
 
 
 // Quiz pagina
@@ -300,6 +294,31 @@ app.get('/uploads/:filename', (req, res) => {
 });
 
 
+// Quiz pagina
+app.get('/quiz', async (req, res) => {
+    console.log('Quizpagina bezocht');
+
+    try {
+        const db = client.db(process.env.DB_NAME);
+        const questions = db.collection('0Questions');
+
+        // Haal alle vragen op en zet ze in een array
+        const allQuestions = await questions.find().toArray();
+
+        // Log vragen in de terminal
+        console.log('Questions:', allQuestions);
+
+        // Render de quizpagina en stuur vragen + gebruiker mee
+        res.render('quiz.ejs', { 
+            user: req.session.user || null, 
+            questions: allQuestions 
+        });
+
+    } catch (error) {
+        console.error('Quiz vragen ophalen ging fout:', error);
+        res.status(500).send('Er is iets misgegaan op de server');
+    }
+});
 
 // Archief pagina
 app.get('/api/data/:category', async (req, res) => {
@@ -327,8 +346,6 @@ app.get('/api/data/:category', async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 });
-
-
 
 
 // Middleware voor not found errors - error 404

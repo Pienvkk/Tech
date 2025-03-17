@@ -22,8 +22,6 @@ good luck coding! (^-^)*/
     font-style: normal;
 }
 
-
-
 /* GLOBALE CSS */
 
 body {
@@ -43,12 +41,15 @@ h1, h2 {
     align-items: center;
 }
 
+
 h1 {
     margin: 2rem 0 2rem 3rem;
 }
 
 h2 {
-    margin: 0 0 0 1rem;
+    margin: 0 5 0 1rem;
+    display: flex;
+    text-align: center;
 }
 
 form {
@@ -236,7 +237,9 @@ header nav ul li p {
     margin-top: 5rem;
 }
 
-
+.mainIndex section:first-of-type img{
+    height: 25em;
+}
 
 .mainIndex section:nth-of-type(2) { 
     background-color: #240907;
@@ -298,6 +301,65 @@ header nav ul li p {
     width: 30vw;
    margin-right: 1em;
   }
+
+  .mainIndex section:last-of-type{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .mainIndex section:last-of-type div:nth-of-type(1){
+    margin-top: 10em;
+  }
+
+  .mainIndex section:last-of-type div:nth-of-type(2){
+    display: flex;
+    justify-content: center;
+    margin-top: 20em;
+    
+    background-color: #FFFFFF;
+    color: #121212;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px; /* kan dit met px?*/
+  }
+
+  .mainIndex section:last-of-type div:nth-of-type(2) ul:first-of-type li{
+    font-family:'formule1mainfont';
+  }
+
+  .mainIndex section:last-of-type div:nth-of-type(2) ul{
+    margin-right: 5em;
+    margin-left: 6em;
+  }
+  .mainIndex section:last-of-type div:nth-of-type(2) ul li{
+    list-style-type: none;
+    margin-top: 1em;
+  }
+
+/* testje voor carousel */
+
+/* .mainIndex section:first-of-type div{
+    display:grid;
+    grid-template-rows:min-content 1fr;
+    justify-content:center;
+}
+
+.mainIndex section:first-of-type img {
+    display:flex !important; 
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  border:none;
+  background:none;
+} */
+
+
+
 
 
 /* INLOGGEN MAIN */
@@ -442,6 +504,7 @@ input[type="submit"]:hover {
 }
 
 
+
 .mainCommunity h1{
     width: 95%;
     margin: 0;
@@ -458,6 +521,7 @@ input[type="submit"]:hover {
     font-weight: 800;
     font-size: 1.1rem;
 } 
+
 .mainCommunity{
     display: flex;
     flex-direction: column;
@@ -580,7 +644,13 @@ input[type="submit"]:hover {
 
 
 /* COMMUNITY MAIN */
-
+.mainCommunity{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;      
+    margin: 1rem 1rem;
+}
 
 /* ARCHIEF MAIN */
 
@@ -654,6 +724,83 @@ input[type="submit"]:hover {
 
 .archiveList li:last-child {
     border-bottom: none;
+}
+
+/* HELP & SUPPORT */
+
+.mainHelpSupport h1, h2{
+    margin-bottom: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.mainHelpSupport{  /* zelfde als support pagina samen stoppen?*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+    align-items: center;      
+    margin: 1rem 1rem;
+}
+
+.mainHelpSupport section{
+    margin-bottom: 10rem;
+}
+
+.mainHelpSupport ul {
+    margin: 3rem 1rem;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.mainHelpSupport li {
+    background-color: #222222;
+    padding: 1rem;
+    padding-left: 1rem;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.mainHelpSupport li  details p{
+    padding-top: 0.5rem;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.mainHelpSupport li details summary {
+    margin-bottom: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+ /*  FORM */
+
+form {
+    background-color: #222222;
+    padding: 2rem 20rem;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+
+form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+form input, form textarea {
+    padding: 0.75rem 5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+}
+
+
+form button:hover {
+    background-color: #555;
 }
 
 details {
