@@ -83,6 +83,11 @@ client.connect()
         db = client.db(process.env.DB_NAME);
     })
 
+
+  .catch((err) => {
+    console.log(`Database connection error - ${err}`)
+    console.log(`For uri - ${uri}`)
+
     .catch((err) => {
         console.log(`Database connection error - ${err}`)
         console.log(`For uri - ${uri}`)

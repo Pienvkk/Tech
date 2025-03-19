@@ -12,12 +12,16 @@ good luck coding! (^-^)*/
     font-weight: 200;
     font-style: normal;
     font-size: 4mm;
+    max-width: 100%;
 }
 
 :root{
     --font-family-primary:'formule1mainfont';
     --font-family-secondary: 'sans-serif';
+
+
     --color-background: #121212;
+    --color-text-light:#030303;
 
 
     --font-size-small: 0.8em;
@@ -238,7 +242,6 @@ header nav ul li p {
 .mainIndex section:first-of-type div:nth-of-type(2) {
     display: flex;
     justify-content: center;
-    justify-content: space-evenly;
     margin-top: 3rem;
 }
 
@@ -258,20 +261,29 @@ header nav ul li p {
     background-color: #240907;
     display: flex;
     min-height: 90vh;
+
+}
+
+.mainIndex section:nth-of-type(2) h2{
+    display: flex;
+    align-self: flex-start;
 }
 
 .mainIndex section:last-of-type{
-    background-color: #240907;
+    background-color: #240907; /* var van maken*/
     width: 100%;
 }
 .mainIndex section:nth-of-type(2) p{
-    max-width: fit-content;
-    margin:1cm;
+    display: flex;
+    margin-top:2rem;
 }
+
 .mainIndex section:nth-of-type(2) div ul{
     display: flex;
     flex-direction: column;
     list-style-type: none;
+
+    margin-top: 20rem;
  }
 
 
@@ -279,12 +291,13 @@ header nav ul li p {
     font-size: 3vh;
     font-family: var(--font-family-primary);
 
+
+
  }
 
 .mainIndex section:nth-of-type(2) div{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
 }
 
 .mainIndex section:nth-of-type(2) img{
@@ -312,28 +325,89 @@ header nav ul li p {
 .mainIndex section:nth-of-type(3) div img {
     width: 30vw;
    margin-right: 1em;
+
+
   }
+  
+/* leaderbord */
 
   .mainIndex section:last-of-type{
     display:flex;
     flex-direction: column;
     text-align: center;
+    padding-bottom: 3rem;
   }
 
-  .mainIndex section:last-of-type div:nth-of-type(1){
+  .mainIndex section:last-of-type div:first-of-type ul{
     margin-top: 10em;
+
+    display: flex;
+    justify-content: space-around;
+
+    gap: 20px;
+    margin-bottom: 30px;
   }
+
+  /*  cards */
+
+ .mainIndex section:last-of-type div:first-of-type ul li {
+    width: 15rem;
+    height: 10rem;
+
+    border-radius: 2px;
+    border: 0px solid #000;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    list-style-type: none;
+
+    display:flex;
+    justify-content:center;
+  }
+
+
+  .mainIndex section:last-of-type div:first-of-type ul li p{
+    color: #fff;
+    width: 9rem;
+    height: 3rem;
+    background-color: var(--color-background);
+
+    display: flex;
+    justify-content:center;
+    margin-top: 8rem;
+
+    padding: 1rem 3rem 0 3rem;
+    font-family: var(--font-family-primary);
+
+  }
+
+  /*  lijst */
+  
 
   .mainIndex section:last-of-type div:nth-of-type(2){
     display: flex;
     justify-content: center;
-    margin-top: 20em;
+    margin-top: 10em;
     
-    background-color: #FFFFFF;
-    --color-background: #121212;
+    background-color:hsl(0, 0%, 100%);
+    padding: 3rem 2rem 2rem;
+    color:var(--color-text-light);
+    
     margin-left: auto;
     margin-right: auto;
-    border-radius: 10px; /* kan dit met px?*/
+    border-radius: 5px; 
+  }
+
+  section div:first-of-type img:hover {
+    transform: scale(1.1); 
+}
+
+  /*  lijst  */
+
+
+  .mainIndex section:last-of-type div:nth-of-type(2)  ul li h3{
+    font-size: var(--font-size-xlarge);
+    font-family: var(--font-family-primary);
+    margin-bottom: auto;
   }
 
   .mainIndex section:last-of-type div:nth-of-type(2) ul:first-of-type li{
@@ -342,11 +416,13 @@ header nav ul li p {
 
   .mainIndex section:last-of-type div:nth-of-type(2) ul{
     margin-right: 5em;
-    margin-left: 6em;
+    margin-left: 5em;
   }
   .mainIndex section:last-of-type div:nth-of-type(2) ul li{
     list-style-type: none;
-    margin-top: 1em;
+    margin-bottom: 3em;
+    font-size: var(--font-size-medium);
+
   }
 
   
@@ -374,7 +450,7 @@ header nav ul li p {
 .swiper-button-prev,
 .swiper-button-next {
     border: none;
-    background-color: #ff0000;
+    background-color:var(--color-background);
 }
 
 
@@ -537,6 +613,7 @@ input[type="submit"]:hover {
 
 }
 
+/* COMMUNICTY  */
 
 
 .mainCommunity h1{
@@ -563,6 +640,9 @@ input[type="submit"]:hover {
 
 .mainCommunity div:first-of-type{
     display: flex;
+    flex-direction: row
+;
+    margin: 10px;
     flex-direction: row;
     margin: 2rem;
     margin-left: 1rem;
@@ -583,6 +663,11 @@ input[type="submit"]:hover {
     border-radius: 5px;
     margin-bottom: 20px;
     display: flex;
+  
+    flex-direction: column;
+    justify-content: center;
+    width: 85%;
+
     flex-direction: row;
     width: 90%;
     background-color: rgb(28, 28, 28);
@@ -605,7 +690,6 @@ input[type="submit"]:hover {
     -webkit-mask-image: linear-gradient(180deg, #000  10%, transparent);
     margin-bottom: 10px;
     width: 100%;
-
 }
 
 .mainCommunity div:nth-of-type(2) article div{
@@ -613,6 +697,7 @@ input[type="submit"]:hover {
 }
 
 .mainCommunity div article img{ 
+    width: 8vw;
     margin: auto 1.5rem auto 0;
     max-width: 12vw;
     margin-left: auto;
@@ -735,6 +820,9 @@ input[type="submit"]:hover {
 /* TEAM UP MAIN */
 
 
+
+
+
 /* COMMUNITY MAIN */
 .mainCommunity{
     display: flex;
@@ -744,15 +832,45 @@ input[type="submit"]:hover {
     margin: 1rem 1rem;
 }
 
+
+
+
+
+
 /* ARCHIEF MAIN */
 
 .mainArchive {
     display: grid;
     grid-template-columns: 10vw auto 10vw;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
     gap: 2vw;
 }
 
+.zoeken{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 3;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.zoeken div{
+    display: flex;
+    flex-direction: row;
+}
+
+.zoeken div details:nth-of-type(2){
+    margin-left: 1rem;
+}
+
+.zoeken label input{
+    padding: 0.5rem 1rem;
+    border-radius: 75px;
+    background-color: rgb(250, 243, 243);
+}
 .mainArchive h1 {
     grid-row: 1;
 }
@@ -792,7 +910,7 @@ input[type="submit"]:hover {
     margin-left: 1rem;
 
     font-family: var(--font-family-primary);
-    font-size: 1.8rem;
+    font-size: var(--font-size-large);
 }
 
 .archiveList {
@@ -804,7 +922,7 @@ input[type="submit"]:hover {
     list-style: none;
     border: 1px solid #FFFFFF; 
 
-    grid-row: 3;
+    grid-row: 4;
     grid-column-start: 2;
     grid-column-end: 3;
 }
