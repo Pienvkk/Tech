@@ -640,8 +640,8 @@ input[type="submit"]:hover {
 
 .mainCommunity div:first-of-type{
     display: flex;
-    flex-direction: row
-;
+    flex-direction: row;
+
     margin: 10px;
     flex-direction: row;
     margin: 2rem;
@@ -661,7 +661,8 @@ input[type="submit"]:hover {
 .mainCommunity div:nth-of-type(2) article{
     border: 2px solid #FFFFFF;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+
     display: flex;
   
     flex-direction: column;
@@ -687,7 +688,7 @@ input[type="submit"]:hover {
 }
 
 .mainCommunity p:first-of-type{
-    -webkit-mask-image: linear-gradient(180deg, #000  10%, transparent);
+    --webkit-mask-image: linear-gradient(180deg, #000  10%, transparent);
     margin-bottom: 10px;
     width: 100%;
 }
@@ -857,15 +858,17 @@ input[type="submit"]:hover {
     justify-content: space-between;
 }
 
-.zoeken div{
+.zoeken details{
     display: flex;
-    flex-direction: row;
 }
 
-.zoeken div details:nth-of-type(2){
-    margin-left: 1rem;
-}
+.zoeken details button{
+   margin-top: 1rem;
+   background-color: #FFF;
 
+   padding: 0.5rem;
+   border-radius: 3px;
+}
 .zoeken label input{
     padding: 0.5rem 1rem;
     border-radius: 75px;
