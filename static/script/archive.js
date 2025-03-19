@@ -112,16 +112,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         // Maak een <summary> met het seizoen en de winnaar
                         const summary = document.createElement("summary");
-                        summary.textContent = `${championship.season} - Winner: ${championship.winner}`;
+                        summary.textContent = `${championship.year} - Winner: ${championship.winner}`;
 
                         // Maak een <div> met extra informatie
                         const info = document.createElement("div");
                         info.innerHTML = `
-                            <p><strong>Runner-up:</strong> ${championship.runnerUp}</p>
-                            <p><strong>Winning Team:</strong> ${championship.team}</p>
+                            <p><strong>Team:</strong> ${championship.team}</p>
                             <p><strong>Wins:</strong> ${championship.wins}</p>
+                            <p><strong>Pole positions:</strong> ${championship.poles}</p>
                             <p><strong>Podiums:</strong> ${championship.podiums}</p>
                             <p><strong>Total Points:</strong> ${championship.points}</p>
+                            <p><strong>Constructor champion:</strong> ${championship.constructor-champion}</p>
                         `;
 
                         // Voeg alles toe aan het <details> element

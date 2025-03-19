@@ -10,11 +10,21 @@
     <%- include('../view/header'); %>
     
     <main>
-      <h1>Welcome, <%= questions.quizquestions %>!</h1>
-    </main>
+      <h1>Formule 1 Quiz</h1>
+
+      <div>
+        <% questions.forEach(question => { %>
+            <article>
+              <p><%= question.question %></p>
+                <div>
+                  <%= question.answers %>
+                </div>
+            </article>
+        <% }) %>
+    </div>
+  </main>
 
     <%- include('../view/footer'); %>
 
-    <script src="/script/server.js"></script>
 </body>
 </html>
