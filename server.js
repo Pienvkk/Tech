@@ -50,6 +50,7 @@ app
     .get('/createPost', renderPage('createPost'))
     .get('/archive', renderPage('archive'))
     .get('/helpSupport', renderPage('helpSupport'))
+    .get('/friends', renderPage('friends'))
     
     
     .listen(process.env.PORT, () => {
