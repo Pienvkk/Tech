@@ -654,7 +654,6 @@ input[type="submit"]:hover {
 
 /* COMMUNICTY  */
 
-
 .mainCommunity h1{
     width: 95%;
     margin: 0;
@@ -714,18 +713,22 @@ input[type="submit"]:hover {
     flex-direction: row;
     width: 90%;
     background-color: rgb(28, 28, 28);
+    margin-top: 2rem;
 }
 
 .mainCommunity article div{
     width: 100%;
+    display: flex;
+
 }
 
-
 .mainCommunity h2{
-    font-size: 28px;
+    font-size:var(--font-size-xlarge);
     margin-left: 0px;
     margin-bottom: 10px;
     max-width: 60%;
+    margin-top: 0;
+
     font-weight: 50;
 }
 
