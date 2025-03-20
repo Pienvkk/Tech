@@ -44,7 +44,7 @@ app
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
     .get('/profile', renderPage('profile'))
-    .get('/quiz', renderPage('quiz'))
+    .get('/quiz', quiz)
     .get('/teamUp', renderPage('teamUp'))
     .get('/community', community)
     .get('/createPost', renderPage('createPost'))
@@ -83,10 +83,9 @@ client.connect()
         db = client.db(process.env.DB_NAME);
     })
 
-
-    .catch((err) => {
-        console.log(`Database connection error - ${err}`)
-        console.log(`For uri - ${uri}`)
+  .catch((err) => {
+    console.log(`Database connection error - ${err}`)
+    console.log(`For uri - ${uri}`)
 })
 
 
@@ -97,7 +96,7 @@ app.post('/login', async (req, res) => {
     console.log('Received login request:', req.body)
 
     // Inloggen
-    const { username, pass, season, team, driver } = req.body
+    const { username, pass, season, team, driver} = req.body
 
     try {
         const users = db.collection('0Users')
@@ -197,11 +196,6 @@ app.post('/accountPreferences', async (req, res) => {
     }
 });
 
-// Inloggen
-app.post('/login', async (req, res) => {
-    // Check of login request binnenkomt
-    console.log('Received login request:', req.body); 
-})
 
 
 // Afbeeldingen opslaan
@@ -210,7 +204,7 @@ const storage = multer.diskStorage({
         cb(null, 'static/uploads');
     },
     filename: function (req, file, cb) {
-        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`
+        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
         cb(null, uniqueName);
     }
 });
@@ -218,32 +212,19 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 
+
 // Quiz pagina
-app.get('/quiz', async (req, res) => {
-    console.log('Quizpagina bezocht')
-
+async function quiz(req, res) {
     try {
-        const questions = db.collection('0Questions')
+        const questions = await db.collection('0Questions').find().toArray()
+        console.log("Fetched questions:", questions); // Debugging
 
-        // Haal alle vragen op en zet ze in een array
-        const allQuestions = await questions.find().toArray()
-
-        // Log vragen in de terminal
-        console.log('Questions:', allQuestions)
-
-        // Render de quizpagina en stuur vragen + gebruiker mee
-        res.render('quiz.ejs', { 
-            user: req.session.user || null, 
-            questions: allQuestions 
-        });
-
-    } catch (error) {
-        console.error('Quiz vragen ophalen ging fout:', error)
-        res.status(500).send('Er is iets misgegaan op de server')
+        res.render('quiz.ejs', { user: req.session.user || null, questions })
+    } catch (err) {
+        console.error("Error fetching questions:", err);
+        res.status(500).send('Error fetching questions')
     }
-})
-
-
+}
 
 // Community pagina
 async function community(req, res) {
@@ -293,32 +274,6 @@ app.get('/uploads/:filename', (req, res) => {
     res.sendFile(filePath);
 });
 
-
-// Quiz pagina
-app.get('/quiz', async (req, res) => {
-    console.log('Quizpagina bezocht');
-
-    try {
-        const db = client.db(process.env.DB_NAME);
-        const questions = db.collection('0Questions');
-
-        // Haal alle vragen op en zet ze in een array
-        const allQuestions = await questions.find().toArray();
-
-        // Log vragen in de terminal
-        console.log('Questions:', allQuestions);
-
-        // Render de quizpagina en stuur vragen + gebruiker mee
-        res.render('quiz.ejs', { 
-            user: req.session.user || null, 
-            questions: allQuestions 
-        });
-
-    } catch (error) {
-        console.error('Quiz vragen ophalen ging fout:', error);
-        res.status(500).send('Er is iets misgegaan op de server');
-    }
-});
 
 // Archief pagina
 app.get('/api/data/:category', async (req, res) => {
