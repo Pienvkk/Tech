@@ -12,19 +12,22 @@
     <main>
       <h1>Formule 1 Quiz</h1>
 
+      <% if (!user) { %> 
+        <p>You must be logged in to take personalised quizzes!</p>
+      <% } else { %>
       <div>
         <% questions.forEach(question => { %>
             <article>
               <p><%= question.question %></p>
-                <div>
-                  <%= question.answers %>
-                </div>
             </article>
         <% }) %>
-    </div>
+      </div>
+      <% } %>
   </main>
 
     <%- include('../view/footer'); %>
+
+    <script src="/script/quiz.js"></script>
 
 </body>
 </html>

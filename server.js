@@ -176,7 +176,7 @@ app.post('/createAccount', async (req, res) => {
 
 // Voorkeuren instellen
 app.post('/accountPreferences', async (req, res) => {
-    const {season, team, driver} = req.body;
+    const {season, driver, team, circuit} = req.body;
 
     try {
         const users = db.collection('0Users')
@@ -184,11 +184,11 @@ app.post('/accountPreferences', async (req, res) => {
         // Update user om zijn preferences toe te voegen
         await users.updateOne(
             { username: req.session.user.username },
-            { $set: { firstSeason: season, team: team, driver: driver }}
+            { $set: { firstSeason: season, team: team, driver: driver, season: season }}
           );
-        console.log(season)
-        console.log("Username to update:", req.session.user.usernamee)
-        res.redirect('/')
+
+        console.log("Preferences have been updated", req.session.user.username)
+        res.redirect('/profile')
 
     } catch (error) {
         console.error('Preferences adding error:', error)
