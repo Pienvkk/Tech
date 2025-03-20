@@ -28,6 +28,7 @@ good luck coding! (^-^)*/
     --font-family-secondary: 'sans-serif';
 
 
+    --color-background-white: #FFFF;
     --color-background: #121212;
     --color-text-light:#070101;
 
@@ -93,7 +94,7 @@ header {
     width: 100%;
     height: 8vh;
 
-    background-color: var(--color-background-white);
+    background-color:var(--color-background-white);
     font-family: "alfabet", sans-serif;
     font-weight: 200;
 }
