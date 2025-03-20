@@ -1107,6 +1107,10 @@ details div p {
 .vindvrienden label{
     width: 50%;
 }
+
+.vindvrienden li{
+    display: flex;
+}
 /* FOOTER */
 
 footer{
