@@ -84,10 +84,6 @@ client.connect()
     })
 
 
-  .catch((err) => {
-    console.log(`Database connection error - ${err}`)
-    console.log(`For uri - ${uri}`)
-
     .catch((err) => {
         console.log(`Database connection error - ${err}`)
         console.log(`For uri - ${uri}`)
