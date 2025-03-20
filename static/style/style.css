@@ -661,20 +661,23 @@ input[type="submit"]:hover {
 }
 
 .mainCommunity a {
-    padding: 1.2rem 1.5rem;
+    padding: 1rem;
     background-color: #ff0000;
     color: #FFFFFF;
     text-decoration: none;
+
     height: 20px;
     width: 100px;
     border-radius: 5px;
+
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: var(--font-size-medium);
 } 
 
 .mainCommunity{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .mainCommunity div:first-of-type{
