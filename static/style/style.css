@@ -661,20 +661,23 @@ input[type="submit"]:hover {
 }
 
 .mainCommunity a {
-    padding: 1.2rem 1.5rem;
+    padding: 1rem;
     background-color: #ff0000;
     color: #FFFFFF;
     text-decoration: none;
+
     height: 20px;
     width: 100px;
     border-radius: 5px;
+
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: var(--font-size-medium);
 } 
 
 .mainCommunity{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .mainCommunity div:first-of-type{
@@ -1084,7 +1087,6 @@ details div p {
 /* HELP & SUPPORT */
 
 
-
 /* friends */
 /* .mainfriends{
     display: flex;
@@ -1105,7 +1107,27 @@ details div p {
 .vindvrienden label{
     width: 50%;
 }
+/* FOOTER */
 
-.vindvrienden li{
+footer{
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+footer section{
+    margin: 5rem;
+}
+
+footer h3{
+    font-family: var(--font-family-primary);
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+}
+
+footer ul{
+    list-style-type: none;
+}
+footer ul li{
+    margin-bottom: 1rem;
 }
