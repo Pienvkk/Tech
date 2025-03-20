@@ -775,8 +775,7 @@ input[type="submit"]:hover {
  /*  FORM */
 
 form {
-    background-color: #222222;
-    padding: 2rem 20rem;
+    padding: 2rem 2;
     border-radius: 8px;
     margin: 0 auto;
 }
