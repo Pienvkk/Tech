@@ -1082,3 +1082,26 @@ details div p {
 }
 
 /* HELP & SUPPORT */
+
+
+
+/* friends */
+.mainfriends{
+    display: flex;
+    flex-direction: column;
+    align-items: center;      
+
+}
+
+.vindvrienden {
+    display: flex;
+    justify-content: space-between;
+}
+
+.vindvrienden label input{
+    border-radius: 75px;
+}
+
+.vindvrienden label{
+    width: 50%;
+}
