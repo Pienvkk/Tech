@@ -83,10 +83,9 @@ client.connect()
         db = client.db(process.env.DB_NAME);
     })
 
-
-    .catch((err) => {
-        console.log(`Database connection error - ${err}`)
-        console.log(`For uri - ${uri}`)
+  .catch((err) => {
+    console.log(`Database connection error - ${err}`)
+    console.log(`For uri - ${uri}`)
 })
 
 
@@ -97,7 +96,7 @@ app.post('/login', async (req, res) => {
     console.log('Received login request:', req.body)
 
     // Inloggen
-    const { username, pass, season, team, driver } = req.body
+    const { username, pass, season, team, driver} = req.body
 
     try {
         const users = db.collection('0Users')
