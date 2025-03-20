@@ -6,54 +6,56 @@
     <title>F1 Matching</title>
     <link rel="stylesheet" href="/style/style.css" type="text/css">
     <link rel="stylesheet" href="https://use.typekit.net/jva5hqf.css">
+     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
-<!--afbeelding van https://wallpapers.com/picture/f1-pictures-wdbpy9k0wue1test.html-->
+<!--afbeelding van https://pixabay.com/nl/photos/f1-racen-sport-mensen-4509029/-->
 <body>
     <%- include('../view/header'); %>
 
     <main class="mainIndex">
-        <section class="swiper">  <!--classes zijn voor de voor carousel -->
-            <h1>f1 battles</h1> 
-                <div class="swiper-wrapper">
+        <section class="swiper">
+            <h1>f1 battles</h1>
+            <p class="swiper-pagination"></p>
+            <button class="swiper-button-prev"></button>
+            <button class="swiper-button-next"></button>
 
-                    <!-- <p class="swiper-pagination"></p>  testje carousel
-
-                    <button class="swiper-button-prev"></button> 
-                    <button class="swiper-button-next"></button>  -->
-
-                    <img src=".\style\images\home\kaartje_fernando_alonso.png" alt="card 1" class="swiper-slide">
-                    <img src=".\style\images\home\kaartje_charles_leclerc.png" alt="card 2" class="swiper-slide">
-                    <img src=".\style\images\home\kaartje_max_verstappen.png" alt="card 3" class="swiper-slide">
-                    <img src=".\style\images\home\kaartje_lando_norris.png" alt="card 4" class="swiper-slide">
-                    <img src=".\style\images\home\kaartje_lewis_hamilton.png" alt="card 5" class="swiper-slide">
-                </div>
+            <ul class="swiper-wrapper">
+                <li class="swiper-slide"><img src="/style/images/home/kaartje_fernando_alonso.png" alt="card 1"></li>
+                <li class="swiper-slide"><img src="/style/images/home/kaartje_charles_leclerc.png" alt="card 2"></li>
+                <li class="swiper-slide"><img src="/style/images/home/kaartje_max_verstappen.png" alt="card 3"></li>
+                <li class="swiper-slide"><img src="/style/images/home/kaartje_lando_norris.png" alt="card 4"></li>
+                <li class="swiper-slide"><img src="/style/images/home/kaartje_lewis_hamilton.png" alt="card 5"></li>
+            </ul>
         </section>
+
         <section>
                     <div>
                     <h2>Welkom bij f1 battle</h2>
-                        <p>Daag andere Formule 1-fans uit, test je kennis en win geweldige prijzen! Strijd samen in verschillende quizbattles, verzamel punten en race naar de top. Wordt jij de ultieme F1-kampioen?</p>
+                        <p>Ben jij een echte Formule 1-fan en klaar om je kennis op de proef te stellen? Daag andere racefans uit in spannende quizbattles, test je expertise en win fantastische prijzen! Strijd samen met vrienden of tegen andere liefhebbers, verzamel zoveel mogelijk punten en klim naar de top van het klassement. Elke quiz is een nieuwe uitdaging waarin je jouw F1-kennis kunt bewijzen. Heb jij het in je om de ultieme F1-kampioen te worden? Doe mee en race naar de overwinning!</p>
                             <ul>
                                 <li><p>1. Team up</p></li>
                                 <li><p>2. Speel</p></li>
                                 <li><p>3. Win</p></li>
                             </ul>
                     </div>
-                                <img src="./style/images/home/max_verstappen.jpg" alt="max verstappen">
+                                <img src="./style/images/home/formule1_over.png" alt="max verstappen">
          </section>
         <section>
                         <h2>Speel met je vrienden</h2>
                             <div>
                                 <img src="./style/images/home/speelmetjevrienden_f1_race.png" alt="card 1">
-                                <img src="./style/images/home/speelmetjevrienden_1_dufry_mclaren.png" alt="card 2">
-                                <img src="./style/images/home/speelmetjevrienden_pitstop.png" alt="card 3">
+                                <img src="./style/images/home/speelmetjevrienden_racer.png" alt="card 2">
+                                <img src="./style/images/home/speelmetjevrienden_band.png" alt="card 3">
                             </div>
         </section>
          <section>
                         <h2>player leaderbord</h2> <!--zijn divs hier oke?-->
                             <div>
-                                <img src="" alt="card 1">
-                                <img src="" alt="card 2">
-                                <img src="" alt="card 3">
+                                <ul>
+                                    <li><p>1. Jan38 </p></li>
+                                    <li><p>1. Bas38 </p></li>
+                                    <li><p>1. Koen38 </p> </li>
+                                </ul>
                             </div>
                             <div>
                                 <ul>
@@ -85,6 +87,7 @@
     </main>
 
     <%- include('../view/footer'); %>
-    <script src="/script.js"> </script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/script/home.js"></script>
 </body>
 </html>
