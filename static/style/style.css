@@ -29,7 +29,6 @@ good luck coding! (^-^)*/
 
 
     --color-background: #121212;
-    --color-background-white: #FFFF;
     --color-text-light:#030303;
 
 
@@ -45,7 +44,7 @@ good luck coding! (^-^)*/
 
 body {
     color:white;
-    background-color: var(--color-background-white);
+    background-color: var(--color-background);
 }
 
 
@@ -94,7 +93,7 @@ header {
     width: 100%;
     height: 8vh;
 
-    background-color: var(bac);
+    background-color: #FFFFFF;
     font-family: "alfabet", sans-serif;
     font-weight: 200;
 }
@@ -140,7 +139,7 @@ header nav ul li a:active {
 }
 
 header nav  ul li:nth-of-type(6) a { 
-    background-color:var(--color-background-white);
+    background-color: #ffffff;
     box-shadow:0px 4px 4px 2px rgb(0 0 0 / 0.25);
     color: black;
     border-radius: 5px;
@@ -230,9 +229,6 @@ header nav ul li p {
     margin-top: 0.3rem;
 }
 
-
-/* HOME MAIN */
-
 .mainIndex {
     display: flex;
     flex-direction: column;
@@ -242,6 +238,8 @@ header nav ul li p {
     min-height: 90vh;
 }
 
+
+/* HOME MAIN */
 /*
 .mainIndex {
     display: flex;
@@ -555,7 +553,7 @@ input[type="file"] {
     padding: 13px;
     border: 1px solid #ccc;
     font-size: 1rem;
-    background-color:var(--color-background-white);
+    background: white;
     color: #333;
     transition: border 0.3s, box-shadow 0.3s;
 }
