@@ -237,6 +237,8 @@ header nav ul li p {
     align-items: center;
 
     max-width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
     min-height: 90vh;
 }
 
@@ -254,6 +256,7 @@ header nav ul li p {
 }
 */
 
+
 .mainIndex section:first-of-type div:nth-of-type(2) {
     display: flex;
     justify-content: center;
@@ -262,8 +265,8 @@ header nav ul li p {
 
 
 .mainIndex section {
-     max-width: 100%;
-    /* padding-left: 3rem; */
+     width: 100%;
+     padding-left: 3rem; 
     min-height: 80vh;
     margin-top: 5rem;
 }
@@ -274,17 +277,22 @@ header nav ul li p {
 
 .mainIndex section:nth-of-type(2) { 
     background-color: #240907;
-    display: grid; /* Grid gebruiken voor layout */
-    grid-template-columns: 1fr 1fr; /* Twee kolommen van gelijke grootte */
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
     height:80vh;
+
     max-width: 100%;
-    place-items: center; /* Centreert de inhoud */
-    padding: 2rem; /* Optioneel voor wat ruimte rondom de inhoud */
+    place-items: center;
+}
+
+.mainIndex section:nth-of-type(2) p:first-of-type{
+    margin-left: 1rem;
 }
 
 .mainIndex section:nth-of-type(2) h2{
     display: flex;
     align-self: flex-start;
+    
 }
 
 .mainIndex section:last-of-type{
@@ -297,7 +305,6 @@ header nav ul li p {
 }
 .mainIndex section:nth-of-type(2) p{
     display: flex;
-    margin-top:2rem;
 }
 
 .mainIndex section:nth-of-type(2) div ul{
@@ -311,8 +318,6 @@ header nav ul li p {
  .mainIndex section:nth-of-type(2) div ul li p{
     font-size: 3vh;
     font-family: var(--font-family-primary);
-
-
  }
 
 .mainIndex section:nth-of-type(2) div{
@@ -335,8 +340,6 @@ header nav ul li p {
 .mainIndex section:nth-of-type(3) div{
   display: flex;
   justify-content: space-between;
-
-  width: 90vw;
 }
 
 .mainIndex section:nth-of-type(3) h2{
@@ -418,6 +421,7 @@ header nav ul li p {
     width: 100%;
     margin-top: auto;
   }
+
 
   /*  lijst */
   
@@ -903,6 +907,7 @@ input[type="submit"]:hover {
 
 .zoeken details{
     display: flex;
+    flex-direction: column;
 }
 
 .zoeken details button{
@@ -918,7 +923,7 @@ input[type="submit"]:hover {
     background-color: rgb(250, 243, 243);
 }
 .mainArchive h1 {
-    grid-row: 1;
+    grid-column-start: 2;
 }
 
 
@@ -982,6 +987,19 @@ input[type="submit"]:hover {
     border-bottom: none;
 }
 
+.zoeken details button{
+    background-color: #555;
+    border-radius: 5px;
+    color:var(--color-background-white);
+    font-weight: 500;
+}
+
+
+.zoeken details button{
+    display: flex;
+    flex-direction: column;
+
+}
 /* HELP & SUPPORT */
 
 .mainHelpSupport h1, h2{
@@ -1163,7 +1181,7 @@ details div p {
     justify-content: space-between;
     padding-top: 1em;
 } 
-  
+
 /* DINGEN voor positie friends
 .mainArchive {
     display: grid;
