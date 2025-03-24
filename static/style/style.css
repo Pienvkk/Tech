@@ -1041,7 +1041,7 @@ input[type="submit"]:hover {
     background-color: #555;
     color:var(--color-background-white);
     font-weight: 500;
-    
+
     cursor: pointer;
 }
 
@@ -1133,22 +1133,22 @@ details div p {
 
 
 /* friends */
-<<<<<<< HEAD
+
 .mainfriends p:first-of-type, h1{
     display: flex;
     justify-content: center;
 }
-=======
+
 .mainfriends{
     display: flex;
     flex-direction: column;
     align-items: center;
 } 
->>>>>>> 2d4c983 (support en hlp pagina staat weer goed!)
+
 
 .mainfriends div label{
     display: flex;
-<<<<<<< HEAD
+
     justify-content: center;
 }
 
@@ -1160,10 +1160,9 @@ details div p {
 .mainfriends div li{
     display: flex;
     padding: 0.3em;
-=======
     justify-content: space-between;
     padding-top: 1em;
-} */
+} 
   
 /* DINGEN voor positie friends
 .mainArchive {
@@ -1222,7 +1221,6 @@ details div p {
     width: 30%;
 
     grid-column: 2;
->>>>>>> 2d4c983 (support en hlp pagina staat weer goed!)
 }
 
 .mainfriends div:nth-of-type(2) {
@@ -1230,11 +1228,6 @@ details div p {
     justify-content: baseline;
 }
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 2d4c983 (support en hlp pagina staat weer goed!)
 /* FOOTER */
 
 footer{
