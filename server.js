@@ -45,11 +45,12 @@ app
     .get('/accountPreferences', renderPage('accountPreferences'))
     .get('/profile', renderPage('profile'))
     .get('/quiz', quiz)
-    .get('/teamUp', renderPage('teamUp'))
+    .get('/teamUp', teamUp)
     .get('/community', community)
     .get('/createPost', renderPage('createPost'))
     .get('/archive', renderPage('archive'))
     .get('/helpSupport', renderPage('helpSupport'))
+    .get('/friends', renderPage('friends'))
     
     
     .listen(process.env.PORT, () => {
@@ -88,7 +89,32 @@ client.connect()
     console.log(`For uri - ${uri}`)
 })
 
+// Afbeeldingen opslaan forum
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'static/uploads');
+    },
+    filename: function (req, file, cb) {
+        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+        cb(null, uniqueName);
+    }
+});
 
+const upload = multer({ storage })
+
+// Afbeeldingen opslaan profielfoto
+
+const profileStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'static/profilepics'); // Separate folder for profile pictures
+    },
+    filename: function (req, file, cb) {
+        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+        cb(null, uniqueName);
+    }
+});
+
+const uploadProfilePic = multer({ storage: profileStorage });
 
 // Inloggen
 app.post('/login', async (req, res) => {
@@ -138,17 +164,17 @@ app.get('/logout', (req, res) => {
 
 
 // Account aanmaken
-app.post('/createAccount', async (req, res) => {
+app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
     // Check of account creatie request binnenkomt
     console.log('Received account creation request:', req.body)
 
     // Account aanmaken
-    const { username, pass, email, date} = req.body;
+    const { username, pass, email, date, file} = req.body;
     const formattedDate = date ? new Date(date) : null
 
     try {
         const users = db.collection('0Users')
-
+        const filename = req.file ? req.file.filename : null
         // Kijkt of username al bestaat
         const existingUser = await users.findOne({ username: username })
         if (existingUser) {
@@ -159,8 +185,9 @@ app.post('/createAccount', async (req, res) => {
             return res.status(400).send('Email taken')
         }
 
+
         // Stopt nieuwe user in database
-        await users.insertOne({ username: username, password: pass, email: email, date: formattedDate});
+        await users.insertOne({ username: username, password: pass, email: email, date: formattedDate, profilePic: filename});
 
         const user = await users.findOne({ username: username, password: pass })
         req.session.user = { username }
@@ -187,7 +214,6 @@ app.post('/accountPreferences', async (req, res) => {
             { $set: { firstSeason: season, team: team, driver: driver }}
           );
         console.log(season)
-        console.log("Username to update:", req.session.user.usernamee)
         res.redirect('/')
 
     } catch (error) {
@@ -196,20 +222,58 @@ app.post('/accountPreferences', async (req, res) => {
     }
 });
 
+app.post('/follow', async (req, res) =>{
+    const {targetUser} = req.body;
+    const currentUser = req.session.user.username;
 
+    try{
+        const users = db.collection('0Users');
+        
+        await users.updateOne(
+            { username: currentUser },
+            { $addToSet: { following: targetUser } }
+        );
 
-// Afbeeldingen opslaan
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'static/uploads');
-    },
-    filename: function (req, file, cb) {
-        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
-        cb(null, uniqueName);
+        await users.updateOne(
+            { username: targetUser },
+            { $addToSet: {followers: currentUser}}
+        )
+
+        res.json({ message: 'You are now following ${targetUsername}.'})
+    
+    }   catch (error) {
+            console.error('Error following user:', error);
+            res.status(500).send('Server error');
     }
-});
+})
 
-const upload = multer({ storage })
+app.post('/unfollow', async (req, res) =>{
+    const {targetUser} = req.body;
+    const currentUser = req.session.user.username;
+
+    try{
+        const users = db.collection('0Users');
+        
+        await users.updateOne(
+            { username: currentUser },
+            { $pull: { following: targetUser } }
+        );
+
+        await users.updateOne(
+            { username: targetUser },
+            { $pull: {followers: currentUser}}
+        )
+
+        res.json({ message: 'You are now following ${targetUsername}.'})
+    
+    }   catch (error) {
+            console.error('Error following user:', error);
+            res.status(500).send('Server error');
+    }
+})
+
+
+
 
 
 
@@ -230,15 +294,18 @@ async function quiz(req, res) {
 async function community(req, res) {
     try {
         const posts = await db.collection('0Posts').find().toArray()
-        console.log("Fetched posts:", posts); // Debugging
-
         res.render('community.ejs', { user: req.session.user || null, posts })
     } catch (err) {
-        console.error("Error fetching posts:", err);
-        res.status(500).send('Error fetching posts')
     }
 }
 
+async function teamUp(req, res) {
+    try {
+        const users = await db.collection('0Users').find().toArray()
+        res.render('teamUp.ejs', { user: req.session.user || null, users })
+    } catch (err) {
+    }
+}
 
 
 // Post uploaden
@@ -274,6 +341,10 @@ app.get('/uploads/:filename', (req, res) => {
     res.sendFile(filePath);
 });
 
+app.get('/uploads/:filename', (req, res) => {
+    const filePath = path.join(__dirname, 'static/profilepics', req.params.filename);
+    res.sendFile(filePath);
+});
 
 // Archief pagina
 app.get('/api/data/:category', async (req, res) => {
