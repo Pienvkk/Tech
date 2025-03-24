@@ -599,7 +599,7 @@ input[type="submit"] {
     border: none;
     cursor: pointer;
     transform: skew(-20deg);
-    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    transition: 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 /* Hover effect: inside red border, white background, black text */

@@ -48,7 +48,6 @@ app
     .get('/teamUp', renderPage('teamUp'))
     .get('/community', community)
     .get('/createPost', renderPage('createPost'))
-    .get('/archive', renderPage('archive'))
     .get('/helpSupport', renderPage('helpSupport'))
     
     
@@ -222,21 +221,6 @@ const upload = multer({ storage })
 
 
 // Quiz pagina
-// async function quiz(req, res) {
-//     try {
-//         const questions = await db.collection('0Questions').find().toArray()
-//         console.log("Fetched questions:", questions); // Debugging
-
-//         res.render('quiz.ejs', { user: req.session.user || null, questions })
-//     } catch (err) {
-//         console.error("Error fetching questions:", err);
-//         res.status(500).send('Error fetching questions')
-//     }
-// }
-
-
-
-// Quiz pagina
 async function quiz(req, res) {
     try {
         const user = req.session.user
@@ -322,32 +306,43 @@ app.get('/uploads/:filename', (req, res) => {
 });
 
 
-// Archief pagina
-app.get('/api/data/:category', async (req, res) => {
-    try {
-        const category = req.params.category; // Haal de categorie uit de URL
 
-        let data = [];
+// Archief pagina
+app.get('/archive', async (req, res) => {
+    try {
+        console.log("Data is er"); // kijken of t binnenkomt
+
+        const category = req.query.category || "drivers"
+
+        let data = []
+
+        console.log("Geselecteerde categorie:", category)
 
         if (category === "drivers") {
-            data = await db.collection("Drivers").find({}).toArray();
-        } else if (category === "constructors") {
-            data = await db.collection("Constructors").find({}).toArray();
-        } else if (category === "championships") {
-            data = await db.collection("Championships").find({}).toArray();
-        } else if (category === "circuits") {
-            data = await db.collection("Circuits").find({}).toArray();
-        } else {
-            return res.status(400).json({ error: "Ongeldige categorie" });
+            data =  await db.collection('Drivers').find().toArray()
+        } 
+        else if (category === "constructors") {
+            data =  await db.collection('Constructors').find().toArray()
+        } 
+        else if (category === "championships") {
+            data =  await db.collection('Championships').find().toArray()
+        } 
+        else if (category === "circuits") {
+            data =  await db.collection('Circuits').find().toArray()
+        } 
+        else {
+            return res.status(400).json({ error: "No category" })
         }
+        
+        res.render('archive.ejs', { user: req.session.user, category, data })
+    } 
+    
+    catch (err) {
+        console.error("Error fetching archive:", err);
+        res.status(500).send('Error fetching archive')
+    } 
+})
 
-        res.json(data);
-
-    } catch (error) {
-        console.error("Fout bij ophalen van data:", error);
-        res.status(500).json({ error: "Server error" });
-    }
-});
 
 
 // Middleware voor not found errors - error 404
