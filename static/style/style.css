@@ -140,7 +140,7 @@ header nav ul li a:active {
 }
 
 header nav  ul li:nth-of-type(6) a { 
-    background-color: #ffffff;
+    background-color: var(--color-background-white);
     box-shadow:0px 4px 4px 2px rgb(0 0 0 / 0.25);
     color: black;
     border-radius: 5px;
@@ -175,22 +175,23 @@ header nav ul li:nth-of-type(7) a {
     background-color: #e11515;
     border-radius: 5px;
     padding: 0.8rem 1.4rem;
+
     color: white;
+    font-weight: 800;
+    font-size:var(--font-size-medium);
+
     border: none;
     cursor: pointer;
     font-size: 1.4rem;
     transition: 0.3s, color 0.3s, border 0.3s;
-    font-weight: 800;
-
-    font-size:var(--font-size-medium);
 } 
 
 header nav ul li:nth-of-type(7) a:link {
-    color: #FFFFFF;
+    color: var(--color-background-white);
 }
 
 header nav ul li:nth-of-type(7) a:visited {
-    color: #FFFFFF;
+    color: var(--color-background-white);
 }
 
 header nav ul li:nth-of-type(7) a:hover {
@@ -201,7 +202,7 @@ header nav ul li:nth-of-type(7) a:hover {
 }
 
 header nav ul li:nth-of-type(7) a:active {
-    color: #FFFFFF;
+    color: var(--color-background-white);
 }
 
 header nav ul li p {
@@ -517,6 +518,7 @@ header nav ul li p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     height: 80vh;
     font-family: Arial, sans-serif;
 }
@@ -662,7 +664,7 @@ input[type="submit"]:hover {
 .mainCommunity a {
     padding: 1rem;
     background-color: #ff0000;
-    color: #FFFFFF;
+    color:var(--color-background-white);
     text-decoration: none;
 
     height: 20px;
@@ -964,7 +966,7 @@ input[type="submit"]:hover {
     
     overflow-y: auto; 
     list-style: none;
-    border: 1px solid #FFFFFF; 
+    border: 1px solid var(--color-background-white); 
 
     grid-row: 4;
     grid-column-start: 2;
@@ -973,7 +975,7 @@ input[type="submit"]:hover {
 
 .archiveList li {
     padding: 1rem;
-    border-bottom: 1px solid #FFFFFF;
+    border-bottom: 1px solid var(--color-background-white);
 }
 
 .archiveList li:last-child {
@@ -984,19 +986,24 @@ input[type="submit"]:hover {
 
 .mainHelpSupport h1, h2{
     margin-bottom: 20px;
+
     font-weight: bold;
     display: flex;
     justify-content: center;
 }
 
-.mainHelpSupport{  /* zelfde als support pagina samen stoppen?*/
+.mainHelpSupport{ 
     display: flex;
+    width: 100%;
+    
     flex-direction: column;
     justify-content: center;  
-    align-items: center;      
-    margin: 1rem 1rem;
+    align-items: center;  
+    text-align: center;    
 }
-
+.mainHelpSupport p:first-of-type{
+    margin: 2rem;
+}
 .mainHelpSupport section{
     margin-bottom: 10rem;
 }
@@ -1014,6 +1021,7 @@ input[type="submit"]:hover {
     margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
     text-align: center;
 }
 .mainHelpSupport li  details p{
@@ -1026,13 +1034,33 @@ input[type="submit"]:hover {
     font-weight: bold;
     cursor: pointer;
 }
+
+.mainHelpSupport button{
+    padding: 1rem;
+    border-radius: 60px;
+    background-color: #555;
+    color:var(--color-background-white);
+    font-weight: 500;
+    
+    cursor: pointer;
+}
+
+.mainHelpSupport button label{
+    color:var(--color-text-light);
+}
+
+
  /*  FORM */
 
 form {
     background-color: #222222;
-    padding: 2rem 20rem;
+    width: 80rem;
+    height: 40rem;
     border-radius: 8px;
+
     margin: 0 auto;
+    max-width: 80%; 
+    align-items: center; 
 }
 
 
@@ -1040,16 +1068,30 @@ form label {
     font-weight: bold;
     margin-bottom: 0.5rem;
     font-size: 1rem;
+
+    display: flex;
+    text-align: center;
 }
 
 form input, form textarea {
-    padding: 0.75rem 5rem;
+    padding: 1rem;
     margin-bottom: 1rem;
     font-size: 1rem;
+    width: 30rem;
+
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
 
+}
+form textarea ::placeholder{
+    display: flex;
+   text-align: left;
+}
+
+form input{
+    display: flex;
+    justify-items: flex-start;
 }
 
 
@@ -1091,13 +1133,22 @@ details div p {
 
 
 /* friends */
+<<<<<<< HEAD
 .mainfriends p:first-of-type, h1{
     display: flex;
     justify-content: center;
 }
+=======
+.mainfriends{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} 
+>>>>>>> 2d4c983 (support en hlp pagina staat weer goed!)
 
 .mainfriends div label{
     display: flex;
+<<<<<<< HEAD
     justify-content: center;
 }
 
@@ -1109,6 +1160,69 @@ details div p {
 .mainfriends div li{
     display: flex;
     padding: 0.3em;
+=======
+    justify-content: space-between;
+    padding-top: 1em;
+} */
+  
+/* DINGEN voor positie friends
+.mainArchive {
+    display: grid;
+    grid-template-columns: 10vw auto 10vw;
+    grid-template-rows: auto auto auto auto;
+    gap: 2vw;
+}
+
+.zoeken{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 3;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+    */
+
+ .vindvrienden{
+    display: grid;
+    grid-template-columns: 10vw auto 10vw;
+    grid-template-rows: auto auto auto auto;
+    gap: 2vw;
+ }
+
+ .vindvrienden{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 3;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+ }
+
+/* sections maken om ruimte te creeren op pagina? */
+
+.vindvrienden label:first-of-type{
+    width: 50rem;
+
+   grid-column: 3;
+
+}
+.vindvrienden details{
+    width:30em;
+}
+.vindvrienden label input{
+    border-radius: 75px;
+}
+
+.vindvrienden label{
+    width: 30%;
+
+    grid-column: 2;
+>>>>>>> 2d4c983 (support en hlp pagina staat weer goed!)
 }
 
 .mainfriends div:nth-of-type(2) {
@@ -1117,7 +1231,10 @@ details div p {
 }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2d4c983 (support en hlp pagina staat weer goed!)
 /* FOOTER */
 
 footer{
@@ -1139,6 +1256,7 @@ footer h3{
 footer ul{
     list-style-type: none;
 }
+
 footer ul li{
     margin-bottom: 1rem;
 }
