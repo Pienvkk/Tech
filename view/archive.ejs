@@ -16,22 +16,18 @@
 
         <aside>
             <div>
-                <input type="radio" id="drivers" name="categorie" value="drivers" checked />
-                <label for="drivers">Drivers</label>
+                <a href="/archive?category=drivers" class="<%= category === "drivers" ? 'selected' : '' %>"> Drivers</a>
             </div>
             
             <div>
-                <input type="radio" id="constructors" name="categorie" value="constructors" />
-                <label for="constructors">Constructors</label>
+                <a href="/archive?category=constructors" class="<%= category === "constructors" ? 'selected' : '' %>"> Constructors</a>
             </div>
 
             <div>
-                <input type="radio" id="championships" name="categorie" value="championships"  />
-                <label for="championships">Championships</label>
+                <a href="/archive?category=championships" class="<%= category === "championships" ? 'selected' : '' %>"> Championships</a>
             </div>
             <div>
-                <input type="radio" id="circuits" name="categorie" value="circuits" />
-                <label for="circuits">Circuits</label>
+                <a href="/archive?category=circuits" class="<%= category === "circuits" ? 'selected' : '' %>"> Circuits</a>
             </div>
         </aside>
 
@@ -46,13 +42,55 @@
                 </details>
         </div>
         
-        <ul class="archiveList"></ul>
-        
+        <ul class="archiveList">
+            <% if (category == "drivers" && data.length > 0) { %>
+                <% data.forEach(item => { %>
+                    <li> 
+                        <p><%= item.forename%></p>
+                        <p><%= item.surname%></p>
+                        <p><%= item.code%></p>
+                        <p><%= item.number%></p>
+                        <p><%= item.nationality%></p>
+                    </li>
+                <% }) %>
+
+            <% } else if (category == "constructors" && data.length > 0) { %>
+                <% data.forEach(item => { %>
+                    <li>
+                        <p><%= item.name %></p>
+                        <p><%= item.nationality %></p>
+                    </li>
+                <% }) %>
+
+            <% } else if (category == "championships" && data.length > 0) { %>
+                <% data.forEach(item => { %>
+                    <li>
+                        <details>
+                            <summary>
+                                <p><%= item.season %></p>
+                                <p><%= item.winner %> (Team: <%= item.team %>)</p>
+                            </summary>
+                            <p><%= item.wins %></p>
+                            <p><%= item.podiums %></p>
+                            <p><%= item.poles %></p>
+                            <p><%= item.points %></p>
+                            <p><%= item.constructor_champion %></p>
+                        </details>
+                    </li>
+                <% }) %>
+
+            <% } else if (category == "circuits" && data.length > 0) { %>
+                <% data.forEach(item => { %>
+                    <li>
+                        <p><%= item.name %></p>
+                        <p><%= item.location %></p>
+                        <p><%= item.country %></p>
+                    </li>
+                <% }) }%>
+        </ul>
     </main>
 
     <%- include('../view/footer'); %>
 
-    <script src="/script/archive.js"></script>
-    <script src="/script/lazyload.js"></script>
 </body>
 </html>
