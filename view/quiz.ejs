@@ -15,6 +15,22 @@
       <% if (!user) { %> 
         <p>You must be logged in to take personalised quizzes!</p>
       <% } else { %>
+
+      <div>
+        <% if (user) { %>
+          <p>Current user: <%= user.username %></p>
+          <br>
+          <p>Watches F1 since: <%= user.firstSeason %></p>
+          <p>Favorite Driver: <%= user.driver %></p>
+          <p>Favorite Team: <%= user.team %></p>
+          <p>Favorite Circuit: <%= user.circuit %></p>
+      <% } else { %>
+          <p>User data is not available.</p>
+      <% } %>
+      </div>  
+
+      <br><br>
+
       <div>
         <% questions.forEach(question => { %>
             <article>
@@ -23,11 +39,12 @@
         <% }) %>
       </div>
       <% } %>
+
   </main>
 
     <%- include('../view/footer'); %>
 
-    <script src="/script/quiz.js"></script>
+    <!-- <script src="/script/quiz.js"></script> -->
 
 </body>
 </html>

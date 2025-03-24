@@ -96,33 +96,41 @@ app.post('/login', async (req, res) => {
     console.log('Received login request:', req.body)
 
     // Inloggen
-    const { username, pass, season, team, driver} = req.body
+    const { username, pass} = req.body
 
     try {
         const users = db.collection('0Users')
-        const {season, team, driver} = req.body;
+        const {season, team, driver, circuit} = req.body;
 
         // Zoek de gebruiker in de database
         const user = await users.findOne({ username: username, password: pass })
 
         if (!user) {
-            return res.status(400).send('Ongeldige gebruikersnaam of wachtwoord')
+            return res.status(400).send('Incorrect username or password')
         }
 
         // Login is succesvol - Sla de gebruiker op in de sessie
-        req.session.user = { username: user.username }
+        req.session.user = { 
+            id: user._id,
+            username: user.username, 
+            password: user.password,
+            firstSeason: user.firstSeason,
+            team: user.team,
+            driver: user.driver,
+            circuit: user.circuit
+        }
 
         // Update user om zijn preferences toe te voegen
         await users.updateOne(
             { username: req.session.user.username },
-            { $set: { firstSeason: season, team: team, driver: driver }}
+            { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit}}
           );
         res.redirect('/')
 
 
     } catch (error) {
         console.error('Login fout:', error)
-        res.status(500).send('Er is iets misgegaan op de server')
+        res.status(500).send('Something went wrong')
     }
 })
 
@@ -184,7 +192,7 @@ app.post('/accountPreferences', async (req, res) => {
         // Update user om zijn preferences toe te voegen
         await users.updateOne(
             { username: req.session.user.username },
-            { $set: { firstSeason: season, team: team, driver: driver, season: season }}
+            { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit }}
           );
 
         console.log("Preferences have been updated", req.session.user.username)
@@ -214,14 +222,53 @@ const upload = multer({ storage })
 
 
 // Quiz pagina
+// async function quiz(req, res) {
+//     try {
+//         const questions = await db.collection('0Questions').find().toArray()
+//         console.log("Fetched questions:", questions); // Debugging
+
+//         res.render('quiz.ejs', { user: req.session.user || null, questions })
+//     } catch (err) {
+//         console.error("Error fetching questions:", err);
+//         res.status(500).send('Error fetching questions')
+//     }
+// }
+
+
+
+// Quiz pagina
 async function quiz(req, res) {
     try {
-        const questions = await db.collection('0Questions').find().toArray()
-        console.log("Fetched questions:", questions); // Debugging
+        const user = req.session.user
+        console.log("Current user:", user)
 
-        res.render('quiz.ejs', { user: req.session.user || null, questions })
+        if (!user) {
+            return res.render('quiz.ejs', { user: null, questions: [] })
+        }
+
+        const questions = await db.collection('0Questions').find().toArray()
+        console.log("Quiz qeustions:", questions)
+
+        // Functie om placeholders te vervangen
+        const personalizeQuestion = (questions, user) => {
+            return questions
+                .replace("{{firstSeason}}", user.firstSeason)
+                .replace("{{driver}}", user.driver)
+                .replace("{{team}}", user.team)
+                .replace("{{circuit}}", user.circuit)
+        };
+
+        // Vervang placeholders in de vragen
+        const personalizedQuestions = questions.map(q => ({
+            ...q,
+            question: personalizeQuestion(q.question, user)
+        }));
+
+        console.log("Rendering quiz with user:", user);
+        res.render('quiz.ejs', { user, questions: personalizedQuestions })
+
     } catch (err) {
-        console.error("Error fetching questions:", err);
+        console.error("Error fetching questions:", err)
         res.status(500).send('Error fetching questions')
     }
 }
