@@ -1,3 +1,6 @@
+
+// zoek functie & data laden
+
 document.addEventListener("DOMContentLoaded", function () {
     const radioButtonsArchive = document.querySelectorAll("input[name='categorie']");
     const dataList = document.querySelector(".archiveList");
@@ -73,86 +76,24 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchData(defaultCategory);
 });
 
+/*
 
+// Sorteren Alphabet
+const button = document.querySelector(".zoek details summary button:nth-of-type(1)");
 
 /*
-// DATA LADEN 
-document.addEventListener("DOMContentLoaded", function () {
-    const radioButtonsArchive = document.querySelectorAll("input[name='categorie']");
-    const dataList = document.querySelector(".archiveList");
-    
+dataList.sort
+console.log(sortedNames);
 
-    function fetchData(category) {
-        fetch(`/api/data/${category}`)
-            .then(response => response.json())
-            .then(data => {
-                dataList.innerHTML = ""; // Maak de lijst leeg
-
-                if (category === "drivers") {
-                    data.forEach(driver => {
-                        const li = document.createElement("li");
-                        li.textContent = `${driver.surname} ${driver.forename} (${driver.code}) - ${driver.number} - ${driver.nationality}`;
-                        dataList.appendChild(li);
-
-                        console.log('Data!')
-                    });
-
-                } else if (category === "constructors") {
-                    data.forEach(constructor => {
-                        const li = document.createElement("li");
-                        li.textContent = `${constructor.name} (${constructor.nationality})`;
-                        dataList.appendChild(li);
-                    });
-
-                } else if (category === "championships") {
-                    data.forEach(championship => {
-                        // Maak een <details> element
-                        const details = document.createElement("details");
-                        details.setAttribute("name", "championships"); // Alle details hebben dezelfde naam
-
-                        // Maak een <summary> met het seizoen en de winnaar
-                        const summary = document.createElement("summary");
-                        summary.textContent = `${championship.year} - Winner: ${championship.winner}`;
-
-                        // Maak een <div> met extra informatie
-                        const info = document.createElement("div");
-                        info.innerHTML = `
-                            <p><strong>Team:</strong> ${championship.team}</p>
-                            <p><strong>Wins:</strong> ${championship.wins}</p>
-                            <p><strong>Pole positions:</strong> ${championship.poles}</p>
-                            <p><strong>Podiums:</strong> ${championship.podiums}</p>
-                            <p><strong>Total Points:</strong> ${championship.points}</p>
-                            <p><strong>Constructor champion:</strong> ${championship.constructor-champion}</p>
-                        `;
-
-                        // Voeg alles toe aan het <details> element
-                        details.appendChild(summary);
-                        details.appendChild(info);
-
-                        // Voeg het toe aan de lijst
-                        dataList.appendChild(details);
-                    });
-
-                } else if (category === "circuits") {
-                    data.forEach(circuit => {
-                        const li = document.createElement("li");
-                        li.textContent = `${circuit.name} (${circuit.location}, ${circuit.country}) - ${circuit.length} km`;
-                        dataList.appendChild(li);
-                    });
-                }
-            })
-            .catch(error => console.error("Fout bij ophalen van data:", error));
+users.sort(function (a, b) {
+    if (a.name < b.name) {
+      return -1;
     }
-
-    // Standaard: Laad de eerste optie (drivers)
-    const defaultCategory = document.querySelector("input[name='categorie']:checked").value;
-    fetchData(defaultCategory);
-
-    // Luisteren naar veranderingen in de radio buttons
-    radioButtonsArchive.forEach(radio => {
-        radio.addEventListener("change", function () {
-            fetchData(this.value);
-        });
-    });
-});
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
 */
+
+// Sorteren Gronologisch

@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://use.typekit.net/jva5hqf.css">
      <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
-<!--afbeelding van https://pixabay.com/nl/photos/f1-racen-sport-mensen-4509029/-->
+
+<!--afbeelding van https://wallpapers.com/picture/f1-pictures-wdbpy9k0wue1test.html-->
+
 <body>
     <%- include('../view/header'); %>
 
@@ -43,18 +45,18 @@
         <section>
                         <h2>Speel met je vrienden</h2>
                             <div>
-                                <img src="./style/images/home/speelmetjevrienden_f1_race.png" alt="card 1">
-                                <img src="./style/images/home/speelmetjevrienden_racer.png" alt="card 2">
-                                <img src="./style/images/home/speelmetjevrienden_band.png" alt="card 3">
+                                <img class="lazy-load"  data-src="./style/images/home/speelmetjevrienden_f1_race.png" alt="card 1">
+                                <img class="lazy-load"  data-src="./style/images/home/speelmetjevrienden_racer.png" alt="card 2">
+                                <img class="lazy-load"  data-src="./style/images/home/speelmetjevrienden_band.png" alt="card 3">
                             </div>
         </section>
          <section>
                         <h2>player leaderbord</h2> <!--zijn divs hier oke?-->
                             <div>
                                 <ul>
-                                    <li><p>1. Jan38 </p></li>
+                                    <li><p>2. Jan38 </p></li>
                                     <li><p>1. Bas38 </p></li>
-                                    <li><p>1. Koen38 </p> </li>
+                                    <li><p>3. Koen38 </p> </li>
                                 </ul>
                             </div>
                             <div>
@@ -87,7 +89,10 @@
     </main>
 
     <%- include('../view/footer'); %>
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="/script/home.js"></script>
+    <script src="/script/lazyload.js"></script>
+
 </body>
 </html>
