@@ -14,7 +14,7 @@
 
         <h1>CREATE ACCOUNT</h1>
 
-        <form action="/createAccount" method="POST">
+        <form action="/createAccount" method="POST" enctype="multipart/form-data">
 
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" required>
@@ -27,6 +27,10 @@
 
             <label for="date">Date of Birth</label>
             <input type="date" name="date" id="date" required>
+
+            <label for="file" class="custom-file-upload">Add profile picture</label>
+            <input type="file" id="file" name="file">
+            
             <input type="submit" value="Create Account">
         </form>
         
