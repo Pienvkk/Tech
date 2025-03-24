@@ -233,6 +233,7 @@ header nav ul li p {
 
 /* Home */ 
 
+/*
 .mainIndex {
     display: flex;
     flex-direction: column;
@@ -243,7 +244,7 @@ header nav ul li p {
     margin-right: 1rem;
     min-height: 90vh;
 }
-
+*/
 
 
 .mainIndex section:first-of-type div:nth-of-type(2) {
@@ -337,11 +338,9 @@ header nav ul li p {
 }
 .mainIndex section:nth-of-type(3) div img {
     width: 28vw;
-
-
   }
   
-/* leaderbord */
+/* leaderbord  */
 
   .mainIndex section:last-of-type{
     display:flex;
@@ -359,6 +358,7 @@ header nav ul li p {
     gap: 20px;
     margin-bottom: 30px;
   }
+  /*=
 
   /*  cards */
 
