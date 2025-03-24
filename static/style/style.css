@@ -28,8 +28,8 @@ good luck coding! (^-^)*/
     --font-family-secondary: 'sans-serif';
 
 
-    --color-background: #121212;
     --color-background-white: #FFFF;
+    --color-background: #121212;
     --color-text-light:#070101;
 
 
@@ -94,7 +94,7 @@ header {
     width: 100%;
     height: 8vh;
 
-    background-color: var(--color-background-white);
+    background-color:var(--color-background-white);
     font-family: "alfabet", sans-serif;
     font-weight: 200;
 }
@@ -140,7 +140,7 @@ header nav ul li a:active {
 }
 
 header nav  ul li:nth-of-type(6) a { 
-    background-color:var(--color-background-white);
+    background-color: #ffffff;
     box-shadow:0px 4px 4px 2px rgb(0 0 0 / 0.25);
     color: black;
     border-radius: 5px;
@@ -230,9 +230,6 @@ header nav ul li p {
     margin-top: 0.3rem;
 }
 
-
-/* HOME MAIN */
-
 .mainIndex {
     display: flex;
     flex-direction: column;
@@ -242,6 +239,8 @@ header nav ul li p {
     min-height: 90vh;
 }
 
+
+/* HOME MAIN */
 /*
 .mainIndex {
     display: flex;
@@ -555,7 +554,7 @@ input[type="file"] {
     padding: 13px;
     border: 1px solid #ccc;
     font-size: 1rem;
-    background-color:var(--color-background-white);
+    background: white;
     color: #333;
     transition: border 0.3s, box-shadow 0.3s;
 }
@@ -655,27 +654,29 @@ input[type="submit"]:hover {
 
 /* COMMUNICTY  */
 
-
 .mainCommunity h1{
     width: 95%;
     margin: 0;
 }
 
 .mainCommunity a {
-    padding: 1.2rem 1.5rem;
+    padding: 1rem;
     background-color: #ff0000;
     color: #FFFFFF;
     text-decoration: none;
+
     height: 20px;
     width: 100px;
     border-radius: 5px;
+
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: var(--font-size-medium);
 } 
 
 .mainCommunity{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .mainCommunity div:first-of-type{
@@ -712,18 +713,22 @@ input[type="submit"]:hover {
     flex-direction: row;
     width: 90%;
     background-color: rgb(28, 28, 28);
+    margin-top: 2rem;
 }
 
 .mainCommunity article div{
     width: 100%;
+    display: flex;
+
 }
 
-
 .mainCommunity h2{
-    font-size: 28px;
+    font-size:var(--font-size-xlarge);
     margin-left: 0px;
     margin-bottom: 10px;
     max-width: 60%;
+    margin-top: 0;
+
     font-weight: 50;
 }
 
@@ -860,6 +865,46 @@ input[type="submit"]:hover {
 
 /* TEAM UP MAIN */
 
+.teamUp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.teamUp h2{
+    margin-top: 2rem;
+}
+
+.teamUp div{
+    align-items: center;
+    display: flex;
+    background-color: #333;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    width: 60%;
+    border-radius: 8px;
+}
+
+#followBtn{
+    background-color: #e11515;
+    border-radius: 5px;
+    padding: 0.8rem 1.4rem;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    transition: 0.3s, color 0.3s, border 0.3s;
+    font-weight: 800;
+
+    font-size:var(--font-size-medium);
+}
+
+#followBtn:hover{
+    background-color: #ffffff;
+    box-shadow:0px 0px 0px 2px rgb(161, 0, 0) inset;
+    color: black;
+    
+}
 
 
 
@@ -1024,8 +1069,7 @@ input[type="submit"]:hover {
  /*  FORM */
 
 form {
-    background-color: #222222;
-    padding: 2rem 20rem;
+    padding: 2rem 2;
     border-radius: 8px;
     margin: 0 auto;
 }
@@ -1083,3 +1127,53 @@ details div p {
 }
 
 /* HELP & SUPPORT */
+
+
+/* friends */
+/* .mainfriends{
+    display: flex;
+    flex-direction: column;
+    align-items: center;      
+} */
+
+/* .vindvrienden {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+} */
+
+.vindvrienden label input{
+    border-radius: 75px;
+}
+
+.vindvrienden label{
+    width: 50%;
+}
+
+.vindvrienden li{
+    display: flex;
+}
+/* FOOTER */
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+footer section{
+    margin: 5rem;
+}
+
+footer h3{
+    font-family: var(--font-family-primary);
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+}
+
+footer ul{
+    list-style-type: none;
+}
+footer ul li{
+    margin-bottom: 1rem;
+}
