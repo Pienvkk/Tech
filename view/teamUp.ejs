@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Matching</title>
     <link rel="stylesheet" href="/style/style.css" type="text/css">
-    <link rel="stylesheet" href="https://use.typekit.net/jva5hqf.css">
+    <link rel="stylesheet" href="https://use.typekit.net/jva5h qf.css">
 </head>
 
 <body>
@@ -13,9 +13,21 @@
 
     <main class="teamUp">
         <h1>Team Up!</h1>
+        <% users.forEach(myUser => { %>
+                <div>
+                <h2><%= myUser.username %></h2>
+                <%if (user != null){%>
+                    <button data-username="<%= myUser.username %>" class="button" id="followBtn">
+                        Follow
+                    </button>
+                <%}%>
+                </div>
+        <% }) %>
     </main>
 
     <%- include('../view/footer'); %>
+
+    <script src="/script/follow.js"></script>
     <script src="/script.js"> </script>
     <script src="/script/lazyload.js"></script>
 
