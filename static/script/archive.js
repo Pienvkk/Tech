@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateList(data) {
-        dataList.innerHTML = ""; // Maak de lijst leeg
+        dataList.innerHTML = ""; // Maakt de lijst leeg
 
         data.forEach(item => {
             const li = document.createElement("li");
@@ -76,24 +76,18 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchData(defaultCategory);
 });
 
-/*
 
-// Sorteren Alphabet
-const button = document.querySelector(".zoek details summary button:nth-of-type(1)");
+// Sorteren Alphabet (poging tot)
 
-/*
-dataList.sort
-console.log(sortedNames);
-
-users.sort(function (a, b) {
-    if (a.name < b.name) {
-      return -1;
+document.querySelector(".zoeken details button:nth-of-type(1)").addEventListener("click", function (event) {
+    if (event.target.tagName === "BUTTON") {
+        if (event.target.textContent === "Alphabet") {
+            dataList.sort("item-name", { order: "asc" }); // Sorteer van A-Z
+        } else {
+            datalist.sort("item-name", { order: "desc" }); // Sorteer van Z-A
+        }
     }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  });
-*/
+});
 
-// Sorteren Gronologisch
+
+// Sorteren Chronologisch
