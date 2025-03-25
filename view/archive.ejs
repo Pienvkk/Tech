@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <%- include('../view/header'); %>
+    <%- include('../view/header');%>
 
     <main class="mainArchive">
         <h1>archives</h1>
@@ -42,15 +42,14 @@
                 </details>
         </div>
         
-        <ul class="archiveList">
+        <ul class="archiveList" id="archiveList">
             <% if (category == "drivers" && data.length > 0) { %>
                 <% data.forEach(item => { %>
                     <li> 
-                        <p><%= item.forename%></p>
-                        <p><%= item.surname%></p>
-                        <p><%= item.code%></p>
-                        <p><%= item.number%></p>
-                        <p><%= item.nationality%></p>
+                        <p class="forename"><%= item.forename %></p>
+                        <p class="surname"><%= item.surname %></p>
+                        <p class="name"><%= item.name %></p>
+                        <p class="season"><%= item.season %></p>
                     </li>
                 <% }) %>
 
@@ -91,6 +90,8 @@
     </main>
 
     <%- include('../view/footer'); %>
+    <script src="/script/lazyload.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 
 </body>
 </html>
