@@ -223,11 +223,9 @@ app.post('/accountPreferences', async (req, res) => {
 
         console.log("Preferences have been updated", req.session.user.username)
         res.redirect('/profile')
-
-        console.log(season)
-        res.redirect('/')
-
-    } catch (error) {
+    } 
+    
+    catch (error) {
         console.error('Preferences adding error:', error)
         res.status(500).send('Server error')
     }
