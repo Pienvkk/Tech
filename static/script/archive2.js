@@ -19,21 +19,21 @@ AlphabetFilterButton.addEventListener('click', function () {
     console.log("Ik doe het")
 });
 */
+ 
 document.addEventListener('DOMContentLoaded', function () {
+    // Definieer de opties voor List.js
     const options = {
         valueNames: ['forename', 'surname'] // Strings die overeenkomen met de HTML-klassen
-    } 
+    };
 
-});
     const archiveList = new List('archiveList', options);
 
-    sortButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const sortField = button.value; // Haal de waarde van de knop op
-            archiveList.sort(sortField, { order: "asc" }); // Sorteer op basis van de waarde
-            console.log(`Lijst gesorteerd op ${sortField}`);
-        });
+    
+    AlphabetFilterButton.addEventListener("click", function () {
+        archiveList.sort('surname', { order: "asc" });
     });
+});
+
 /* 
 
 options.sort(function (a, b) {
