@@ -48,7 +48,6 @@ app
     .get('/teamUp', teamUp)
     .get('/community', community)
     .get('/createPost', renderPage('createPost'))
-    .get('/archive', renderPage('archive'))
     .get('/helpSupport', renderPage('helpSupport'))
     .get('/friends', renderPage('friends'))
     
@@ -121,33 +120,41 @@ app.post('/login', async (req, res) => {
     console.log('Received login request:', req.body)
 
     // Inloggen
-    const { username, pass, season, team, driver} = req.body
+    const { username, pass} = req.body
 
     try {
         const users = db.collection('0Users')
-        const {season, team, driver} = req.body;
+        const {season, team, driver, circuit} = req.body;
 
         // Zoek de gebruiker in de database
         const user = await users.findOne({ username: username, password: pass })
 
         if (!user) {
-            return res.status(400).send('Ongeldige gebruikersnaam of wachtwoord')
+            return res.status(400).send('Incorrect username or password')
         }
 
         // Login is succesvol - Sla de gebruiker op in de sessie
-        req.session.user = { username: user.username }
+        req.session.user = { 
+            id: user._id,
+            username: user.username, 
+            password: user.password,
+            firstSeason: user.firstSeason,
+            team: user.team,
+            driver: user.driver,
+            circuit: user.circuit
+        }
 
         // Update user om zijn preferences toe te voegen
         await users.updateOne(
             { username: req.session.user.username },
-            { $set: { firstSeason: season, team: team, driver: driver }}
+            { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit}}
           );
         res.redirect('/')
 
 
     } catch (error) {
         console.error('Login fout:', error)
-        res.status(500).send('Er is iets misgegaan op de server')
+        res.status(500).send('Something went wrong')
     }
 })
 
@@ -202,7 +209,7 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
 
 // Voorkeuren instellen
 app.post('/accountPreferences', async (req, res) => {
-    const {season, team, driver} = req.body;
+    const {season, driver, team, circuit} = req.body;
 
     try {
         const users = db.collection('0Users')
@@ -210,12 +217,14 @@ app.post('/accountPreferences', async (req, res) => {
         // Update user om zijn preferences toe te voegen
         await users.updateOne(
             { username: req.session.user.username },
-            { $set: { firstSeason: season, team: team, driver: driver }}
+            { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit }}
           );
-        console.log(season)
-        res.redirect('/')
 
-    } catch (error) {
+        console.log("Preferences have been updated", req.session.user.username)
+        res.redirect('/profile')
+    } 
+    
+    catch (error) {
         console.error('Preferences adding error:', error)
         res.status(500).send('Server error')
     }
@@ -302,12 +311,36 @@ app.get("/check-follow-status", async (req, res) => {
 // Quiz pagina
 async function quiz(req, res) {
     try {
-        const questions = await db.collection('0Questions').find().toArray()
-        console.log("Fetched questions:", questions); // Debugging
+        const user = req.session.user
+        console.log("Current user:", user)
 
-        res.render('quiz.ejs', { user: req.session.user || null, questions })
+        if (!user) {
+            return res.render('quiz.ejs', { user: null, questions: [] })
+        }
+
+        const questions = await db.collection('0Questions').find().toArray()
+        console.log("Quiz qeustions:", questions)
+
+        // Functie om placeholders te vervangen
+        const personalizeQuestion = (questions, user) => {
+            return questions
+                .replace("{{firstSeason}}", user.firstSeason)
+                .replace("{{driver}}", user.driver)
+                .replace("{{team}}", user.team)
+                .replace("{{circuit}}", user.circuit)
+        };
+
+        // Vervang placeholders in de vragen
+        const personalizedQuestions = questions.map(q => ({
+            ...q,
+            question: personalizeQuestion(q.question, user)
+        }));
+
+        console.log("Rendering quiz with user:", user);
+        res.render('quiz.ejs', { user, questions: personalizedQuestions })
+
     } catch (err) {
-        console.error("Error fetching questions:", err);
+        console.error("Error fetching questions:", err)
         res.status(500).send('Error fetching questions')
     }
 }
@@ -376,32 +409,43 @@ app.get('/profilepics/:filename', (req, res) => {
     res.sendFile(filePath);
 });
 
-// Archief pagina
-app.get('/api/data/:category', async (req, res) => {
-    try {
-        const category = req.params.category; // Haal de categorie uit de URL
 
-        let data = [];
+// Archief pagina
+app.get('/archive', async (req, res) => {
+    try {
+        console.log("Data is er"); // kijken of t binnenkomt
+
+        const category = req.query.category || "drivers"
+
+        let data = []
+
+        console.log("Geselecteerde categorie:", category)
 
         if (category === "drivers") {
-            data = await db.collection("Drivers").find({}).toArray();
-        } else if (category === "constructors") {
-            data = await db.collection("Constructors").find({}).toArray();
-        } else if (category === "championships") {
-            data = await db.collection("Championships").find({}).toArray();
-        } else if (category === "circuits") {
-            data = await db.collection("Circuits").find({}).toArray();
-        } else {
-            return res.status(400).json({ error: "Ongeldige categorie" });
+            data =  await db.collection('Drivers').find().toArray()
+        } 
+        else if (category === "constructors") {
+            data =  await db.collection('Constructors').find().toArray()
+        } 
+        else if (category === "championships") {
+            data =  await db.collection('Championships').find().toArray()
+        } 
+        else if (category === "circuits") {
+            data =  await db.collection('Circuits').find().toArray()
+        } 
+        else {
+            return res.status(400).json({ error: "No category" })
         }
+        
+        res.render('archive.ejs', { user: req.session.user, category, data })
+    } 
+    
+    catch (err) {
+        console.error("Error fetching archive:", err);
+        res.status(500).send('Error fetching archive')
+    } 
+})
 
-        res.json(data);
-
-    } catch (error) {
-        console.error("Fout bij ophalen van data:", error);
-        res.status(500).json({ error: "Server error" });
-    }
-});
 
 
 // Middleware voor not found errors - error 404
