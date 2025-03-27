@@ -1104,8 +1104,6 @@ details div p {
 .mainfriends div:first-of-type label input{
     border-radius: 75px;
 }
-
-
 .mainfriends div li{
     display: flex;
     padding: 0.3em;
