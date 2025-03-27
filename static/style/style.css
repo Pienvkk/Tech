@@ -247,6 +247,22 @@ header nav ul li p {
     margin-top: 0.3rem;
 }
 
+details summary::marker,
+:is(::-webkit-details-marker) {
+  font-family: monospace;
+  color: #EE0000;
+  font-weight: bold;
+}
+
+.firstsummary{
+    color: #28282A;
+    padding: 0.5em;
+    background-color: #FFFFFF;
+}
+
+/* HOME MAIN */
+
+
 .mainIndex {
     display: flex;
     flex-direction: column;
@@ -255,10 +271,6 @@ header nav ul li p {
     max-width: 100%;
     min-height: 90vh;
 }
-
-
-/* HOME MAIN */
-
 
 .mainIndex {
     display: grid;
@@ -1547,7 +1559,6 @@ details div p {
     justify-content: center;
 }
 
-
 .mainfriends div:nth-of-type(2) {
     display: flex;
     justify-content: baseline;
@@ -1565,14 +1576,27 @@ details div p {
 .mainfriends div li{
     display: flex;
     padding: 0.3em;
+    width: auto;
 }
-
 
 .vindvrienden label input{
     border-radius: 75px;
 }
 
+.mainfriends ul{
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
 
+.mainfriends .firstsummary{
+    width: 25%;
+}
+
+.mainfriends .friendssummary{
+    width: 25%;
+    margin-left: 2em;
+    padding-top: 1em;
+}
 /* FOOTER */
 
 footer{
