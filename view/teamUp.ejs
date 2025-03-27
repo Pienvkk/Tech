@@ -14,16 +14,17 @@
     <main class="teamUp">
         <h1>Team Up!</h1>
         <% users.forEach(myUser => { %>
-                <div>
+            <div>
                 <h2><%= myUser.username %></h2>
-                <%if (user != null){%>
-                    <button data-username="<%= myUser.username %>" class="button" id="followBtn">
+                <% if (user != null && user.username !== myUser.username) { %> <!-- Prevent current user from following themselves -->
+                    <button data-user-username="<%= myUser.username %>" class="button" id="followBtn">
                         Follow
                     </button>
-                <%}%>
-                </div>
+                <% } %>
+            </div>
         <% }) %>
     </main>
+    
 
     <%- include('../view/footer'); %>
 
