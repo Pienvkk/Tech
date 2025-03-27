@@ -5,7 +5,7 @@ Created by: Berend Janssen
             Reuben auf dem Brinken
 
 ## About:
-A F1 website were fans can make an account and battle against eachother through quizzes. The Website contains an community page where people can put up posts and discuss different subjects with other fans. The website also contains an archive page where users can find information about drivers, circuits, championships and constructers.
+An F1 fan website where fans can make an account and battle against eachother through quizzes. The website contains a community page where people can make posts and discuss different topics with other fans. The website also contains an archive page where users can find information about drivers, circuits, championships and constructors.
 
 ## How to adopt:
 
