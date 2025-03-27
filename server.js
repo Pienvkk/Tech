@@ -43,7 +43,7 @@ app
     .get('/login', renderPage('login'))
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
-    .get('/profile', renderPage('profile'))
+    .get('/profile', profile)
     .get('/quiz', quiz)
     .get('/teamUp', teamUp)
     .get('/community', community)
@@ -51,7 +51,6 @@ app
     .get('/archive', renderPage('archive'))
     .get('/helpSupport', renderPage('helpSupport'))
     .get('/friends', renderPage('friends'))
-    
     
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
@@ -330,6 +329,14 @@ async function teamUp(req, res) {
     }
 }
 
+async function profile(req, res) {
+    try {
+        const user = await db.collection('0Users').findOne({ username: req.session.user.username });
+        res.render('profile.ejs', { user });
+    } catch (err) {
+    }
+}
+
 
 // Post uploaden
 app.post('/createPost', upload.single('file'), async (req, res) => {
@@ -364,7 +371,7 @@ app.get('/uploads/:filename', (req, res) => {
     res.sendFile(filePath);
 });
 
-app.get('/uploads/:filename', (req, res) => {
+app.get('/profilepics/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/profilepics', req.params.filename);
     res.sendFile(filePath);
 });
