@@ -274,7 +274,30 @@ app.post('/unfollow', async (req, res) =>{
 
 
 
+async function checkIfFollowing(currentUser, targetUser, db) {
+    const user = await db.collection("0Users").findOne({
+        username: currentUser,
+        following: targetUser
+    });
 
+    return user !== null;
+}
+
+
+
+
+app.get("/check-follow-status", async (req, res) => {
+    const { targetUser } = req.query;
+    const currentUser = req.session.user.username;
+
+    try {
+        const isFollowing = await checkIfFollowing(currentUser, targetUser, db);
+        res.json({ isFollowing });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to check follow status" });
+    }
+});
 
 
 // Quiz pagina
