@@ -35,6 +35,14 @@
         <% questions.forEach(question => { %>
             <article>
               <p><%= question.question %></p>
+              <div>
+                <% question.answers.forEach((answer, index) => { %>
+                  <label>
+                    <input type="radio" name="question-<%= question._id %>" value="<%= answer %>">
+                    <%= answer %>
+                  </label>
+                <% }) %>
+              </div>
             </article>
         <% }) %>
       </div>

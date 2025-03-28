@@ -115,6 +115,8 @@ const profileStorage = multer.diskStorage({
 
 const uploadProfilePic = multer({ storage: profileStorage });
 
+
+
 // Inloggen
 app.post('/login', async (req, res) => {
     // Check of login request binnenkomt
@@ -285,7 +287,6 @@ app.post('/unfollow', async (req, res) =>{
 
 
 
-
 // Quiz pagina
 async function quiz(req, res) {
     try {
@@ -296,25 +297,45 @@ async function quiz(req, res) {
             return res.render('quiz.ejs', { user: null, questions: [] })
         }
 
+        // Haal de quizvragen op
         const questions = await db.collection('0Questions').find().toArray()
-        console.log("Quiz qeustions:", questions)
+        console.log("Quiz questions:", questions)
 
-        // Functie om placeholders te vervangen
-        const personalizeQuestion = (questions, user) => {
-            return questions
+        // Haal de championship data op op basis van het firstSeason van de gebruiker
+        const championship = await db.collection('Championships').findOne({
+            season: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
+        })
+
+        // Error bij championship database
+        if (!championship || !championship.driver_standings || championship.driver_standings.length < 4) {
+            console.error("No sufficient data for season:", user.firstSeason);
+            return res.status(500).send(`Error: No sufficient championship data for season ${user.firstSeason}`);
+        }
+
+        // Pak de top 4 coureurs
+        const topDrivers = championship.driver_standings.slice(0, 4).map(driver => driver.name)
+
+        // Functie om placeholders te vervangen in de vragen & antwoorden
+        const personalizeText = (text, user, drivers) => {
+            return text
                 .replace("{{firstSeason}}", user.firstSeason)
                 .replace("{{driver}}", user.driver)
                 .replace("{{team}}", user.team)
                 .replace("{{circuit}}", user.circuit)
-        };
+                .replace("{{answer1}}", drivers[0])
+                .replace("{{answer2}}", drivers[1])
+                .replace("{{answer3}}", drivers[2])
+                .replace("{{answer4}}", drivers[3])
+        }
 
-        // Vervang placeholders in de vragen
+        // Vervang placeholders in de vragen en antwoorden
         const personalizedQuestions = questions.map(q => ({
-            ...q,
-            question: personalizeQuestion(q.question, user)
-        }));
+            question: personalizeText(q.question, user, topDrivers),
+            answers: q.answers.split(", ").map(answer => personalizeText(answer, user, topDrivers)),
+            correctAnswer: personalizeText(q.correctAnswer, user, topDrivers)
+        }))
 
-        console.log("Rendering quiz with user:", user);
+        console.log("Rendering quiz with user:", user)
         res.render('quiz.ejs', { user, questions: personalizedQuestions })
 
     } catch (err) {
@@ -322,6 +343,7 @@ async function quiz(req, res) {
         res.status(500).send('Error fetching questions')
     }
 }
+
 
 // Community pagina
 async function community(req, res) {
