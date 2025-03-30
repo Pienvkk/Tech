@@ -42,6 +42,8 @@ Submit a pull request if you have improvements or bug fixes.
 
 Contact us directly via [email/contact info if applicable].
 
+
+
 🚀 Let’s make this the best F1 fan experience together!
 
 
