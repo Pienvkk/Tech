@@ -40,7 +40,8 @@ Open an issue on this GitHub repository.
 
 Submit a pull request if you have improvements or bug fixes.
 
-Contact us directly via [email/contact info if applicable].
+Contact us directly via @email.
+
 
 
 
