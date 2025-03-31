@@ -26,10 +26,10 @@
                     <%if (post.file) { %>
                         <img src="/uploads/<%= post.file %>" alt="Post image">
                     <% } %>
-                    <div class="communityList list">
-                    <h2 class="postitle"><%= post.title %></h2>
-                    <p><%= post.content %></p>
-                    <p class="User">User: <%= post.user %></p>
+                    <div>
+                        <h2><%= post.title %></h2>
+                            <p><%= post.content %></p>
+                           <p>User: <%= post.user %></p>
                     </div>
                 </article>
             <% }) %>

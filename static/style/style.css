@@ -739,6 +739,17 @@ details summary::marker,
     height: 5em;
 }
 
+/* .swiper-pagination-bullet {
+    background-color: #ffffff; 
+    width: 12px; 
+    height: 12px;
+    margin: 0 5px; 
+    opacity: 1; 
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #ff0000; 
+  } */
 
 
 /* INLOGGEN MAIN */
@@ -885,7 +896,8 @@ input[type="submit"]:hover {
 
 /* COMMUNICTY  */
 
-.mainCommunity h1{
+
+.mainCommunity h1, h2{
     width: 95%;
     margin: 0;
 }
@@ -897,7 +909,6 @@ input[type="submit"]:hover {
     text-decoration: none;
 
     height: 20px;
-    width: 110px;
     border-radius: 5px;
 
     font-weight: 800;
@@ -927,24 +938,29 @@ input[type="submit"]:hover {
     align-items: center;
     flex-direction: column;
     display: flex;
-    position: relative;
 }
-
+ 
 .mainCommunity div:nth-of-type(2) article{
     border: 2px solid #FFFFFF;
     border-radius: 5px;
-    margin-bottom: 10px;
 
     display: flex;
   
     flex-direction: column;
     justify-content: center;
     width: 85%;
+    height: fit-content;
 
     flex-direction: row;
-    width: 90%;
     background-color: rgb(28, 28, 28);
     margin-top: 2rem;
+
+}
+
+
+.mainCommunity div:nth-of-type(2) article img{
+    height: 25em;
+    width: 25em;
 }
 
 .mainCommunity article div{
@@ -957,7 +973,8 @@ input[type="submit"]:hover {
     font-size:var(--font-size-xlarge);
     margin-left: 0px;
     margin-bottom: 10px;
-    max-width: 60%;
+    display: flex;
+    justify-content: left;
     margin-top: 0;
 
     font-weight: 50;
@@ -975,9 +992,9 @@ input[type="submit"]:hover {
 
 .mainCommunity div article img{ 
     width: 8vw;
-    margin: auto 1.5rem auto 0;
+    margin: 1.5rem;
+    border-radius: 5px;
     max-width: 12vw;
-    margin-left: auto;
     max-height: 12vw;
 }
 
