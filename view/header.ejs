@@ -9,7 +9,7 @@
             <li><a href="/helpSupport">Help & Support</a></li>
             <% if (user) { %>
                 <li class="profielKnop"><a href="/profile"><img src="/static/profilepics/<% user.profilePic %>" alt="Your profile picture"><p><%= user.username %></p></a></li>
-                <li><a href="/logout">Uitloggen</a></li>
+                <li><a href="/logout">Log out</a></li>
                 <% console.log(user.profilePic) %>
             <% } else { %>
                 <li><a href="/login">Log in</a></li>
