@@ -58,7 +58,7 @@
                 <% } else if (category == "constructors" && data.length > 0) { %>
                     <% data.forEach(item => { %>
                         <li>
-                            <p><%= item.name %></p>
+                            <p class="forename"><%= item.name %></p>
                             <p><%= item.nationality %></p>
                         </li>
                     <% }) %>
@@ -83,7 +83,7 @@
                 <% } else if (category == "circuits" && data.length > 0) { %>
                     <% data.forEach(item => { %>
                         <li>
-                            <p><%= item.name %></p>
+                            <p class="forename"><%= item.name %></p>
                             <p><%= item.location %></p>
                             <p><%= item.country %></p>
                         </li>
@@ -94,7 +94,7 @@
 
     <%- include('../view/footer'); %>k
     <script src="/script/lazyload.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/list.js@2.3.1/dist/list.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
     <script src="/script/archive2.js"></script>
 
 </body>
