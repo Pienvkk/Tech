@@ -20,22 +20,25 @@
             </div>
         </div>
         <div id="communityList">
-        <% if (posts && posts.length > 0) { %>
-            <% posts.forEach(post => { %>
+            <div class="communityList list">
+                <% if (posts && posts.length > 0) { %>
+                <% posts.forEach(post => { %>
                 <article>
-                    <%if (post.file) { %>
+                        <%if (post.file) { %>
                         <img src="/uploads/<%= post.file %>" alt="Post image">
-                    <% } %>
-                    <div class="communityList list">
-                        <h2 class="posttitle"><%= post.title %></h2>
-                        <p><%= post.content %></p>
-                        <p class="user">User: <%= post.user %></p>
-                    </div>
+                        <% } %>
+                        <div>
+                            <p class="posttitle"><%= post.title %></p>
+                            <p><%= post.content %></p>
+                            <p class="user">User: <%= post.user %></p>
+                        </div>            
                 </article>
-            <% }) %>
-        <% } else { %>
-            <p>Er zijn nog geen posts.</p>
-        <% } %>
+                <% }) %>
+                <% } else { %>
+                <p>Er zijn nog geen posts.</p>
+                <% } %>
+            </div>            
+        </div>   
     </main>
 
     <%- include('../view/footer'); %>

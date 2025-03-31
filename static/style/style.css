@@ -921,7 +921,7 @@ input[type="submit"]:hover {
     justify-content: space-between;
 }
 
-.mainCommunity div:first-of-type{
+/* .mainCommunity div:first-of-type{
     display: flex;
     flex-direction: row;
 
@@ -930,9 +930,9 @@ input[type="submit"]:hover {
     margin: 2rem;
     margin-left: 1rem;
     width: 87%;
-}
+} */
 
-.mainCommunity div:nth-of-type(2){
+.mainCommunity div{
     margin: auto;
     width: 85%;
     align-items: center;
@@ -945,16 +945,13 @@ input[type="submit"]:hover {
     border-radius: 5px;
 
     display: flex;
-  
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     width: 85%;
     height: fit-content;
+    padding: 3em;
 
-    flex-direction: row;
     background-color: rgb(28, 28, 28);
     margin-top: 2rem;
-
 }
 
 
@@ -969,7 +966,7 @@ input[type="submit"]:hover {
 
 }
 
-.mainCommunity h2{
+.mainCommunity .posttitle{
     font-size:var(--font-size-xlarge);
     margin-left: 0px;
     margin-bottom: 10px;
@@ -978,12 +975,19 @@ input[type="submit"]:hover {
     margin-top: 0;
 
     font-weight: 50;
+    font-family: var(--font-family-primary);
+
 }
 
 .mainCommunity p:first-of-type{
     --webkit-mask-image: linear-gradient(180deg, #000  10%, transparent);
     margin-bottom: 10px;
     width: 100%;
+}
+
+.mainCommunity .user{
+    display: flex;
+
 }
 
 .mainCommunity div:nth-of-type(2) article div{
