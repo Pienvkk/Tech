@@ -1141,6 +1141,11 @@ input[type="submit"]:hover {
 
 
 /* COMMUNITY MAIN */
+.mainCommunity  label input{
+    border-radius: 75px;
+}
+
+
 .mainCommunity{
     display: flex;
     flex-direction: column;
@@ -1148,7 +1153,6 @@ input[type="submit"]:hover {
     align-items: center;      
     margin: 1rem 1rem;
 }
-
 
 /* ARCHIEF MAIN */
 
@@ -1551,10 +1555,6 @@ details div p {
 .mainfriends div:nth-of-type(2) {
     display: flex;
     justify-content: baseline;
-}
-
-.mainfriends div:first-of-type label input{
-    border-radius: 75px;
 }
 
 .mainfriends div label{
