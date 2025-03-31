@@ -109,7 +109,7 @@ const profileStorage = multer.diskStorage({
     filename: function (req, file, cb) {
         const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
         cb(null, uniqueName);
-    }
+    }   
 });
 
 const uploadProfilePic = multer({ storage: profileStorage });
@@ -141,7 +141,8 @@ app.post('/login', async (req, res) => {
             firstSeason: user.firstSeason,
             team: user.team,
             driver: user.driver,
-            circuit: user.circuit
+            circuit: user.circuit,
+            profilePic: user.profilePic || '/static/default-profile.png'
         }
 
         // Update user om zijn preferences toe te voegen

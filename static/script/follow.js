@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async () => {
+ document.addEventListener("DOMContentLoaded", async () => {
     const buttons = document.querySelectorAll(".button");
 
     buttons.forEach(async (button) => {
