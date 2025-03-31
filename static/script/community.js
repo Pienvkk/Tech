@@ -1,4 +1,4 @@
-const Zoekbalk = document.querySelector('.zoeken');
+const Zoekbalk = document.querySelector('.zoeken input');
 
 document.addEventListener('DOMContentLoaded', function () {
     if (typeof List === 'undefined') {
@@ -18,3 +18,4 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(`Zoeken naar: ${searchValue}`);
     });
 });
+

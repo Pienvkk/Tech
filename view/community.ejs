@@ -14,8 +14,8 @@
     <main class="mainCommunity">
         <div>
             <h1>Community</h1>
-            <div class="zoeken">
-                <label><input type="text" placeholder="search posts..."></label>
+            <div>
+                <label class="zoeken"><input type="search" placeholder="search posts..."></label>
                 <a href="/createPost">Create Post</a>
             </div>
         </div>
@@ -26,10 +26,10 @@
                     <%if (post.file) { %>
                         <img src="/uploads/<%= post.file %>" alt="Post image">
                     <% } %>
-                    <div>
-                        <h2><%= post.title %></h2>
-                            <p><%= post.content %></p>
-                           <p>User: <%= post.user %></p>
+                    <div class="communityList list">
+                        <h2 class="posttitle"><%= post.title %></h2>
+                        <p><%= post.content %></p>
+                        <p class="user">User: <%= post.user %></p>
                     </div>
                 </article>
             <% }) %>
@@ -39,8 +39,8 @@
     </main>
 
     <%- include('../view/footer'); %>
-    <script src="/script/community.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    <script src="/script/community.js"></script>
     <script src="/script/lazyload.js"></script>
 </body>
 </html>
