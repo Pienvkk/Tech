@@ -206,7 +206,7 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
         console.error('Account creation error:', error)
         res.status(500).send('Server error')
     }
-});
+})
 
 
 
@@ -231,14 +231,14 @@ app.post('/accountPreferences', async (req, res) => {
         console.error('Preferences adding error:', error)
         res.status(500).send('Server error')
     }
-});
+})
 
 app.post('/follow', async (req, res) =>{
     const {targetUser} = req.body;
     const currentUser = req.session.user.username;
 
     try{
-        const users = db.collection('0Users');
+        const users = db.collection('0Users')
         
         await users.updateOne(
             { username: currentUser },
@@ -253,8 +253,8 @@ app.post('/follow', async (req, res) =>{
         res.json({ message: 'You are now following ${targetUsername}.'})
     
     }   catch (error) {
-            console.error('Error following user:', error);
-            res.status(500).send('Server error');
+            console.error('Error following user:', error)
+            res.status(500).send('Server error')
     }
 })
 
@@ -263,7 +263,7 @@ app.post('/unfollow', async (req, res) =>{
     const currentUser = req.session.user.username;
 
     try{
-        const users = db.collection('0Users');
+        const users = db.collection('0Users')
         
         await users.updateOne(
             { username: currentUser },
@@ -278,8 +278,8 @@ app.post('/unfollow', async (req, res) =>{
         res.json({ message: 'You are now following ${targetUsername}.'})
     
     }   catch (error) {
-            console.error('Error following user:', error);
-            res.status(500).send('Server error');
+            console.error('Error following user:', error)
+            res.status(500).send('Server error')
     }
 })
 
@@ -301,38 +301,71 @@ async function quiz(req, res) {
         const questions = await db.collection('0Questions').find().toArray()
         console.log("Quiz questions:", questions)
 
-        // Haal de championship data op op basis van het firstSeason van de gebruiker
+
+
+        // Haal de championship data op
         const championship = await db.collection('Championships').findOne({
             year: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
         })
 
         // Error bij championship database
         if (!championship || !championship.driver_standings || championship.driver_standings.length < 4) {
-            console.error("No sufficient data for season:", user.firstSeason);
-            return res.status(500).send(`Error: No sufficient championship data for season ${user.firstSeason}`);
+            console.error("No sufficient data for season:", user.firstSeason)
+            return res.status(500).send(`Error: No sufficient championship data for season ${user.firstSeason}`)
         }
 
         // Pak de top 4 coureurs
         const topDrivers = championship.driver_standings.slice(0, 4).map(driver => driver.name)
+        const winner = championship.driver_standings
+
+
+
+        // Haal de circuit data op
+        const circuits = await db.collection('Circuits').findOne({
+            circuitRef: user.circuit
+        })
+
+        // Error bij championship database
+        if (!circuits || !circuits.name) {
+            console.error("No sufficient data for circuit:", user.circuit)
+            return res.status(500).send(`Error: No sufficient circuit data for season ${user.circuit}`)
+        }
+
+        // Pak namen van 4 circuits
+        const circuitsList = await db.collection('Circuits').aggregate([{ $sample: { size: 4 } }]).toArray();
+        const topTracks = circuitsList.map(circuit => circuit.name)
+
+        const userCircuit = await db.collection('Circuits').findOne({
+            circuitRef: user.circuit
+        })
+
+        circuitsList.push(userCircuit)
+
 
         // Functie om placeholders te vervangen in de vragen & antwoorden
         const personalizeText = (text, user, drivers) => {
             return text
-                .replace("{{firstSeason}}", user.firstSeason)
-                .replace("{{driver}}", user.driver)
-                .replace("{{team}}", user.team)
-                .replace("{{circuit}}", user.circuit)
-                .replace("{{answer1}}", drivers[0])
-                .replace("{{answer2}}", drivers[1])
-                .replace("{{answer3}}", drivers[2])
-                .replace("{{answer4}}", drivers[3])
+            .replace("{{firstSeason}}", user.firstSeason)
+            .replace("{{driver}}", user.driver)
+            .replace("{{team}}", user.team)
+            .replace("{{circuit}}", user.circuit)
+
+            .replace("{{answer1.1}}", drivers[0])
+            .replace("{{answer1.2}}", drivers[1])
+            .replace("{{answer1.3}}", drivers[2])
+            .replace("{{answer1.4}}", drivers[3])
+
+            .replace("{{answer2.1}}", topTracks[0])
+            .replace("{{answer2.2}}", topTracks[1])
+            .replace("{{answer2.3}}", topTracks[2])
+            .replace("{{answer2.4}}", topTracks[3])
         }
 
         // Vervang placeholders in de vragen en antwoorden
         const personalizedQuestions = questions.map(q => ({
-            question: personalizeText(q.question, user, topDrivers),
-            answers: q.answers.split(", ").map(answer => personalizeText(answer, user, topDrivers)),
-            correctAnswer: personalizeText(q.correctAnswer, user, topDrivers)
+        question: personalizeText(q.question, user, topDrivers, topTracks),
+        answers: q.answers.split(", ").map(answer => personalizeText(answer, user, topDrivers, topTracks)),
+        correctAnswer: personalizeText(q.correctAnswer, user, topDrivers, topTracks)
         }))
 
         console.log("Rendering quiz with user:", user)
