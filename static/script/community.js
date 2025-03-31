@@ -1,4 +1,4 @@
-const Zoekbalk = document.querySelector('.zoeken input');
+const Zoekbalk = document.querySelector('.zoekencommunity input');
 
 document.addEventListener('DOMContentLoaded', function () {
     if (typeof List === 'undefined') {

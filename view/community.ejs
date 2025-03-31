@@ -14,8 +14,8 @@
     <main class="mainCommunity">
         <div>
             <h1>Community</h1>
-            <div>
-                <label class="zoeken"><input type="search" placeholder="search posts..."></label>
+            <div class="zoekencommunity">
+                <label><input type="search" placeholder="search posts..."></label>
                 <a href="/createPost">Create Post</a>
             </div>
         </div>
@@ -27,7 +27,7 @@
                         <%if (post.file) { %>
                         <img src="/uploads/<%= post.file %>" alt="Post image">
                         <% } %>
-                        <div>
+                        <div class="posttext">
                             <p class="posttitle"><%= post.title %></p>
                             <p><%= post.content %></p>
                             <p class="user">User: <%= post.user %></p>
