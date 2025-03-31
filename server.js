@@ -148,10 +148,10 @@ app.post('/login', async (req, res) => {
         }
 
         // Update user om zijn preferences toe te voegen
-        await users.updateOne(
-            { username: req.session.user.username },
-            { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit}}
-          );
+        // await users.updateOne(
+        //     { username: req.session.user.username },
+        //     { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit}}
+        //   );
         res.redirect('/')
 
 
@@ -303,7 +303,7 @@ async function quiz(req, res) {
 
         // Haal de championship data op op basis van het firstSeason van de gebruiker
         const championship = await db.collection('Championships').findOne({
-            season: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
+            year: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
         })
 
         // Error bij championship database

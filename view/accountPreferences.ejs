@@ -17,7 +17,7 @@
         <form action="/accountPreferences" method="POST">
             <label for="season">When did you first start watching Formula 1?</label>
             <select id="season" name="season">
-                <% for (let year = 2025; year >= 1950; year--) { %>
+                <% for (let year = 2024; year >= 1950; year--) { %>
                     <option value="<%= year %>"><%= year %></option>
                 <% } %>
             </select>
