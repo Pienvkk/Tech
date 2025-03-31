@@ -42,8 +42,12 @@
                 </details>
         </div>
 
+        <button class="sort" data-sort="forename">Sort by Forename</button>
+        <button class="sort" data-sort="surname">Sort by Surname</button>
+
+
         <div id="archiveList">
-            <ul class="archiveList">
+            <ul class="archiveList list">
                 <% if (category == "drivers" && data.length > 0) { %>
                     <% data.forEach(item => { %>
                         <li> 
