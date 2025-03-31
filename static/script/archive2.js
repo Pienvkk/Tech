@@ -2,11 +2,8 @@
 const AlphabetFilterButton = document.querySelector('.sort')
 const ChronologischFilterButton = document.querySelector('.zoeken details button:last-of-type');
 const Zoekbalk = document.querySelector('.zoeken label input');
-
-
-/*
-
-*/
+  
+/*  probeersel  */
  
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -20,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     AlphabetFilterButton.addEventListener("click", function () {
         archiveList.sort('surname', { order: "asc" });
     });
-});
+});              
 
  
 
