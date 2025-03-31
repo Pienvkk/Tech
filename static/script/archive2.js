@@ -1,6 +1,4 @@
 
-const List = require('list.js'); 
-
 const AlphabetFilterButton = document.querySelector('.sort');
 const ChronologischFilterButton = document.querySelector('.zoeken details button:last-of-type');
 const Zoekbalk = document.querySelector('.zoeken label input');
@@ -23,6 +21,13 @@ document.addEventListener('DOMContentLoaded', function () {
         archiveList.sort('surname', { order: 'asc' });
         console.log('Lijst gesorteerd op surname');
     });
+
+
+    ChronologischFilterButton.addEventListener('click', function () {
+        archiveList.sort('forename', { order: 'asc' });
+        console.log('Lijst gesorteerd op surname');
+    });
+
 
     Zoekbalk.addEventListener('input', function () {
         const searchValue = Zoekbalk.value; 
