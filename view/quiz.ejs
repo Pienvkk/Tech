@@ -9,7 +9,7 @@
 <body>
     <%- include('../view/header'); %>
     
-    <main>
+    <main class="mainQuiz">
       <h1>Formule 1 Quiz</h1>
 
       <% if (!user) { %> 
@@ -23,9 +23,9 @@
           <p>Watches F1 since: <%= user.firstSeason %></p>
           <p>Favorite Driver: <%= user.driver %></p>
           <p>Favorite Team: <%= user.team %></p>
-          <p>Favorite Circuit: <%= user.circuit %></p>
+          <p>Favorite Grand Prix: <%= user.circuit %></p>
       <% } else { %>
-          <p>User data is not available.</p>
+          <p>User data is not avail able.</p>
       <% } %>
       </div>  
 

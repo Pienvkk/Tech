@@ -209,7 +209,7 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
         console.error('Account creation error:', error)
         res.status(500).send('Server error')
     }
-});
+})
 
 
 
@@ -234,14 +234,14 @@ app.post('/accountPreferences', async (req, res) => {
         console.error('Preferences adding error:', error)
         res.status(500).send('Server error')
     }
-});
+})
 
 app.post('/follow', async (req, res) =>{
     const {targetUser} = req.body;
     const currentUser = req.session.user.username;
 
     try{
-        const users = db.collection('0Users');
+        const users = db.collection('0Users')
         
         await users.updateOne(
             { username: currentUser },
@@ -256,8 +256,8 @@ app.post('/follow', async (req, res) =>{
         res.json({ message: 'You are now following ${targetUsername}.'})
     
     }   catch (error) {
-            console.error('Error following user:', error);
-            res.status(500).send('Server error');
+            console.error('Error following user:', error)
+            res.status(500).send('Server error')
     }
 })
 
@@ -266,7 +266,7 @@ app.post('/unfollow', async (req, res) =>{
     const currentUser = req.session.user.username;
 
     try{
-        const users = db.collection('0Users');
+        const users = db.collection('0Users')
         
         await users.updateOne(
             { username: currentUser },
@@ -281,8 +281,8 @@ app.post('/unfollow', async (req, res) =>{
         res.json({ message: 'You are now following ${targetUsername}.'})
     
     }   catch (error) {
-            console.error('Error following user:', error);
-            res.status(500).send('Server error');
+            console.error('Error following user:', error)
+            res.status(500).send('Server error')
     }
 })
 
@@ -304,30 +304,69 @@ async function quiz(req, res) {
         const questions = await db.collection('0Questions').find().toArray()
         console.log("Quiz questions:", questions)
 
-        // Haal de championship data op op basis van het firstSeason van de gebruiker
+
+        // VRAAG 1 - CHAMPIONSHIP
+        // Haal de championship data op uit jaar van userPreference
         const championship = await db.collection('Championships').findOne({
             year: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
         })
 
         // Error bij championship database
-        if (!championship || !championship.driver_standings || championship.driver_standings.length < 4) {
-            console.error("No sufficient data for season:", user.firstSeason);
-            return res.status(500).send(`Error: No sufficient championship data for season ${user.firstSeason}`);
+        if (!championship) {
+            console.error("No sufficient data for season:", user.firstSeason)
+            return res.status(500).send(`Error: No championship data for ${user.firstSeason} season`)
         }
 
-        // Pak de top 4 coureurs
-        const topDrivers = championship.driver_standings.slice(0, 4).map(driver => driver.name)
+        // Pakt top 4 drivers - shufflet - pakt namen
+        const topDrivers = championship.driver_standings
+        .slice(0, 4) 
+        .sort(() => 0.5 - Math.random())
+        .map(driver => driver.name) 
+
+
+
+        // VRAAG 2 - CIRCUIT
+        // Haal de circuit data op
+        const circuits = await db.collection('Circuits').findOne()
+
+        // Error bij circuit database
+        if (!circuits) {
+            console.error("No sufficient data for circuit:", user.circuit)
+            return res.status(500).send(`Error: No circuit data for ${user.circuit}`)
+        }
+
+        // Pakt 3 circuits uit collectie en voegt circuit toe dat overeenkomt met userPreference
+        const circuitsList = await db.collection('Circuits').aggregate([{ $sample: { size: 3 } }]).toArray()
+        const userCircuit = await db.collection('Circuits').findOne({
+            circuitRef: user.circuit
+        })
+
+        circuitsList.push(userCircuit)
+
+        // shufflet - pakt bijbehorende landen
+        const topTracks = circuitsList
+        .sort(() => 0.5 - Math.random())
+        .map(circuit => circuit.country)
+
+
+
         // Functie om placeholders te vervangen in de vragen & antwoorden
         const personalizeText = (text, user, drivers) => {
             return text
-                .replace("{{firstSeason}}", user.firstSeason)
-                .replace("{{driver}}", user.driver)
-                .replace("{{team}}", user.team)
-                .replace("{{circuit}}", user.circuit)
-                .replace("{{answer1}}", drivers[0])
-                .replace("{{answer2}}", drivers[1])
-                .replace("{{answer3}}", drivers[2])
-                .replace("{{answer4}}", drivers[3])
+            .replace("{{firstSeason}}", user.firstSeason)
+            .replace("{{driver}}", user.driver)
+            .replace("{{team}}", user.team)
+            .replace("{{circuit}}", user.circuit)
+
+            .replace("{{answer1.1}}", topDrivers[0])
+            .replace("{{answer1.2}}", topDrivers[1])
+            .replace("{{answer1.3}}", topDrivers[2])
+            .replace("{{answer1.4}}", topDrivers[3])
+
+            .replace("{{answer2.1}}", topTracks[0])
+            .replace("{{answer2.2}}", topTracks[1])
+            .replace("{{answer2.3}}", topTracks[2])
+            .replace("{{answer2.4}}", topTracks[3])
         }
 
         // Function to remove unwanted quotes around the answer
