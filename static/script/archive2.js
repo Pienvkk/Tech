@@ -3,7 +3,7 @@ const AlphabetFilterButton = document.querySelector('.sort');
 const ChronologischFilterButton = document.querySelector('.zoeken details button:last-of-type');
 const Zoekbalk = document.querySelector('.zoeken label input');
 
-// check
+// check of het werkt
 document.addEventListener('DOMContentLoaded', function () {
     if (typeof List === 'undefined') {
         console.error('List.js is niet geladen!!');
