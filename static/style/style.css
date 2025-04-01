@@ -77,7 +77,7 @@ h1 {
 h2 {
     font-family: var(--font-family-primary);
 
-    margin:5rem 0.5rem 0.5rem;
+    margin:0rem 5rem 0.5rem 0.5rem;
     font-size: 5vh;
     display: flex;
 
@@ -366,11 +366,16 @@ details summary::marker,
     justify-content: center;
 }
 
-.mainIndex section:nth-of-type(3) div {
+.mainIndex section:nth-of-type(3) ul {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-}
 
+    list-style-type: none;
+}
+.mainIndex section:nth-of-type(3) ul li{
+    margin-right: 1em;
+}
 .mainIndex section:nth-of-type(3) h2 {
     text-align: center;
 }
@@ -450,7 +455,7 @@ details summary::marker,
     margin-top: auto;
 }
 
-/* List adjustments */
+/* List */
 .mainIndex section:last-of-type div:nth-of-type(2) {
     display: flex;
     justify-content: center;
@@ -677,8 +682,9 @@ details summary::marker,
     border-radius: 5px; 
   }
 
-  section div:first-of-type img:hover {
-    transform: scale(1.1); 
+  section div:first-of-type img:hover, .mainindex section:nth-of-type(3):hover ul li img {
+    transform: scale(2.0); 
+    transition:1s;
 }
 
   /*  lijst  */
@@ -689,6 +695,61 @@ details summary::marker,
     font-family: var(--font-family-primary);
     margin-bottom: auto;
   }
+
+/*
+  .mainIndex section:nth-of-type(3) ul li p{
+    color: #fff;
+    background-color: var(--color-background);
+    font-size: var(--font-size-large);
+
+    display: flex;
+    justify-content:center;
+
+    padding: 1rem;
+    font-family: var(--font-family-primary);
+
+    width: 100%;
+    margin-top: auto;
+  }
+
+*/
+
+
+.mainIndex section:nth-of-type(3) ul li {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.mainIndex section:nth-of-type(3) ul li p {
+    position: absolute;
+    bottom: 0; 
+    left: 1;
+    right: 1;
+    
+    color: #fff; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    width: 89%;
+    font-size: var(--font-size-large);
+    text-align: center; 
+    
+    padding: 1rem;
+    font-family: var(--font-family-primary); 
+    z-index: 1; 
+}
+/* Zorg dat de afbeelding volledig zichtbaar is */
+.mainIndex section:nth-of-type(3) ul li img {
+    width: 95%;
+    height: auto; 
+    display: block;
+}
+.mainIndex section:nth-of-type(3) ul li:hover img {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); 
+}
 
   .mainIndex section:last-of-type div:nth-of-type(2) ul:first-of-type li{
     font-family: var(--font-family-primary);
@@ -702,10 +763,40 @@ details summary::marker,
     list-style-type: none;
     margin-bottom: 3em;
     font-size: var(--font-size-medium);
-
   }
 
-  
+  /* button */
+
+
+    .round-button {
+        position: absolute; 
+        top: 92%; 
+        right: 10px; 
+        transform: translateY(-50%);
+
+        width: 40px; 
+        height: 40px; 
+        background-color: var(--color-primary);
+        color: var(--color-background-white); 
+        border: none; 
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+        font-size: 1.5rem; 
+
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        cursor: pointer; 
+        transition: background-color 0.3s ease, transform 0.3s ease; 
+        z-index: 1;
+    }
+    
+    /* Hover-effect voor de knop */
+    .round-button:hover {
+        background-color:rgb(99, 26, 26) ; /* Donkerdere blauwe kleur bij hover */
+        transform: translateY(-50%) scale(1.1); /* Vergroot de knop iets bij hover */
+    }
+
 /* carousel */
 
 .mainIndex section:first-of-type {
@@ -980,8 +1071,14 @@ input[type="submit"]:hover {
 }
 
 .mainCommunity div:nth-of-type(2) article img{
-    height: 25em;
+    height: 20em;
+    width: 20em;
+}
+
+.mainCommunity div:nth-of-type(2) article img:hover{
+    height:25em;
     width: 25em;
+    position: relative;
 }
 
 .mainCommunity article div{
