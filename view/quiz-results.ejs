@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/quiz">Take the Quiz</a></li>
+                <li><a href="/community">Community</a></li>
+                <li><a href="/archive">Archive</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="results">
+            <h2>Your Score: <%= score %></h2>
+            <h2>Total Score: <%= user.score %></h2>
+            <% if (score === total) { %>
+                <p>Excellent! You're a true F1 expert!</p>
+            <% } else if (score >= total * 0.7) { %>
+                <p>Great job! You know your stuff!</p>
+            <% } else { %>
+                <p>Good effort! Keep studying to improve your score!</p>
+            <% } %>
+            <a href="/quiz">Try Again</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Formula 1 Quiz Battle. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -50,6 +50,8 @@ app
     .get('/createPost', renderPage('createPost'))
     .get('/helpSupport', renderPage('helpSupport'))
     .get('/friends', renderPage('friends'))
+    .get('/quiz-results.ejs', quizresults)
+    .get('/leaderboard', leaderboard)
     
     
     .listen(process.env.PORT, () => {
@@ -60,6 +62,7 @@ app
 
 // Database
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
+const { render } = require('ejs')
 
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Formule1`
 
@@ -196,7 +199,7 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
 
 
         // Stopt nieuwe user in database
-        await users.insertOne({ username: username, password: pass, email: email, date: formattedDate, profilePic: filename});
+        await users.insertOne({ username: username, password: pass, email: email, date: formattedDate, profilePic: filename, score: 0});
 
         const user = await users.findOne({ username: username, password: pass })
         req.session.user = { username }
@@ -314,7 +317,6 @@ async function quiz(req, res) {
 
         // Pak de top 4 coureurs
         const topDrivers = championship.driver_standings.slice(0, 4).map(driver => driver.name)
-
         // Functie om placeholders te vervangen in de vragen & antwoorden
         const personalizeText = (text, user, drivers) => {
             return text
@@ -328,12 +330,17 @@ async function quiz(req, res) {
                 .replace("{{answer4}}", drivers[3])
         }
 
-        // Vervang placeholders in de vragen en antwoorden
-        const personalizedQuestions = questions.map(q => ({
+        // Function to remove unwanted quotes around the answer
+        const sanitizeAnswer = (answer) => {
+            return answer.replace(/\"/g, '').trim(); // Remove quotes
+        };
+
+        // When preparing the questions and answers
+        const personalizedQuestions = questions.map((q, index) => ({
             question: personalizeText(q.question, user, topDrivers),
-            answers: q.answers.split(", ").map(answer => personalizeText(answer, user, topDrivers)),
-            correctAnswer: personalizeText(q.correctAnswer, user, topDrivers)
-        }))
+            answers: q.answers.split(", ").map(answer => sanitizeAnswer(answer)),
+            correctAnswer: sanitizeAnswer(q.correctAnswer)
+        }));
 
         console.log("Rendering quiz with user:", user)
         res.render('quiz.ejs', { user, questions: personalizedQuestions })
@@ -344,12 +351,62 @@ async function quiz(req, res) {
     }
 }
 
+app.post('/submit-quiz', async (req, res) => {
+    try {
+        const user = req.session.user;
+        const users = db.collection('0Users');
+        const userAnswers = req.body;
+        const questions = await db.collection('0Questions').find().toArray();
+        let score = 0;
+
+        questions.forEach((question, index) => {
+            const userAnswer = userAnswers[`question-${index}`].replace(/\"/g, '').trim(); // Sanitize user input
+            const correctAnswer = question.correctAnswer.replace(/\"/g, '').trim(); // Sanitize correct answer
+
+            if (userAnswer === correctAnswer) {
+                score++
+            }
+            else{
+                score--
+            }
+        });
+        await users.updateOne(
+            { username: user.username },
+            { $inc: { score: score } } // Increment the user's score in the database
+        );
+
+        const updatedUser = await users.findOne({ username: user.username });
+
+
+        res.render('quiz-results.ejs', {score, user: updatedUser, total: questions.length  });
+    } catch (err) {
+        console.error("Error processing quiz:", err);
+        res.status(500).send("Error processing quiz results.");
+    }
+});
+
 
 // Community pagina
 async function community(req, res) {
     try {
         const posts = await db.collection('0Posts').find().toArray()
         res.render('community.ejs', { user: req.session.user || null, posts })
+    } catch (err) {
+    }
+}
+
+async function leaderboard(req, res) {
+    try {
+        const users = await db.collection('0Users').find().toArray()
+        res.render('leaderboard.ejs', { user: req.session.user || null, users })
+    } catch (err) {
+    }
+}
+
+async function quizresults(req, res) {
+    try {
+        const users = await db.collection('0Users').find().toArray()
+        res.render('quiz-results.ejs', { user: req.session.user || null, users })
     } catch (err) {
     }
 }
@@ -390,6 +447,7 @@ app.post('/createPost', upload.single('file'), async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+
 
 app.get('/uploads/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/uploads', req.params.filename);
