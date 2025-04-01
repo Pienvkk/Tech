@@ -34,16 +34,16 @@
         <div class="zoeken">
             <label><input type="search" class="search" placeholder="search..."></label>
                 <details>
-                    <summary>
+                    <summary class="firstsummary">
                         sort
                     </summary>
-                        <button class="sort">Alphabet</button>
-                        <button class="sort">Chronologisch</button>
+                    <button class="sort" value="forename">Alphabetic surename</button>
+                    <button class="sort" value="surname">Alphabetic forename</button>
                 </details>
         </div>
 
         <div id="archiveList">
-            <ul class="archiveList">
+            <ul class="archiveList list">
                 <% if (category == "drivers" && data.length > 0) { %>
                     <% data.forEach(item => { %>
                         <li> 
@@ -58,7 +58,7 @@
                 <% } else if (category == "constructors" && data.length > 0) { %>
                     <% data.forEach(item => { %>
                         <li>
-                            <p><%= item.name %></p>
+                            <p class="forename"><%= item.name %></p>
                             <p><%= item.nationality %></p>
                         </li>
                     <% }) %>
@@ -83,7 +83,7 @@
                 <% } else if (category == "circuits" && data.length > 0) { %>
                     <% data.forEach(item => { %>
                         <li>
-                            <p><%= item.name %></p>
+                            <p class="forename"><%= item.name %></p>
                             <p><%= item.location %></p>
                             <p><%= item.country %></p>
                         </li>
@@ -92,9 +92,9 @@
         </div>
     </main>
 
-    <%- include('../view/footer'); %>
+    <%- include('../view/footer'); %>k
     <script src="/script/lazyload.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
     <script src="/script/archive2.js"></script>
 
 </body>

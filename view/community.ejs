@@ -13,30 +13,37 @@
 
     <main class="mainCommunity">
         <div>
-        <h1>Community</h1>
-        <a href="/createPost">Create Post</a>
+            <h1>Community</h1>
+            <div class="zoekencommunity">
+                <label><input type="search" placeholder="search posts..."></label>
+                <a href="/createPost">Create Post</a>
+            </div>
         </div>
-        <div>
-        <% if (posts && posts.length > 0) { %>
-            <% posts.forEach(post => { %>
+        <div id="communityList">
+            <div class="communityList list">
+                <% if (posts && posts.length > 0) { %>
+                <% posts.forEach(post => { %>
                 <article>
-                    <%if (post.file) { %>
+                        <%if (post.file) { %>
                         <img src="/uploads/<%= post.file %>" alt="Post image">
-                    <% } %>
-                    <div>
-                    <h2><%= post.title %></h2>
-                    <p><%= post.content %></p>
-                    <p>User: <%= post.user %></p>
-                    </div>
+                        <% } %>
+                        <div class="posttext">
+                            <p class="posttitle"><%= post.title %></p>
+                            <p><%= post.content %></p>
+                            <p class="user">User: <%= post.user %></p>
+                        </div>            
                 </article>
-            <% }) %>
-        <% } else { %>
-            <p>Er zijn nog geen posts.</p>
-        <% } %>
+                <% }) %>
+                <% } else { %>
+                <p>Er zijn nog geen posts.</p>
+                <% } %>
+            </div>            
+        </div>   
     </main>
 
     <%- include('../view/footer'); %>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    <script src="/script/community.js"></script>
     <script src="/script/lazyload.js"></script>
-
 </body>
 </html>

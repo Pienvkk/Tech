@@ -77,7 +77,7 @@ h1 {
 h2 {
     font-family: var(--font-family-primary);
 
-    margin:5rem 0.5rem 0.5rem;
+    margin:0rem 5rem 0.5rem 0.5rem;
     font-size: 5vh;
     display: flex;
 
@@ -247,6 +247,22 @@ header nav ul li p {
     margin-top: 0.3rem;
 }
 
+details summary::marker,
+:is(::-webkit-details-marker) {
+  font-family: monospace;
+  color: #EE0000;
+  font-weight: bold;
+}
+
+.firstsummary{
+    color: #28282A;
+    padding: 0.5em;
+    background-color: #FFFFFF;
+}
+
+/* HOME MAIN */
+
+
 .mainIndex {
     display: flex;
     flex-direction: column;
@@ -255,10 +271,6 @@ header nav ul li p {
     max-width: 100%;
     min-height: 90vh;
 }
-
-
-/* HOME MAIN */
-
 
 .mainIndex {
     display: grid;
@@ -354,11 +366,16 @@ header nav ul li p {
     justify-content: center;
 }
 
-.mainIndex section:nth-of-type(3) div {
+.mainIndex section:nth-of-type(3) ul {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-}
 
+    list-style-type: none;
+}
+.mainIndex section:nth-of-type(3) ul li{
+    margin-right: 1em;
+}
 .mainIndex section:nth-of-type(3) h2 {
     text-align: center;
 }
@@ -438,7 +455,7 @@ header nav ul li p {
     margin-top: auto;
 }
 
-/* List adjustments */
+/* List */
 .mainIndex section:last-of-type div:nth-of-type(2) {
     display: flex;
     justify-content: center;
@@ -665,8 +682,9 @@ header nav ul li p {
     border-radius: 5px; 
   }
 
-  section div:first-of-type img:hover {
-    transform: scale(1.1); 
+  section div:first-of-type img:hover, .mainindex section:nth-of-type(3):hover ul li img {
+    transform: scale(2.0); 
+    transition:1s;
 }
 
   /*  lijst  */
@@ -677,6 +695,61 @@ header nav ul li p {
     font-family: var(--font-family-primary);
     margin-bottom: auto;
   }
+
+/*
+  .mainIndex section:nth-of-type(3) ul li p{
+    color: #fff;
+    background-color: var(--color-background);
+    font-size: var(--font-size-large);
+
+    display: flex;
+    justify-content:center;
+
+    padding: 1rem;
+    font-family: var(--font-family-primary);
+
+    width: 100%;
+    margin-top: auto;
+  }
+
+*/
+
+
+.mainIndex section:nth-of-type(3) ul li {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.mainIndex section:nth-of-type(3) ul li p {
+    position: absolute;
+    bottom: 0; 
+    left: 1;
+    right: 1;
+    
+    color: #fff; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    width: 89%;
+    font-size: var(--font-size-large);
+    text-align: center; 
+    
+    padding: 1rem;
+    font-family: var(--font-family-primary); 
+    z-index: 1; 
+}
+/* Zorg dat de afbeelding volledig zichtbaar is */
+.mainIndex section:nth-of-type(3) ul li img {
+    width: 95%;
+    height: auto; 
+    display: block;
+}
+.mainIndex section:nth-of-type(3) ul li:hover img {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); 
+}
 
   .mainIndex section:last-of-type div:nth-of-type(2) ul:first-of-type li{
     font-family: var(--font-family-primary);
@@ -690,10 +763,40 @@ header nav ul li p {
     list-style-type: none;
     margin-bottom: 3em;
     font-size: var(--font-size-medium);
-
   }
 
-  
+  /* button */
+
+
+    .round-button {
+        position: absolute; 
+        top: 92%; 
+        right: 10px; 
+        transform: translateY(-50%);
+
+        width: 40px; 
+        height: 40px; 
+        background-color: var(--color-primary);
+        color: var(--color-background-white); 
+        border: none; 
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+        font-size: 1.5rem; 
+
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        cursor: pointer; 
+        transition: background-color 0.3s ease, transform 0.3s ease; 
+        z-index: 1;
+    }
+    
+    /* Hover-effect voor de knop */
+    .round-button:hover {
+        background-color:rgb(99, 26, 26) ; /* Donkerdere blauwe kleur bij hover */
+        transform: translateY(-50%) scale(1.1); /* Vergroot de knop iets bij hover */
+    }
+
 /* carousel */
 
 .mainIndex section:first-of-type {
@@ -879,6 +982,7 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
+
 .mainProfile section h2 {
     margin: 0 0 2rem 0;
 }
@@ -908,14 +1012,16 @@ input[type="submit"]:hover {
     background-color: #ffffff;
     box-shadow:0px 0px 0px 2px rgb(161, 0, 0) inset;
     color: black;
-
 }
 
 /* COMMUNICTY  */
 
+
 .mainCommunity h1{
     width: 95%;
     margin: 0;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
 }
 
 .mainCommunity a {
@@ -925,7 +1031,6 @@ input[type="submit"]:hover {
     text-decoration: none;
 
     height: 20px;
-    width: 100px;
     border-radius: 5px;
 
     font-weight: 800;
@@ -938,7 +1043,7 @@ input[type="submit"]:hover {
     justify-content: space-between;
 }
 
-.mainCommunity div:first-of-type{
+/* .mainCommunity div:first-of-type{
     display: flex;
     flex-direction: row;
 
@@ -947,48 +1052,82 @@ input[type="submit"]:hover {
     margin: 2rem;
     margin-left: 1rem;
     width: 87%;
-}
+} */
 
-.mainCommunity div:nth-of-type(2){
+.mainCommunity div{
     margin: auto;
     width: 85%;
     align-items: center;
     flex-direction: column;
     display: flex;
-    position: relative;
+}
+
+.mainCommunity .zoekencommunity{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.zoekencommunity label{
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+.zoekencommunity input{
+    padding: 0.5rem 1rem;
+    border-radius: 75px;
+    background-color: rgb(250, 243, 243);
+}
+
+.zoekencommunity a{
+    grid-area: 1 / 5 / 2 / 6;
+    width: 50%;
 }
 
 .mainCommunity div:nth-of-type(2) article{
     border: 2px solid #FFFFFF;
     border-radius: 5px;
-    margin-bottom: 10px;
 
     display: flex;
-  
-    flex-direction: column;
-    justify-content: center;
-    width: 85%;
-
     flex-direction: row;
-    width: 90%;
+    width: 85%;
+    height: fit-content;
+    padding: 3em;
+
     background-color: rgb(28, 28, 28);
     margin-top: 2rem;
+}
+
+.mainCommunity div:nth-of-type(2) article img{
+    height: 20em;
+    width: 20em;
+}
+
+.mainCommunity div:nth-of-type(2) article img:hover{
+    height:25em;
+    width: 25em;
+    position: relative;
 }
 
 .mainCommunity article div{
     width: 100%;
     display: flex;
-
 }
 
-.mainCommunity h2{
+.mainCommunity article p{
+    display: flex;
+    justify-content: start;
+}
+
+.mainCommunity .posttitle{
     font-size:var(--font-size-xlarge);
-    margin-left: 0px;
-    margin-bottom: 10px;
-    max-width: 60%;
-    margin-top: 0;
+    margin-bottom: 10rem;
+    display: flex;
+    justify-content: left;
 
     font-weight: 50;
+    font-family: var(--font-family-primary);
 }
 
 .mainCommunity p:first-of-type{
@@ -997,15 +1136,11 @@ input[type="submit"]:hover {
     width: 100%;
 }
 
-.mainCommunity div:nth-of-type(2) article div{
-    flex-direction: column;
-}
-
 .mainCommunity div article img{ 
     width: 8vw;
-    margin: auto 1.5rem auto 0;
+    margin: 1.5rem;
+    border-radius: 5px;
     max-width: 12vw;
-    margin-left: auto;
     max-height: 12vw;
 }
 
@@ -1169,6 +1304,11 @@ input[type="submit"]:hover {
 
 
 /* COMMUNITY MAIN */
+.mainCommunity  label input{
+    border-radius: 75px;
+}
+
+
 .mainCommunity{
     display: flex;
     flex-direction: column;
@@ -1176,7 +1316,6 @@ input[type="submit"]:hover {
     align-items: center;      
     margin: 1rem 1rem;
 }
-
 
 /* ARCHIEF MAIN */
 
@@ -1570,29 +1709,48 @@ details div p {
 
 
 /* friends */
-/* .mainfriends{
+.mainfriends p:first-of-type, h1{
     display: flex;
-    flex-direction: column;
-    align-items: center;      
-} */
+    justify-content: center;
+}
 
-/* .vindvrienden {
+.mainfriends div:nth-of-type(2) {
     display: flex;
-    justify-content: space-between;
-    padding-top: 1em;
-} */
+    justify-content: baseline;
+}
+
+.mainfriends div label{
+    display: flex;
+    justify-content: center;
+}
+
+.mainfriends div li{
+    display: flex;
+    padding: 0.3em;
+    width: auto;
+}
 
 .vindvrienden label input{
     border-radius: 75px;
 }
 
-.vindvrienden label{
-    width: 50%;
+.mainfriends ul{
+    margin-left: 2em;
+    margin-bottom: 1em;
 }
 
-.vindvrienden li{
-    display: flex;
+.mainfriends .firstsummary{
+    margin-right: 3em;
+    width: 5%;
 }
+
+.mainfriends .friendssummary{
+    width: 25%;
+    margin-left: 2em;
+    padding-top: 1em;
+}
+
+
 /* FOOTER */
 
 footer{
