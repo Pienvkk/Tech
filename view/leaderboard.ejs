@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
+</head>
+<body>
+    <%- include('../view/header'); %>
+    <div class="container">
+        <main class="main-content">
+            <section class="leaderboard-section">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Rank</th>
+                            <th class="table-header">Username</th>
+                            <th class="table-header">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((user, index) => { %>
+                            <tr class="table-row">
+                                <td class="table-cell"><%= index + 1 %></td>
+                                <td class="table-cell"><%= user.username %></td>
+                                <td class="table-cell"><%= user.score %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

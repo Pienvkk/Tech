@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formule 1 Quiz</title>
-    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
 </head>
 <body>
     <%- include('../view/header'); %>
@@ -31,21 +31,23 @@
 
       <br><br>
 
-      <div>
-        <% questions.forEach(question => { %>
+      <form action="/submit-quiz" method="POST">
+        <% questions.forEach((question, index) => { %>
             <article>
-              <p><%= question.question %></p>
-              <div>
-                <% question.answers.forEach((answer, index) => { %>
-                  <label>
-                    <input type="radio" name="question-<%= question._id %>" value="<%= answer %>">
-                    <%= answer %>
-                  </label>
-                <% }) %>
-              </div>
+                <p><%= question.question %></p>
+                <div>
+                    <% question.answers.forEach((answer) => { %>
+                        <label>
+                            <!-- Using both question._id and index for a unique name per question group -->
+                            <input type="radio" name="question-<%= index %>" value="<%= answer %>">
+                            <%= answer %>
+                        </label>
+                    <% }) %>
+                </div>
             </article>
         <% }) %>
-      </div>
+        <button type="submit">Submit</button>
+    </form>
       <% } %>
 
   </main>
