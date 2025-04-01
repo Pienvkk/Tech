@@ -283,11 +283,7 @@ app.post('/unfollow', async (req, res) =>{
     }
 })
 
-
-
-
-
-// Quiz pagina
+// QUIZ PAGINA
 async function quiz(req, res) {
     try {
         const user = req.session.user
@@ -297,81 +293,91 @@ async function quiz(req, res) {
             return res.render('quiz.ejs', { user: null, questions: [] })
         }
 
-        // Haal de quizvragen op
+        // VRAGEN OPHALEN
         const questions = await db.collection('0Questions').find().toArray()
         console.log("Quiz questions:", questions)
 
 
+
         // VRAAG 1 - CHAMPIONSHIP
-        // Haal de championship data op uit jaar van userPreference
         const championship = await db.collection('Championships').findOne({
             year: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
         })
 
-        // Error bij championship database
         if (!championship) {
-            console.error("No sufficient data for season:", user.firstSeason)
+            console.error("No sufficient data for season:", user.firstSeason);
             return res.status(500).send(`Error: No championship data for ${user.firstSeason} season`)
         }
 
-        // Pakt top 4 drivers - shufflet - pakt namen
         const topDrivers = championship.driver_standings
-        .slice(0, 4) 
+        .slice(0, 4)
         .sort(() => 0.5 - Math.random())
-        .map(driver => driver.name) 
+        .map(driver => driver.name)
 
 
 
         // VRAAG 2 - CIRCUIT
-        // Haal de circuit data op
-        const circuits = await db.collection('Circuits').findOne()
+        const circuitsList = await db.collection('Circuits').aggregate([{ $sample: { size: 3 } }]).toArray()
+        const userCircuit = await db.collection('Circuits').findOne({ circuitRef: user.circuit })
 
-        // Error bij circuit database
-        if (!circuits) {
-            console.error("No sufficient data for circuit:", user.circuit)
+        if (!userCircuit || circuitsList.length === 0) {
+            console.error("No sufficient data for circuit:", user.circuit);
             return res.status(500).send(`Error: No circuit data for ${user.circuit}`)
         }
 
-        // Pakt 3 circuits uit collectie en voegt circuit toe dat overeenkomt met userPreference
-        const circuitsList = await db.collection('Circuits').aggregate([{ $sample: { size: 3 } }]).toArray()
-        const userCircuit = await db.collection('Circuits').findOne({
-            circuitRef: user.circuit
-        })
-
         circuitsList.push(userCircuit)
 
-        // shufflet - pakt bijbehorende landen
         const topTracks = circuitsList
         .sort(() => 0.5 - Math.random())
         .map(circuit => circuit.country)
 
 
+        
+        // VRAAG 3 - DRIVER NUMBER
+        const numbers = Array.from({ length: 3 }, () => Math.floor(Math.random() * 100) + 1)
+        const userDriver = await db.collection('Drivers').findOne({ driverRef: user.driver })
+
+        if (!userDriver || !userDriver.number) {
+            console.error("No sufficient data for driver:", user.driver);
+            return res.status(500).send(`Error: No driver data for ${user.driver}`)
+        }
+
+        numbers.push(userDriver.number)
+
+        const driverNumbers = numbers.sort(() => 0.5 - Math.random())
+
+
 
         // Functie om placeholders te vervangen in de vragen & antwoorden
-        const personalizeText = (text, user, drivers) => {
+        const personalizeText = (text, user, topDrivers, topTracks, driverNumbers) => {
             return text
-            .replace("{{firstSeason}}", user.firstSeason)
-            .replace("{{driver}}", user.driver)
-            .replace("{{team}}", user.team)
-            .replace("{{circuit}}", user.circuit)
+                .replace("{{firstSeason}}", user.firstSeason)
+                .replace("{{driver}}", user.driver)
+                .replace("{{team}}", user.team)
+                .replace("{{circuit}}", user.circuit)
 
-            .replace("{{answer1.1}}", topDrivers[0])
-            .replace("{{answer1.2}}", topDrivers[1])
-            .replace("{{answer1.3}}", topDrivers[2])
-            .replace("{{answer1.4}}", topDrivers[3])
+                .replace("{{answer1.1}}", topDrivers[0])
+                .replace("{{answer1.2}}", topDrivers[1])
+                .replace("{{answer1.3}}", topDrivers[2])
+                .replace("{{answer1.4}}", topDrivers[3])
 
-            .replace("{{answer2.1}}", topTracks[0])
-            .replace("{{answer2.2}}", topTracks[1])
-            .replace("{{answer2.3}}", topTracks[2])
-            .replace("{{answer2.4}}", topTracks[3])
-        }
+                .replace("{{answer2.1}}", topTracks[0])
+                .replace("{{answer2.2}}", topTracks[1])
+                .replace("{{answer2.3}}", topTracks[2])
+                .replace("{{answer2.4}}", topTracks[3])
+
+                .replace("{{answer3.1}}", driverNumbers[0] || "N/A")
+                .replace("{{answer3.2}}", driverNumbers[1] || "N/A")
+                .replace("{{answer3.3}}", driverNumbers[2] || "N/A")
+                .replace("{{answer3.4}}", driverNumbers[3] || "N/A")
+        };
 
         // Vervang placeholders in de vragen en antwoorden
         const personalizedQuestions = questions.map(q => ({
-        question: personalizeText(q.question, user, topDrivers, topTracks),
-        answers: q.answers.split(", ").map(answer => personalizeText(answer, user, topDrivers, topTracks)),
-        correctAnswer: personalizeText(q.correctAnswer, user, topDrivers, topTracks)
-        }))
+            question: personalizeText(q.question, user, topDrivers, topTracks, driverNumbers),
+            answers: q.answers.split(",").map(answer => personalizeText(answer, user, topDrivers, topTracks, driverNumbers)),
+            correctAnswer: personalizeText(q.correctAnswer, user, topDrivers, topTracks, driverNumbers)
+        }));
 
         console.log("Rendering quiz with user:", user)
         res.render('quiz.ejs', { user, questions: personalizedQuestions })
@@ -381,6 +387,7 @@ async function quiz(req, res) {
         res.status(500).send('Error fetching questions')
     }
 }
+
 
 
 // Community pagina
