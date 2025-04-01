@@ -369,23 +369,18 @@ async function quiz(req, res) {
                 .replace("{{answer2.3}}", topTracks[2])
                 .replace("{{answer2.4}}", topTracks[3])
 
-                .replace("{{answer3.1}}", driverNumbers[0] || "N/A")
-                .replace("{{answer3.2}}", driverNumbers[1] || "N/A")
-                .replace("{{answer3.3}}", driverNumbers[2] || "N/A")
-                .replace("{{answer3.4}}", driverNumbers[3] || "N/A")
-        };
+                .replace("{{answer3.1}}", driverNumbers[0])
+                .replace("{{answer3.2}}", driverNumbers[1])
+                .replace("{{answer3.3}}", driverNumbers[2])
+                .replace("{{answer3.4}}", driverNumbers[3])
+        }
 
-        // Function to remove unwanted quotes around the answer
-        const sanitizeAnswer = (answer) => {
-            return answer.replace(/\"/g, '').trim(); // Remove quotes
-        };
-
-        // When preparing the questions and answers
-        const personalizedQuestions = questions.map((q, index) => ({
-            question: personalizeText(q.question, user, topDrivers),
-            answers: q.answers.split(", ").map(answer => sanitizeAnswer(answer)),
-            correctAnswer: sanitizeAnswer(q.correctAnswer)
-        }));
+        // Vervang placeholders in de vragen en antwoorden
+        const personalizedQuestions = questions.map(q => ({
+            question: personalizeText(q.question, user, topDrivers, topTracks, driverNumbers),
+            answers: q.answers.split(",").map(answer => personalizeText(answer, user, topDrivers, topTracks, driverNumbers)),
+            correctAnswer: personalizeText(q.correctAnswer, user, topDrivers, topTracks, driverNumbers)
+        }))
 
         console.log("Rendering quiz with user:", user)
         res.render('quiz.ejs', { user, questions: personalizedQuestions })
@@ -399,37 +394,40 @@ async function quiz(req, res) {
 
 app.post('/submit-quiz', async (req, res) => {
     try {
-        const user = req.session.user;
-        const users = db.collection('0Users');
-        const userAnswers = req.body;
-        const questions = await db.collection('0Questions').find().toArray();
-        let score = 0;
+        const user = req.session.user
+        const users = db.collection('0Users')
+        const userAnswers = req.body
+        const questions = await db.collection('0Questions').find().toArray()
+        let score = 0
 
         questions.forEach((question, index) => {
-            const userAnswer = userAnswers[`question-${index}`].replace(/\"/g, '').trim(); // Sanitize user input
-            const correctAnswer = question.correctAnswer.replace(/\"/g, '').trim(); // Sanitize correct answer
+            const userAnswer = userAnswers[`question-${index}`]
+            const correctAnswer = question.correctAnswer.replace(/\"/g, '').trim()
 
-            if (userAnswer === correctAnswer) {
+            console.log(`User Answer: '${userAnswer}' | Correct Answer (personalized): '${correctAnswer}'`)
+
+            if (userAnswer && userAnswer.toString().trim().toLowerCase() === correctAnswer) {
                 score++
-            }
-            else{
+            } else {
                 score--
             }
-        });
+        })
+
         await users.updateOne(
             { username: user.username },
             { $inc: { score: score } } // Increment the user's score in the database
-        );
+        )
 
-        const updatedUser = await users.findOne({ username: user.username });
+        const updatedUser = await users.findOne({ username: user.username })
 
 
-        res.render('quiz-results.ejs', {score, user: updatedUser, total: questions.length  });
+        res.render('quiz-results.ejs', {score, user: updatedUser, total: questions.length  })
+
     } catch (err) {
-        console.error("Error processing quiz:", err);
-        res.status(500).send("Error processing quiz results.");
+        console.error("Error processing quiz:", err)
+        res.status(500).send("Error processing quiz results.")
     }
-});
+})
 
 
 // Community pagina
