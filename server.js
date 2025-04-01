@@ -302,44 +302,49 @@ async function quiz(req, res) {
         console.log("Quiz questions:", questions)
 
 
-
-        // Haal de championship data op
+        // VRAAG 1 - CHAMPIONSHIP
+        // Haal de championship data op uit jaar van userPreference
         const championship = await db.collection('Championships').findOne({
             year: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
         })
 
         // Error bij championship database
-        if (!championship || !championship.driver_standings || championship.driver_standings.length < 4) {
+        if (!championship) {
             console.error("No sufficient data for season:", user.firstSeason)
-            return res.status(500).send(`Error: No sufficient championship data for season ${user.firstSeason}`)
+            return res.status(500).send(`Error: No championship data for ${user.firstSeason} season`)
         }
 
-        // Pak de top 4 coureurs
-        const topDrivers = championship.driver_standings.slice(0, 4).map(driver => driver.name)
-        const winner = championship.driver_standings
+        // Pakt top 4 drivers - shufflet - pakt namen
+        const topDrivers = championship.driver_standings
+        .slice(0, 4) 
+        .sort(() => 0.5 - Math.random())
+        .map(driver => driver.name) 
 
 
 
+        // VRAAG 2 - CIRCUIT
         // Haal de circuit data op
-        const circuits = await db.collection('Circuits').findOne({
-            circuitRef: user.circuit
-        })
+        const circuits = await db.collection('Circuits').findOne()
 
-        // Error bij championship database
-        if (!circuits || !circuits.name) {
+        // Error bij circuit database
+        if (!circuits) {
             console.error("No sufficient data for circuit:", user.circuit)
-            return res.status(500).send(`Error: No sufficient circuit data for season ${user.circuit}`)
+            return res.status(500).send(`Error: No circuit data for ${user.circuit}`)
         }
 
-        // Pak namen van 4 circuits
-        const circuitsList = await db.collection('Circuits').aggregate([{ $sample: { size: 4 } }]).toArray();
-        const topTracks = circuitsList.map(circuit => circuit.name)
-
+        // Pakt 3 circuits uit collectie en voegt circuit toe dat overeenkomt met userPreference
+        const circuitsList = await db.collection('Circuits').aggregate([{ $sample: { size: 3 } }]).toArray()
         const userCircuit = await db.collection('Circuits').findOne({
             circuitRef: user.circuit
         })
 
         circuitsList.push(userCircuit)
+
+        // shufflet - pakt bijbehorende landen
+        const topTracks = circuitsList
+        .sort(() => 0.5 - Math.random())
+        .map(circuit => circuit.country)
+
 
 
         // Functie om placeholders te vervangen in de vragen & antwoorden
@@ -350,10 +355,10 @@ async function quiz(req, res) {
             .replace("{{team}}", user.team)
             .replace("{{circuit}}", user.circuit)
 
-            .replace("{{answer1.1}}", drivers[0])
-            .replace("{{answer1.2}}", drivers[1])
-            .replace("{{answer1.3}}", drivers[2])
-            .replace("{{answer1.4}}", drivers[3])
+            .replace("{{answer1.1}}", topDrivers[0])
+            .replace("{{answer1.2}}", topDrivers[1])
+            .replace("{{answer1.3}}", topDrivers[2])
+            .replace("{{answer1.4}}", topDrivers[3])
 
             .replace("{{answer2.1}}", topTracks[0])
             .replace("{{answer2.2}}", topTracks[1])
