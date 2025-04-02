@@ -43,14 +43,13 @@ app
     .get('/login', renderPage('login'))
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
-    .get('/profile', renderPage('profile'))
+    .get('/profile', profile)
     .get('/quiz', quiz)
     .get('/teamUp', teamUp)
     .get('/community', community)
     .get('/createPost', renderPage('createPost'))
     .get('/helpSupport', renderPage('helpSupport'))
     .get('/friends', renderPage('friends'))
-    
     
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
@@ -110,7 +109,7 @@ const profileStorage = multer.diskStorage({
     filename: function (req, file, cb) {
         const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
         cb(null, uniqueName);
-    }
+    }   
 });
 
 const uploadProfilePic = multer({ storage: profileStorage });
@@ -142,7 +141,8 @@ app.post('/login', async (req, res) => {
             firstSeason: user.firstSeason,
             team: user.team,
             driver: user.driver,
-            circuit: user.circuit
+            circuit: user.circuit,
+            profilePic: user.profilePic || '/static/default-profile.png'
         }
 
         // Update user om zijn preferences toe te voegen
@@ -283,7 +283,30 @@ app.post('/unfollow', async (req, res) =>{
 
 
 
+async function checkIfFollowing(currentUser, targetUser, db) {
+    const user = await db.collection("0Users").findOne({
+        username: currentUser,
+        following: targetUser
+    });
 
+    return user !== null;
+}
+
+
+
+
+app.get("/check-follow-status", async (req, res) => {
+    const { targetUser } = req.query;
+    const currentUser = req.session.user.username;
+
+    try {
+        const isFollowing = await checkIfFollowing(currentUser, targetUser, db);
+        res.json({ isFollowing });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to check follow status" });
+    }
+});
 
 
 // Quiz pagina
@@ -340,6 +363,14 @@ async function teamUp(req, res) {
     }
 }
 
+async function profile(req, res) {
+    try {
+        const user = await db.collection('0Users').findOne({ username: req.session.user.username });
+        res.render('profile.ejs', { user });
+    } catch (err) {
+    }
+}
+
 
 // Post uploaden
 app.post('/createPost', upload.single('file'), async (req, res) => {
@@ -374,7 +405,7 @@ app.get('/uploads/:filename', (req, res) => {
     res.sendFile(filePath);
 });
 
-app.get('/uploads/:filename', (req, res) => {
+app.get('/profilepics/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/profilepics', req.params.filename);
     res.sendFile(filePath);
 });
