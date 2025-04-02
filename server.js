@@ -120,12 +120,10 @@ const uploadProfilePic = multer({ storage: profileStorage });
 
 
 
-// Inloggen
+// LOGIN
 app.post('/login', async (req, res) => {
-    // Check of login request binnenkomt
     console.log('Received login request:', req.body)
 
-    // Inloggen
     const { username, pass} = req.body
 
     try {
@@ -150,13 +148,7 @@ app.post('/login', async (req, res) => {
             circuit: user.circuit
         }
 
-        // Update user om zijn preferences toe te voegen
-        // await users.updateOne(
-        //     { username: req.session.user.username },
-        //     { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit}}
-        //   );
         res.redirect('/')
-
 
     } catch (error) {
         console.error('Login fout:', error)
@@ -166,7 +158,7 @@ app.post('/login', async (req, res) => {
 
 
 
-// Uitloggen
+// LOGOUT
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/')
@@ -175,12 +167,10 @@ app.get('/logout', (req, res) => {
 
 
 
-// Account aanmaken
+// ACCOUNT AANMAKEN
 app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
-    // Check of account creatie request binnenkomt
     console.log('Received account creation request:', req.body)
 
-    // Account aanmaken
     const { username, pass, email, date, file} = req.body;
     const formattedDate = date ? new Date(date) : null
 
@@ -197,8 +187,6 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
             return res.status(400).send('Email taken')
         }
 
-
-        // Stopt nieuwe user in database
         await users.insertOne({ username: username, password: pass, email: email, date: formattedDate, profilePic: filename, score: 0});
 
         const user = await users.findOne({ username: username, password: pass })
@@ -213,14 +201,13 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
 
 
 
-// Voorkeuren instellen
+// USER PREFERENCES
 app.post('/accountPreferences', async (req, res) => {
     const {season, driver, team, circuit} = req.body;
 
     try {
         const users = db.collection('0Users')
 
-        // Update user om zijn preferences toe te voegen
         await users.updateOne(
             { username: req.session.user.username },
             { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit }}
@@ -236,6 +223,9 @@ app.post('/accountPreferences', async (req, res) => {
     }
 })
 
+
+
+// FOLLOW
 app.post('/follow', async (req, res) =>{
     const {targetUser} = req.body;
     const currentUser = req.session.user.username;
@@ -261,6 +251,9 @@ app.post('/follow', async (req, res) =>{
     }
 })
 
+
+
+// UNFOLLOW
 app.post('/unfollow', async (req, res) =>{
     const {targetUser} = req.body;
     const currentUser = req.session.user.username;
@@ -285,6 +278,8 @@ app.post('/unfollow', async (req, res) =>{
             res.status(500).send('Server error')
     }
 })
+
+
 
 // QUIZ PAGINA
 async function quiz(req, res) {
@@ -395,6 +390,8 @@ async function quiz(req, res) {
 }
 
 
+
+// QUIZ SUBMITTING / SCORE BEREKENEN
 app.post('/submit-quiz', async (req, res) => {
     try {
         const user = req.session.user
@@ -434,7 +431,8 @@ app.post('/submit-quiz', async (req, res) => {
 })
 
 
-// Community pagina
+
+// COMMUNITY PAGINA
 async function community(req, res) {
     try {
         const posts = await db.collection('0Posts').find().toArray()
@@ -443,6 +441,9 @@ async function community(req, res) {
     }
 }
 
+
+
+// LEADERBOARD PAGINA -> TIJDELIJK??
 async function leaderboard(req, res) {
     try {
         const users = await db.collection('0Users').find().toArray()
@@ -451,6 +452,9 @@ async function leaderboard(req, res) {
     }
 }
 
+
+
+// QUIZ-RESULTS PAGINA
 async function quizresults(req, res) {
     try {
         const users = await db.collection('0Users').find().toArray()
@@ -459,6 +463,9 @@ async function quizresults(req, res) {
     }
 }
 
+
+
+// TEAM-UP PAGINA
 async function teamUp(req, res) {
     try {
         const users = await db.collection('0Users').find().toArray()
@@ -468,7 +475,8 @@ async function teamUp(req, res) {
 }
 
 
-// Post uploaden
+
+// POST UPLOADEN
 app.post('/createPost', upload.single('file'), async (req, res) => {
     console.log('Received post creation request:', req.body); 
 
@@ -494,21 +502,27 @@ app.post('/createPost', upload.single('file'), async (req, res) => {
         console.error('Post creation error:', error);
         res.status(500).send('Server error');
     }
-});
+})
 
 
+
+// UPLOAD IMAGES OPHALEN
 app.get('/uploads/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/uploads', req.params.filename);
     res.sendFile(filePath);
-});
+})
 
+
+
+// PROFILE IMAGES OPHALEN
 app.get('/uploads/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/profilepics', req.params.filename);
     res.sendFile(filePath);
-});
+})
 
 
-// Archief pagina
+
+// ARCHIVE PAGINA
 app.get('/archive', async (req, res) => {
     try {
         console.log("Data is er"); // kijken of t binnenkomt
@@ -521,17 +535,13 @@ app.get('/archive', async (req, res) => {
 
         if (category === "drivers") {
             data =  await db.collection('Drivers').find().toArray()
-        } 
-        else if (category === "constructors") {
+        } else if (category === "constructors") {
             data =  await db.collection('Constructors').find().toArray()
-        } 
-        else if (category === "championships") {
+        } else if (category === "championships") {
             data =  await db.collection('Championships').find().toArray()
-        } 
-        else if (category === "circuits") {
+        } else if (category === "circuits") {
             data =  await db.collection('Circuits').find().toArray()
-        } 
-        else {
+        } else {
             return res.status(400).json({ error: "No category" })
         }
         
@@ -548,16 +558,12 @@ app.get('/archive', async (req, res) => {
 
 // Middleware voor not found errors - error 404
 app.use((req, res) => {
-    // log error to console
     console.error('404 error at URL: ' + req.url)
-    // send back a HTTP response with status code 404
     res.status(404).send('404 error at URL: ' + req.url)
 })
 
 // Middleware voor server errors - error 500
 app.use((err, req, res) => {
-    // log error to console
     console.error(err.stack)
-    // send back a HTTP response with status code 500
     res.status(500).send('500: server error')
 })
