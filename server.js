@@ -303,6 +303,7 @@ async function quiz(req, res) {
 
 
         // VRAAG 1 - CHAMPIONSHIP
+        // Pakt top 4 drivers uit seizoen van userPreferences als mogelijke antwoorden
         const championship = await db.collection('Championships').findOne({
             year: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
         })
@@ -320,6 +321,7 @@ async function quiz(req, res) {
 
 
         // VRAAG 2 - CIRCUIT
+        // Pakt 3 random circuits - voegt user circuit toe - en geeft de bijbehorende landen als mogelijke antwoorden
         const circuitsList = await db.collection('Circuits').aggregate([{ $sample: { size: 3 } }]).toArray()
         const userCircuit = await db.collection('Circuits').findOne({ circuitRef: user.circuit })
 
@@ -337,6 +339,7 @@ async function quiz(req, res) {
 
         
         // VRAAG 3 - DRIVER NUMBER
+        // Pakt 3 random getallen tussen 0 & 100 en voegt driver nummer toe van driver van user preferences als mogelijke antwoorden
         const numbers = Array.from({ length: 3 }, () => Math.floor(Math.random() * 100) + 1)
         const userDriver = await db.collection('Drivers').findOne({ driverRef: user.driver })
 
@@ -404,10 +407,11 @@ app.post('/submit-quiz', async (req, res) => {
             const userAnswer = userAnswers[`question-${index}`]
             const correctAnswer = userAnswers[`correctAnswer-${index}`]
 
-            console.log(`User Answer: '${userAnswer}' | Correct Answer (personalized): '${correctAnswer}'`)
+            console.log(`User Answer: '${userAnswer}' | Correct Answer: '${correctAnswer}'`)
 
             if (userAnswer && userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
                 score++
+                score = Math.round(score * 1.5)
             } else {
                 score--
             }
