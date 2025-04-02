@@ -402,11 +402,11 @@ app.post('/submit-quiz', async (req, res) => {
 
         questions.forEach((question, index) => {
             const userAnswer = userAnswers[`question-${index}`]
-            const correctAnswer = question.correctAnswer.replace(/\"/g, '').trim()
+            const correctAnswer = userAnswers[`correctAnswer-${index}`]
 
             console.log(`User Answer: '${userAnswer}' | Correct Answer (personalized): '${correctAnswer}'`)
 
-            if (userAnswer && userAnswer.toString().trim().toLowerCase() === correctAnswer) {
+            if (userAnswer && userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
                 score++
             } else {
                 score--
