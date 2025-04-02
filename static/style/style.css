@@ -882,7 +882,6 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
-
 .mainProfile section h2 {
     margin: 0 0 2rem 0;
 }
@@ -895,7 +894,6 @@ input[type="submit"]:hover {
 }
 
 /* COMMUNICTY  */
-
 
 .mainCommunity h1{
     width: 95%;
@@ -937,9 +935,8 @@ input[type="submit"]:hover {
 .mainCommunity div{
     margin: auto;
     width: 85%;
-    align-items: center;
-    flex-direction: column;
     display: flex;
+    flex-direction: column;
 }
 
 .mainCommunity .zoekencommunity{
@@ -989,11 +986,6 @@ input[type="submit"]:hover {
     display: flex;
 }
 
-.mainCommunity article p{
-    display: flex;
-    justify-content: start;
-}
-
 .mainCommunity .posttitle{
     font-size:var(--font-size-xlarge);
     margin-bottom: 10rem;
@@ -1016,6 +1008,10 @@ input[type="submit"]:hover {
     border-radius: 5px;
     max-width: 12vw;
     max-height: 12vw;
+}
+
+.mainCommunity .user{
+    padding-top: 1em;
 }
 
 
@@ -1047,7 +1043,6 @@ input[type="submit"]:hover {
     grid-template-columns: auto 50vw auto;
     grid-template-rows: auto auto auto;
     gap: 3rem;
-    
 }
 
 .mainQuiz section:nth-of-type(1){
