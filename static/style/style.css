@@ -340,11 +340,11 @@ details summary::marker,
     display: flex;
     flex-direction: column;
     list-style-type: none;
-    margin-top: 19em;
+    margin-top: 10em;
 }
 
 .mainIndex section:nth-of-type(2) div ul li p {
-    font-size: 3vh;
+    font-size: 5vh;
     font-family: var(--font-family-primary);
 }
 
