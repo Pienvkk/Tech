@@ -277,6 +277,9 @@ details summary::marker,
     min-height: 90vh;
 }
 
+.swiper-button-prev, .swiper-button-next, .swiper-pagination-bullet, .swiper-pagination-bullet-active, .swiper-pagination-bullet-active {
+    color: #838383 !important;
+}
 .mainIndex h1{
     font-size: 10vh;
 }
