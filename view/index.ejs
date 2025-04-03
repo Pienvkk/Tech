@@ -52,39 +52,26 @@
         </section>
          <section>
                         <h2>player leaderbord</h2> <!--zijn divs hier oke?-->
-                            <div>
-                                <ul>
-                                    <li><p>2. Jan38 </p></li>
-                                    <li><p>1. Bas38 </p></li>
-                                    <li><p>3. Koen38 </p> </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul>
-                                    <li><h3>Gebruiker</h3></li>
-                                    <li>Bas8390</li>
-                                    <li>Tom030</li>
-                                    <li>Koen8393</li>
-                                    <li>Ben8932</li>
-                                    <li>Bert8398</li>
-                                </ul>
-                                <ul>
-                                    <li><h3>Level</h3></li>
-                                    <li>level pro</li>
-                                    <li>level pro</li>
-                                    <li>level good</li>
-                                    <li>level good</li>
-                                    <li>level good</li>
-                                </ul>
-                                <ul>
-                                    <li><h3>Points</h3></li>
-                                    <li>793794</li>
-                                    <li>373284</li>
-                                    <li>673843</li>
-                                    <li>778349</li>
-                                    <li>889290</li>
-                                </ul>
-                            </div>
+                        <section class="leaderboard-section">
+                            <table class="leaderboard-table">
+                                <thead>
+                                    <tr>
+                                        <th class="table-header">Rank</th>
+                                        <th class="table-header">Username</th>
+                                        <th class="table-header">Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% users.forEach((user, index) => { %>
+                                        <tr class="table-row">
+                                            <td class="table-cell"><%= index + 1 %></td>
+                                            <td class="table-cell"><%= user.username %></td>
+                                            <td class="table-cell"><%= user.score %></td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </section>
         </section>
     </main>
 

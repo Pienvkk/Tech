@@ -39,7 +39,7 @@ app
     .set ('view engine', 'ejs')
     .set ('views', 'view')
 
-    .get('/', renderPage('index'))
+    .get('/', index)
     .get('/login', renderPage('login'))
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
@@ -408,7 +408,6 @@ app.post('/submit-quiz', async (req, res) => {
 
             if (userAnswer && userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
                 score++
-                score = Math.round(score * 1.5)
             } else {
                 score--
             }
@@ -430,7 +429,13 @@ app.post('/submit-quiz', async (req, res) => {
     }
 })
 
-
+async function index(req, res) {
+    try {
+        const posts = await db.collection('0Users').find().toArray()
+        res.render('index.ejs', { user: req.session.user || null, users })
+    } catch (err) {
+    }
+}
 
 // COMMUNITY PAGINA
 async function community(req, res) {

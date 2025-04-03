@@ -428,7 +428,7 @@ header nav ul li p {
   /*  lijst */
   
 
-  .mainIndex section:last-of-type div:nth-of-type(2){
+  .mainIndex section:last-of-type table{
     display: flex;
     justify-content: center;
     margin-top: 10em;
@@ -449,21 +449,21 @@ header nav ul li p {
   /*  lijst  */
 
 
-  .mainIndex section:last-of-type div:nth-of-type(2)  ul li h3{
+  .mainIndex section:last-of-type th{
     font-size: var(--font-size-xlarge);
     font-family: var(--font-family-primary);
     margin-bottom: auto;
   }
-
-  .mainIndex section:last-of-type div:nth-of-type(2) ul:first-of-type li{
+  
+  .leaderboard-section :nth-of-type(2) ul:first-of-type li{
     font-family: var(--font-family-primary);
   }
 
-  .mainIndex section:last-of-type div:nth-of-type(2) ul{
+  .leaderboard-section table{
     margin-right: 5em;
     margin-left: 5em;
   }
-  .mainIndex section:last-of-type div:nth-of-type(2) ul li{
+  .leaderboard-section td{
     list-style-type: none;
     margin-bottom: 3em;
     font-size: var(--font-size-medium);
