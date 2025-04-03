@@ -76,15 +76,15 @@ main {
 h1 {
     font-family: var(--font-family-primary);
 
-    font-size: 7vh;
+    font-size: 8vh;
     margin: 2rem 0 2rem 3rem;
 }
 
 h2 {
     font-family: var(--font-family-primary);
 
-    margin:0rem 5rem 0.5rem 0.5rem;
-    font-size: 5vh;
+    margin:2rem 5rem 0.5rem 0.5rem;
+    font-size: 6vh;
 }
 
 form {
@@ -267,15 +267,6 @@ details summary::marker,
 
 
 .mainIndex {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    max-width: 100%;
-    min-height: 90vh;
-}
-
-.mainIndex {
     display: grid;
     grid-template-columns: repeat(12, 1fr); 
     grid-template-rows: auto; 
@@ -286,6 +277,16 @@ details summary::marker,
     min-height: 90vh;
 }
 
+.swiper-button-prev, .swiper-button-next, .swiper-pagination-bullet, .swiper-pagination-bullet-active, .swiper-pagination-bullet-active {
+    color: #838383 !important;
+}
+.mainIndex h1{
+    font-size: 10vh;
+}
+
+.mainIndex section:nth-of-type(2) h2{
+    font-size: 5.9vh;
+}
 
 .mainIndex section {
     grid-column: span 12; 
@@ -339,11 +340,11 @@ details summary::marker,
     display: flex;
     flex-direction: column;
     list-style-type: none;
-    margin-top: 19em;
+    margin-top: 10em;
 }
 
 .mainIndex section:nth-of-type(2) div ul li p {
-    font-size: 3vh;
+    font-size: 5vh;
     font-family: var(--font-family-primary);
 }
 
@@ -355,7 +356,7 @@ details summary::marker,
 .mainIndex section:nth-of-type(2) img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+
 }
 
 .mainIndex section:nth-of-type(3) h2 {
@@ -945,7 +946,6 @@ input[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 90vh;
     font-family: Arial, sans-serif;
 }
 
@@ -970,7 +970,6 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
-
 .mainProfile section h2 {
     margin: 0 0 2rem 0;
 }
@@ -982,8 +981,21 @@ input[type="submit"]:hover {
     background-color: gray;
 }
 
-/* COMMUNICTY  */
+.mainProfile a:last-of-type{
+    background-color: #e11515;
+    border-radius: 5px;
+    padding: 0.8rem 1.4rem;
+    color: white;
+    border: none;
+    font-size: 1.4rem;
+    transition: 0.3s, color 0.3s, border 0.3s;
+    font-weight: 800;
+    text-decoration: none;
 
+    font-size:var(--font-size-medium);
+}
+
+/* COMMUNICTY  */
 
 .mainCommunity h1{
     width: 95%;
@@ -1026,9 +1038,8 @@ input[type="submit"]:hover {
 .mainCommunity div{
     margin: auto;
     width: 85%;
-    align-items: center;
-    flex-direction: column;
     display: flex;
+    flex-direction: column;
 }
 
 .mainCommunity .zoekencommunity{
@@ -1113,9 +1124,15 @@ input[type="submit"]:hover {
 }
 
 .mainCommunity div article img{ 
-    margin-right: 1em;
-    border-radius: 3px;
-    height: 80%;
+    width: 8vw;
+    margin: 1.5rem;
+    border-radius: 5px;
+    max-width: 12vw;
+    max-height: 12vw;
+}
+
+.mainCommunity .user{
+    padding-top: 1em;
 }
 
 
@@ -1147,7 +1164,6 @@ input[type="submit"]:hover {
     grid-template-columns: auto 50vw auto;
     grid-template-rows: auto auto auto;
     gap: 3rem;
-    
 }
 
 .mainQuiz section:nth-of-type(1){
@@ -1555,7 +1571,7 @@ input[type="submit"]:hover {
 
  /*  FORM */
  form {
-    padding: 2rem 2;
+    padding: 2rem 2rem;
     border-radius: 8px;
     margin: 0 auto;
 

@@ -49,7 +49,7 @@ app
     .get('/community', community)
     .get('/createPost', renderPage('createPost'))
     .get('/helpSupport', renderPage('helpSupport'))
-    .get('/friends', renderPage('friends'))
+    // .get('/friends', renderPage('friends'))
     
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
