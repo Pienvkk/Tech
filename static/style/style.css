@@ -943,7 +943,6 @@ input[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 90vh;
     font-family: Arial, sans-serif;
 }
 
@@ -1555,7 +1554,7 @@ input[type="submit"]:hover {
 
  /*  FORM */
  form {
-    padding: 2rem 2;
+    padding: 2rem 2rem;
     border-radius: 8px;
     margin: 0 auto;
 
