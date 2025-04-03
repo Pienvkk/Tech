@@ -60,7 +60,7 @@ app
 
 
 
-// Database
+// DATABASE
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const { render } = require('ejs')
 
