@@ -981,6 +981,20 @@ input[type="submit"]:hover {
     background-color: gray;
 }
 
+.mainProfile a:last-of-type{
+    background-color: #e11515;
+    border-radius: 5px;
+    padding: 0.8rem 1.4rem;
+    color: white;
+    border: none;
+    font-size: 1.4rem;
+    transition: 0.3s, color 0.3s, border 0.3s;
+    font-weight: 800;
+    text-decoration: none;
+
+    font-size:var(--font-size-medium);
+}
+
 /* COMMUNICTY  */
 
 .mainCommunity h1{
