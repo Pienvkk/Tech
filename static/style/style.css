@@ -981,6 +981,12 @@ input[type="submit"]:hover {
     background-color: gray;
 }
 
+.mainProfile a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .mainProfile a:last-of-type{
     background-color: #e11515;
     border-radius: 5px;
@@ -991,6 +997,7 @@ input[type="submit"]:hover {
     transition: 0.3s, color 0.3s, border 0.3s;
     font-weight: 800;
     text-decoration: none;
+    margin: 2rem 44em 0rem 44rem;
 
     font-size:var(--font-size-medium);
 }
