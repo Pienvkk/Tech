@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
+</head>
+<body>
+
+    <%- include('../view/header') %>
+
+    <main>
+        <section class="results">
+            <h2>Your Score: <%= score %></h2>
+            <h2>Total Score: <%= user.score %></h2>
+            <% if (score === total) { %>
+                <p>Excellent! You're a true F1 expert!</p>
+            <% } else if (score >= total * 0.7) { %>
+                <p>Great job! You know your stuff!</p>
+            <% } else { %>
+                <p>Good effort! Keep studying to improve your score!</p>
+            <% } %>
+            <a href="/quiz">Try Again</a>
+        </section>
+    </main>
+    
+    <%- include('../view/footer'); %>
+    <script src="/script/lazyload.js"></script>
+
+</body>
+</html>

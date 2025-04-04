@@ -15,28 +15,29 @@
         <h1>archives</h1>
 
         <aside>
-            <div>
-                <a href="/archive?category=drivers" class="<%= category === "drivers" ? 'selected' : '' %>"> Drivers</a>
-            </div>
-            
-            <div>
-                <a href="/archive?category=constructors" class="<%= category === "constructors" ? 'selected' : '' %>"> Constructors</a>
-            </div>
+                <h3>Filters</h3>
+                    <div>
+                        <a href="/archive?category=drivers" class="<%= category === "drivers" ? 'selected' : '' %>"> Drivers</a>
+                    </div>
+                    
+                    <div>
+                        <a href="/archive?category=constructors" class="<%= category === "constructors" ? 'selected' : '' %>"> Constructors</a>
+                    </div>
 
-            <div>
-                <a href="/archive?category=championships" class="<%= category === "championships" ? 'selected' : '' %>"> Championships</a>
-            </div>
-            <div>
-                <a href="/archive?category=circuits" class="<%= category === "circuits" ? 'selected' : '' %>"> Circuits</a>
-            </div>
+                    <div>
+                        <a href="/archive?category=championships" class="<%= category === "championships" ? 'selected' : '' %>"> Championships</a>
+                    </div>
+                    <div>
+                        <a href="/archive?category=circuits" class="<%= category === "circuits" ? 'selected' : '' %>"> Circuits</a>
+                    </div>
         </aside>
 
         <div class="zoeken">
             <label><input type="search" class="search" placeholder="search..."></label>
                 <details>
                     <summary class="firstsummary">sort</summary>
-                    <button class="sort" value="forename">Alphabetic surename</button>
-                    <button class="sort" value="surname">Alphabetic forename</button>
+                        <button class="sort" value="forename">Alphabetic surename</button>
+                        <button class="sort" value="surname">Alphabetic forename</button>
                 </details>
         </div>
 
