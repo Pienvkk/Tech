@@ -1010,6 +1010,18 @@ input[type="submit"]:hover {
 
 /* PROFILE MAIN */
 
+.mainProfile{
+    display: flex;
+    flex-direction: column;
+}
+
+.mainProfile div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
 .mainProfile section {
     display: flex;
     flex-direction: column;
@@ -1017,8 +1029,27 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
+.mainProfile ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+}
+
+.mainProfile ul li {
+    font-size: 2vh;
+    font-family: var(--font-family-primary);
+    font-weight: 200;
+    margin-top: 10px;
+}
+
+
 .mainProfile section h2 {
     margin: 0 0 2rem 0;
+}
+
+.mainProfile h1{
+    margin-left: 0;
+    margin-bottom: 40px ;
 }
 
 .mainProfile section img {
@@ -1034,7 +1065,7 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
-.mainProfile a:last-of-type{
+.mainProfile a{
     background-color: #e11515;
     border-radius: 5px;
     padding: 0.8rem 1.4rem;
