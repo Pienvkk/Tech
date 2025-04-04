@@ -86,7 +86,11 @@ h2 {
     margin:2rem 5rem 0.5rem 0.5rem;
     font-size: 6vh;
 }
-
+h3{
+    font-family: var(--font-family-primary);
+    margin: 0.5rem 0rem 2rem 0rem;
+    font-size: var(--spacing-large);
+}
 form {
     display: flex;
     flex-direction: column;
@@ -258,9 +262,15 @@ details summary::marker,
 }
 
 .firstsummary{
-    color: #28282A;
-    padding: 0.5em;
-    background-color: #FFFFFF;
+    color: var(--color-background-white);
+    font-family: var(--font-family-primary);
+    padding: 0.8em 2rem;
+    background-color:#333;
+    border-radius: 5px;
+}
+.firstsummary:hover{
+    background-color: #262626;
+    padding: 0.8em 2rem;
 }
 
 /* HOME MAIN */
@@ -392,7 +402,7 @@ details summary::marker,
 }
 
 .mainIndex section:last-of-type div:first-of-type ul {
-    margin-top: 10em;
+    margin-top: 5em;
     display: flex;
     justify-content: space-around;
     gap: 20px;
@@ -457,7 +467,7 @@ details summary::marker,
 .mainIndex section:last-of-type div:nth-of-type(2) {
     display: flex;
     justify-content: center;
-    margin-top: 10em;
+    margin-top: 5em;
     background-color: hsl(0, 0%, 100%);
     padding: 3rem 2rem 2rem;
     color: var(--color-text-light);
@@ -602,8 +612,6 @@ details summary::marker,
   }
 
   .mainIndex section:last-of-type div:first-of-type ul{
-    margin-top: 10em;
-
     display: flex;
     justify-content: space-around;
 
@@ -1347,26 +1355,40 @@ input[type="submit"]:hover {
     gap: 1rem; 
 }
 
-.mainArchive aside div {
-    background-color: var(--color-primary);
-    border-radius: var(--border-radius-medium);
-    text-align: center;
-    padding: var(--spacing-small);
-}
-
 .mainArchive aside div a {
     color: white;
     text-decoration: none;
     font-size: var(--font-size-medium);
     font-weight: bold;
 }
+.mainArchive aside div a:hover{
+    background-color: #a51414;
+}
+.mainArchive aside div {
+    margin-bottom: 1rem;
+}
+
+
+
+.mainArchive aside{
+    background-color: var(--color-text-dark);
+    padding: 1rem 1rem 1rem 1rem;
+    border-radius: 3px;
+}
 
 .mainArchive aside div a.selected {
-    background-color: var(--color-secondary);
+    background-color: #240907;
+    width: 100%;
     padding: var(--spacing-small);
     border-radius: var(--border-radius-small);
 }
-
+.mainArchive aside div a{
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-medium);
+    text-align: center;
+    padding: var(--spacing-small);
+    margin-bottom: 2rem;
+}
 /* ARCHIEF ID*/
 
 #archiveList {
@@ -1502,12 +1524,19 @@ input[type="submit"]:hover {
 
 .zoeken details button{
    margin-top: 1rem;
+   padding: 0.5rem;
    background-color: #FFF;
+   font-weight: bold;
+   border-radius: 5px;
+}
 
-
+.zoeken details button:hover{
    padding: 0.5rem;
    border-radius: 3px;
+   background-color: #ebebeb;
 }
+
+
 .zoeken label input{
     padding: 0.5rem 1rem;
     border-radius: 75px;
