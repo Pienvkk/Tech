@@ -31,7 +31,8 @@ good luck coding! (^-^)
 
 :root{
     --font-family-primary:'formule1mainfont';
-    --font-family-secondary: 'sans-serif';
+    --font-family-primary2: "alfabet", sans-serif;
+
 
 
     --color-background-white: #FFFF;
@@ -59,6 +60,7 @@ good luck coding! (^-^)
     --border-radius-large: 8px;
 
     --box-shadow: 0px 4px 4px 0px 
+
 }
 
 
@@ -676,12 +678,7 @@ details summary::marker,
 
   /*  lijst */
   
-
   .mainIndex section:last-of-type table{
-    display: flex;
-    justify-content: center;
-    margin-top: 10em;
-    
     background-color:hsl(0, 0%, 100%);
     padding: 3rem 2rem 2rem;
     color:var(--color-text-light);
@@ -861,16 +858,16 @@ details summary::marker,
 }
 
 .leaderboard-table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
 .table-header {
     background-color: black; /* Use your project's primary color */
-    color: var(--text-on-primary); /* Ensure text is readable on primary color */
+    color: #FFF; /* Ensure text is readable on primary color */
     padding: 12px;
-    text-align: left;
+    text-align: center;
     font-weight: bold;
 }
 
@@ -878,16 +875,28 @@ details summary::marker,
     background-color: var(--row-alt-bg-color); /* Alternate row background */
 }
 
+
 .table-cell {
     padding: 10px;
     border-bottom: 1px solid var(--border-color); /* Use your project's border color */
-    color: var(--text-color); /* Use your project's text color */
+    color:var(--text-color); /* Use your project's text color */
 }
-
+.table-cell:nth-of-type(2){
+    font-family: var(--font-family-primary);
+}
 .table-row:hover {
     background-color: var(--hover-bg-color); /* Row hover background color */
 }
 
+.table-row{
+    border-bottom: 2px solid #000;
+}
+.mainIndex td{
+    font-family: "alfabet", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: var(--font-size-large);
+}
 /* INLOGGEN MAIN */
 
 .mainLogin {
