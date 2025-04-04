@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formule 1 Quiz</title>
-    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/style.css" type="text/css">
 </head>
 <body>
-    <%- include('../view/header'); %>
+    <%- include('../view/header') %>
     
-    <main>
+    <main class="mainQuiz">
       <h1>Formule 1 Quiz</h1>
 
       <% if (!user) { %> 
@@ -23,26 +23,33 @@
           <p>Watches F1 since: <%= user.firstSeason %></p>
           <p>Favorite Driver: <%= user.driver %></p>
           <p>Favorite Team: <%= user.team %></p>
-          <p>Favorite Circuit: <%= user.circuit %></p>
+          <p>Favorite Grand Prix: <%= user.circuit %></p>
       <% } else { %>
-          <p>User data is not available.</p>
+          <p>User data is not avail able.</p>
       <% } %>
       </div>  
 
       <br><br>
 
-      <div>
-        <% questions.forEach(question => { %>
+      <form action="/submit-quiz" method="POST">
+        <% questions.forEach((question, index) => { %>
             <article>
-              <p><%= question.question %></p>
+                <p><%= question.question %></p>
+                <div>
+                    <% question.answers.forEach((answer) => { %>
+                        <input type="radio" name="question-<%= index %>" value="<%= answer %>">
+                        <label><%= answer %></label>
+                    <% }) %>
+                </div>
             </article>
         <% }) %>
-      </div>
+        <button type="submit">Submit</button>
+    </form>
       <% } %>
 
   </main>
 
-    <%- include('../view/footer'); %>
+    <%- include('../view/footer') %>
     <script src="/script/lazyload.js"></script>
 
     <!-- <script src="/script/quiz.js"></script> -->
