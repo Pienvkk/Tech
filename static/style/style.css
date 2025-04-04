@@ -163,6 +163,7 @@ header nav ul li a:active {
     color: #202020;
 }
 
+
 header nav  ul li:nth-of-type(6) a { 
     background-color: #ffffff;
     box-shadow:0px 4px 4px 2px rgb(0 0 0 / 0.25);
@@ -178,24 +179,24 @@ header nav  ul li:nth-of-type(6) a {
     font-size:var(--font-size-medium);
 } 
 
-header nav ul li:nth-of-type(6) a:link {
+header nav ul li:nth-of-type(7) a:link {
     color: #FFFFFF;
 }
 
-header nav ul li:nth-of-type(6) a:visited {
+header nav ul li:nth-of-type(7) a:visited {
     color: black;
 }
 
-header nav ul li:nth-of-type(6) a:hover {
+header nav ul li:nth-of-type(7) a:hover {
     background-color: #acacac;
     color: white;
 }
 
-header nav ul li:nth-of-type(6) a:active {
+header nav ul li:nth-of-type(7) a:active {
     color: #FFFFFF;
 }
 
-header nav ul li:nth-of-type(7) a {
+header nav ul li:nth-of-type(8) a {
     background-color: #e11515;
     border-radius: 5px;
     padding: 0.8rem 1.4rem;
@@ -209,6 +210,7 @@ header nav ul li:nth-of-type(7) a {
     font-size:var(--font-size-medium);
 } 
 
+
 header nav ul li:nth-of-type(7) a:link {
     color: #FFFFFF;
 }
@@ -217,12 +219,13 @@ header nav ul li:nth-of-type(7) a:visited {
     color: #FFFFFF;
 }
 
-header nav ul li:nth-of-type(7) a:hover {
+header nav ul li:nth-of-type(8) a:hover {
     background-color: #ffffff;
     box-shadow:0px 0px 0px 2px rgb(161, 0, 0) inset;
     color: black;
 
 }
+
 
 header nav ul li:nth-of-type(7) a:active {
     color: #FFFFFF;
@@ -674,7 +677,7 @@ details summary::marker,
   /*  lijst */
   
 
-  .mainIndex section:last-of-type div:nth-of-type(2){
+  .mainIndex section:last-of-type table{
     display: flex;
     justify-content: center;
     margin-top: 10em;
@@ -696,11 +699,12 @@ details summary::marker,
   /*  lijst  */
 
 
-  .mainIndex section:last-of-type div:nth-of-type(2)  ul li h3{
+  .mainIndex section:last-of-type th{
     font-size: var(--font-size-xlarge);
     font-family: var(--font-family-primary);
     margin-bottom: auto;
   }
+
 
 /*
   .mainIndex section:nth-of-type(3) ul li p{
@@ -761,11 +765,11 @@ details summary::marker,
     font-family: var(--font-family-primary);
   }
 
-  .mainIndex section:last-of-type div:nth-of-type(2) ul{
+  .leaderboard-section table{
     margin-right: 5em;
     margin-left: 5em;
   }
-  .mainIndex section:last-of-type div:nth-of-type(2) ul li{
+  .leaderboard-section td{
     list-style-type: none;
     margin-bottom: 3em;
     font-size: var(--font-size-medium);
@@ -848,6 +852,41 @@ details summary::marker,
     background-color: #ff0000; 
   } */
 
+/* Main styles for the leaderboard page */
+.leaderboard-section {
+    background-color: var(--secondary-bg-color); /* Use your project's secondary background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow); /* Use your project's box shadow variable */
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table-header {
+    background-color: black; /* Use your project's primary color */
+    color: var(--text-on-primary); /* Ensure text is readable on primary color */
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.table-row:nth-child(even) {
+    background-color: var(--row-alt-bg-color); /* Alternate row background */
+}
+
+.table-cell {
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color); /* Use your project's border color */
+    color: var(--text-color); /* Use your project's text color */
+}
+
+.table-row:hover {
+    background-color: var(--hover-bg-color); /* Row hover background color */
+}
 
 /* INLOGGEN MAIN */
 
@@ -1153,7 +1192,7 @@ input[type="submit"]:hover {
 
 /* QUIZ MAIN */
 
-/* .mainQuiz section {
+.mainQuiz {
     display: flex;
     flex-direction: column;
     text-align: center; 
@@ -1247,19 +1286,14 @@ input[type="submit"]:hover {
     margin-top: 3rem;
 }
 
-.mainQuiz ul li label {
-    font-size:large;
-    margin-left: 1rem;
+.mainQuiz form {
+    height: auto;
 }
 
-/* PROBEERSEL */
-.quiz-question {
-    display: none;
+.mainQuiz article {
+    margin-bottom: 2em;
 }
 
-.quiz-question.is-active {
-    display: block;
-}
 
 
 /* TEAM UP MAIN */
@@ -1542,8 +1576,10 @@ input[type="submit"]:hover {
     border-radius: 75px;
     background-color: rgb(250, 243, 243);
 }
-/* HELP & SUPPORT */
 
+
+
+/* HELP & SUPPORT */
 .mainHelpSupport h1, h2{
     margin-bottom: 20px;
     font-weight: bold;
@@ -1735,7 +1771,8 @@ details div p {
 /* HELP & SUPPORT */
 
 
-/* friends */
+
+/* FRIENDS */
 .mainfriends p:first-of-type, h1{
     display: flex;
     justify-content: center;

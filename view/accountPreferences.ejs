@@ -17,74 +17,74 @@
         <form action="/accountPreferences" method="POST">
             <label for="season">When did you first start watching Formula 1?</label>
             <select id="season" name="season">
-                <% for (let year = 2025; year >= 1950; year--) { %>
+                <% for (let year = 2024; year >= 1950; year--) { %>
                     <option value="<%= year %>"><%= year %></option>
                 <% } %>
             </select>
 
-            <label for="driver">Who is your favorite (active) driver?</label>
+            <label for="driver">Who is your favorite driver?</label>
             <select id="driver" name="driver">
-                <option value="alexander_albon">Alexander Albon</option>
-                <option value="andrea_kimi_antonelli">Andrea Kimi Antonelli</option>
-                <option value="carlos_sainz">Carlos Sainz Jr.</option>
-                <option value="charles_leclerc">Charles Leclerc</option>
-                <option value="fernando_alonso">Fernando Alonso</option>
-                <option value="gabriel_bortoleto">Gabriel Bortoleto</option>
-                <option value="george_russell">George Russell</option>
-                <option value="isack_hadjar">Isack Hadjar</option>
-                <option value="jack_doohan">Jack Doohan</option>
-                <option value="lando_norris">Lando Norris</option>
-                <option value="lance_stroll">Lance Stroll</option>
-                <option value="lewis_hamilton">Lewis Hamilton</option>
-                <option value="liam_lawson">Liam Lawson</option>
+                <option value="albon">Alexander Albon</option>
+                <option value="sainz">Carlos Sainz Jr.</option>
+                <option value="leclerc">Charles Leclerc</option>
+                <option value="ricciardo">Daniel Ricciardo</option>
+                <option value="alonso">Fernando Alonso</option>
+                <option value="russell">George Russell</option>
+                <option value="zhou">Guanyu Zhou</option>
+                <option value="kevin_magnussen">Kevin Magnussen</option>
+                <option value="norris">Lando Norris</option>
+                <option value="stroll">Lance Stroll</option>
+                <option value="hamilton">Lewis Hamilton</option>
+                <option value="lawson">Liam Lawson</option>
                 <option value="max_verstappen">Max Verstappen</option>
-                <option value="nico_hulkenberg">Nico Hülkenberg</option>
-                <option value="oliver_bearman">Oliver Bearman</option>
-                <option value="oscar_piastri">Oscar Piastri</option>
-                <option value="pierre_gasly">Pierre Gasly</option>
-                <option value="yuki_tsunoda">Yuki Tsunoda</option>
+                <option value="hulkenberg">Nico Hülkenberg</option>
+                <option value="bearman">Oliver Bearman</option>
+                <option value="piastri">Oscar Piastri</option>
+                <option value="gasly">Pierre Gasly</option>
+                <option value="bottas">Valtteri Bottas</option>
+                <option value="tsunoda">Yuki Tsunoda</option>
             </select>
 
             <label for="team">What is your favorite (active) team?</label>
             <select id="team" name="team">
-                <option value="alpine">Alpine</option>
-                <option value="aston_martin">Aston Martin</option>
-                <option value="ferrari">Ferrari</option>
-                <option value="haas">Haas</option>
-                <option value="kick_sauber">Kick Sauber</option>
-                <option value="mclaren">McLaren</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="racing_bulls">Racing Bulls</option>
-                <option value="red_bull_racing">Red Bull Racing</option>
-                <option value="williams">Williams</option>
+                <option value="Alpine F1 Team">Alpine</option>
+                <option value="Aston Martin">Aston Martin</option>
+                <option value="Ferrari">Ferrari</option>
+                <option value="Haas F1 Team">Haas</option>
+                <option value="Sauber">Kick Sauber</option>
+                <option value="McLaren">McLaren</option>
+                <option value="Mercedes">Mercedes</option>
+                <option value="AlphaTauri">Racing Bulls</option>
+                <option value="Red Bull Racing">Red Bull Racing</option>
+                <option value="Williams">Williams</option>
             </select>
 
             <label for="team">What is your favorite (active) circuit?</label>
             <select id="circuit" name="circuit">
-                <option value="australian_gp">Australian Grand Prix</option>
-                <option value="chinese_gp">Chinese Grand Prix</option>
-                <option value="japanese_gp">Japanese Grand Prix</option>
-                <option value="bahrain_gp">Bahrain Grand Prix</option>
-                <option value="saudi_arabian_gp">Saudi Arabian Grand Prix</option>
-                <option value="miami_gp">Miami Grand Prix</option>
-                <option value="emilia_romagna_gp">Emilia-Romagna Grand Prix</option>
-                <option value="monaco_gp">Monaco Grand Prix</option>
-                <option value="spanish_gp">Spanish Grand Prix</option>
-                <option value="canadian_gp">Canadian Grand Prix</option>
-                <option value="austrian_gp">Austrian Grand Prix</option>
-                <option value="british_gp">British Grand Prix</option>
-                <option value="belgian_gp">Belgian Grand Prix</option>
-                <option value="hungarian_gp">Hungarian Grand Prix</option>
-                <option value="dutch_gp">Dutch Grand Prix</option>
-                <option value="italian_gp">Italian Grand Prix</option>
-                <option value="azerbaijan_gp">Azerbaijan Grand Prix</option>
-                <option value="singapore_gp">Singapore Grand Prix</option>
-                <option value="united_states_gp">United States Grand Prix</option>
-                <option value="mexico_city_gp">Mexico City Grand Prix</option>
-                <option value="sao_paulo_gp">São Paulo Grand Prix</option>
-                <option value="las_vegas_gp">Las Vegas Grand Prix</option>
-                <option value="qatar_gp">Qatar Grand Prix</option>
-                <option value="abu_dhabi_gp">Abu Dhabi Grand Prix</option>
+                <option value="albert_park">Australian Grand Prix</option>
+                <option value="shanghai">Chinese Grand Prix</option>
+                <option value="suzuka">Japanese Grand Prix</option>
+                <option value="bahrain">Bahrain Grand Prix</option>
+                <option value="jeddah">Saudi Arabian Grand Prix</option>
+                <option value="miami">Miami Grand Prix</option>
+                <option value="imola">Emilia-Romagna Grand Prix</option>
+                <option value="monaco">Monaco Grand Prix</option>
+                <option value="catalunya">Spanish Grand Prix</option>
+                <option value="villeneuve">Canadian Grand Prix</option>
+                <option value="red_bull_ring">Austrian Grand Prix</option>
+                <option value="silverstone">British Grand Prix</option>
+                <option value="spa">Belgian Grand Prix</option>
+                <option value="hungaroring">Hungarian Grand Prix</option>
+                <option value="zandvoort">Dutch Grand Prix</option>
+                <option value="monza">Italian Grand Prix</option>
+                <option value="baku">Azerbaijan Grand Prix</option>
+                <option value="marina_bay">Singapore Grand Prix</option>
+                <option value="americas">United States Grand Prix</option>
+                <option value="rodriguez">Mexico City Grand Prix</option>
+                <option value="interlagos">São Paulo Grand Prix</option>
+                <option value="las_vegas">Las Vegas Grand Prix</option>
+                <option value="losail">Qatar Grand Prix</option>
+                <option value="yas_marina">Abu Dhabi Grand Prix</option>
             </select>
 
             <input type="submit" value="Set account Preferences">

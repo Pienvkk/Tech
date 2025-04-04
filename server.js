@@ -39,17 +39,18 @@ app
     .set ('view engine', 'ejs')
     .set ('views', 'view')
 
-    .get('/', renderPage('index'))
+    .get('/', index)
     .get('/login', renderPage('login'))
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
-    .get('/profile', profile)
+    .get('/profile', renderPage('profile'))
     .get('/quiz', quiz)
     .get('/teamUp', teamUp)
     .get('/community', community)
     .get('/createPost', renderPage('createPost'))
     .get('/helpSupport', renderPage('helpSupport'))
-    // .get('/friends', renderPage('friends'))
+    .get('/friends', renderPage('friends'))
+    .get('/quiz-results.ejs', quizresults)
     
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
@@ -57,8 +58,9 @@ app
 
 
 
-// Database
+// DATABASE
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
+const { render } = require('ejs')
 
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Formule1`
 
@@ -114,12 +116,12 @@ const profileStorage = multer.diskStorage({
 
 const uploadProfilePic = multer({ storage: profileStorage });
 
-// Inloggen
+
+
+// LOGIN
 app.post('/login', async (req, res) => {
-    // Check of login request binnenkomt
     console.log('Received login request:', req.body)
 
-    // Inloggen
     const { username, pass} = req.body
 
     try {
@@ -141,17 +143,10 @@ app.post('/login', async (req, res) => {
             firstSeason: user.firstSeason,
             team: user.team,
             driver: user.driver,
-            circuit: user.circuit,
-            profilePic: user.profilePic || '/static/default-profile.png'
+            circuit: user.circuit
         }
 
-        // Update user om zijn preferences toe te voegen
-        await users.updateOne(
-            { username: req.session.user.username },
-            { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit}}
-          );
         res.redirect('/')
-
 
     } catch (error) {
         console.error('Login fout:', error)
@@ -161,7 +156,7 @@ app.post('/login', async (req, res) => {
 
 
 
-// Uitloggen
+// LOGOUT
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/')
@@ -170,12 +165,10 @@ app.get('/logout', (req, res) => {
 
 
 
-// Account aanmaken
+// ACCOUNT AANMAKEN
 app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
-    // Check of account creatie request binnenkomt
     console.log('Received account creation request:', req.body)
 
-    // Account aanmaken
     const { username, pass, email, date, file} = req.body;
     const formattedDate = date ? new Date(date) : null
 
@@ -192,9 +185,7 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
             return res.status(400).send('Email taken')
         }
 
-
-        // Stopt nieuwe user in database
-        await users.insertOne({ username: username, password: pass, email: email, date: formattedDate, profilePic: filename});
+        await users.insertOne({ username: username, password: pass, email: email, date: formattedDate, profilePic: filename, score: 0});
 
         const user = await users.findOne({ username: username, password: pass })
         req.session.user = { username }
@@ -204,18 +195,17 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
         console.error('Account creation error:', error)
         res.status(500).send('Server error')
     }
-});
+})
 
 
 
-// Voorkeuren instellen
+// USER PREFERENCES
 app.post('/accountPreferences', async (req, res) => {
     const {season, driver, team, circuit} = req.body;
 
     try {
         const users = db.collection('0Users')
 
-        // Update user om zijn preferences toe te voegen
         await users.updateOne(
             { username: req.session.user.username },
             { $set: { firstSeason: season, team: team, driver: driver, circuit: circuit }}
@@ -229,14 +219,17 @@ app.post('/accountPreferences', async (req, res) => {
         console.error('Preferences adding error:', error)
         res.status(500).send('Server error')
     }
-});
+})
 
+
+
+// FOLLOW
 app.post('/follow', async (req, res) =>{
     const {targetUser} = req.body;
     const currentUser = req.session.user.username;
 
     try{
-        const users = db.collection('0Users');
+        const users = db.collection('0Users')
         
         await users.updateOne(
             { username: currentUser },
@@ -251,17 +244,20 @@ app.post('/follow', async (req, res) =>{
         res.json({ message: 'You are now following ${targetUsername}.'})
     
     }   catch (error) {
-            console.error('Error following user:', error);
-            res.status(500).send('Server error');
+            console.error('Error following user:', error)
+            res.status(500).send('Server error')
     }
 })
 
+
+
+// UNFOLLOW
 app.post('/unfollow', async (req, res) =>{
     const {targetUser} = req.body;
     const currentUser = req.session.user.username;
 
     try{
-        const users = db.collection('0Users');
+        const users = db.collection('0Users')
         
         await users.updateOne(
             { username: currentUser },
@@ -276,8 +272,8 @@ app.post('/unfollow', async (req, res) =>{
         res.json({ message: 'You are now following ${targetUsername}.'})
     
     }   catch (error) {
-            console.error('Error following user:', error);
-            res.status(500).send('Server error');
+            console.error('Error following user:', error)
+            res.status(500).send('Server error')
     }
 })
 
@@ -289,27 +285,27 @@ async function checkIfFollowing(currentUser, targetUser, db) {
         following: targetUser
     });
 
-    return user !== null;
+    return user !== null
 }
 
 
 
-
 app.get("/check-follow-status", async (req, res) => {
-    const { targetUser } = req.query;
-    const currentUser = req.session.user.username;
+    const { targetUser } = req.query
+    const currentUser = req.session.user.username
 
     try {
-        const isFollowing = await checkIfFollowing(currentUser, targetUser, db);
+        const isFollowing = await checkIfFollowing(currentUser, targetUser, db)
         res.json({ isFollowing });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Failed to check follow status" });
+        res.status(500).json({ error: "Failed to check follow status" })
     }
-});
+})
 
 
-// Quiz pagina
+
+// QUIZ PAGINA
 async function quiz(req, res) {
     try {
         const user = req.session.user
@@ -319,25 +315,193 @@ async function quiz(req, res) {
             return res.render('quiz.ejs', { user: null, questions: [] })
         }
 
+        // VRAGEN OPHALEN
         const questions = await db.collection('0Questions').find().toArray()
-        console.log("Quiz qeustions:", questions)
+        console.log("Quiz questions:", questions)
 
-        // Functie om placeholders te vervangen
-        const personalizeQuestion = (questions, user) => {
-            return questions
+
+
+        // VRAAG 1 - CHAMPIONSHIP
+        // Pakt top 4 drivers uit seizoen van userPreferences als mogelijke antwoorden
+        const championship = await db.collection('Championships').findOne({
+            year: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
+        })
+
+        if (!championship) {
+            console.error("No sufficient data for season:", user.firstSeason);
+            return res.status(500).send(`Error: No championship data for ${user.firstSeason} season`)
+        }
+
+        const topDrivers = championship.driver_standings
+        .slice(0, 4)
+        .sort(() => 0.5 - Math.random())
+        .map(driver => driver.name)
+
+
+
+        // VRAAG 2 - CIRCUIT
+        // Pakt 3 random circuits - voegt user circuit toe - en geeft de bijbehorende landen als mogelijke antwoorden
+        const circuitsList = await db.collection('Circuits').aggregate([{ $sample: { size: 3 } }]).toArray()
+        const userCircuit = await db.collection('Circuits').findOne({ circuitRef: user.circuit })
+
+        if (!userCircuit || circuitsList.length === 0) {
+            console.error("No sufficient data for circuit:", user.circuit);
+            return res.status(500).send(`Error: No circuit data for ${user.circuit}`)
+        }
+
+        circuitsList.push(userCircuit)
+
+        const topTracks = circuitsList
+        .sort(() => 0.5 - Math.random())
+        .map(circuit => circuit.country)
+
+
+        
+        // VRAAG 3 - DRIVER NUMBER
+        // Pakt 3 random getallen tussen 0 & 100 en voegt driver nummer toe van driver van user preferences als mogelijke antwoorden
+        const numbers = Array.from({ length: 3 }, () => Math.floor(Math.random() * 100) + 1)
+        const userDriver = await db.collection('Drivers').findOne({ driverRef: user.driver })
+
+        if (!userDriver || !userDriver.number) {
+            console.error("No sufficient data for driver:", user.driver);
+            return res.status(500).send(`Error: No driver data for ${user.driver}`)
+        }
+
+        numbers.push(userDriver.number)
+
+        const driverNumbers = numbers.sort(() => 0.5 - Math.random())
+
+
+
+        // VRAAG 4 - DRIVER POINTS 2024
+        // 
+        const championship2024 = await db.collection('Championships').findOne({ year: 2024 })
+
+        if (!championship2024) {
+            console.error("No data for 2024 championship");
+            return res.status(500).send("No data for 2024 championship");
+        }
+
+        const driverInfo = championship2024.driver_standings.find(d => d.driverRef === user.driver)
+
+        if (!driverInfo) {
+            console.error("Driver not found in 2024 standings");
+            return res.status(500).send(`No data for driver ${user.driver}`);
+        }
+
+        const userDriverPoints = driverInfo.points
+        
+        const overigePoints = new Set()
+
+        while (overigePoints.size < 3) {
+            const variatie = Math.floor(Math.random() * 7) + 5 // Max 12 pt verschil
+            const plusOfMin = Math.random() > 0.5 ? 1 : -1;
+            const nieuwePoints = userDriverPoints + plusOfMin * variatie;
+
+            if (nieuwePoints !== userDriverPoints && nieuwePoints >= 0) {
+                overigePoints.add(nieuwePoints)
+            }
+        }
+
+        const driverPoints = [...overigePoints, userDriverPoints].sort(() => 0.5 - Math.random());
+
+
+
+        // VRAAG 5 - TEAM POINTS RANDOM SEIZOEN
+        //
+        const correcteSeizoen = await db.collection('Championships').findOne({
+            year: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
+        })
+
+        if (!correcteSeizoen || !correcteSeizoen.constructor_standings) {
+            console.error("No constructor found for season:", user.firstSeason)
+            return res.status(500).send(`Error: No constructor data for ${user.firstSeason}`)
+        }
+
+        const userTeam = correcteSeizoen.constructor_standings.find((team, index) => {
+            return team.name?.toLowerCase() === user.team.toLowerCase()
+        })
+
+        if (!userTeam) {
+            console.error(`Team ${user.team} niet gevonden in constructor standings voor ${user.firstSeason}`)
+            return res.status(500).send(`Team ${user.team} niet gevonden in data`)
+        }
+
+        const teamPosition = userTeam.position || (correcteSeizoen.constructor_standings.indexOf(userTeam) + 1)
+
+        const overigePositions = new Set()
+        
+        while (overigePositions.size < 3) {
+            const variatie = Math.floor(Math.random() * 3) + 1 // Max 3 posities verschil
+            const plusOfMin = Math.random() > 0.5 ? 1 : -1
+            const fakePos = teamPosition + variatie * plusOfMin
+
+            if (fakePos > 0 && fakePos <= correcteSeizoen.constructor_standings.length && fakePos !== teamPosition) {
+                overigePositions.add(fakePos)
+            }
+        }
+
+        const constructorPositions = [...overigePositions, teamPosition]
+        .map(pos => pos.toString())
+        .sort(() => 0.5 - Math.random())
+
+
+
+        // Functie om placeholders te vervangen in de vragen & antwoorden
+        const personalizeText = (text, user, topDrivers, topTracks, driverNumbers, driverPoints, constructorPositions) => {
+            return text
                 .replace("{{firstSeason}}", user.firstSeason)
                 .replace("{{driver}}", user.driver)
                 .replace("{{team}}", user.team)
                 .replace("{{circuit}}", user.circuit)
-        };
 
-        // Vervang placeholders in de vragen
-        const personalizedQuestions = questions.map(q => ({
-            ...q,
-            question: personalizeQuestion(q.question, user)
-        }));
+                .replace("{{answer1.1}}", topDrivers[0])
+                .replace("{{answer1.2}}", topDrivers[1])
+                .replace("{{answer1.3}}", topDrivers[2])
+                .replace("{{answer1.4}}", topDrivers[3])
 
-        console.log("Rendering quiz with user:", user);
+                .replace("{{answer2.1}}", topTracks[0])
+                .replace("{{answer2.2}}", topTracks[1])
+                .replace("{{answer2.3}}", topTracks[2])
+                .replace("{{answer2.4}}", topTracks[3])
+
+                .replace("{{answer3.1}}", driverNumbers[0])
+                .replace("{{answer3.2}}", driverNumbers[1])
+                .replace("{{answer3.3}}", driverNumbers[2])
+                .replace("{{answer3.4}}", driverNumbers[3])
+
+                .replace("{{answer4.1}}", driverPoints[0])
+                .replace("{{answer4.2}}", driverPoints[1])
+                .replace("{{answer4.3}}", driverPoints[2])
+                .replace("{{answer4.4}}", driverPoints[3])
+
+                .replace("{{answer5.1}}", constructorPositions[0])
+                .replace("{{answer5.2}}", constructorPositions[1])
+                .replace("{{answer5.3}}", constructorPositions[2])
+                .replace("{{answer5.4}}", constructorPositions[3])
+        }
+
+        const correctAnswers = []
+
+        const personalizedQuestions = questions.map((q, index) => {
+            const questionText = personalizeText(q.question, user, topDrivers, topTracks, driverNumbers, driverPoints, constructorPositions)
+            const answerOptions = q.answers.split(",").map(answer => personalizeText(answer, user, topDrivers, topTracks, driverNumbers, driverPoints, constructorPositions))
+
+            if (index === 0) correctAnswers.push(championship.driver_standings[0].name)
+            if (index === 1) correctAnswers.push(userDriver.number.toString())
+            if (index === 2) correctAnswers.push(userCircuit.country)
+            if (index === 3) correctAnswers.push(userDriverPoints.toString())
+            if (index === 4) correctAnswers.push(teamPosition.toString())
+
+            return {
+                question: questionText,
+                answers: answerOptions
+            }
+        })
+
+        console.log("Correct answers:", correctAnswers)
+        req.session.correctAnswers = correctAnswers
+
         res.render('quiz.ejs', { user, questions: personalizedQuestions })
 
     } catch (err) {
@@ -346,7 +510,59 @@ async function quiz(req, res) {
     }
 }
 
-// Community pagina
+
+
+// QUIZ SUBMITTING / SCORE BEREKENEN
+app.post('/submit-quiz', async (req, res) => {
+    try {
+        const user = req.session.user
+        const users = db.collection('0Users')
+        const userAnswers = req.body
+        const correctAnswers = req.session.correctAnswers
+
+        console.log("User answers:", userAnswers)
+        console.log("Correct answers:", correctAnswers)
+
+        let score = 0
+
+        correctAnswers.forEach((correctAnswer, index) => {
+            const userAnswer = userAnswers[`question-${index}`]
+
+            if (userAnswer && userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+                score++
+            } else {
+                score--
+            }
+        })
+
+        await users.updateOne(
+            { username: user.username },
+            { $inc: { score: score } } 
+        )
+
+        const updatedUser = await users.findOne({ username: user.username })
+
+
+        res.render('quiz-results.ejs', {score, user: updatedUser, total: correctAnswers.length  })
+
+    } catch (err) {
+        console.error("Error processing quiz:", err)
+        res.status(500).send("Error processing quiz results.")
+    }
+})
+
+
+
+// INDEX - HOMEPAGINA (voor leaderboard)
+async function index(req, res) {
+    try {
+        const users = await db.collection('0Users').find().toArray()
+        res.render('index.ejs', { user: req.session.user || null, users })
+    } catch (err) {
+    }
+}
+
+// COMMUNITY PAGINA
 async function community(req, res) {
     try {
         const posts = await db.collection('0Posts').find().toArray()
@@ -355,6 +571,21 @@ async function community(req, res) {
     }
 }
 
+
+
+
+// QUIZ-RESULTS PAGINA
+async function quizresults(req, res) {
+    try {
+        const users = await db.collection('0Users').find().toArray()
+        res.render('quiz-results.ejs', { user: req.session.user || null, users })
+    } catch (err) {
+    }
+}
+
+
+
+// TEAM-UP PAGINA
 async function teamUp(req, res) {
     try {
         const users = await db.collection('0Users').find().toArray()
@@ -363,16 +594,9 @@ async function teamUp(req, res) {
     }
 }
 
-async function profile(req, res) {
-    try {
-        const user = await db.collection('0Users').findOne({ username: req.session.user.username });
-        res.render('profile.ejs', { user });
-    } catch (err) {
-    }
-}
 
 
-// Post uploaden
+// POST UPLOADEN
 app.post('/createPost', upload.single('file'), async (req, res) => {
     console.log('Received post creation request:', req.body); 
 
@@ -398,20 +622,27 @@ app.post('/createPost', upload.single('file'), async (req, res) => {
         console.error('Post creation error:', error);
         res.status(500).send('Server error');
     }
-});
+})
 
+
+
+// UPLOAD IMAGES OPHALEN
 app.get('/uploads/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/uploads', req.params.filename);
     res.sendFile(filePath);
-});
+})
 
-app.get('/profilepics/:filename', (req, res) => {
+
+
+// PROFILE IMAGES OPHALEN
+app.get('/uploads/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/profilepics', req.params.filename);
-    res.sendFile(filePath);
-});
+    res.sendFile(filePath);require('dotenv').config() 
+})
+  
 
 
-// Archief pagina
+// ARCHIVE PAGINA
 app.get('/archive', async (req, res) => {
     try {
         console.log("Data is er"); // kijken of t binnenkomt
@@ -424,17 +655,13 @@ app.get('/archive', async (req, res) => {
 
         if (category === "drivers") {
             data =  await db.collection('Drivers').find().toArray()
-        } 
-        else if (category === "constructors") {
+        } else if (category === "constructors") {
             data =  await db.collection('Constructors').find().toArray()
-        } 
-        else if (category === "championships") {
+        } else if (category === "championships") {
             data =  await db.collection('Championships').find().toArray()
-        } 
-        else if (category === "circuits") {
+        } else if (category === "circuits") {
             data =  await db.collection('Circuits').find().toArray()
-        } 
-        else {
+        } else {
             return res.status(400).json({ error: "No category" })
         }
         
@@ -451,16 +678,12 @@ app.get('/archive', async (req, res) => {
 
 // Middleware voor not found errors - error 404
 app.use((req, res) => {
-    // log error to console
     console.error('404 error at URL: ' + req.url)
-    // send back a HTTP response with status code 404
     res.status(404).send('404 error at URL: ' + req.url)
 })
 
 // Middleware voor server errors - error 500
 app.use((err, req, res) => {
-    // log error to console
     console.error(err.stack)
-    // send back a HTTP response with status code 500
     res.status(500).send('500: server error')
 })
