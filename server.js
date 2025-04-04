@@ -370,7 +370,7 @@ async function quiz(req, res) {
         const overigePoints = new Set()
 
         while (overigePoints.size < 3) {
-            const variatie = Math.floor(Math.random() * 10) + 5;
+            const variatie = Math.floor(Math.random() * 7) + 5 // Max 12 pt verschil
             const plusOfMin = Math.random() > 0.5 ? 1 : -1;
             const nieuwePoints = userDriverPoints + plusOfMin * variatie;
 
@@ -383,8 +383,48 @@ async function quiz(req, res) {
 
 
 
+        // VRAAG 5 - TEAM POINTS RANDOM SEIZOEN
+        //
+        const correcteSeizoen = await db.collection('Championships').findOne({
+            year: isNaN(user.firstSeason) ? user.firstSeason : parseInt(user.firstSeason)
+        })
+
+        if (!correcteSeizoen || !correcteSeizoen.constructor_standings) {
+            console.error("No constructor found for season:", user.firstSeason)
+            return res.status(500).send(`Error: No constructor data for ${user.firstSeason}`)
+        }
+
+        const userTeam = correcteSeizoen.constructor_standings.find((team, index) => {
+            return team.name?.toLowerCase() === user.team.toLowerCase()
+        })
+
+        if (!userTeam) {
+            console.error(`Team ${user.team} niet gevonden in constructor standings voor ${user.firstSeason}`)
+            return res.status(500).send(`Team ${user.team} niet gevonden in data`)
+        }
+
+        const teamPosition = userTeam.position || (correcteSeizoen.constructor_standings.indexOf(userTeam) + 1)
+
+        const overigePositions = new Set()
+        
+        while (overigePositions.size < 3) {
+            const variatie = Math.floor(Math.random() * 3) + 1 // Max 3 posities verschil
+            const plusOfMin = Math.random() > 0.5 ? 1 : -1
+            const fakePos = teamPosition + variatie * plusOfMin
+
+            if (fakePos > 0 && fakePos <= correcteSeizoen.constructor_standings.length && fakePos !== teamPosition) {
+                overigePositions.add(fakePos)
+            }
+        }
+
+        const constructorPositions = [...overigePositions, teamPosition]
+        .map(pos => pos.toString())
+        .sort(() => 0.5 - Math.random())
+
+
+
         // Functie om placeholders te vervangen in de vragen & antwoorden
-        const personalizeText = (text, user, topDrivers, topTracks, driverNumbers, driverPoints) => {
+        const personalizeText = (text, user, topDrivers, topTracks, driverNumbers, driverPoints, constructorPositions) => {
             return text
                 .replace("{{firstSeason}}", user.firstSeason)
                 .replace("{{driver}}", user.driver)
@@ -410,18 +450,24 @@ async function quiz(req, res) {
                 .replace("{{answer4.2}}", driverPoints[1])
                 .replace("{{answer4.3}}", driverPoints[2])
                 .replace("{{answer4.4}}", driverPoints[3])
+
+                .replace("{{answer5.1}}", constructorPositions[0])
+                .replace("{{answer5.2}}", constructorPositions[1])
+                .replace("{{answer5.3}}", constructorPositions[2])
+                .replace("{{answer5.4}}", constructorPositions[3])
         }
 
         const correctAnswers = []
 
         const personalizedQuestions = questions.map((q, index) => {
-            const questionText = personalizeText(q.question, user, topDrivers, topTracks, driverNumbers, driverPoints)
-            const answerOptions = q.answers.split(",").map(answer => personalizeText(answer, user, topDrivers, topTracks, driverNumbers, driverPoints))
+            const questionText = personalizeText(q.question, user, topDrivers, topTracks, driverNumbers, driverPoints, constructorPositions)
+            const answerOptions = q.answers.split(",").map(answer => personalizeText(answer, user, topDrivers, topTracks, driverNumbers, driverPoints, constructorPositions))
 
             if (index === 0) correctAnswers.push(championship.driver_standings[0].name)
             if (index === 1) correctAnswers.push(userDriver.number.toString())
             if (index === 2) correctAnswers.push(userCircuit.country)
             if (index === 3) correctAnswers.push(userDriverPoints.toString())
+            if (index === 4) correctAnswers.push(teamPosition.toString())
 
             return {
                 question: questionText,
@@ -460,7 +506,6 @@ app.post('/submit-quiz', async (req, res) => {
 
             if (userAnswer && userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
                 score++
-                score = Math.round(score * 1.5)
             } else {
                 score--
             }
@@ -468,7 +513,7 @@ app.post('/submit-quiz', async (req, res) => {
 
         await users.updateOne(
             { username: user.username },
-            { $inc: { score: score } } // Increment the user's score in the database
+            { $inc: { score: score } } 
         )
 
         const updatedUser = await users.findOne({ username: user.username })
@@ -482,6 +527,9 @@ app.post('/submit-quiz', async (req, res) => {
     }
 })
 
+
+
+// INDEX - HOMEPAGINA (voor leaderboard)
 async function index(req, res) {
     try {
         const users = await db.collection('0Users').find().toArray()
