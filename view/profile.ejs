@@ -20,7 +20,32 @@
         </section>
 
         <a href="/accountPreferences">Edit Preferences</a>
-
+        <div>
+            <section>
+                <h2>Followers</h2>
+                <ul>
+                    <% if (Array.isArray(user.followers)) { %>
+                        <% user.followers.forEach(follower => { %>
+                            <li><%= follower %></li> 
+                        <% }) %>
+                    <% } else { %>
+                        <li>No followers</li>
+                    <% } %>
+                </ul>
+            </section>
+            <section>
+                <h2>Following</h2>
+                <ul>
+                    <% if (Array.isArray(user.following)) { %>
+                        <% user.following.forEach(following => { %>
+                            <li><%= following %></li> 
+                        <% }) %>
+                    <% } else { %>
+                        <li>Not following anyone</li>
+                    <% } %>
+                </ul>
+            </section>
+        </div>
         <a href="/teamUp">Search friends</a>
 
     </main>

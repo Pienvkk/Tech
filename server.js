@@ -43,7 +43,7 @@ app
     .get('/login', renderPage('login'))
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
-    .get('/profile', renderPage('profile'))
+    .get('/profile', profile)
     .get('/quiz', quiz)
     .get('/teamUp', teamUp)
     .get('/community', community)
@@ -561,6 +561,23 @@ async function index(req, res) {
     } catch (err) {
     }
 }
+
+
+
+async function profile(req, res) {
+    try {
+        const username = req.session.user?.username;
+        
+        const user = await db.collection('0Users').findOne({ username});
+        const users = await db.collection('0Users').find().toArray();
+
+        res.render('profile.ejs', { user: user || null, users: users || [] });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Something went wrong");
+    }
+}
+
 
 // COMMUNITY PAGINA
 async function community(req, res) {
