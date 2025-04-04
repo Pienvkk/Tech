@@ -20,17 +20,13 @@
         <div class="vindvrienden">
             <label><input type="text" placeholder="search..."></label>
             <details>
-                <summary>
-                    sort
-                </summary>
+                <summary class="firstsummary">Filters</summary>
                     <details>
-                        <summary>
-                            Team
-                        </summary>
+                        <summary class="friendssummary">Team</summary>
                             <ul>
                                 <li>
                                     <input type="checkbox" id="alpine" name="alpine" value="alp">
-                                    <label for="alpine"> alpine </label>
+                                    <label for="alpine"> Alpine </label>
                                 </li>
                                 <li>
                                     <input type="checkbox" id="amartin" name="astonmartin" value="astonmartin">
@@ -72,7 +68,7 @@
                         </details>
                 
                 <details>
-                    <summary>drivers</summary>
+                    <summary class="friendssummary">Drivers</summary>
                     <ul>
                         <li>
                             <input type="checkbox" id="lnorris" name="landonorris" value="landonorris">
@@ -137,7 +133,7 @@
         </main>
     
     <%- include('../view/footer'); %>
-    
+    <script src="/script/friends.js"></script>
     <script src="/script/lazyload.js"></script>
 
 </body>

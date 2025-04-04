@@ -43,7 +43,7 @@ app
     .get('/login', renderPage('login'))
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
-    .get('/profile', renderPage('profile'))
+    .get('/profile', profile)
     .get('/quiz', quiz)
     .get('/teamUp', teamUp)
     .get('/community', community)
@@ -52,7 +52,6 @@ app
     .get('/friends', renderPage('friends'))
     .get('/quiz-results.ejs', quizresults)
     .get('/leaderboard', leaderboard)
-    
     
     .listen(process.env.PORT, () => {
         console.log(`Webserver is listening at port ${process.env.PORT}`)
@@ -113,7 +112,7 @@ const profileStorage = multer.diskStorage({
     filename: function (req, file, cb) {
         const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
         cb(null, uniqueName);
-    }
+    }   
 });
 
 const uploadProfilePic = multer({ storage: profileStorage });
@@ -770,7 +769,8 @@ app.post('/login', async (req, res) => {
             firstSeason: user.firstSeason,
             team: user.team,
             driver: user.driver,
-            circuit: user.circuit
+            circuit: user.circuit,
+            profilePic: user.profilePic || '/static/default-profile.png'
         }
 
         res.redirect('/')
@@ -904,6 +904,32 @@ app.post('/unfollow', async (req, res) =>{
     }
 })
 
+
+
+async function checkIfFollowing(currentUser, targetUser, db) {
+    const user = await db.collection("0Users").findOne({
+        username: currentUser,
+        following: targetUser
+    });
+
+    return user !== null
+}
+
+
+
+app.get("/check-follow-status", async (req, res) => {
+    const { targetUser } = req.query
+    const currentUser = req.session.user.username
+
+    try {
+        const isFollowing = await checkIfFollowing(currentUser, targetUser, db)
+        res.json({ isFollowing });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to check follow status" })
+    }
+})
+  
 
 
 // QUIZ PAGINA
@@ -1055,7 +1081,7 @@ async function quiz(req, res) {
 
 
 
-// QUIZ SUBMITTING / SCORE BEREKENEN
+// QUIZ SUBMITTING - SCORE BEREKENEN
 app.post('/submit-quiz', async (req, res) => {
     try {
         const user = req.session.user
@@ -1092,7 +1118,10 @@ app.post('/submit-quiz', async (req, res) => {
         res.status(500).send("Error processing quiz results.")
     }
 })
+  
+  
 
+// INDEX - HOMEPAGINA (voor leaderboard)
 async function index(req, res) {
     try {
         const posts = await db.collection('0Users').find().toArray()
@@ -1143,6 +1172,14 @@ async function teamUp(req, res) {
     }
 }
 
+async function profile(req, res) {
+    try {
+        const user = await db.collection('0Users').findOne({ username: req.session.user.username });
+        res.render('profile.ejs', { user });
+    } catch (err) {
+    }
+}
+
 
 
 // POST UPLOADEN
@@ -1184,7 +1221,7 @@ app.get('/uploads/:filename', (req, res) => {
 
 
 // PROFILE IMAGES OPHALEN
-app.get('/uploads/:filename', (req, res) => {
+app.get('/profilepics/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'static/profilepics', req.params.filename);
     res.sendFile(filePath);
 })
