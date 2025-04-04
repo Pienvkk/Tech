@@ -37,12 +37,10 @@
                 <p><%= question.question %></p>
                 <div>
                     <% question.answers.forEach((answer) => { %>
-                        <!-- Using both question._id and index for a unique name per question group -->
                         <input type="radio" name="question-<%= index %>" value="<%= answer %>">
                         <label><%= answer %></label>
                     <% }) %>
                 </div>
-                <input type="hidden" name="correctAnswer-<%= index %>" value="<%= question.correctAnswer %>">
             </article>
         <% }) %>
         <button type="submit">Submit</button>
