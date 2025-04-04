@@ -284,6 +284,10 @@ details summary::marker,
     font-size: 10vh;
 }
 
+.mainIndex ul:first-of-type {
+    margin-bottom: 3rem;
+}
+
 .mainIndex section:nth-of-type(2) h2{
     font-size: 5.9vh;
 }
@@ -828,17 +832,7 @@ details summary::marker,
     height: 5em;
 }
 
-/* .swiper-pagination-bullet {
-    background-color: #ffffff; 
-    width: 12px; 
-    height: 12px;
-    margin: 0 5px; 
-    opacity: 1; 
-  }
 
-  .swiper-pagination-bullet-active {
-    background-color: #ff0000; 
-  } */
 
 
 /* INLOGGEN MAIN */
@@ -1275,6 +1269,8 @@ input[type="submit"]:hover {
     width: 60%;
     border-radius: 8px;
 }
+
+
 
 #followBtn{
     background-color: #e11515;
