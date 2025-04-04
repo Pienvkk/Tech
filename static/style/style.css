@@ -38,7 +38,8 @@ good luck coding! (^-^)
     --color-background-white: #FFFF;
     --color-background: #121212;
     --color-text-light:#070101;
-    --color-text-dark: #202020;
+    --color-text-darker:#FFFF; /* op donkere stukken met witte tekst*/
+    --color-text-dark: #202020; /* is eigenlijk veel achtergrondkleur*/
     --color-primary: #e11515;
     --color-secondary: #acacac;
     --color-border: #ddd;
