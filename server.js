@@ -349,8 +349,42 @@ async function quiz(req, res) {
 
 
 
+        // VRAAG 4 - DRIVER POINTS 2024
+        // 
+        const championship2024 = await db.collection('Championships').findOne({ year: 2024 })
+
+        if (!championship2024) {
+            console.error("No data for 2024 championship");
+            return res.status(500).send("No data for 2024 championship");
+        }
+
+        const driverInfo = championship2024.driver_standings.find(d => d.driverRef === user.driver)
+
+        if (!driverInfo) {
+            console.error("Driver not found in 2024 standings");
+            return res.status(500).send(`No data for driver ${user.driver}`);
+        }
+
+        const userDriverPoints = driverInfo.points
+        
+        const overigePoints = new Set()
+
+        while (overigePoints.size < 3) {
+            const variatie = Math.floor(Math.random() * 20) + 5;
+            const plusOfMin = Math.random() > 0.5 ? 1 : -1;
+            const nieuwePoints = userDriverPoints + plusOfMin * variatie;
+
+            if (nieuwePoints !== userDriverPoints && nieuwePoints >= 0) {
+                overigePoints.add(nieuwePoints)
+            }
+        }
+
+        const driverPoints = [...overigePoints, userDriverPoints].sort(() => 0.5 - Math.random());
+
+
+
         // Functie om placeholders te vervangen in de vragen & antwoorden
-        const personalizeText = (text, user, topDrivers, topTracks, driverNumbers) => {
+        const personalizeText = (text, user, topDrivers, topTracks, driverNumbers, driverPoints) => {
             return text
                 .replace("{{firstSeason}}", user.firstSeason)
                 .replace("{{driver}}", user.driver)
@@ -371,13 +405,18 @@ async function quiz(req, res) {
                 .replace("{{answer3.2}}", driverNumbers[1])
                 .replace("{{answer3.3}}", driverNumbers[2])
                 .replace("{{answer3.4}}", driverNumbers[3])
+
+                .replace("{{answer4.1}}", driverPoints[0])
+                .replace("{{answer4.2}}", driverPoints[1])
+                .replace("{{answer4.3}}", driverPoints[2])
+                .replace("{{answer4.4}}", driverPoints[3])
         }
 
         // Vervang placeholders in de vragen en antwoorden
         const personalizedQuestions = questions.map(q => ({
-            question: personalizeText(q.question, user, topDrivers, topTracks, driverNumbers),
-            answers: q.answers.split(",").map(answer => personalizeText(answer, user, topDrivers, topTracks, driverNumbers)),
-            correctAnswer: personalizeText(q.correctAnswer, user, topDrivers, topTracks, driverNumbers)
+            question: personalizeText(q.question, user, topDrivers, topTracks, driverNumbers, driverPoints),
+            answers: q.answers.split(",").map(answer => personalizeText(answer, user, topDrivers, topTracks, driverNumbers, driverPoints)),
+            correctAnswer: personalizeText(q.correctAnswer, user, topDrivers, topTracks, driverNumbers, driverPoints)
         }))
 
         console.log("Rendering quiz with user:", user)
