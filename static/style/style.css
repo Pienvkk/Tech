@@ -31,13 +31,15 @@ good luck coding! (^-^)
 
 :root{
     --font-family-primary:'formule1mainfont';
-    --font-family-secondary: 'sans-serif';
+    --font-family-primary2: "alfabet", sans-serif;
+
 
 
     --color-background-white: #FFFF;
     --color-background: #121212;
     --color-text-light:#070101;
-    --color-text-dark: #202020;
+    --color-text-darker:#FFFF; /* op donkere stukken met witte tekst*/
+    --color-text-dark: #202020; /* is eigenlijk veel achtergrondkleur*/
     --color-primary: #e11515;
     --color-secondary: #acacac;
     --color-border: #ddd;
@@ -59,6 +61,7 @@ good luck coding! (^-^)
     --border-radius-large: 8px;
 
     --box-shadow: 0px 4px 4px 0px 
+
 }
 
 
@@ -295,6 +298,10 @@ details summary::marker,
 }
 .mainIndex h1{
     font-size: 10vh;
+}
+
+.mainIndex ul:first-of-type {
+    margin-bottom: 3rem;
 }
 
 .mainIndex section:nth-of-type(2) h2{
@@ -676,12 +683,7 @@ details summary::marker,
 
   /*  lijst */
   
-
   .mainIndex section:last-of-type table{
-    display: flex;
-    justify-content: center;
-    margin-top: 10em;
-    
     background-color:hsl(0, 0%, 100%);
     padding: 3rem 2rem 2rem;
     color:var(--color-text-light);
@@ -840,17 +842,7 @@ details summary::marker,
     height: 5em;
 }
 
-/* .swiper-pagination-bullet {
-    background-color: #ffffff; 
-    width: 12px; 
-    height: 12px;
-    margin: 0 5px; 
-    opacity: 1; 
-  }
 
-  .swiper-pagination-bullet-active {
-    background-color: #ff0000; 
-  } */
 
 /* Main styles for the leaderboard page */
 .leaderboard-section {
@@ -861,16 +853,16 @@ details summary::marker,
 }
 
 .leaderboard-table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
 .table-header {
     background-color: black; /* Use your project's primary color */
-    color: var(--text-on-primary); /* Ensure text is readable on primary color */
+    color: #FFF; /* Ensure text is readable on primary color */
     padding: 12px;
-    text-align: left;
+    text-align: center;
     font-weight: bold;
 }
 
@@ -878,16 +870,28 @@ details summary::marker,
     background-color: var(--row-alt-bg-color); /* Alternate row background */
 }
 
+
 .table-cell {
     padding: 10px;
     border-bottom: 1px solid var(--border-color); /* Use your project's border color */
-    color: var(--text-color); /* Use your project's text color */
+    color:var(--text-color); /* Use your project's text color */
 }
-
+.table-cell:nth-of-type(2){
+    font-family: var(--font-family-primary);
+}
 .table-row:hover {
     background-color: var(--hover-bg-color); /* Row hover background color */
 }
 
+.table-row{
+    border-bottom: 2px solid #000;
+}
+.mainIndex td{
+    font-family: "alfabet", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: var(--font-size-large);
+}
 /* INLOGGEN MAIN */
 
 .mainLogin {
@@ -1337,19 +1341,28 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
-.teamUp h2{
-    margin-top: 2rem;
-}
-
 .teamUp div{
-    align-items: center;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
     background-color: #333;
     flex-direction: column;
     margin-bottom: 2rem;
     width: 60%;
     border-radius: 8px;
 }
+
+.teamUp div h2{
+    margin-top: 2rem;
+    grid-area: 1 / 1 / 2 / 4; 
+}
+
+.teamUp div button {
+    grid-area: 1 / 5 / 2 / 6;
+}
+
 
 #followBtn{
     background-color: #e11515;
@@ -1361,8 +1374,8 @@ input[type="submit"]:hover {
     font-size: 1.4rem;
     transition: 0.3s, color 0.3s, border 0.3s;
     font-weight: 800;
-
     font-size:var(--font-size-medium);
+    margin: 1.5em;
 }
 
 #followBtn:hover{
