@@ -1308,13 +1308,12 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
-.teamUp h2{
-    margin-top: 2rem;
-}
-
 .teamUp div{
-    align-items: center;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
     background-color: #333;
     flex-direction: column;
     margin-bottom: 2rem;
@@ -1322,6 +1321,14 @@ input[type="submit"]:hover {
     border-radius: 8px;
 }
 
+.teamUp div h2{
+    margin-top: 2rem;
+    grid-area: 1 / 1 / 2 / 4; 
+}
+
+.teamUp div button {
+    grid-area: 1 / 5 / 2 / 6;
+}
 
 
 #followBtn{
@@ -1334,8 +1341,8 @@ input[type="submit"]:hover {
     font-size: 1.4rem;
     transition: 0.3s, color 0.3s, border 0.3s;
     font-weight: 800;
-
     font-size:var(--font-size-medium);
+    margin: 1.5em;
 }
 
 #followBtn:hover{

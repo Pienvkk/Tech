@@ -19,4 +19,4 @@
 //     });
 // });
 
-console.log("friends is geladen")
+// console.log("friends is geladen")
