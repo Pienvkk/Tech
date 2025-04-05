@@ -1,6 +1,7 @@
 require('dotenv').config() 
 
 const express = require('express')
+const validator = require('validator');
 const app = express()
 const multer = require('multer')
 const path = require('path')
@@ -43,7 +44,7 @@ app
     .get('/login', renderPage('login'))
     .get('/createAccount', renderPage('createAccount'))
     .get('/accountPreferences', renderPage('accountPreferences'))
-    .get('/profile', renderPage('profile'))
+    .get('/profile', profile)
     .get('/quiz', quiz)
     .get('/teamUp', teamUp)
     .get('/community', community)
@@ -175,6 +176,9 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
     try {
         const users = db.collection('0Users')
         const filename = req.file ? req.file.filename : null
+        if (!validator.isEmail(email)) {
+            return res.status(400).send('Invalid email address');
+        }
         // Kijkt of username al bestaat
         const existingUser = await users.findOne({ username: username })
         if (existingUser) {
@@ -184,6 +188,8 @@ app.post('/createAccount',uploadProfilePic.single('file'), async (req, res) => {
         if (existingEmail) {
             return res.status(400).send('Email taken')
         }
+
+        
 
         await users.insertOne({ username: username, password: pass, email: email, date: formattedDate, profilePic: filename, score: 0});
 
@@ -561,6 +567,23 @@ async function index(req, res) {
     } catch (err) {
     }
 }
+
+
+
+async function profile(req, res) {
+    try {
+        const username = req.session.user?.username;
+        
+        const user = await db.collection('0Users').findOne({ username});
+        const users = await db.collection('0Users').find().toArray();
+
+        res.render('profile.ejs', { user: user || null, users: users || [] });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Something went wrong");
+    }
+}
+
 
 // COMMUNITY PAGINA
 async function community(req, res) {
