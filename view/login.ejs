@@ -19,13 +19,17 @@
             <input type="text" name="username" id="username" required>
 
             <label for="pass">Password:</label>
-            <input type="text" name="pass" id="pass" required>
+            <input type="password" name="pass" id="pass" required>
+            <label>
+                <input type="checkbox" onclick="togglePassword()"> Show password
+              </label>
             <input type="submit" value="Login" required>
         </form>
     </main>
 
     <%- include('../view/footer'); %>
     <script src="/script/lazyload.js"></script>
+    <script src="/script/password.js"></script>
  
 </body>
 </html>
