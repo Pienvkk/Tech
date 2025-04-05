@@ -1022,6 +1022,10 @@ input[type="submit"]:hover {
 /* PROFILE MAIN */
 
 .mainProfile{
+    background-color: var(--color-text-dark);
+    margin: 4rem;
+    padding-bottom: 4rem;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
 }
@@ -1039,6 +1043,9 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
+.mainProfile section:first-of-type{
+    margin-bottom: 4rem;
+}
 .mainProfile ul {
     display: flex;
     flex-direction: column;
@@ -1050,11 +1057,18 @@ input[type="submit"]:hover {
     font-family: var(--font-family-primary);
     font-weight: 200;
     margin-top: 10px;
+
+    font-family: "alfabet", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
 .mainProfile section h2 {
     margin: 0 0 2rem 0;
+    font-family: "alfabet", sans-serif;
+    font-weight: 900;
+    font-style: italic;
 }
 
 .mainProfile h1{
@@ -1616,6 +1630,7 @@ input[type="submit"]:hover {
 
 .mainHelpSupport li:hover {
     transform: scale(1.05);
+    transition: 200ms;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
     z-index: 10;
 }
@@ -1625,14 +1640,15 @@ input[type="submit"]:hover {
 }
 
 .mainHelpSupport li  details p{
-    padding-top: 0.5rem;
+    padding: 0.5rem 0rem 2rem 0rem;
     transition: max-height 0.5s ease-in-out;
+
 }
 
 .mainHelpSupport li details summary {
-    margin-bottom: 1rem;
     font-weight: bold;
     cursor: pointer;
+    padding: 0.3rem 0;
 }
 
  /*  FORM */
